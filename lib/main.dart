@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
-import "package:waka_time_app/common/ui.theme/app_theme.dart";
 
 import "common/routing/routes.gr.dart";
+import "common/ui/theme/app_theme.dart";
 
 void main() {
   runApp(App());

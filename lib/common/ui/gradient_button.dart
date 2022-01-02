@@ -1,0 +1,42 @@
+import "package:flutter/material.dart";
+import "package:waka_time_app/common/ui/theme/colors.dart";
+
+class GradientButton extends StatelessWidget {
+  const GradientButton({
+    Key? key,
+    required this.child,
+    this.startColor,
+    this.endColor,
+    required this.onPressed,
+  }) : super(key: key);
+
+  final Widget child;
+  final Color? startColor;
+  final Color? endColor;
+  final Function() onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all(const EdgeInsets.all(0.0)),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
+        ),
+      ),
+      child: Ink(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              startColor ?? Gradients.primary.startColor,
+              endColor ?? Gradients.primary.endColor
+            ],
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(80.0)),
+        ),
+        child: child,
+      ),
+    );
+  }
+}

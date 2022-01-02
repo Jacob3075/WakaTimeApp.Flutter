@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:waka_time_app/common/ui.theme/colors.dart';
+import "package:waka_time_app/common/ui/gradient_button.dart";
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -30,7 +30,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(40),
-                child: _gradientButton(
+                child: GradientButton(
+                  onPressed: () {},
                   child: Container(
                     padding: const EdgeInsets.all(25),
                     constraints: const BoxConstraints(
@@ -50,29 +51,6 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  ElevatedButton _gradientButton({required Widget child}) {
-    return ElevatedButton(
-      onPressed: () {},
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all(const EdgeInsets.all(0.0)),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(40.0),
-          ),
-        ),
-      ),
-      child: Ink(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Gradients.primary.startColor, Gradients.primary.endColor],
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(80.0)),
-        ),
-        child: child,
       ),
     );
   }
