@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:waka_time_app/common/ui.theme/colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -65,11 +66,11 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
       child: Ink(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blue, Colors.cyanAccent],
+            colors: [Gradients.primary.startColor, Gradients.primary.endColor],
           ),
-          borderRadius: BorderRadius.all(Radius.circular(80.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(80.0)),
         ),
         child: child,
       ),

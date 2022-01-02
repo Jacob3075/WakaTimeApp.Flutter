@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:waka_time_app/common/ui.theme/theme.dart";
+import "package:waka_time_app/common/ui.theme/app_theme.dart";
 
 import "common/routing/routes.gr.dart";
 
@@ -17,7 +17,8 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routeInformationParser: _appRouter.defaultRouteParser(),
       routerDelegate: _appRouter.delegate(),
-      theme: darkTheme,
+      theme: AppTheme.darkTheme,
+      themeMode: ThemeMode.dark,
     );
   }
 }
