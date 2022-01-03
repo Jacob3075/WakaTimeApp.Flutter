@@ -4,6 +4,7 @@ import "package:url_launcher/url_launcher.dart";
 import "package:waka_time_app/common/ui/gradient_button.dart";
 import "package:waka_time_app/common/ui/theme/colors.dart";
 import "package:waka_time_app/common/utils/constants.dart";
+import "package:waka_time_app/features/login/data/login_api.dart";
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -130,9 +131,8 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<bool> openLink() async => await launch(Constants.apiKeyUrl);
 
-  void onLoginButtonPressed() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(apiKeyTextController.text)),
-    );
+  void onLoginButtonPressed() async {
+    final userDetails = await LoginApi.testApiKey(apiKeyTextController.text);
+    print(userDetails);
   }
 }
