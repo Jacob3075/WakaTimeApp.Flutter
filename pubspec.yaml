@@ -13,12 +13,13 @@ dependencies:
   auto_route: ^3.2.1
   http: ^0.13.4
   flutter_secure_storage: ^5.0.2
+  url_launcher: ^6.0.17
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_native_splash: ^1.3.2
-  build_runner:
+  build_runner: ^2.1.7
   auto_route_generator: ^3.2.1
 
   flutter_lints: ^1.0.4

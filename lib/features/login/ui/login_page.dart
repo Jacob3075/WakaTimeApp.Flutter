@@ -1,7 +1,9 @@
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
+import "package:url_launcher/url_launcher.dart";
 import "package:waka_time_app/common/ui/gradient_button.dart";
 import "package:waka_time_app/common/ui/theme/colors.dart";
+import "package:waka_time_app/common/utils/constants.dart";
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,6 +13,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final apiKeyTextController = TextEditingController();
+
+  @override
+  void dispose() {
+    apiKeyTextController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
   Padding _loginButton() => Padding(
         padding: const EdgeInsets.all(40),
         child: GradientButton(
-          onPressed: () {},
+          onPressed: onLoginButtonPressed,
           child: Container(
             padding: const EdgeInsets.all(25),
             constraints: const BoxConstraints(
@@ -76,6 +86,8 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
       child: TextField(
+        style: const TextStyle(color: Colors.white),
+        controller: apiKeyTextController,
         decoration: const InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.accentIcons),
@@ -116,5 +128,11 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void openLink() async {}
+  Future<bool> openLink() async => await launch(Constants.apiKeyUrl);
+
+  void onLoginButtonPressed() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(apiKeyTextController.text)),
+    );
+  }
 }
