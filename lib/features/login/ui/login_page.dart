@@ -1,11 +1,13 @@
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:url_launcher/url_launcher.dart";
 import "package:waka_time_app/common/ui/gradient_button.dart";
 import "package:waka_time_app/common/ui/theme/colors.dart";
 import "package:waka_time_app/common/utils/constants.dart";
-import "package:waka_time_app/features/login/data/login_api.dart";
+import "package:waka_time_app/features/login/ui/bloc/login_page_cubit.dart";
 
+// TODO: HANDLE ERRORS IN API CALL (DARTZ)
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -23,20 +25,41 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _appTitle(),
-              _apiKeyInputSection(),
-              _loginButton(),
-            ],
+  Widget build(BuildContext context) => Scaffold(
+        body: SafeArea(
+          child: BlocProvider(
+            create: (context) => LoginPageCubit(),
+            child: BlocConsumer<LoginPageCubit, LoginPageState>(
+              listener: (context, state) {
+                if (state is Error) {
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(SnackBar(content: Text(state.errorMessage)));
+                }
+              },
+              builder: (context, state) {
+                if (state is Loading) {
+                  // TODO: SHOW LOADING INDICATOR
+                } else if (state is Success) {
+                  // TODO: NAVIGATE
+                } else if (state is Default) {}
+                return _buildDefaultStatePage(context);
+              },
+            ),
           ),
         ),
+      );
+
+  Widget _buildDefaultStatePage(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _appTitle(),
+          _apiKeyInputSection(),
+          _loginButton(context),
+        ],
       ),
     );
   }
@@ -48,26 +71,6 @@ class _LoginPageState extends State<LoginPage> {
           style: TextStyle(
             fontSize: 38,
             fontWeight: FontWeight.w500,
-          ),
-        ),
-      );
-
-  Padding _loginButton() => Padding(
-        padding: const EdgeInsets.all(40),
-        child: GradientButton(
-          onPressed: onLoginButtonPressed,
-          child: Container(
-            padding: const EdgeInsets.all(25),
-            constraints: const BoxConstraints(
-              minWidth: 88.0,
-              minHeight: 36.0,
-            ),
-            alignment: Alignment.center,
-            child: const Text(
-              "Login to Wakatime",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
-            ),
           ),
         ),
       );
@@ -129,10 +132,29 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Widget _loginButton(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(40),
+        child: GradientButton(
+          onPressed: () => onLoginButtonPressed(context),
+          child: Container(
+            padding: const EdgeInsets.all(25),
+            constraints: const BoxConstraints(
+              minWidth: 88.0,
+              minHeight: 36.0,
+            ),
+            alignment: Alignment.center,
+            child: const Text(
+              "Login to Wakatime",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16),
+            ),
+          ),
+        ),
+      );
+
   Future<bool> openLink() async => await launch(Constants.apiKeyUrl);
 
-  void onLoginButtonPressed() async {
-    final userDetails = await LoginApi.testApiKey(apiKeyTextController.text);
-    print(userDetails);
+  void onLoginButtonPressed(BuildContext context) async {
+    context.read<LoginPageCubit>().login(apiKeyTextController.text);
   }
 }
