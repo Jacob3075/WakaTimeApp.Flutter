@@ -7,8 +7,12 @@ import "package:waka_time_app/features/login/data/dtos/user_details_dto.dart";
 import "package:waka_time_app/features/login/data/mappers/user_details_mapper.dart";
 
 class LoginApi {
+  final http.Client client;
+
+  LoginApi({required this.client});
+
   Future<UserDetails> testApiKey(String apiKey) async {
-    http.Response response = await http.get(
+    http.Response response = await client.get(
       Uri.parse(
         "${Constants.wakaTimeApiUrl}/users/current?api_key=$apiKey",
       ),

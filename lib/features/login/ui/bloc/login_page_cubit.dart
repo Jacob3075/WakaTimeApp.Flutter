@@ -1,13 +1,16 @@
 import "package:bloc/bloc.dart";
 import "package:meta/meta.dart";
+import "package:waka_time_app/common/data/api_key_store.dart";
 import "package:waka_time_app/features/login/data/login_api.dart";
 
 part "login_page_state.dart";
 
 class LoginPageCubit extends Cubit<LoginPageState> {
-  LoginPageCubit() : super(Default());
+  final LoginApi loginApi;
+  final ApiKeyStore store;
 
-  final LoginApi loginApi = LoginApi();
+  LoginPageCubit({required this.loginApi, required this.store})
+      : super(Default());
 
   void login(String textFieldInput) async {
     if (textFieldInput.isEmpty) {

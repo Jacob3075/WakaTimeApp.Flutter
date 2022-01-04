@@ -5,6 +5,7 @@ import "package:url_launcher/url_launcher.dart";
 import "package:waka_time_app/common/ui/gradient_button.dart";
 import "package:waka_time_app/common/ui/theme/colors.dart";
 import "package:waka_time_app/common/utils/constants.dart";
+import "package:waka_time_app/features/login/injection_container.dart";
 import "package:waka_time_app/features/login/ui/bloc/login_page_cubit.dart";
 
 // TODO: HANDLE ERRORS IN API CALL (DARTZ)
@@ -28,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) => Scaffold(
         body: SafeArea(
           child: BlocProvider(
-            create: (context) => LoginPageCubit(),
+            create: (context) => getIt<LoginPageCubit>(),
             child: BlocConsumer<LoginPageCubit, LoginPageState>(
               listener: (context, state) {
                 if (state is Error) {
