@@ -11,14 +11,8 @@ void initLoginPageServices() {
   getIt.registerSingleton(const FlutterSecureStorage());
   getIt.registerSingleton(http.Client());
 
-  getIt.registerSingletonWithDependencies(
-    () => LoginApi(client: getIt()),
-    dependsOn: [http.Client],
-  );
-  getIt.registerSingletonWithDependencies(
-    () => UserDetailsStore(storage: getIt()),
-    dependsOn: [FlutterSecureStorage],
-  );
+  getIt.registerSingleton(LoginApi(client: getIt()));
+  getIt.registerSingleton(UserDetailsStore(storage: getIt()));
 
   getIt.registerFactory(() => LoginPageCubit(
         loginApi: getIt(),

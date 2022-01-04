@@ -6,7 +6,6 @@ part "user_details.freezed.dart";
 part "user_details.g.dart";
 
 @freezed
-@JsonSerializable()
 class UserDetails with _$UserDetails {
   const factory UserDetails({
     required String bio,
@@ -29,7 +28,4 @@ class UserDetails with _$UserDetails {
 
   factory UserDetails.fromJsonString(String jsonString) =>
       _$_UserDetails.fromJson(jsonDecode(jsonString));
-
-  @override
-  Map<String, dynamic> toJson() => _$UserDetailsToJson(this);
 }

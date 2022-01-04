@@ -4,7 +4,8 @@ import "package:waka_time_app/common/domain/models/user_details.dart";
 class UserDetailsStore {
   final FlutterSecureStorage _storage;
 
-  UserDetailsStore({required storage}) : _storage = storage;
+  UserDetailsStore({required FlutterSecureStorage storage})
+      : _storage = storage;
 
   Future<void> saveApiKey(String apiKey) async =>
       await _storage.write(key: _UserDetailsStoreKeys.keyApiKey, value: apiKey);
@@ -18,9 +19,13 @@ class UserDetailsStore {
         value: userDetails.toJson().toString(),
       );
 
-  Future<UserDetails?> getUserDetails() async => UserDetails.fromJsonString(
-        await _storage.read(key: _UserDetailsStoreKeys.keyUserDetails) ?? "",
-      );
+  Future<UserDetails?> getUserDetails() async {
+    final userDetailsFromStore =
+        await _storage.read(key: _UserDetailsStoreKeys.keyUserDetails);
+    if (userDetailsFromStore == null) return null;
+
+    return UserDetails.fromJsonString(userDetailsFromStore);
+  }
 }
 
 abstract class _UserDetailsStoreKeys {
