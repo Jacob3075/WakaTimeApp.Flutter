@@ -1,13 +1,13 @@
 import "package:bloc/bloc.dart";
 import "package:meta/meta.dart";
-import "package:waka_time_app/common/data/api_key_store.dart";
+import "package:waka_time_app/common/data/user_details_store.dart";
 import "package:waka_time_app/features/login/data/login_api.dart";
 
 part "login_page_state.dart";
 
 class LoginPageCubit extends Cubit<LoginPageState> {
   final LoginApi loginApi;
-  final ApiKeyStore store;
+  final UserDetailsStore store;
 
   LoginPageCubit({required this.loginApi, required this.store})
       : super(Default());
@@ -18,9 +18,12 @@ class LoginPageCubit extends Cubit<LoginPageState> {
       return;
     }
 
-    final userDetails = await loginApi.testApiKey(textFieldInput);
+    emit(Loading());
 
-    //TODO: SAVE TO DEVICE
+    final userDetails = await loginApi.testApiKey(textFieldInput);
+    await store.saveUserDetails(userDetails);
+    await store.saveApiKey(textFieldInput);
+
     emit(Success());
   }
 }
