@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:waka_time_app/common/routing/auth_guard.dart";
 import "package:waka_time_app/injection_container.dart" as di;
 
 import "common/routing/routes.gr.dart";
@@ -11,7 +12,7 @@ void main() {
 
 class App extends StatelessWidget {
   App({Key? key}) : super(key: key);
-  final _appRouter = AppRouter();
+  final _appRouter = AppRouter(authGuard: AuthGuard());
 
   @override
   Widget build(BuildContext context) {

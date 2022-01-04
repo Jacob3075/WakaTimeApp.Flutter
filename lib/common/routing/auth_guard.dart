@@ -1,21 +1,24 @@
-import 'package:auto_route/auto_route.dart';
+import "package:auto_route/auto_route.dart";
+import "package:waka_time_app/common/data/user_details_store.dart";
+import "package:waka_time_app/common/domain/models/user_details.dart";
+import "package:waka_time_app/common/routing/routes.gr.dart";
+import "package:waka_time_app/features/login/injection_container.dart";
 
 class AuthGuard extends AutoRouteGuard {
-  // ignore: non_constant_identifier_names
-  void onNavigation_temp(NavigationResolver resolver, StackRouter router) {
-    // the navigation is paused until resolver.next() is called with either
-    // true to resume/continue navigation or false to abort navigation
-    // if (isAuthenticated) {
-    // if user is authenticated we continue
-    // resolver.next(true);
-    // } else {
-    // we redirect the user to our login page
-    // router.push(const LoginPageRoute());
-    // }
-  }
-
   @override
-  void onNavigation(NavigationResolver resolver, StackRouter router) {
-    resolver.next(true);
+  Future<void> onNavigation(
+    NavigationResolver resolver,
+    StackRouter router,
+  ) async {
+    // TODO: CHANGE GET_IT IMPORT
+    final userDetailsStore = getIt<UserDetailsStore>();
+    final String? apiKey = await userDetailsStore.getApiKey();
+    final UserDetails? userDetails = await userDetailsStore.getUserDetails();
+
+    if (apiKey == null || userDetails == null) {
+      router.popAndPush(const LoginPageRoute());
+    } else {
+      resolver.next(true);
+    }
   }
 }
