@@ -21,7 +21,13 @@ class LoginPageCubit extends Cubit<LoginPageState> {
 
     emit(Loading());
 
-    final userDetails = await loginApi.testApiKey(textFieldInput);
+    final userDetails = await loginApi.getUserDetails(textFieldInput);
+    if (userDetails == null) {
+      // TODO: ERROR REASON: INVALID KEY, SERVER ERROR, NETWORK ERROR
+      emit(Error("Could not get user details"));
+      return;
+    }
+
     await store.saveUserDetails(userDetails);
     await store.saveApiKey(textFieldInput);
 
