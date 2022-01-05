@@ -8,7 +8,8 @@ class Errors with _$Errors {
 
   const factory Errors.network() = _Network;
 
-  const factory Errors.unauthorized([String? errorMessage]) = _Unauthorized;
+  factory Errors.unauthorized() =>
+      const _ClientError(errorMessage: "Unauthorized", code: 401);
 
   const factory Errors.clientError({
     required String errorMessage,

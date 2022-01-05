@@ -1,11 +1,11 @@
 import "package:bloc/bloc.dart";
 import "package:meta/meta.dart";
 import "package:waka_time_app/common/data/user_details_store.dart";
+import "package:waka_time_app/common/utils/utils.dart";
 import "package:waka_time_app/features/login/data/login_api.dart";
 
 part "login_page_state.dart";
 
-// TODO: HANDLE ERRORS IN API CALL (DARTZ)
 class LoginPageCubit extends Cubit<LoginPageState> {
   final LoginApi loginApi;
   final UserDetailsStore store;
@@ -21,16 +21,15 @@ class LoginPageCubit extends Cubit<LoginPageState> {
 
     emit(Loading());
 
-    final userDetails = await loginApi.getUserDetails(textFieldInput);
-    if (userDetails == null) {
-      // TODO: ERROR REASON: INVALID KEY, SERVER ERROR, NETWORK ERROR
-      emit(Error("Could not get user details"));
-      return;
-    }
+    final either = await loginApi.getUserDetails(textFieldInput);
+    either.fold(
+      (errors) => emit(Error(errors.getErrorMessage())),
+      (userDetails) async {
+        await store.saveUserDetails(userDetails);
+        await store.saveApiKey(textFieldInput);
 
-    await store.saveUserDetails(userDetails);
-    await store.saveApiKey(textFieldInput);
-
-    emit(Success());
+        emit(Success());
+      },
+    );
   }
 }

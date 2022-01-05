@@ -14,24 +14,7 @@ class LoginApi {
 
   LoginApi({required this.client});
 
-  Future<UserDetails?> getUserDetails(String apiKey) async {
-    http.Response response = await client.get(
-      Uri.parse(
-        "${Constants.wakaTimeApiUrl}/users/current?api_key=$apiKey",
-      ),
-    );
-
-    final statusCode = response.statusCode;
-
-    if (statusCode.isBetween(200, 299)) {
-      Map<String, dynamic> jsonMap = jsonDecode(response.body);
-      final userDetailsDTO = UserDetailsDTO.fromJson(jsonMap);
-      return UserDetailsMapper().fromDto(userDetailsDTO);
-    } else if (statusCode == 401) {
-    } else if (statusCode.isBetween(400, 499)) {}
-  }
-
-  Future<Either<Errors, UserDetails>> getUserDetails1(String apiKey) async =>
+  Future<Either<Errors, UserDetails>> getUserDetails(String apiKey) async =>
       getDataOrErrorFromApi<UserDetails>(apiKey: apiKey, tryBody: _tryBody);
 
   Future<Either<Errors, UserDetails>> _tryBody(String apiKey) async {

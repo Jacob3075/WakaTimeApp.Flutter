@@ -16,38 +16,53 @@ Either<Errors, T> getDataOrErrorFromResponse<T>({
   required Either<Errors, T> Function(http.Response response) successBody,
 }) {
   final statusCode = response.statusCode;
+  Either<Errors, T> result;
   if (statusCode.isBetween(200, 299)) {
-    return successBody(response);
+    result = successBody(response);
   } else if (statusCode == 401) {
-    return const Left(Errors.unauthorized());
+    result = Left(Errors.unauthorized());
   } else if (statusCode.isBetween(400, 499)) {
-    return Left(Errors.clientError(
+    result = Left(Errors.clientError(
       errorMessage: response.body,
       code: statusCode,
     ));
   } else if (statusCode.isBetween(500, 599)) {
-    return Left(Errors.serverError(
+    result = Left(Errors.serverError(
       errorMessage: response.body,
       code: statusCode,
     ));
   } else {
-    return Left(Errors(errorMessage: response.body));
+    result = Left(Errors(errorMessage: response.body));
   }
+
+  return result;
 }
 
 Future<Either<Errors, T>> getDataOrErrorFromApi<T>({
   required String apiKey,
   required Future<Either<Errors, T>> Function(String apiKey) tryBody,
 }) async {
+  Either<Errors, T> result;
   try {
-    return tryBody(apiKey);
+    result = await tryBody(apiKey);
   } on SocketException {
-    return const Left(Errors.network());
+    result = const Left(Errors.network());
   } on HttpException {
-    return const Left(Errors.network());
+    result = const Left(Errors.network());
   } on FormatException catch (exception) {
-    return Left(Errors(errorMessage: "Format Exception, ${exception.message}"));
+    result =
+        Left(Errors(errorMessage: "Format Exception, ${exception.message}"));
   } on Exception catch (exception) {
-    return Left(Errors(errorMessage: exception.toString()));
+    result = Left(Errors(errorMessage: exception.toString()));
   }
+  return result;
+}
+
+extension ErrorMessage on Errors {
+  String getErrorMessage() => map(
+        (value) => value.errorMessage,
+        network: (error) => "Network Error",
+        clientError: (error) => error.errorMessage,
+        serverError: (error) => error.errorMessage,
+      );
 }
