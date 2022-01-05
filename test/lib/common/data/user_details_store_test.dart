@@ -20,65 +20,87 @@ main() {
 
   const userDetailsKey = "KEY_USER_DETAILS";
   const apiKeyKey = "KEY_API_KEY";
+  const apiKey = "e15618f1-bbfc-42e9-9fb9-c4a82e0b23ec";
 
-  group(
-    "When store contains values",
-    () {
-      test(
-        "for user details reading it should return a valid object",
-        () async {
-          when(mockStorage.read(key: userDetailsKey))
-              .thenAnswer((realInvocation) async => cachedUserDetailsJson);
+  group("Reading values", () {
+    group(
+      "When store contains values",
+      () {
+        test(
+          "for user details reading it should return a valid object",
+          () async {
+            when(mockStorage.read(key: userDetailsKey))
+                .thenAnswer((realInvocation) async => cachedUserDetailsJson);
 
-          UserDetails? userDetails = await store.getUserDetails();
+            UserDetails? userDetails = await store.getUserDetails();
 
-          expect(userDetails, isNotNull);
-          expect(userDetails, equals(userDetails));
-        },
-      );
+            expect(userDetails, isNotNull);
+            expect(userDetails, equals(userDetails));
+          },
+        );
 
-      test(
-        "for api key then reading it should return the key",
-        () async {
-          var apiKey = "e15618f1-bbfc-42e9-9fb9-c4a82e0b23ec";
-          when(mockStorage.read(key: apiKeyKey))
-              .thenAnswer((realInvocation) async => apiKey);
+        test(
+          "for api key then reading it should return the key",
+          () async {
+            when(mockStorage.read(key: apiKeyKey))
+                .thenAnswer((realInvocation) async => apiKey);
 
-          String? apiKeyFromStore = await store.getApiKey();
+            String? apiKeyFromStore = await store.getApiKey();
 
-          expect(apiKeyFromStore, isNotNull);
-          expect(apiKeyFromStore, equals(apiKey));
-        },
-      );
-    },
-  );
+            expect(apiKeyFromStore, isNotNull);
+            expect(apiKeyFromStore, equals(apiKey));
+          },
+        );
+      },
+    );
 
-  group(
-    "When store does not contain values",
-    () {
-      test(
-        "for user details reading it should return null",
-        () async {
-          when(mockStorage.read(key: userDetailsKey))
-              .thenAnswer((realInvocation) async => null);
+    group(
+      "When store does not contain values",
+      () {
+        test(
+          "for user details reading it should return null",
+          () async {
+            when(mockStorage.read(key: userDetailsKey))
+                .thenAnswer((realInvocation) async => null);
 
-          UserDetails? userDetails = await store.getUserDetails();
+            UserDetails? userDetails = await store.getUserDetails();
 
-          expect(userDetails, isNull);
-        },
-      );
+            expect(userDetails, isNull);
+          },
+        );
 
-      test(
-        "for api key then reading it should return null",
-        () async {
-          when(mockStorage.read(key: apiKeyKey))
-              .thenAnswer((realInvocation) async => null);
+        test(
+          "for api key then reading it should return null",
+          () async {
+            when(mockStorage.read(key: apiKeyKey))
+                .thenAnswer((realInvocation) async => null);
 
-          String? apiKeyFromStore = await store.getApiKey();
+            String? apiKeyFromStore = await store.getApiKey();
 
-          expect(apiKeyFromStore, isNull);
-        },
-      );
-    },
-  );
+            expect(apiKeyFromStore, isNull);
+          },
+        );
+      },
+    );
+  });
+
+  group("Writing values", () {
+    test("to user details", () async {
+      await store.saveUserDetails(userDetails);
+
+      verify(mockStorage.write(
+        key: userDetailsKey,
+        value: cachedUserDetailsJson,
+      ));
+    });
+
+    test("to api key", () async {
+      await store.saveApiKey(apiKey);
+
+      verify(mockStorage.write(
+        key: apiKeyKey,
+        value: apiKey,
+      ));
+    });
+  });
 }
