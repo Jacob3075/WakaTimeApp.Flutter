@@ -1,17 +1,12 @@
 part of "login_page_cubit.dart";
 
-// TODO: UPDATE TO USE FREEZED
-@immutable
-abstract class LoginPageState {}
+@freezed
+class LoginPageState with _$LoginPageState {
+  const factory LoginPageState.defaultState() = Default;
 
-class Default extends LoginPageState {}
+  const factory LoginPageState.success() = Success;
 
-class Success extends LoginPageState {}
+  const factory LoginPageState.error(String errorMessage) = Error;
 
-class Error extends LoginPageState {
-  final String errorMessage;
-
-  Error(this.errorMessage);
+  const factory LoginPageState.loading() = Loading;
 }
-
-class Loading extends LoginPageState {}
