@@ -1,3 +1,5 @@
+import "dart:convert";
+
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 
@@ -16,7 +18,7 @@ class UserDetailsStore {
   Future<void> saveUserDetails(UserDetails userDetails) async =>
       await _storage.write(
         key: _UserDetailsStoreKeys.keyUserDetails,
-        value: userDetails.toJson().toString(),
+        value: jsonEncode(userDetails.toJson()),
       );
 
   Future<UserDetails?> getUserDetails() async {
