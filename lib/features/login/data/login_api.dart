@@ -10,15 +10,15 @@ import "package:waka_time_app/features/login/data/dtos/user_details_dto.dart";
 import "package:waka_time_app/features/login/data/mappers/user_details_mapper.dart";
 
 class LoginApi {
-  final http.Client client;
+  final http.Client _client;
 
-  LoginApi({required this.client});
+  LoginApi({required http.Client client}) : _client = client;
 
   Future<Either<Errors, UserDetails>> getUserDetails(String apiKey) async =>
       getDataOrErrorFromApi<UserDetails>(apiKey: apiKey, tryBody: _tryBody);
 
   Future<Either<Errors, UserDetails>> _tryBody(String apiKey) async {
-    http.Response response = await client.get(
+    http.Response response = await _client.get(
       Uri.parse(
         "${Constants.wakaTimeApiUrl}/users/current?api_key=$apiKey",
       ),

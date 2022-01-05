@@ -1,6 +1,6 @@
 import "package:waka_time_app/common/domain/models/user_details.dart";
 
-final cachedUserDetailsJson = """{
+final sampleUserDetailsJson = """{
   "bio": "abc",
   "email": "jacob.bosco3075@gmail.com",
   "id": "0ace2da6-e00b-4441-ae74-7638ad8fb5ad",
@@ -19,7 +19,7 @@ final cachedUserDetailsJson = """{
     .replaceAll("\n", "")
     .replaceAll(" ", "");
 
-const userDetails = UserDetails(
+const sampleUserDetails = UserDetails(
   bio: "abc",
   email: "jacob.bosco3075@gmail.com",
   id: "0ace2da6-e00b-4441-ae74-7638ad8fb5ad",

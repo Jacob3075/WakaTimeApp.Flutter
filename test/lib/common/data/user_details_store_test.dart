@@ -5,7 +5,7 @@ import "package:mockito/mockito.dart";
 import "package:waka_time_app/common/data/user_details_store.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 
-import "../../fixtures/cached_user_details.dart";
+import "../../fixtures/sample_user_details.dart";
 import "user_details_store_test.mocks.dart";
 
 @GenerateMocks([FlutterSecureStorage])
@@ -30,7 +30,7 @@ main() {
           "for user details reading it should return a valid object",
           () async {
             when(mockStorage.read(key: userDetailsKey))
-                .thenAnswer((realInvocation) async => cachedUserDetailsJson);
+                .thenAnswer((realInvocation) async => sampleUserDetailsJson);
 
             UserDetails? userDetails = await store.getUserDetails();
 
@@ -86,11 +86,11 @@ main() {
 
   group("Writing values", () {
     test("to user details", () async {
-      await store.saveUserDetails(userDetails);
+      await store.saveUserDetails(sampleUserDetails);
 
       verify(mockStorage.write(
         key: userDetailsKey,
-        value: cachedUserDetailsJson,
+        value: sampleUserDetailsJson,
       ));
     });
 

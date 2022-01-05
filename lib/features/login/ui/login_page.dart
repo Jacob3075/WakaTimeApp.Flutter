@@ -151,7 +151,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<bool> _openLink() async => await launch(Constants.apiKeyUrl);
 
   void _onLoginButtonPressed(BuildContext context) async =>
-      context.read<LoginPageCubit>().login(apiKeyTextController.text);
+      await context.read<LoginPageCubit>().login(apiKeyTextController.text);
 
   BoxDecoration _createShadowDecoration(double borderRadius) => BoxDecoration(
         color: AppColors.cardBGPrimary,
