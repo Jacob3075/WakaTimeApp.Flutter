@@ -5,6 +5,7 @@ import "package:waka_time_app/features/login/data/login_api.dart";
 
 part "login_page_state.dart";
 
+// TODO: HANDLE ERRORS IN API CALL (DARTZ)
 class LoginPageCubit extends Cubit<LoginPageState> {
   final LoginApi loginApi;
   final UserDetailsStore store;

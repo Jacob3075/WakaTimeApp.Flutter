@@ -8,35 +8,37 @@ class GradientButton extends StatelessWidget {
     this.startColor,
     this.endColor,
     required this.onPressed,
+    required this.borderRadius,
   }) : super(key: key);
 
   final Widget child;
   final Color? startColor;
   final Color? endColor;
   final Function() onPressed;
+  final double borderRadius;
 
   @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all(const EdgeInsets.all(0.0)),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(40.0)),
-        ),
-      ),
-      child: Ink(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              startColor ?? Gradients.primary.startColor,
-              endColor ?? Gradients.primary.endColor
-            ],
+  Widget build(BuildContext context) => ElevatedButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(const EdgeInsets.all(0.0)),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius),
+            ),
           ),
-          borderRadius: const BorderRadius.all(Radius.circular(80.0)),
         ),
-        child: child,
-      ),
-    );
-  }
+        child: Ink(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                startColor ?? Gradients.primary.startColor,
+                endColor ?? Gradients.primary.endColor
+              ],
+            ),
+            borderRadius: const BorderRadius.all(Radius.circular(80.0)),
+          ),
+          child: child,
+        ),
+      );
 }

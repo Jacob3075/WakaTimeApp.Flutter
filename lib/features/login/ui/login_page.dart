@@ -1,14 +1,15 @@
+import "package:auto_route/auto_route.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:url_launcher/url_launcher.dart";
+import "package:waka_time_app/common/routing/routes.gr.dart";
 import "package:waka_time_app/common/ui/gradient_button.dart";
 import "package:waka_time_app/common/ui/theme/colors.dart";
 import "package:waka_time_app/common/utils/constants.dart";
 import "package:waka_time_app/features/login/ui/bloc/login_page_cubit.dart";
 import "package:waka_time_app/injection_container.dart";
 
-// TODO: HANDLE ERRORS IN API CALL (DARTZ)
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -36,36 +37,33 @@ class _LoginPageState extends State<LoginPage> {
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
                     ..showSnackBar(SnackBar(content: Text(state.errorMessage)));
+                } else if (state is Loading) {
+                  showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (context) =>
+                        const Center(child: CircularProgressIndicator()),
+                  );
+                } else if (state is Success) {
+                  AutoRouter.of(context).replace(const HomePageRoute());
                 }
               },
-              builder: (context, state) {
-                if (state is Loading) {
-                  // TODO: SHOW LOADING INDICATOR
-                } else if (state is Success) {
-                  // TODO: NAVIGATE
-                } else if (state is Default) {}
-                return _buildDefaultStatePage(context);
-              },
+              builder: (context, _) => _buildDefaultStatePage(context),
             ),
           ),
         ),
       );
 
-  Widget _buildDefaultStatePage(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
+  Widget _buildDefaultStatePage(BuildContext context) => Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           _appTitle(),
           _apiKeyInputSection(),
           _loginButton(context),
         ],
-      ),
-    );
-  }
+      );
 
-  Padding _appTitle() => const Padding(
+  Widget _appTitle() => const Padding(
         padding: EdgeInsets.symmetric(vertical: 20),
         child: Text(
           "Wakatime Client",
@@ -77,19 +75,11 @@ class _LoginPageState extends State<LoginPage> {
       );
 
   Widget _apiKeyInputSection() {
-    const borderRadius = BorderRadius.all(Radius.circular(20));
+    const borderRadiusValue = 20.0;
+    const borderRadius = BorderRadius.all(Radius.circular(borderRadiusValue));
+
     final apiKeyInput = Container(
-      decoration: const BoxDecoration(
-        color: AppColors.cardBGPrimary,
-        borderRadius: borderRadius,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black,
-            blurRadius: 10,
-            offset: Offset(0, 4),
-          )
-        ],
-      ),
+      decoration: _createShadowDecoration(borderRadiusValue),
       child: TextField(
         style: const TextStyle(color: Colors.white),
         controller: apiKeyTextController,
@@ -115,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
           TextSpan(
             text: "here.",
             style: const TextStyle(color: AppColors.accentText),
-            recognizer: TapGestureRecognizer()..onTap = openLink,
+            recognizer: TapGestureRecognizer()..onTap = _openLink,
           ),
         ],
       ),
@@ -133,29 +123,45 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _loginButton(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(40),
-        child: GradientButton(
-          onPressed: () => onLoginButtonPressed(context),
-          child: Container(
-            padding: const EdgeInsets.all(25),
-            constraints: const BoxConstraints(
-              minWidth: 88.0,
-              minHeight: 36.0,
-            ),
-            alignment: Alignment.center,
-            child: const Text(
-              "Login to Wakatime",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
-            ),
+  Widget _loginButton(BuildContext context) {
+    const borderRadius = 50.0;
+    return Container(
+      margin: const EdgeInsets.all(40),
+      decoration: _createShadowDecoration(borderRadius),
+      child: GradientButton(
+        onPressed: () => _onLoginButtonPressed(context),
+        borderRadius: borderRadius,
+        child: Container(
+          padding: const EdgeInsets.all(25),
+          constraints: const BoxConstraints(
+            minWidth: 88.0,
+            minHeight: 36.0,
+          ),
+          alignment: Alignment.center,
+          child: const Text(
+            "Login to Wakatime",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 16),
           ),
         ),
-      );
-
-  Future<bool> openLink() async => await launch(Constants.apiKeyUrl);
-
-  void onLoginButtonPressed(BuildContext context) async {
-    context.read<LoginPageCubit>().login(apiKeyTextController.text);
+      ),
+    );
   }
+
+  Future<bool> _openLink() async => await launch(Constants.apiKeyUrl);
+
+  void _onLoginButtonPressed(BuildContext context) async =>
+      context.read<LoginPageCubit>().login(apiKeyTextController.text);
+
+  BoxDecoration _createShadowDecoration(double borderRadius) => BoxDecoration(
+        color: AppColors.cardBGPrimary,
+        borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black,
+            blurRadius: 10,
+            offset: Offset(0, 4),
+          )
+        ],
+      );
 }
