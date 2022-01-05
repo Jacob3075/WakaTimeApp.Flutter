@@ -5,17 +5,16 @@ import "package:waka_time_app/common/data/user_details_store.dart";
 import "package:waka_time_app/features/login/data/login_api.dart";
 import "package:waka_time_app/features/login/ui/bloc/login_page_cubit.dart";
 
-final getIt = GetIt.instance;
-
 void initLoginPageServices() {
-  getIt.registerSingleton(const FlutterSecureStorage());
-  getIt.registerSingleton(http.Client());
+  final _getIt = GetIt.instance;
+  _getIt.registerSingleton(const FlutterSecureStorage());
+  _getIt.registerSingleton(http.Client());
 
-  getIt.registerSingleton(LoginApi(client: getIt()));
-  getIt.registerSingleton(UserDetailsStore(storage: getIt()));
+  _getIt.registerSingleton(LoginApi(client: _getIt()));
+  _getIt.registerSingleton(UserDetailsStore(storage: _getIt()));
 
-  getIt.registerFactory(() => LoginPageCubit(
-        loginApi: getIt(),
-        store: getIt(),
+  _getIt.registerFactory(() => LoginPageCubit(
+        loginApi: _getIt(),
+        store: _getIt(),
       ));
 }
