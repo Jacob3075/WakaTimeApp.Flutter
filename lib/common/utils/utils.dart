@@ -2,7 +2,7 @@ import "dart:io";
 
 import "package:dartz/dartz.dart";
 import "package:http/http.dart" as http;
-import "package:waka_time_app/common/data/errors.dart";
+import 'package:waka_time_app/common/data/network/errors.dart';
 
 extension Range on num {
   /// Checks if number is between [from] and [to] parameters.

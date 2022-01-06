@@ -2,7 +2,7 @@ import "package:flutter_secure_storage/flutter_secure_storage.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:mockito/annotations.dart";
 import "package:mockito/mockito.dart";
-import "package:waka_time_app/common/data/user_details_store.dart";
+import 'package:waka_time_app/common/data/local/user_details_store.dart';
 import "package:waka_time_app/common/domain/models/user_details.dart";
 
 import "../../fixtures/sample_user_details.dart";

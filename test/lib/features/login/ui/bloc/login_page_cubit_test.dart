@@ -3,8 +3,8 @@ import "package:dartz/dartz.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:mockito/annotations.dart";
 import "package:mockito/mockito.dart";
-import "package:waka_time_app/common/data/errors.dart";
-import "package:waka_time_app/common/data/user_details_store.dart";
+import 'package:waka_time_app/common/data/local/user_details_store.dart';
+import 'package:waka_time_app/common/data/network/errors.dart';
 import "package:waka_time_app/features/login/data/login_api.dart";
 import "package:waka_time_app/features/login/ui/bloc/login_page_cubit.dart";
 

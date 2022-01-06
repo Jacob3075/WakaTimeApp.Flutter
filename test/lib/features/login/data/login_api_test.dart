@@ -5,7 +5,7 @@ import "package:flutter_test/flutter_test.dart";
 import "package:http/http.dart" as http;
 import "package:mockito/annotations.dart";
 import "package:mockito/mockito.dart";
-import "package:waka_time_app/common/data/errors.dart";
+import "package:waka_time_app/common/data/network/errors.dart";
 import "package:waka_time_app/features/login/data/login_api.dart";
 
 import "../../../fixtures/sample_user_details.dart";
@@ -72,7 +72,6 @@ main() {
     },
   );
 
-  // TODO: FINISH TESTS
   group(
     "When http client returns data",
     () {

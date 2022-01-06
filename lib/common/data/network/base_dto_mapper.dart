@@ -1,4 +1,4 @@
-abstract class DtoMapper<Model, Dto> {
+abstract class BaseDtoMapper<Model, Dto> {
   Model fromDto(Dto dto);
 
   Dto fromModel(Model model);
