@@ -19,6 +19,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final apiKeyTextController = TextEditingController();
+  BuildContext? dialogContext;
 
   @override
   void dispose() {
@@ -41,11 +42,17 @@ class _LoginPageState extends State<LoginPage> {
                   showDialog(
                     barrierDismissible: false,
                     context: context,
-                    builder: (context) =>
-                        const Center(child: CircularProgressIndicator()),
+                    builder: (context) {
+                      dialogContext = context;
+                      return const Center(child: CircularProgressIndicator());
+                    },
                   );
                 } else if (state is Success) {
                   AutoRouter.of(context).replace(const HomePageRoute());
+                }
+                if (dialogContext != null && state is! Loading) {
+                  Navigator.pop(dialogContext!);
+                  dialogContext = null;
                 }
               },
               builder: (context, _) => _buildDefaultStatePage(context),
