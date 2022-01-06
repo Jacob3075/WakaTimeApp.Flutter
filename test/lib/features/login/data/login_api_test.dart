@@ -6,19 +6,20 @@ import "package:http/http.dart" as http;
 import "package:mockito/annotations.dart";
 import "package:mockito/mockito.dart";
 import "package:waka_time_app/common/data/network/errors.dart";
-import "package:waka_time_app/features/login/data/login_api.dart";
+import "package:waka_time_app/features/login/domain/login_uc.dart";
 
 import "../../../fixtures/sample_user_details.dart";
 import "login_api_test.mocks.dart";
 
 @GenerateMocks([http.Client])
 main() {
-  late LoginApi loginApi;
+  late LoginUC loginApi;
   late MockClient client;
+  const loginUCParameters = LoginUCParameters(apiKey: "");
 
   setUp(() {
     client = MockClient();
-    loginApi = LoginApi(client: client);
+    loginApi = LoginUC(client: client);
   });
 
   group(
@@ -29,7 +30,7 @@ main() {
         () async {
           when(client.get(any)).thenThrow(const SocketException(""));
 
-          final result = await loginApi.getUserDetails("");
+          final result = await loginApi(loginUCParameters);
 
           expect(result, isA<Left>());
           result.fold(
@@ -44,7 +45,7 @@ main() {
         () async {
           when(client.get(any)).thenThrow(const HttpException(""));
 
-          final result = await loginApi.getUserDetails("");
+          final result = await loginApi(loginUCParameters);
 
           expect(result, isA<Left>());
           result.fold(
@@ -59,7 +60,7 @@ main() {
         () async {
           when(client.get(any)).thenThrow(Exception(""));
 
-          final result = await loginApi.getUserDetails("");
+          final result = await loginApi(loginUCParameters);
 
           expect(result, isA<Left>());
           result.fold(
@@ -81,7 +82,7 @@ main() {
           when(client.get(any)).thenAnswer(
               (_) async => http.Response(sampleUserDetailsResponse, 200));
 
-          final result = await loginApi.getUserDetails("");
+          final result = await loginApi(loginUCParameters);
 
           expect(result, isA<Right>());
           result.fold(
@@ -97,7 +98,7 @@ main() {
           when(client.get(any)).thenAnswer(
               (_) async => http.Response("""{"error":"Unauthorized"}""", 401));
 
-          final result = await loginApi.getUserDetails("");
+          final result = await loginApi(loginUCParameters);
 
           expect(result, isA<Left>());
           result.fold(
@@ -113,7 +114,7 @@ main() {
           when(client.get(any)).thenAnswer(
               (_) async => http.Response("""{"error":"Not found"}""", 404));
 
-          final result = await loginApi.getUserDetails("");
+          final result = await loginApi(loginUCParameters);
 
           expect(result, isA<Left>());
           result.fold(

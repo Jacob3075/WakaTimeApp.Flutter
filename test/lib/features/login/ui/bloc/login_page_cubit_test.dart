@@ -5,13 +5,13 @@ import "package:mockito/annotations.dart";
 import "package:mockito/mockito.dart";
 import 'package:waka_time_app/common/data/local/user_details_store.dart';
 import 'package:waka_time_app/common/data/network/errors.dart';
-import "package:waka_time_app/features/login/data/login_api.dart";
+import 'package:waka_time_app/features/login/domain/login_uc.dart';
 import "package:waka_time_app/features/login/ui/bloc/login_page_cubit.dart";
 
 import "../../../../fixtures/sample_user_details.dart";
 import "login_page_cubit_test.mocks.dart";
 
-@GenerateMocks([LoginApi, UserDetailsStore])
+@GenerateMocks([LoginUC, UserDetailsStore])
 void main() {
   late LoginPageCubit cubit;
   late MockUserDetailsStore store;
@@ -52,6 +52,7 @@ void main() {
         expect: () => [
           const LoginPageState.loading(),
           const LoginPageState.error("Network Error"),
+          const LoginPageState.defaultState(),
         ],
         verify: (_) {
           verifyNever(store.saveApiKey(any));
