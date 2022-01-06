@@ -18,6 +18,10 @@ dependencies:
   flutter_secure_storage: ^5.0.2
   auto_route: ^3.2.1
   url_launcher: ^6.0.17
+  splashscreen:
+    git:
+      url: https://github.com/DPLYR-dev/SplashScreenFlutterPackage.git
+      ref: master
 
   freezed_annotation: ^1.1.0
   json_annotation: ^4.4.0
@@ -30,7 +34,6 @@ dev_dependencies:
   mockito: ^5.0.17
   bloc_test: ^9.0.2
 
-  flutter_native_splash: ^1.3.3
   flutter_lints: ^1.0.4
 
   build_runner: ^2.1.7
@@ -55,7 +58,3 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-
-flutter_native_splash:
-  color: "#121212"
-  image: assets/ic_launcher.png
