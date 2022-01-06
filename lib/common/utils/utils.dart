@@ -11,14 +11,43 @@ extension Range on num {
   bool isBetween(num from, num to) => from <= this && this <= to;
 }
 
-Either<Errors, T> getDataOrErrorFromResponse<T>({
+/// Calls the [apiCall] function, if it throws an exception they are handled.
+/// If no exceptions are thrown then the response status code is checked,
+/// if it is in 200s series then [successResponseProcessing] is called
+/// and appropriate response is returned
+Future<Either<Errors, T>> getDataOrErrorFromApi<T>({
+  required Future<http.Response> Function() apiCall,
+  required Either<Errors, T> Function(http.Response response)
+      successResponseProcessing,
+}) async {
+  Either<Errors, T> result;
+  try {
+    result = _getDataOrErrorFromResponse(
+      response: await apiCall(),
+      successResponseProcessing: successResponseProcessing,
+    );
+  } on SocketException {
+    result = const Left(Errors.network());
+  } on HttpException {
+    result = const Left(Errors.network());
+  } on FormatException catch (exception) {
+    result =
+        Left(Errors(errorMessage: "Format Exception, ${exception.message}"));
+  } on Exception catch (exception) {
+    result = Left(Errors(errorMessage: exception.toString()));
+  }
+  return result;
+}
+
+Either<Errors, T> _getDataOrErrorFromResponse<T>({
   required http.Response response,
-  required Either<Errors, T> Function(http.Response response) successBody,
+  required Either<Errors, T> Function(http.Response response)
+      successResponseProcessing,
 }) {
   final statusCode = response.statusCode;
   Either<Errors, T> result;
   if (statusCode.isBetween(200, 299)) {
-    result = successBody(response);
+    result = successResponseProcessing(response);
   } else if (statusCode == 401) {
     result = Left(Errors.unauthorized());
   } else if (statusCode.isBetween(400, 499)) {
@@ -35,26 +64,6 @@ Either<Errors, T> getDataOrErrorFromResponse<T>({
     result = Left(Errors(errorMessage: response.body));
   }
 
-  return result;
-}
-
-Future<Either<Errors, T>> getDataOrErrorFromApi<T>({
-  required String apiKey,
-  required Future<Either<Errors, T>> Function(String apiKey) tryBody,
-}) async {
-  Either<Errors, T> result;
-  try {
-    result = await tryBody(apiKey);
-  } on SocketException {
-    result = const Left(Errors.network());
-  } on HttpException {
-    result = const Left(Errors.network());
-  } on FormatException catch (exception) {
-    result =
-        Left(Errors(errorMessage: "Format Exception, ${exception.message}"));
-  } on Exception catch (exception) {
-    result = Left(Errors(errorMessage: exception.toString()));
-  }
   return result;
 }
 

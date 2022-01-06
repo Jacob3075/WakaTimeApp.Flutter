@@ -15,21 +15,20 @@ class LoginApi {
   LoginApi({required http.Client client}) : _client = client;
 
   Future<Either<Errors, UserDetails>> getUserDetails(String apiKey) async =>
-      getDataOrErrorFromApi<UserDetails>(apiKey: apiKey, tryBody: _tryBody);
+      getDataOrErrorFromApi<UserDetails>(
+        apiCall: () => _apiCall(apiKey),
+        successResponseProcessing: _successResponseProcessing,
+      );
 
-  Future<Either<Errors, UserDetails>> _tryBody(String apiKey) async {
-    http.Response response = await _client.get(
-      Uri.parse(
-        "${Constants.wakaTimeApiUrl}/users/current?api_key=$apiKey",
-      ),
-    );
-    return getDataOrErrorFromResponse<UserDetails>(
-      response: response,
-      successBody: _body,
-    );
-  }
+  Future<http.Response> _apiCall(String apiKey) async => _client.get(
+        Uri.parse(
+          "${Constants.wakaTimeApiUrl}/users/current?api_key=$apiKey",
+        ),
+      );
 
-  Either<Errors, UserDetails> _body(http.Response response) {
+  Either<Errors, UserDetails> _successResponseProcessing(
+    http.Response response,
+  ) {
     Map<String, dynamic> jsonMap = jsonDecode(response.body);
     final userDetailsDTO = UserDetailsDTO.fromJson(jsonMap);
     return Right(UserDetailsMapper().fromDto(userDetailsDTO));

@@ -8,6 +8,7 @@ import "package:mockito/mockito.dart";
 import "package:waka_time_app/common/data/errors.dart";
 import "package:waka_time_app/features/login/data/login_api.dart";
 
+import "../../../fixtures/sample_user_details.dart";
 import "login_api_test.mocks.dart";
 
 @GenerateMocks([http.Client])
@@ -77,17 +78,56 @@ main() {
     () {
       test(
         "when data is valid, correct object is returned",
-        () {},
+        () async {
+          when(client.get(any)).thenAnswer(
+              (_) async => http.Response(sampleUserDetailsResponse, 200));
+
+          final result = await loginApi.getUserDetails("");
+
+          expect(result, isA<Right>());
+          result.fold(
+            (_) => null,
+            (data) => expect(data, sampleUserDetails),
+          );
+        },
       );
 
       test(
         "when api key is invalid, appropriate error is returned",
-        () {},
+        () async {
+          when(client.get(any)).thenAnswer(
+              (_) async => http.Response("""{"error":"Unauthorized"}""", 401));
+
+          final result = await loginApi.getUserDetails("");
+
+          expect(result, isA<Left>());
+          result.fold(
+            (error) => expect(error, Errors.unauthorized()),
+            (_) => null,
+          );
+        },
       );
 
       test(
         "when server or client error happens, appropriate error is returned",
-        () {},
+        () async {
+          when(client.get(any)).thenAnswer(
+              (_) async => http.Response("""{"error":"Not found"}""", 404));
+
+          final result = await loginApi.getUserDetails("");
+
+          expect(result, isA<Left>());
+          result.fold(
+            (error) => expect(
+              error,
+              const Errors.clientError(
+                errorMessage: """{"error":"Not found"}""",
+                code: 404,
+              ),
+            ),
+            (_) => null,
+          );
+        },
       );
     },
   );
