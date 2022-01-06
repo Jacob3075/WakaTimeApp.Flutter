@@ -3,9 +3,9 @@ import "package:dartz/dartz.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:mockito/annotations.dart";
 import "package:mockito/mockito.dart";
-import 'package:waka_time_app/common/data/local/user_details_store.dart';
-import 'package:waka_time_app/common/data/network/errors.dart';
-import 'package:waka_time_app/features/login/domain/login_uc.dart';
+import "package:waka_time_app/common/data/local/user_details_store.dart";
+import "package:waka_time_app/common/data/network/errors.dart";
+import "package:waka_time_app/features/login/domain/login_uc.dart";
 import "package:waka_time_app/features/login/ui/bloc/login_page_cubit.dart";
 
 import "../../../../fixtures/sample_user_details.dart";
@@ -15,11 +15,11 @@ import "login_page_cubit_test.mocks.dart";
 void main() {
   late LoginPageCubit cubit;
   late MockUserDetailsStore store;
-  late MockLoginApi loginApi;
+  late MockLoginUC loginApi;
 
   setUp(() {
     store = MockUserDetailsStore();
-    loginApi = MockLoginApi();
+    loginApi = MockLoginUC();
     cubit = LoginPageCubit(loginApi: loginApi, store: store);
   });
 
@@ -29,7 +29,7 @@ void main() {
       blocTest<LoginPageCubit, LoginPageState>(
         "and api request returns valid data, then loading and success states should be emitted",
         build: () => cubit,
-        setUp: () => when(loginApi.getUserDetails(any)).thenAnswer(
+        setUp: () => when(loginApi(any)).thenAnswer(
           (realInvocation) async => const Right(sampleUserDetails),
         ),
         act: (bloc) async => await bloc.login("api key"),
@@ -46,13 +46,12 @@ void main() {
       blocTest<LoginPageCubit, LoginPageState>(
         "and api request returns NetworkError, then loading and error states should be emitted",
         build: () => cubit,
-        setUp: () => when(loginApi.getUserDetails(any))
+        setUp: () => when(loginApi(any))
             .thenAnswer((realInvocation) async => const Left(Errors.network())),
         act: (bloc) async => await bloc.login("api key"),
         expect: () => [
           const LoginPageState.loading(),
           const LoginPageState.error("Network Error"),
-          const LoginPageState.defaultState(),
         ],
         verify: (_) {
           verifyNever(store.saveApiKey(any));
