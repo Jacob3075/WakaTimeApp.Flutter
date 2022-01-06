@@ -5,21 +5,21 @@ import "package:mockito/annotations.dart";
 import "package:mockito/mockito.dart";
 import "package:waka_time_app/common/data/local/user_details_store.dart";
 import "package:waka_time_app/common/data/network/errors.dart";
-import "package:waka_time_app/features/login/domain/login_uc.dart";
+import "package:waka_time_app/features/login/domain/get_user_details_uc.dart";
 import "package:waka_time_app/features/login/ui/bloc/login_page_cubit.dart";
 
 import "../../../../fixtures/sample_user_details.dart";
 import "login_page_cubit_test.mocks.dart";
 
-@GenerateMocks([LoginUC, UserDetailsStore])
+@GenerateMocks([GetUserDetailsUC, UserDetailsStore])
 void main() {
   late LoginPageCubit cubit;
   late MockUserDetailsStore store;
-  late MockLoginUC loginApi;
+  late MockGetUserDetailsUC loginApi;
 
   setUp(() {
     store = MockUserDetailsStore();
-    loginApi = MockLoginUC();
+    loginApi = MockGetUserDetailsUC();
     cubit = LoginPageCubit(loginApi: loginApi, store: store);
   });
 

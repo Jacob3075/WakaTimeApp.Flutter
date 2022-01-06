@@ -10,21 +10,22 @@ import "package:waka_time_app/common/utils/utils.dart";
 import "package:waka_time_app/features/login/data/dtos/user_details_dto.dart";
 import "package:waka_time_app/features/login/data/mappers/user_details_mapper.dart";
 
-typedef LoginUCReturn = Future<Either<Errors, UserDetails>>;
+typedef GetUserDetailsUCReturn = Future<Either<Errors, UserDetails>>;
 
-class LoginUC extends BaseUseCase<LoginUCParameters, LoginUCReturn> {
+class GetUserDetailsUC
+    extends BaseUseCase<GetUserDetailsUCParameters, GetUserDetailsUCReturn> {
   final http.Client _client;
 
-  LoginUC({required http.Client client}) : _client = client;
+  GetUserDetailsUC({required http.Client client}) : _client = client;
 
   @override
-  call(LoginUCParameters parameters) async =>
+  call(GetUserDetailsUCParameters parameters) async =>
       getDataOrErrorFromApi<UserDetails>(
         apiCall: () => _apiCall(parameters),
         successResponseProcessing: _successResponseProcessing,
       );
 
-  Future<http.Response> _apiCall(LoginUCParameters parameters) async =>
+  Future<http.Response> _apiCall(GetUserDetailsUCParameters parameters) async =>
       _client.get(Uri.parse(
         "${Constants.wakaTimeApiUrl}/users/current?api_key=${parameters.apiKey}",
       ));
@@ -38,8 +39,8 @@ class LoginUC extends BaseUseCase<LoginUCParameters, LoginUCReturn> {
   }
 }
 
-class LoginUCParameters extends BaseUseCaseParameters {
+class GetUserDetailsUCParameters extends BaseUseCaseParameters {
   final String apiKey;
 
-  const LoginUCParameters({required this.apiKey}) : super();
+  const GetUserDetailsUCParameters({required this.apiKey}) : super();
 }

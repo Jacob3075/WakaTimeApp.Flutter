@@ -6,20 +6,20 @@ import "package:http/http.dart" as http;
 import "package:mockito/annotations.dart";
 import "package:mockito/mockito.dart";
 import "package:waka_time_app/common/data/network/errors.dart";
-import "package:waka_time_app/features/login/domain/login_uc.dart";
+import "package:waka_time_app/features/login/domain/get_user_details_uc.dart";
 
 import "../../../fixtures/sample_user_details.dart";
 import "login_api_test.mocks.dart";
 
 @GenerateMocks([http.Client])
 main() {
-  late LoginUC loginApi;
+  late GetUserDetailsUC loginApi;
   late MockClient client;
-  const loginUCParameters = LoginUCParameters(apiKey: "");
+  const loginUCParameters = GetUserDetailsUCParameters(apiKey: "");
 
   setUp(() {
     client = MockClient();
-    loginApi = LoginUC(client: client);
+    loginApi = GetUserDetailsUC(client: client);
   });
 
   group(
