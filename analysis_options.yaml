@@ -13,6 +13,7 @@ analyzer:
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
+    - "**/*.mocks.dart"
   errors:
     invalid_annotation_target: ignore
     invalid_use_of_protected_member: error

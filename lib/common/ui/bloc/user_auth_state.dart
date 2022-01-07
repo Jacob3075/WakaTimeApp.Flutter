@@ -6,5 +6,8 @@ class UserAuthState with _$UserAuthState {
 
   const factory UserAuthState.loggedOut() = LoggedOut;
 
-  const factory UserAuthState.loggedIn() = LoggedIn;
+  const factory UserAuthState.loggedIn({
+    required String apiKey,
+    required UserDetails userDetails,
+  }) = LoggedIn;
 }

@@ -1,5 +1,6 @@
 import "package:bloc/bloc.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
+import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/features/login/domain/check_auth_status_uc.dart";
 import "package:waka_time_app/features/login/domain/get_user_details_uc.dart";
 
@@ -22,11 +23,10 @@ class UserAuthCubit extends Cubit<UserAuthState> {
     if (maybeKey == null) {
       emit(const UserAuthState.loggedOut());
     } else {
-      final result =
-          await _getUserDetailsUC(GetUserDetailsUCParameters(apiKey: maybeKey));
+      final result = await _getUserDetailsUC(GetUserDetailsUCParameters(apiKey: maybeKey));
       result.fold(
         (error) => emit(const UserAuthState.loggedOut()),
-        (data) => emit(const UserAuthState.loggedIn()),
+        (data) => emit(UserAuthState.loggedIn(apiKey: maybeKey, userDetails: data)),
       );
     }
     return ""; // needs to return something

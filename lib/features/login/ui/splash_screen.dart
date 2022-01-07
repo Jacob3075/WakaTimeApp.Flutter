@@ -11,18 +11,16 @@ class AppSplashScreen extends StatelessWidget {
   const AppSplashScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      BlocConsumer<UserAuthCubit, UserAuthState>(
+  Widget build(BuildContext context) => BlocConsumer<UserAuthCubit, UserAuthState>(
         listener: (context, state) => state.when(
           loading: () => null,
           loggedOut: () => context.router.replace(const LoginPageRoute()),
-          loggedIn: () => context.router.replace(const HomePageRoute()),
+          loggedIn: (_, __) => context.router.replace(const HomePageRoute()),
         ),
         builder: (context, _) => SplashScreen(
           // seconds: 10,
           // navigateAfterSeconds: null,
-          navigateAfterFuture:
-              context.read<UserAuthCubit>().updateLoginStateAndDetails(),
+          navigateAfterFuture: context.read<UserAuthCubit>().updateLoginStateAndDetails(),
           title: const Text(
             "Wakatime Client",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),

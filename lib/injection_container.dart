@@ -1,6 +1,6 @@
 import "package:get_it/get_it.dart";
 import "package:http/http.dart" as http;
-import 'package:waka_time_app/common/ui/bloc/user_auth_cubit.dart';
+import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
 import "package:waka_time_app/features/home/injection_container.dart"
     as home_page_di;
 import "package:waka_time_app/features/login/injection_container.dart"
