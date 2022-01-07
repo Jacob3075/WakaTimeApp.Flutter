@@ -9,7 +9,7 @@ import "package:waka_time_app/common/data/network/errors.dart";
 import "package:waka_time_app/features/login/domain/get_user_details_uc.dart";
 
 import "../../../fixtures/sample_user_details.dart";
-import "login_api_test.mocks.dart";
+import "get_user_details_uc_test.mocks.dart";
 
 @GenerateMocks([http.Client])
 main() {
@@ -64,8 +64,7 @@ main() {
 
           expect(result, isA<Left>());
           result.fold(
-            (errors) =>
-                expect(errors, const Errors(errorMessage: "Exception: ")),
+            (errors) => expect(errors, const Errors(errorMessage: "Exception: ")),
             (_) => null,
           );
         },
@@ -79,8 +78,8 @@ main() {
       test(
         "when data is valid, correct object is returned",
         () async {
-          when(client.get(any)).thenAnswer(
-              (_) async => http.Response(sampleUserDetailsResponse, 200));
+          when(client.get(any))
+              .thenAnswer((_) async => http.Response(sampleUserDetailsResponse, 200));
 
           final result = await loginApi(loginUCParameters);
 
@@ -95,8 +94,8 @@ main() {
       test(
         "when api key is invalid, appropriate error is returned",
         () async {
-          when(client.get(any)).thenAnswer(
-              (_) async => http.Response("""{"error":"Unauthorized"}""", 401));
+          when(client.get(any))
+              .thenAnswer((_) async => http.Response("""{"error":"Unauthorized"}""", 401));
 
           final result = await loginApi(loginUCParameters);
 
@@ -111,8 +110,8 @@ main() {
       test(
         "when server or client error happens, appropriate error is returned",
         () async {
-          when(client.get(any)).thenAnswer(
-              (_) async => http.Response("""{"error":"Not found"}""", 404));
+          when(client.get(any))
+              .thenAnswer((_) async => http.Response("""{"error":"Not found"}""", 404));
 
           final result = await loginApi(loginUCParameters);
 

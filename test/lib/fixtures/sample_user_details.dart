@@ -13,7 +13,7 @@ final sampleUserDetailsJson = """{
   "durationsSliceBy": "Language",
   "createdAt": "2020-05-18T13:28:23Z",
   "dateFormat": "YYYY-MM-DD",
-  "photoUrl": "https://wakatime.com/photo/6718342a-2e14-4b77-8f65-a04226794b98?s420"
+  "photoUrl": "https://wakatime.com/photo/6718342a-2e14-4b77-8f65-a04226794b98?s=420"
 }
 """
     .replaceAll("\n", "")
@@ -32,8 +32,7 @@ const sampleUserDetails = UserDetails(
   durationsSliceBy: "Language",
   createdAt: "2020-05-18T13:28:23Z",
   dateFormat: "YYYY-MM-DD",
-  photoUrl:
-      "https://wakatime.com/photo/6718342a-2e14-4b77-8f65-a04226794b98?s420",
+  photoUrl: "https://wakatime.com/photo/6718342a-2e14-4b77-8f65-a04226794b98?s=420",
 );
 
 const sampleUserDetailsResponse = """
