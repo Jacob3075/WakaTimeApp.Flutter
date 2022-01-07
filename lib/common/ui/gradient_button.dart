@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:waka_time_app/common/ui/theme/colors.dart";
+import "package:waka_time_app/common/ui/theme/app_colors.dart";
 
 class GradientButton extends StatelessWidget {
   const GradientButton({
@@ -32,8 +32,8 @@ class GradientButton extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                startColor ?? Gradients.primary.startColor,
-                endColor ?? Gradients.primary.endColor
+                startColor ?? AppGradients.primary.startColor,
+                endColor ?? AppGradients.primary.endColor
               ],
             ),
             borderRadius: const BorderRadius.all(Radius.circular(80.0)),

@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import "colors.dart";
+import "app_colors.dart";
 
 abstract class AppTheme {
   static ThemeData get darkTheme => ThemeData(

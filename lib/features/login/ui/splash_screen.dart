@@ -4,7 +4,8 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:splashscreen/splashscreen.dart";
 import "package:waka_time_app/common/routing/routes.gr.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
-import "package:waka_time_app/common/ui/theme/colors.dart";
+import "package:waka_time_app/common/ui/theme/app_assets.dart";
+import "package:waka_time_app/common/ui/theme/app_colors.dart";
 
 // TODO: STYLE SPLASH SCREEN TEXT
 class AppSplashScreen extends StatelessWidget {
@@ -25,7 +26,7 @@ class AppSplashScreen extends StatelessWidget {
             "Wakatime Client",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
           ),
-          image: Image.asset("assets/ic_launcher.png"),
+          image: Image.asset(AppAssets.images.launcherIcon),
           backgroundColor: AppColors.appBG,
           styleTextUnderTheLoader: const TextStyle(),
           photoSize: 100.0,

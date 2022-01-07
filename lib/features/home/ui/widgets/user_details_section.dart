@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:waka_time_app/common/ui/theme/colors.dart";
+import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/features/home/ui/bloc/home_page_cubit.dart";
 
 class UserDetailsSection extends StatelessWidget {

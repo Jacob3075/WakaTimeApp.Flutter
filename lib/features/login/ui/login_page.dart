@@ -5,7 +5,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:url_launcher/url_launcher.dart";
 import "package:waka_time_app/common/routing/routes.gr.dart";
 import "package:waka_time_app/common/ui/gradient_button.dart";
-import "package:waka_time_app/common/ui/theme/colors.dart";
+import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/common/utils/constants.dart";
 import "package:waka_time_app/features/login/ui/bloc/login_page_cubit.dart";
 import "package:waka_time_app/injection_container.dart";
