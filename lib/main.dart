@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/routing/auth_guard.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
 import "package:waka_time_app/injection_container.dart" as di;
@@ -18,14 +19,18 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => di.getIt<UserAuthCubit>(),
-      child: MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        routeInformationParser: _appRouter.defaultRouteParser(),
-        routerDelegate: _appRouter.delegate(),
-        theme: AppTheme.darkTheme,
-        themeMode: ThemeMode.dark,
+    return ScreenUtilInit(
+      designSize: const Size(411, 1208),
+      minTextAdapt: true,
+      builder: () => BlocProvider(
+        create: (_) => di.getIt<UserAuthCubit>(),
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          routeInformationParser: _appRouter.defaultRouteParser(),
+          routerDelegate: _appRouter.delegate(),
+          theme: AppTheme.darkTheme,
+          themeMode: ThemeMode.dark,
+        ),
       ),
     );
   }

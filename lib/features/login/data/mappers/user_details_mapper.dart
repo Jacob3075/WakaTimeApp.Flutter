@@ -17,7 +17,7 @@ class UserDetailsMapper implements BaseDtoMapper<UserDetails, UserDetailsDTO> {
         durationsSliceBy: dto.data.durationsSliceBy,
         createdAt: dto.data.createdAt,
         dateFormat: dto.data.dateFormat,
-        photoUrl: "${dto.data.photoUrl}?s420",
+        photoUrl: "${dto.data.photoUrl}?s=420",
       );
 
   @override
