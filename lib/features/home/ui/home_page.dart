@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: BlocProvider(
-          create: (context) => getIt<HomePageCubit>(),
+          create: (_) => getIt<HomePageCubit>(),
           child: BlocBuilder<HomePageCubit, HomePageState>(
             builder: (context, state) {
               final homePageCubit = context.read<HomePageCubit>();
@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: Column(
                   children: [
-                    SizedBox(height: 30.h),
+                    SizedBox(height: 24.h),
                     UserDetailsSection(cubit: homePageCubit),
                     _timeSpentToday(),
                     _recentProjects(),

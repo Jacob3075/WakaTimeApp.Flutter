@@ -16,10 +16,10 @@ class UserDetailsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         CircleAvatar(
-          radius: 61.r,
+          radius: 34.r,
           backgroundColor: AppColors.cardBGPrimary,
           child: CircleAvatar(
-            radius: 60.r,
+            radius: 33.r,
             backgroundImage: NetworkImage(_cubit.userDetails.photoUrl),
             backgroundColor: AppColors.appBG,
           ),
@@ -28,7 +28,7 @@ class UserDetailsSection extends StatelessWidget {
         Text(
           _cubit.userDetails.displayName,
           style: TextStyle(
-            fontSize: 40.sp,
+            fontSize: 38.sp,
             fontWeight: FontWeight.bold,
           ),
         )
