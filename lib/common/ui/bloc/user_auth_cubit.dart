@@ -11,6 +11,9 @@ class UserAuthCubit extends Cubit<UserAuthState> {
   final CheckAuthStatusUC _checkAuthStatus;
   final GetUserDetailsUC _getUserDetailsUC;
 
+  late UserDetails userDetails;
+  late String apiKey;
+
   UserAuthCubit({
     required CheckAuthStatusUC checkAuthStatus,
     required GetUserDetailsUC getUserDetailsUC,
@@ -26,7 +29,11 @@ class UserAuthCubit extends Cubit<UserAuthState> {
       final result = await _getUserDetailsUC(GetUserDetailsUCParameters(apiKey: maybeKey));
       result.fold(
         (error) => emit(const UserAuthState.loggedOut()),
-        (data) => emit(UserAuthState.loggedIn(apiKey: maybeKey, userDetails: data)),
+        (data) {
+          emit(const UserAuthState.loggedIn());
+          apiKey = maybeKey;
+          userDetails = data;
+        },
       );
     }
     return ""; // needs to return something

@@ -15,7 +15,7 @@ class AppSplashScreen extends StatelessWidget {
         listener: (context, state) => state.when(
           loading: () => null,
           loggedOut: () => context.router.replace(const LoginPageRoute()),
-          loggedIn: (_, __) => context.router.replace(const HomePageRoute()),
+          loggedIn: () => context.router.replace(const HomePageRoute()),
         ),
         builder: (context, _) => SplashScreen(
           // seconds: 10,
