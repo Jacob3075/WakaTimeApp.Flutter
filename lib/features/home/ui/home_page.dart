@@ -48,10 +48,5 @@ class HomePage extends StatelessWidget {
       );
 
   // TODO: ERROR SCREEN
-  Widget _errorScreen(BuildContext context, [String? error]) {
-    // ScaffoldMessenger.of(context)
-    //   ..hideCurrentSnackBar()
-    //   ..showSnackBar(SnackBar(content: Text(error ?? "Error")));
-    return Container();
-  }
+  Widget _errorScreen(BuildContext context, [String? error]) => Container();
 }

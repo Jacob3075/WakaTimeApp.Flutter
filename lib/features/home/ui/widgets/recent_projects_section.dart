@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/flutter_svg.dart";
+import "package:waka_time_app/common/ui/custom_ink_well_card.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/features/home/domain/models/daily_stats.dart";
@@ -8,25 +9,19 @@ import "package:waka_time_app/features/home/domain/models/daily_stats.dart";
 class RecentProjectsSection extends StatelessWidget {
   final DailyStats? dailyStats;
 
-  const RecentProjectsSection({
-    Key? key,
-    this.dailyStats,
-  }) : super(key: key);
+  const RecentProjectsSection({Key? key, this.dailyStats}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildSectionHeader(),
-          SizedBox(height: 12.h),
-          _buildProjectList(dailyStats?.projectsWorkedOn ?? List.empty()),
-        ],
-      ),
-    );
-  }
+  Widget build(BuildContext context) => SizedBox(
+        width: double.infinity,
+        child: Column(
+          children: [
+            _buildSectionHeader(),
+            SizedBox(height: 12.h),
+            _buildProjectList(dailyStats?.projectsWorkedOn ?? List.empty()),
+          ],
+        ),
+      );
 
   Widget _buildSectionHeader() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,51 +53,42 @@ class RecentProjectsSection extends StatelessWidget {
   }
 
   Widget _buildRecentProjectItem(Project project) {
-    return Container(
+    final borderRadius = BorderRadius.circular(20.r);
+    return CustomInkWellCard(
+      borderRadius: borderRadius,
+      margin: 15.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: borderRadius,
         boxShadow: const [AppShadows.cardShadow],
-        color: AppColors.cardBGPrimary,
       ),
-      margin: EdgeInsets.only(bottom: 15.h),
-      child: Material(
-        borderRadius: BorderRadius.circular(20.r),
-        color: AppColors.cardBGPrimary,
-        child: InkWell(
-          splashColor: Colors.white10,
-          borderRadius: BorderRadius.circular(20.r),
-          onTap: () {},
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 12.w),
-            padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 20.w),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 14.h, horizontal: 24.w),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      project.name,
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    SizedBox(height: 4.h),
-                    Text(
-                      project.time.formattedPrint(),
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ],
+                Text(
+                  project.name,
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
-                SvgPicture.asset(AppAssets.icons.arrow)
+                SizedBox(height: 4.h),
+                Text(
+                  project.time.formattedPrint(),
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
               ],
             ),
-          ),
+            SvgPicture.asset(AppAssets.icons.arrow)
+          ],
         ),
       ),
     );
