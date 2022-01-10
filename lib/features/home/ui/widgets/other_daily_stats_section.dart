@@ -4,9 +4,15 @@ import "package:flutter_svg/svg.dart";
 import "package:waka_time_app/common/ui/custom_ink_well_card.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart" as app_colors;
+import "package:waka_time_app/features/home/domain/models/daily_stats.dart";
 
 class OtherDailyStatsSection extends StatelessWidget {
-  const OtherDailyStatsSection({Key? key}) : super(key: key);
+  final DailyStats? dailyStats;
+
+  const OtherDailyStatsSection({
+    Key? key,
+    required this.dailyStats,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -48,21 +54,21 @@ class OtherDailyStatsSection extends StatelessWidget {
             _buildStatsCard(
               gradient: app_colors.AppGradients.greenCyan,
               statCategory: "Most Used Language",
-              value: "Kotlin",
+              value: dailyStats?.mostUsedLanguage ?? "",
               icon: AppAssets.icons.codeFile,
             ),
             SizedBox(height: 20.h),
             _buildStatsCard(
               gradient: app_colors.AppGradients.blueCyan,
               statCategory: "Most Used Editor",
-              value: "Intellij",
+              value: dailyStats?.mostUsedEditor ?? "",
               icon: AppAssets.icons.laptop,
             ),
             SizedBox(height: 20.h),
             _buildStatsCard(
               gradient: app_colors.AppGradients.purpleCyanDark,
               statCategory: "Most Used OS",
-              value: "Linux",
+              value: dailyStats?.mostUsedOs ?? "",
               icon: AppAssets.icons.code,
             ),
           ],
