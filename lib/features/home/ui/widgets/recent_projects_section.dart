@@ -56,7 +56,7 @@ class RecentProjectsSection extends StatelessWidget {
     final borderRadius = BorderRadius.circular(20.r);
     return CustomInkWellCard(
       borderRadius: borderRadius,
-      margin: 15.h,
+      margin: EdgeInsets.only(bottom: 15.h),
       decoration: BoxDecoration(
         borderRadius: borderRadius,
         boxShadow: const [AppShadows.cardShadow],

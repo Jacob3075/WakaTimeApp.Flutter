@@ -7,6 +7,7 @@ import "package:waka_time_app/features/home/ui/bloc/home_page_cubit.dart";
 import "package:waka_time_app/features/home/ui/widgets/recent_projects_section.dart";
 import "package:waka_time_app/features/home/ui/widgets/time_spent_today_card.dart";
 import "package:waka_time_app/features/home/ui/widgets/user_details_section.dart";
+import "package:waka_time_app/features/home/ui/widgets/weekly_report_section.dart";
 import "package:waka_time_app/injection_container.dart";
 
 class HomePage extends StatelessWidget {
@@ -33,17 +34,24 @@ class HomePage extends StatelessWidget {
         ),
       );
 
-  Widget _buildUI(UserDetails userDetails, [DailyStats? dailyStats]) => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: Column(
-          children: [
-            SizedBox(height: 24.h),
-            UserDetailsSection(userDetails: userDetails),
-            SizedBox(height: 20.h),
-            TimeSpentTodayCard(dailyStats: dailyStats),
-            SizedBox(height: 16.h),
-            RecentProjectsSection(dailyStats: dailyStats),
-          ],
+  Widget _buildUI(UserDetails userDetails, [DailyStats? dailyStats]) => SingleChildScrollView(
+        clipBehavior: Clip.none,
+        physics: const BouncingScrollPhysics(),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Column(
+            children: [
+              SizedBox(height: 24.h),
+              UserDetailsSection(userDetails: userDetails),
+              SizedBox(height: 20.h),
+              TimeSpentTodayCard(dailyStats: dailyStats),
+              SizedBox(height: 16.h),
+              RecentProjectsSection(dailyStats: dailyStats),
+              SizedBox(height: 4.h),
+              const WeeklyReportSection(),
+              SizedBox(height: 4.h),
+            ],
+          ),
         ),
       );
 
