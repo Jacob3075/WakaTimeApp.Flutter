@@ -17,8 +17,7 @@ extension Range on num {
 /// and appropriate response is returned
 Future<Either<Errors, T>> getDataOrErrorFromApi<T>({
   required Future<http.Response> Function() apiCall,
-  required Either<Errors, T> Function(http.Response response)
-      successResponseProcessing,
+  required Either<Errors, T> Function(http.Response response) successResponseProcessing,
 }) async {
   Either<Errors, T> result;
   try {
@@ -31,8 +30,7 @@ Future<Either<Errors, T>> getDataOrErrorFromApi<T>({
   } on HttpException {
     result = const Left(Errors.network());
   } on FormatException catch (exception) {
-    result =
-        Left(Errors(errorMessage: "Format Exception, ${exception.message}"));
+    result = Left(Errors(errorMessage: "Format Exception, ${exception.message}"));
   } on Exception catch (exception) {
     result = Left(Errors(errorMessage: exception.toString()));
   }
@@ -41,8 +39,7 @@ Future<Either<Errors, T>> getDataOrErrorFromApi<T>({
 
 Either<Errors, T> _getDataOrErrorFromResponse<T>({
   required http.Response response,
-  required Either<Errors, T> Function(http.Response response)
-      successResponseProcessing,
+  required Either<Errors, T> Function(http.Response response) successResponseProcessing,
 }) {
   final statusCode = response.statusCode;
   Either<Errors, T> result;
@@ -74,4 +71,9 @@ extension ErrorMessage on Errors {
         clientError: (error) => error.errorMessage,
         serverError: (error) => error.errorMessage,
       );
+}
+
+extension ObjectExt<T> on T {
+  /// [Source](https://stackoverflow.com/a/58762538/13181948)
+  R let<R>(R Function(T that) op) => op(this);
 }

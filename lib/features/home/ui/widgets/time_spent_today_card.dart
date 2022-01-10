@@ -3,13 +3,13 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
-import "package:waka_time_app/features/home/ui/bloc/home_page_cubit.dart";
+import "package:waka_time_app/features/home/domain/models/daily_stats.dart";
 
 class TimeSpentTodayCard extends StatelessWidget {
-  final HomePageCubit _cubit;
+  final DailyStats? _dailyStats;
 
-  const TimeSpentTodayCard({Key? key, required HomePageCubit cubit})
-      : _cubit = cubit,
+  const TimeSpentTodayCard({Key? key, required DailyStats? dailyStats})
+      : _dailyStats = dailyStats,
         super(key: key);
 
   @override
@@ -38,7 +38,13 @@ class TimeSpentTodayCard extends StatelessWidget {
                   "Total Time Spent\nToday",
                   style: TextStyle(fontSize: 16.sp),
                 ),
-                const Text("42H, 14M, +16%"),
+                Text(
+                  _dailyStats?.timeSpent.formattedPrint() ?? "",
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ],
             ),
           ),

@@ -55,4 +55,8 @@ class Time with _$Time {
 
     return Time(hours: newHours.toInt(), minutes: newMinutes, decimal: newDecimal);
   }
+
+  String formattedPrint() {
+    return "${hours}H, ${minutes}M";
+  }
 }

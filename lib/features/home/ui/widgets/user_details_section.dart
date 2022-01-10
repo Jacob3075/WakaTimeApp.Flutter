@@ -1,13 +1,13 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
-import "package:waka_time_app/features/home/ui/bloc/home_page_cubit.dart";
 
 class UserDetailsSection extends StatelessWidget {
-  final HomePageCubit _cubit;
+  final UserDetails _userDetails;
 
-  const UserDetailsSection({Key? key, required HomePageCubit cubit})
-      : _cubit = cubit,
+  const UserDetailsSection({Key? key, required UserDetails userDetails})
+      : _userDetails = userDetails,
         super(key: key);
 
   @override
@@ -20,13 +20,13 @@ class UserDetailsSection extends StatelessWidget {
           backgroundColor: AppColors.cardBGPrimary,
           child: CircleAvatar(
             radius: 33.r,
-            backgroundImage: NetworkImage(_cubit.userDetails.photoUrl),
+            backgroundImage: NetworkImage(_userDetails.photoUrl),
             backgroundColor: AppColors.appBG,
           ),
         ),
         SizedBox(width: 36.w),
         Text(
-          _cubit.userDetails.displayName,
+          _userDetails.displayName,
           style: TextStyle(
             fontSize: 38.sp,
             fontWeight: FontWeight.bold,

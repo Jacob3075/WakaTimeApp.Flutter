@@ -24,8 +24,9 @@ class GetDailyStatsUC
       );
 
   Future<http.Response> _apiCall(GetDailyStatsUCParameters parameters) async =>
-      await _client.get(Uri(
-        path: "${Constants.wakaTimeApiUrl}/users/current/summaries?range=today",
+      await _client.get(Uri.parse(
+        //TODO: FIND BETTER WAY TO GET ENDPOINT URL WITH API KEY ATTACHED
+        "${Constants.wakaTimeApiUrl}/users/current/summaries?range=today&api_key=${parameters.apiKey}",
       ));
 
   Either<Errors, DailyStats> _successResponseProcessing(
