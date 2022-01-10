@@ -8,6 +8,7 @@ class _Icons {
 
   final time = "assets/icons/ic_time.svg";
   final code = "assets/icons/ic_code.svg";
+  final codeFile = "assets/icons/ic_code_file.svg";
   final git = "assets/icons/ic_git.svg";
   final laptop = "assets/icons/ic_laptop.svg";
   final logo = "assets/icons/ic_logo.svg";

@@ -8,8 +8,8 @@ abstract class AppColors {
   static const accentText = Color(0xFF8CE3E3);
 }
 
-class _Gradient {
-  const _Gradient(this.startColor, this.endColor, [this.opacity = 100]);
+class Gradient {
+  const Gradient(this.startColor, this.endColor, [this.opacity = 100]);
 
   final Color startColor;
   final Color endColor;
@@ -17,14 +17,14 @@ class _Gradient {
 }
 
 abstract class AppGradients {
-  static const primary = _Gradient(Color(0xFF3F67E0), Color(0xFF65D1E2));
-  static const secondary = _Gradient(Color(0xFF3F55E0), Color(0xFF5EC2D2), 85);
-  static const purpleCyanLight = _Gradient(Color(0xFFCC1FBB), Color(0xFF6FEBFF));
-  static const purpleCyanDark = _Gradient(Color(0xFF921FC9), Color(0xFF5EC2D2));
-  static const greenCyan = _Gradient(Color(0xFF18A963), Color(0xFF65D0E1));
-  static const blueCyan = _Gradient(Color(0xFF7B61FF), Color(0xFF63CFE1));
-  static const redPurple = _Gradient(Color(0xFFEB4F4F), Color(0xFFDC52B5));
-  static const orangeYellow = _Gradient(Color(0xFFFF9900), Color(0xFFE8C754));
+  static const primary = Gradient(Color(0xFF3F67E0), Color(0xFF65D1E2));
+  static const secondary = Gradient(Color(0xFF3F55E0), Color(0xFF5EC2D2), 85);
+  static const purpleCyanLight = Gradient(Color(0xFFCC1FBB), Color(0xFF6FEBFF));
+  static const purpleCyanDark = Gradient(Color(0xFF921FC9), Color(0xFF5EC2D2));
+  static const greenCyan = Gradient(Color(0xFF18A963), Color(0xFF65D0E1));
+  static const blueCyan = Gradient(Color(0xFF7B61FF), Color(0xFF63CFE1));
+  static const redPurple = Gradient(Color(0xFFEB4F4F), Color(0xFFDC52B5));
+  static const orangeYellow = Gradient(Color(0xFFFF9900), Color(0xFFE8C754));
 }
 
 abstract class AppShadows {

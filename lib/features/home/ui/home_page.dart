@@ -4,6 +4,7 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/features/home/domain/models/daily_stats.dart";
 import "package:waka_time_app/features/home/ui/bloc/home_page_cubit.dart";
+import "package:waka_time_app/features/home/ui/widgets/other_daily_stats_section.dart";
 import "package:waka_time_app/features/home/ui/widgets/recent_projects_section.dart";
 import "package:waka_time_app/features/home/ui/widgets/time_spent_today_card.dart";
 import "package:waka_time_app/features/home/ui/widgets/user_details_section.dart";
@@ -49,7 +50,8 @@ class HomePage extends StatelessWidget {
               RecentProjectsSection(dailyStats: dailyStats),
               SizedBox(height: 4.h),
               const WeeklyReportSection(),
-              SizedBox(height: 4.h),
+              SizedBox(height: 20.h),
+              const OtherDailyStatsSection(),
             ],
           ),
         ),

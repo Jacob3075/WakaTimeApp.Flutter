@@ -28,7 +28,7 @@ class CustomInkWellCard extends StatelessWidget {
         borderRadius: borderRadius,
         color: containerColor ?? AppColors.cardBGPrimary,
         child: InkWell(
-          splashColor: splashColor ?? Colors.white10,
+          splashColor: splashColor,
           borderRadius: borderRadius,
           onTap: () {},
           child: child,
