@@ -12,6 +12,7 @@ class _Icons {
   final laptop = "assets/icons/ic_laptop.svg";
   final logo = "assets/icons/ic_logo.svg";
   final logoFull = "assets/icons/ic_logo_full.svg";
+  final arrow = "assets/icons/ic_arrow.svg";
 }
 
 class _Images {
