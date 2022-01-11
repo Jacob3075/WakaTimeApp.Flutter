@@ -1,3 +1,4 @@
+import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/features/home/domain/models/daily_stats.dart";
 
 const sampleEmptyDailyStatsDataJson = """

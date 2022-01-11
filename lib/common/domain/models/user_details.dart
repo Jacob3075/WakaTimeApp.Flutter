@@ -23,8 +23,7 @@ class UserDetails with _$UserDetails {
     required String photoUrl,
   }) = _UserDetails;
 
-  factory UserDetails.fromJson(Map<String, dynamic> json) =>
-      _$UserDetailsFromJson(json);
+  factory UserDetails.fromJson(Map<String, dynamic> json) => _$UserDetailsFromJson(json);
 
   factory UserDetails.fromJsonString(String jsonString) =>
       _$_UserDetails.fromJson(jsonDecode(jsonString));

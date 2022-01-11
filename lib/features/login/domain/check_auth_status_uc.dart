@@ -1,9 +1,8 @@
 import "package:waka_time_app/common/data/local/user_details_store.dart";
-import "package:waka_time_app/common/domain/base_use_case.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
+import "package:waka_time_app/common/domain/usecases/base_use_case.dart";
 
-class CheckAuthStatusUC
-    extends BaseUseCase<CheckAuthStatusUCParameters, Future<String?>> {
+class CheckAuthStatusUC extends BaseUseCase<CheckAuthStatusUCParameters, Future<String?>> {
   final UserDetailsStore _store;
 
   CheckAuthStatusUC({required UserDetailsStore store})

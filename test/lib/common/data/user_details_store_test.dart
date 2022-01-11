@@ -42,8 +42,7 @@ main() {
         test(
           "for api key then reading it should return the key",
           () async {
-            when(mockStorage.read(key: apiKeyKey))
-                .thenAnswer((realInvocation) async => apiKey);
+            when(mockStorage.read(key: apiKeyKey)).thenAnswer((realInvocation) async => apiKey);
 
             String? apiKeyFromStore = await store.getApiKey();
 
@@ -60,8 +59,7 @@ main() {
         test(
           "for user details reading it should return null",
           () async {
-            when(mockStorage.read(key: userDetailsKey))
-                .thenAnswer((realInvocation) async => null);
+            when(mockStorage.read(key: userDetailsKey)).thenAnswer((realInvocation) async => null);
 
             UserDetails? userDetails = await store.getUserDetails();
 
@@ -72,8 +70,7 @@ main() {
         test(
           "for api key then reading it should return null",
           () async {
-            when(mockStorage.read(key: apiKeyKey))
-                .thenAnswer((realInvocation) async => null);
+            when(mockStorage.read(key: apiKeyKey)).thenAnswer((realInvocation) async => null);
 
             String? apiKeyFromStore = await store.getApiKey();
 

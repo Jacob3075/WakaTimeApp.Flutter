@@ -4,7 +4,7 @@ import "package:dartz/dartz.dart";
 import "package:http/http.dart" as http;
 import "package:waka_time_app/common/data/network/api_endpoints.dart";
 import "package:waka_time_app/common/data/network/errors.dart";
-import "package:waka_time_app/common/domain/base_use_case.dart";
+import "package:waka_time_app/common/domain/usecases/base_use_case.dart";
 import "package:waka_time_app/common/utils/utils.dart";
 import "package:waka_time_app/features/home/data/dtos/daily_stats_dto.dart";
 import "package:waka_time_app/features/home/data/mappers/daily_stats_mapper.dart";

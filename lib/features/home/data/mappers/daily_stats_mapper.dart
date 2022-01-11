@@ -1,5 +1,6 @@
 import "package:collection/collection.dart";
 import "package:waka_time_app/common/data/network/base_dto_mapper.dart";
+import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/features/home/data/dtos/daily_stats_dto.dart";
 import "package:waka_time_app/features/home/domain/models/daily_stats.dart";
 
