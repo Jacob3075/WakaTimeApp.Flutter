@@ -12,8 +12,8 @@ class Last7DaysStatsMapper extends BaseDtoMapper<Last7DaysStats, Last7DaysStatsD
         totalTime: _getTotalTimeFromDTO(dto),
         dailyStats: _getDailyStatsFromDTO(dto.data),
         range: StatsRange(
-          startDate: DateTime.now(),
-          endDate: DateTime.now(),
+          startDate: DateTime.parse(dto.start),
+          endDate: DateTime.parse(dto.end),
         ),
       );
 
@@ -68,7 +68,7 @@ class Last7DaysStatsMapper extends BaseDtoMapper<Last7DaysStats, Last7DaysStatsD
                   .firstOrNull
                   ?.name ??
               "",
-          date: DateTime.now(),
+          date: DateTime.parse(data.range.date),
         ),
       )
       .toList();
