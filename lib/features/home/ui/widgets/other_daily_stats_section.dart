@@ -57,14 +57,14 @@ class OtherDailyStatsSection extends StatelessWidget {
               value: last7daysStats?.currentDay.mostUsedLanguage ?? "",
               icon: AppAssets.icons.codeFile,
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 14.h),
             _buildStatsCard(
               gradient: app_colors.AppGradients.blueCyan,
               statCategory: "Most Used Editor",
               value: last7daysStats?.currentDay.mostUsedEditor ?? "",
               icon: AppAssets.icons.laptop,
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 14.h),
             _buildStatsCard(
               gradient: app_colors.AppGradients.purpleCyanDark,
               statCategory: "Most Used OS",

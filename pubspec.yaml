@@ -15,9 +15,10 @@ dependencies:
   http: ^0.13.4
   dartz: ^0.10.1
 
+  fl_chart: ^0.41.0
   flutter_secure_storage: ^5.0.2
   auto_route: ^3.2.1
-  url_launcher: ^6.0.17
+  url_launcher: ^6.0.18
   flutter_screenutil: ^5.0.3
   flutter_svg: 1.0.0
 
@@ -28,6 +29,7 @@ dependencies:
   freezed_annotation: ^1.1.0
   json_annotation: ^4.4.0
   meta: ^1.7.0
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:

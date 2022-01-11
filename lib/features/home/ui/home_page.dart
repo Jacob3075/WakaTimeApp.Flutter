@@ -50,7 +50,7 @@ class HomePage extends StatelessWidget {
               SizedBox(height: 16.h),
               RecentProjectsSection(last7DaysStats: last7daysStats),
               SizedBox(height: 4.h),
-              const WeeklyReportSection(),
+              WeeklyReportSection(last7DaysStats: last7daysStats),
               SizedBox(height: 20.h),
               OtherDailyStatsSection(last7daysStats: last7daysStats),
               SizedBox(height: 20.h),
