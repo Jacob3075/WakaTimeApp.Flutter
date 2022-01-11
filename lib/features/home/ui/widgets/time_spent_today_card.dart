@@ -3,13 +3,13 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
-import "package:waka_time_app/features/home/domain/models/daily_stats.dart";
+import "package:waka_time_app/features/home/domain/models/last_7_days_stats.dart";
 
 class TimeSpentTodayCard extends StatelessWidget {
-  final DailyStats? _dailyStats;
+  final Last7DaysStats? _last7daysStats;
 
-  const TimeSpentTodayCard({Key? key, required DailyStats? dailyStats})
-      : _dailyStats = dailyStats,
+  const TimeSpentTodayCard({Key? key, required Last7DaysStats? last7daysStats})
+      : _last7daysStats = last7daysStats,
         super(key: key);
 
   @override
@@ -38,7 +38,7 @@ class TimeSpentTodayCard extends StatelessWidget {
                     style: TextStyle(fontSize: 16.sp),
                   ),
                   Text(
-                    _dailyStats?.timeSpent.formattedPrint() ?? "",
+                    _last7daysStats?.currentDay.timeSpent.formattedPrint() ?? "",
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,

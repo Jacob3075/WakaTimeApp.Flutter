@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
-import "package:waka_time_app/features/home/domain/models/daily_stats.dart";
+import "package:waka_time_app/features/home/domain/models/last_7_days_stats.dart";
 import "package:waka_time_app/features/home/ui/bloc/home_page_cubit.dart";
 import "package:waka_time_app/features/home/ui/widgets/other_daily_stats_section.dart";
 import "package:waka_time_app/features/home/ui/widgets/recent_projects_section.dart";
@@ -35,7 +35,8 @@ class HomePage extends StatelessWidget {
         ),
       );
 
-  Widget _buildUI(UserDetails userDetails, [DailyStats? dailyStats]) => SingleChildScrollView(
+  Widget _buildUI(UserDetails userDetails, [Last7DaysStats? last7daysStats]) =>
+      SingleChildScrollView(
         clipBehavior: Clip.none,
         physics: const BouncingScrollPhysics(),
         child: Padding(
@@ -45,13 +46,13 @@ class HomePage extends StatelessWidget {
               SizedBox(height: 24.h),
               UserDetailsSection(userDetails: userDetails),
               SizedBox(height: 20.h),
-              TimeSpentTodayCard(dailyStats: dailyStats),
+              TimeSpentTodayCard(last7daysStats: last7daysStats),
               SizedBox(height: 16.h),
-              RecentProjectsSection(dailyStats: dailyStats),
+              RecentProjectsSection(last7DaysStats: last7daysStats),
               SizedBox(height: 4.h),
               const WeeklyReportSection(),
               SizedBox(height: 20.h),
-              OtherDailyStatsSection(dailyStats: dailyStats),
+              OtherDailyStatsSection(last7daysStats: last7daysStats),
               SizedBox(height: 20.h),
             ],
           ),

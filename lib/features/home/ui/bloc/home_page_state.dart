@@ -8,5 +8,5 @@ class HomePageState with _$HomePageState {
 
   const factory HomePageState.error(String error) = Error;
 
-  const factory HomePageState.loaded(DailyStats dailyStats) = Loaded;
+  const factory HomePageState.loaded(Last7DaysStats last7DaysStats) = Loaded;
 }
