@@ -136,10 +136,10 @@ const sampleDailyStatsDataJson = """
         }
       ],
       "grand_total": {
-        "decimal": "4.13",
+        "decimal": "4.1",
         "digital": "4:08",
         "hours": 4,
-        "minutes": 8,
+        "minutes": 6,
         "text": "4 hrs 8 mins",
         "total_seconds": 14891.677
       },

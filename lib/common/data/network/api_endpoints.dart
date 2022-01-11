@@ -6,4 +6,7 @@ abstract class ApiEndpoints {
 
   static Uri getUserDetails(String apiKey) =>
       Uri.parse("${Constants.wakaTimeApiUrl}/users/current?api_key=$apiKey");
+
+  static Uri getWeeklyStats(String apiKey) => Uri.parse(
+      "${Constants.wakaTimeApiUrl}/users/current/summaries?range=last_7_days&api_key=$apiKey");
 }
