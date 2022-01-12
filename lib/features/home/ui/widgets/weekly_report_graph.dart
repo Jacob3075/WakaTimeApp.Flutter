@@ -57,7 +57,7 @@ class WeeklyReportGraph extends StatelessWidget {
           tooltipPadding: EdgeInsets.all(6.r),
           tooltipRoundedRadius: 6.r,
           getTooltipItem: (groupData, groupIndex, rodData, rodIndex) => BarTooltipItem(
-            last7daysStats.dailyStats[rodIndex].timeSpent.formattedPrint(),
+            last7daysStats.dailyStats[groupIndex].timeSpent.formattedPrint(),
             const TextStyle(),
           ),
         ),
