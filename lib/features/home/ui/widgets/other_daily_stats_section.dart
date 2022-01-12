@@ -7,7 +7,7 @@ import "package:waka_time_app/common/ui/theme/app_colors.dart" as app_colors;
 import "package:waka_time_app/features/home/domain/models/last_7_days_stats.dart";
 
 class OtherDailyStatsSection extends StatelessWidget {
-  final Last7DaysStats? last7daysStats;
+  final Last7DaysStats last7daysStats;
 
   const OtherDailyStatsSection({
     Key? key,
@@ -54,21 +54,21 @@ class OtherDailyStatsSection extends StatelessWidget {
             _buildStatsCard(
               gradient: app_colors.AppGradients.greenCyan,
               statCategory: "Most Used Language",
-              value: last7daysStats?.currentDay.mostUsedLanguage ?? "",
+              value: last7daysStats.currentDay.mostUsedLanguage,
               icon: AppAssets.icons.codeFile,
             ),
             SizedBox(height: 14.h),
             _buildStatsCard(
               gradient: app_colors.AppGradients.blueCyan,
               statCategory: "Most Used Editor",
-              value: last7daysStats?.currentDay.mostUsedEditor ?? "",
+              value: last7daysStats.currentDay.mostUsedEditor,
               icon: AppAssets.icons.laptop,
             ),
             SizedBox(height: 14.h),
             _buildStatsCard(
               gradient: app_colors.AppGradients.purpleCyanDark,
               statCategory: "Most Used OS",
-              value: last7daysStats?.currentDay.mostUsedOs ?? "",
+              value: last7daysStats.currentDay.mostUsedOs,
               icon: AppAssets.icons.code,
             ),
           ],

@@ -4,6 +4,7 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/features/home/domain/models/last_7_days_stats.dart";
 import "package:waka_time_app/features/home/ui/bloc/home_page_cubit.dart";
+import "package:waka_time_app/features/home/ui/widgets/loading_animation.dart";
 import "package:waka_time_app/features/home/ui/widgets/other_daily_stats_section.dart";
 import "package:waka_time_app/features/home/ui/widgets/recent_projects_section.dart";
 import "package:waka_time_app/features/home/ui/widgets/time_spent_today_card.dart";
@@ -23,8 +24,7 @@ class HomePage extends StatelessWidget {
               builder: (context, state) {
                 final userDetails = context.read<HomePageCubit>().userDetails;
                 return state.when(
-                  // TODO: LOADING SCREEN
-                  loading: () => _buildUI(userDetails),
+                  loading: () => const LoadingAnimation(),
                   loaded: (data) => _buildUI(userDetails, data),
                   authError: () => _errorScreen(context),
                   error: (error) => _errorScreen(context, error),
@@ -35,8 +35,7 @@ class HomePage extends StatelessWidget {
         ),
       );
 
-  Widget _buildUI(UserDetails userDetails, [Last7DaysStats? last7daysStats]) =>
-      SingleChildScrollView(
+  Widget _buildUI(UserDetails userDetails, Last7DaysStats last7daysStats) => SingleChildScrollView(
         clipBehavior: Clip.none,
         physics: const BouncingScrollPhysics(),
         child: Padding(

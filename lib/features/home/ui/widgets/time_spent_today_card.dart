@@ -6,9 +6,9 @@ import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/features/home/domain/models/last_7_days_stats.dart";
 
 class TimeSpentTodayCard extends StatelessWidget {
-  final Last7DaysStats? _last7daysStats;
+  final Last7DaysStats _last7daysStats;
 
-  const TimeSpentTodayCard({Key? key, required Last7DaysStats? last7daysStats})
+  const TimeSpentTodayCard({Key? key, required Last7DaysStats last7daysStats})
       : _last7daysStats = last7daysStats,
         super(key: key);
 
@@ -38,7 +38,7 @@ class TimeSpentTodayCard extends StatelessWidget {
                     style: TextStyle(fontSize: 16.sp),
                   ),
                   Text(
-                    _last7daysStats?.currentDay.timeSpent.formattedPrint() ?? "",
+                    _last7daysStats.currentDay.timeSpent.formattedPrint(),
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,

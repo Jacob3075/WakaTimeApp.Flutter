@@ -5,7 +5,7 @@ import "package:waka_time_app/features/home/domain/models/last_7_days_stats.dart
 import "package:waka_time_app/features/home/ui/widgets/weekly_report_graph.dart";
 
 class WeeklyReportSection extends StatelessWidget {
-  final Last7DaysStats? last7DaysStats;
+  final Last7DaysStats last7DaysStats;
 
   const WeeklyReportSection({Key? key, required this.last7DaysStats}) : super(key: key);
 

@@ -8,9 +8,9 @@ import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/features/home/domain/models/last_7_days_stats.dart";
 
 class RecentProjectsSection extends StatelessWidget {
-  final Last7DaysStats? last7DaysStats;
+  final Last7DaysStats last7DaysStats;
 
-  const RecentProjectsSection({Key? key, this.last7DaysStats}) : super(key: key);
+  const RecentProjectsSection({Key? key, required this.last7DaysStats}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -19,7 +19,7 @@ class RecentProjectsSection extends StatelessWidget {
           children: [
             _buildSectionHeader(),
             SizedBox(height: 12.h),
-            _buildProjectList(last7DaysStats?.currentDay.projectsWorkedOn ?? List.empty()),
+            _buildProjectList(last7DaysStats.currentDay.projectsWorkedOn),
           ],
         ),
       );
