@@ -3,15 +3,13 @@ import "dart:io";
 import "package:dartz/dartz.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:http/http.dart" as http;
-import "package:mockito/annotations.dart";
 import "package:mockito/mockito.dart";
 import "package:waka_time_app/common/data/network/errors.dart";
 import "package:waka_time_app/features/login/domain/get_user_details_uc.dart";
 
+import "../../../../mocks.mocks.dart";
 import "../../../fixtures/sample_user_details.dart";
-import "get_user_details_uc_test.mocks.dart";
 
-@GenerateMocks([http.Client])
 main() {
   late GetUserDetailsUC loginApi;
   late MockClient client;

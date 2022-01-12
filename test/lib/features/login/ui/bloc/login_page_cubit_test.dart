@@ -1,17 +1,13 @@
 import "package:bloc_test/bloc_test.dart";
 import "package:dartz/dartz.dart";
 import "package:flutter_test/flutter_test.dart";
-import "package:mockito/annotations.dart";
 import "package:mockito/mockito.dart";
-import "package:waka_time_app/common/data/local/user_details_store.dart";
 import "package:waka_time_app/common/data/network/errors.dart";
-import "package:waka_time_app/features/login/domain/get_user_details_uc.dart";
 import "package:waka_time_app/features/login/ui/bloc/login_page_cubit.dart";
 
+import "../../../../../mocks.mocks.dart";
 import "../../../../fixtures/sample_user_details.dart";
-import "login_page_cubit_test.mocks.dart";
 
-@GenerateMocks([GetUserDetailsUC, UserDetailsStore])
 void main() {
   late LoginPageCubit cubit;
   late MockUserDetailsStore store;
@@ -46,8 +42,8 @@ void main() {
       blocTest<LoginPageCubit, LoginPageState>(
         "and api request returns NetworkError, then loading and error states should be emitted",
         build: () => cubit,
-        setUp: () => when(loginApi(any))
-            .thenAnswer((realInvocation) async => const Left(Errors.network())),
+        setUp: () =>
+            when(loginApi(any)).thenAnswer((realInvocation) async => const Left(Errors.network())),
         act: (bloc) async => await bloc.login("api key"),
         expect: () => [
           const LoginPageState.loading(),

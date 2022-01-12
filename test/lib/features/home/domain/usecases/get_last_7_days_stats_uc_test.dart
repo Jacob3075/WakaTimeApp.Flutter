@@ -1,15 +1,13 @@
 import "package:dartz/dartz.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:http/http.dart" as http;
-import "package:mockito/annotations.dart";
 import "package:mockito/mockito.dart";
 import "package:waka_time_app/common/data/network/errors.dart";
-import "package:waka_time_app/features/home/domain/get_last_7_days_stats_uc.dart";
+import "package:waka_time_app/features/home/domain/usecases/get_last_7_days_stats_uc.dart";
 
-import "../../../fixtures/sample_daily_stats_data.dart";
-import "get_last_7_days_stats_uc_test.mocks.dart";
+import "../../../../../mocks.mocks.dart";
+import "../../../../fixtures/sample_daily_stats_data.dart";
 
-@GenerateMocks([http.Client])
 main() {
   late GetLast7DaysStatsUC getLast7DaysStatsUC;
   late MockClient client;
