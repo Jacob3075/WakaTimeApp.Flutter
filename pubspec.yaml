@@ -20,7 +20,8 @@ dependencies:
   auto_route: ^3.2.1
   url_launcher: ^6.0.18
   flutter_screenutil: ^5.0.3
-  flutter_svg: 1.0.0
+  flutter_svg: ^1.0.1
+  lottie: ^1.2.1
 
   splashscreen:
     git:
@@ -49,6 +50,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/animations/
   # example:
   # fonts:
   #   - family: Schyler

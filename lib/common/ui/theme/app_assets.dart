@@ -47,4 +47,33 @@ class _Animation {
   final loopLoadingAnimation = "assets/animations/loop_loading_animation.json";
   final noMobileInternet = "assets/animations/no_mobile_internet.json";
   final worldLocations = "assets/animations/world_locations.json";
+
+  List<String> get otherAnimations => [
+        emptyBox1,
+        empty,
+        internet,
+        noMobileInternet,
+        // emptyBox2,
+      ];
+
+  List<String> get errorAnimations => [
+        error1,
+        error2,
+        errorAnimation,
+      ];
+
+  List<String> get loadingAnimations => [
+        loadingBlob,
+        loadingPaperPlane1,
+        liquidBlobLoaderGreen,
+        blueLoading,
+        loading1,
+        loopLoadingAnimation, //FIXME: CHANGE COLOR
+        jumpingBoxOnRopeLoadingAnimation, //FIXME: CHANGE COLOR
+        // dotsAndLinesLoadingPlexus,
+        // loadingAnimation,
+        // expandingUiElements,
+        // worldLocations,
+        // loading2,
+      ];
 }
