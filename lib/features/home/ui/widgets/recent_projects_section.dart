@@ -1,8 +1,10 @@
+import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/stats_for_duration.dart";
+import "package:waka_time_app/common/routing/routes.gr.dart";
 import "package:waka_time_app/common/ui/custom_ink_well_card.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
@@ -19,7 +21,7 @@ class RecentProjectsSection extends StatelessWidget {
           children: [
             _buildSectionHeader(),
             SizedBox(height: 12.h),
-            _buildProjectList(statsForDuration.currentDay.projectsWorkedOn),
+            _buildProjectList(statsForDuration.currentDay.projectsWorkedOn, context),
           ],
         ),
       );
@@ -45,17 +47,19 @@ class RecentProjectsSection extends StatelessWidget {
         ],
       );
 
-  Widget _buildProjectList(List<Project> projects) {
-    final projectCards = projects.take(3).map((item) => _buildRecentProjectItem(item)).toList();
+  Widget _buildProjectList(List<Project> projects, BuildContext context) {
+    final projectCards =
+        projects.take(3).map((item) => _buildRecentProjectItem(item, context)).toList();
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: Column(children: projectCards),
     );
   }
 
-  Widget _buildRecentProjectItem(Project project) {
+  Widget _buildRecentProjectItem(Project project, BuildContext context) {
     final borderRadius = BorderRadius.circular(20.r);
     return CustomInkWellCard(
+      onTap: () => context.router.push(const DetailedProjectStatsRoute()),
       borderRadius: borderRadius,
       margin: EdgeInsets.only(bottom: 15.h),
       decoration: BoxDecoration(

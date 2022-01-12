@@ -9,6 +9,8 @@ class CustomInkWellCard extends StatelessWidget {
   final Color? splashColor;
   final BoxDecoration? decoration;
 
+  final Function()? onTap;
+
   const CustomInkWellCard({
     Key? key,
     required this.child,
@@ -17,6 +19,7 @@ class CustomInkWellCard extends StatelessWidget {
     this.containerColor,
     this.splashColor,
     this.decoration,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -30,7 +33,7 @@ class CustomInkWellCard extends StatelessWidget {
         child: InkWell(
           splashColor: splashColor,
           borderRadius: borderRadius,
-          onTap: () {},
+          onTap: onTap,
           child: child,
         ),
       ),
