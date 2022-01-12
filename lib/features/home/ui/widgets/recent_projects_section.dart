@@ -59,7 +59,7 @@ class RecentProjectsSection extends StatelessWidget {
   Widget _buildRecentProjectItem(Project project, BuildContext context) {
     final borderRadius = BorderRadius.circular(20.r);
     return CustomInkWellCard(
-      onTap: () => context.router.push(const DetailedProjectStatsRoute()),
+      onTap: () => context.router.push(DetailedProjectStatsRoute(projectName: project.name)),
       borderRadius: borderRadius,
       margin: EdgeInsets.only(bottom: 15.h),
       decoration: BoxDecoration(
