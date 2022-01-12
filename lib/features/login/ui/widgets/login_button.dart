@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:waka_time_app/common/ui/gradient_button.dart";
+import "package:waka_time_app/common/ui/widgets/gradient_button.dart";
 
 class LoginButton extends StatelessWidget {
   final Function(BuildContext context) onPressed;

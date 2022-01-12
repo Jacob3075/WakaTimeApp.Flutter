@@ -33,7 +33,7 @@ class CustomInkWellCard extends StatelessWidget {
         child: InkWell(
           splashColor: splashColor,
           borderRadius: borderRadius,
-          onTap: onTap,
+          onTap: onTap ?? () {},
           child: child,
         ),
       ),

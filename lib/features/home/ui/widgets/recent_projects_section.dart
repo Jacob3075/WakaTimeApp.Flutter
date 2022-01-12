@@ -5,9 +5,9 @@ import "package:flutter_svg/flutter_svg.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/stats_for_duration.dart";
 import "package:waka_time_app/common/routing/routes.gr.dart";
-import "package:waka_time_app/common/ui/custom_ink_well_card.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
+import "package:waka_time_app/common/ui/widgets/custom_ink_well_card.dart";
 
 class RecentProjectsSection extends StatelessWidget {
   final StatsForDuration statsForDuration;
