@@ -9,13 +9,12 @@ typedef _State = DetailedProjectStatsState;
 typedef _Event = DetailedProjectStatsEvent;
 
 class DetailedProjectStatsBloc extends Bloc<_Event, _State> {
-  DetailedProjectStatsBloc() : super(const _State.initialState()) {
-    on<_Event>(
-      (event, emit) => event.when(
-        loadData: _onLoadData,
-      ),
-    );
+  DetailedProjectStatsBloc() : super(const _State.dataLoaded()) {
+    on<LoadData>(_onLoadData);
+    on<LoadedData>(_onLoadedData);
   }
 
-  void _onLoadData() {}
+  void _onLoadData(LoadData event, Emitter emitter) {}
+
+  void _onLoadedData(LoadedData event, Emitter emitter) {}
 }

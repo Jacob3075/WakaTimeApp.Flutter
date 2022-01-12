@@ -3,6 +3,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/routing/auth_guard.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
+import "package:waka_time_app/common/utils/my_bloc_observer.dart";
 import "package:waka_time_app/injection_container.dart" as di;
 
 import "common/routing/routes.gr.dart";
@@ -10,7 +11,10 @@ import "common/ui/theme/app_theme.dart";
 
 void main() {
   di.init();
-  runApp(App());
+  BlocOverrides.runZoned(
+    () => runApp(App()),
+    blocObserver: MyBlocObserver(),
+  );
 }
 
 class App extends StatelessWidget {
