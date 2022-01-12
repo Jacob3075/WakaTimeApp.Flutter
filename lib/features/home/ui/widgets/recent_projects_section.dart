@@ -3,16 +3,16 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
-import "package:waka_time_app/common/domain/models/stats_for_duration.dart";
+import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/routing/routes.gr.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/common/ui/widgets/custom_ink_well_card.dart";
 
 class RecentProjectsSection extends StatelessWidget {
-  final StatsForDuration statsForDuration;
+  final Summaries summaries;
 
-  const RecentProjectsSection({Key? key, required this.statsForDuration}) : super(key: key);
+  const RecentProjectsSection({Key? key, required this.summaries}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -21,7 +21,7 @@ class RecentProjectsSection extends StatelessWidget {
           children: [
             _buildSectionHeader(),
             SizedBox(height: 12.h),
-            _buildProjectList(statsForDuration.currentDay.projectsWorkedOn, context),
+            _buildProjectList(summaries.currentDay.projectsWorkedOn, context),
           ],
         ),
       );

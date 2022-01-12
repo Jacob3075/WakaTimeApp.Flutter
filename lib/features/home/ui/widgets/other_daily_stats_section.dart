@@ -1,17 +1,17 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/svg.dart";
-import "package:waka_time_app/common/domain/models/stats_for_duration.dart";
+import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart" as app_colors;
 import "package:waka_time_app/common/ui/widgets/custom_ink_well_card.dart";
 
 class OtherDailyStatsSection extends StatelessWidget {
-  final StatsForDuration statsForDuration;
+  final Summaries summaries;
 
   const OtherDailyStatsSection({
     Key? key,
-    required this.statsForDuration,
+    required this.summaries,
   }) : super(key: key);
 
   @override
@@ -54,21 +54,21 @@ class OtherDailyStatsSection extends StatelessWidget {
             _buildStatsCard(
               gradient: app_colors.AppGradients.greenCyan,
               statCategory: "Most Used Language",
-              value: statsForDuration.currentDay.mostUsedLanguage,
+              value: summaries.currentDay.mostUsedLanguage,
               icon: AppAssets.icons.codeFile,
             ),
             SizedBox(height: 14.h),
             _buildStatsCard(
               gradient: app_colors.AppGradients.blueCyan,
               statCategory: "Most Used Editor",
-              value: statsForDuration.currentDay.mostUsedEditor,
+              value: summaries.currentDay.mostUsedEditor,
               icon: AppAssets.icons.laptop,
             ),
             SizedBox(height: 14.h),
             _buildStatsCard(
               gradient: app_colors.AppGradients.purpleCyanDark,
               statCategory: "Most Used OS",
-              value: statsForDuration.currentDay.mostUsedOs,
+              value: summaries.currentDay.mostUsedOs,
               icon: AppAssets.icons.code,
             ),
           ],

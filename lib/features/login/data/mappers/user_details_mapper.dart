@@ -1,4 +1,4 @@
-import "package:waka_time_app/common/data/network/base_dto_mapper.dart";
+import "package:waka_time_app/common/data/network/mappers/base_dto_mapper.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/features/login/data/dtos/user_details_dto.dart";
 

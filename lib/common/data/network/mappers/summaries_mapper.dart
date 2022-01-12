@@ -1,14 +1,14 @@
 import "package:collection/collection.dart";
-import "package:waka_time_app/common/data/network/base_dto_mapper.dart";
-import "package:waka_time_app/common/data/network/common_dtos.dart";
+import "package:waka_time_app/common/data/network/dtos/common_dtos.dart";
+import "package:waka_time_app/common/data/network/dtos/summaries_dto.dart";
+import "package:waka_time_app/common/data/network/mappers/base_dto_mapper.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/daily_stats.dart";
-import "package:waka_time_app/common/domain/models/stats_for_duration.dart";
-import "package:waka_time_app/features/home/data/dtos/last_7_days_stats_dto.dart";
+import "package:waka_time_app/common/domain/models/summaries.dart";
 
-class StatsForDurationMapper extends BaseDtoMapper<StatsForDuration, Last7DaysStatsDTO> {
+class SummariesMapper extends BaseDtoMapper<Summaries, SummariesDTO> {
   @override
-  StatsForDuration fromDto(Last7DaysStatsDTO dto) => StatsForDuration(
+  Summaries fromDto(SummariesDTO dto) => Summaries(
         totalTime: _getTotalTimeFromDTO(dto),
         dailyStats: _getDailyStatsFromDTO(dto.data),
         range: StatsRange(
@@ -17,7 +17,7 @@ class StatsForDurationMapper extends BaseDtoMapper<StatsForDuration, Last7DaysSt
         ),
       );
 
-  Time _getTotalTimeFromDTO(Last7DaysStatsDTO dto) => dto.data.map((item) => item.grandTotal).fold(
+  Time _getTotalTimeFromDTO(SummariesDTO dto) => dto.data.map((item) => item.grandTotal).fold(
         const Time(
           decimal: 0,
           minutes: 0,
@@ -74,5 +74,5 @@ class StatsForDurationMapper extends BaseDtoMapper<StatsForDuration, Last7DaysSt
       .toList();
 
   @override
-  Last7DaysStatsDTO fromModel(StatsForDuration model) => throw UnimplementedError();
+  SummariesDTO fromModel(Summaries model) => throw UnimplementedError();
 }

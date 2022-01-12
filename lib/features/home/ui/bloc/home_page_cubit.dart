@@ -2,7 +2,7 @@ import "package:bloc/bloc.dart";
 import "package:dartz/dartz.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/data/network/errors.dart";
-import "package:waka_time_app/common/domain/models/stats_for_duration.dart";
+import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
 import "package:waka_time_app/common/utils/utils.dart";
@@ -30,7 +30,7 @@ class HomePageCubit extends Cubit<HomePageState> {
 
   Future<void> _loadData() async {
     emit(const HomePageState.loading());
-    final Either<Errors, StatsForDuration> result =
+    final Either<Errors, Summaries> result =
         await _last7daysStatsUC(GetLast7DaysStatsUCParameters(apiKey: _apiKey));
     result.fold(
       (error) => emit(HomePageState.error(error.getErrorMessage())),

@@ -1,13 +1,13 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:waka_time_app/common/domain/models/stats_for_duration.dart";
+import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/features/home/ui/widgets/weekly_report_graph.dart";
 
 class WeeklyReportSection extends StatelessWidget {
-  final StatsForDuration statsForDuration;
+  final Summaries summaries;
 
-  const WeeklyReportSection({Key? key, required this.statsForDuration}) : super(key: key);
+  const WeeklyReportSection({Key? key, required this.summaries}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -51,6 +51,6 @@ class WeeklyReportSection extends StatelessWidget {
           color: AppColors.cardBGPrimary,
           boxShadow: const [AppShadows.cardShadow],
         ),
-        child: WeeklyReportGraph(statsForDuration: statsForDuration),
+        child: WeeklyReportGraph(summaries: summaries),
       );
 }
