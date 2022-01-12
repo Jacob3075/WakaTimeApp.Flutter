@@ -3,13 +3,13 @@ import "package:fl_chart/fl_chart.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:intl/intl.dart";
+import "package:waka_time_app/common/domain/models/stats_for_duration.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
-import "package:waka_time_app/features/home/domain/models/last_7_days_stats.dart";
 
 class WeeklyReportGraph extends StatelessWidget {
-  final Last7DaysStats last7daysStats;
+  final StatsForDuration statsForDuration;
 
-  const WeeklyReportGraph({Key? key, required this.last7daysStats}) : super(key: key);
+  const WeeklyReportGraph({Key? key, required this.statsForDuration}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container(
@@ -34,7 +34,7 @@ class WeeklyReportGraph extends StatelessWidget {
         ),
       );
 
-  List<BarChartGroupData> get _chartData => last7daysStats.dailyStats.mapIndexed((index, item) {
+  List<BarChartGroupData> get _chartData => statsForDuration.dailyStats.mapIndexed((index, item) {
         return BarChartGroupData(
           x: index,
           barRods: [
@@ -57,7 +57,7 @@ class WeeklyReportGraph extends StatelessWidget {
           tooltipPadding: EdgeInsets.all(6.r),
           tooltipRoundedRadius: 6.r,
           getTooltipItem: (groupData, groupIndex, rodData, rodIndex) => BarTooltipItem(
-            last7daysStats.dailyStats[groupIndex].timeSpent.formattedPrint(),
+            statsForDuration.dailyStats[groupIndex].timeSpent.formattedPrint(),
             const TextStyle(),
           ),
         ),
@@ -78,7 +78,7 @@ class WeeklyReportGraph extends StatelessWidget {
         bottomTitles: SideTitles(
           showTitles: true,
           getTitles: (index) =>
-              DateFormat("E").format(last7daysStats.dailyStats[index.toInt()].date),
+              DateFormat("E").format(statsForDuration.dailyStats[index.toInt()].date),
           getTextStyles: (_, __) => TextStyle(
             fontSize: 10.sp,
             fontWeight: FontWeight.w300,
