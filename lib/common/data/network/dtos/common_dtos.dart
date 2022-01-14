@@ -3,20 +3,19 @@ import "package:freezed_annotation/freezed_annotation.dart";
 part "common_dtos.freezed.dart";
 part "common_dtos.g.dart";
 
-
 @freezed
 class DataDTO with _$DataDTO {
   // TODO: FINISH MODELS
   const factory DataDTO({
-    required List<dynamic> categories,
+    required List<CategoriesDTO> categories,
     required List<dynamic> dependencies,
     required List<EditorsDTO> editors,
-    @JsonKey(name: "grand_total") required GrandTotalDTO grandTotal,
     required List<LanguageDTO> languages,
-    required List<dynamic> machines,
-    @JsonKey(name: "operating_systems") required List<OperatingSystemsDTO> operatingSystems,
+    required List<MachinesDTO> machines,
     required List<ProjectDTO> projects,
     required RangeDTO range,
+    @JsonKey(name: "operating_systems") required List<OperatingSystemsDTO> operatingSystems,
+    @JsonKey(name: "grand_total") required GrandTotalDTO grandTotal,
   }) = _DataDTO;
 
   factory DataDTO.fromJson(Map<String, dynamic> json) => _$DataDTOFromJson(json);
@@ -38,11 +37,11 @@ class RangeDTO with _$RangeDTO {
 @freezed
 class GrandTotalDTO with _$GrandTotalDTO {
   const factory GrandTotalDTO({
-    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
     required String digital,
     required int hours,
     required int minutes,
     required String text,
+    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
     @JsonKey(name: "total_seconds") required double totalSeconds,
   }) = _GrandTotalDTO;
 
@@ -52,19 +51,19 @@ class GrandTotalDTO with _$GrandTotalDTO {
 @freezed
 class CumulativeTotalDTO with _$CumulativeTotalDTO {
   const factory CumulativeTotalDTO({
-    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
     required String digital,
     required double seconds,
     required String text,
+    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
   }) = _CumulativeTotalDTO;
 
-  factory CumulativeTotalDTO.fromJson(Map<String, dynamic> json) => _$CumulativeTotalDTOFromJson(json);
+  factory CumulativeTotalDTO.fromJson(Map<String, dynamic> json) =>
+      _$CumulativeTotalDTOFromJson(json);
 }
 
 @freezed
 class ProjectDTO with _$ProjectDTO {
   const factory ProjectDTO({
-    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
     required String digital,
     required int hours,
     required int minutes,
@@ -72,6 +71,7 @@ class ProjectDTO with _$ProjectDTO {
     required double percent,
     required int seconds,
     required String text,
+    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
   }) = _ProjectDTO;
 
   factory ProjectDTO.fromJson(Map<String, dynamic> json) => _$ProjectDTOFromJson(json);
@@ -80,7 +80,6 @@ class ProjectDTO with _$ProjectDTO {
 @freezed
 class LanguageDTO with _$LanguageDTO {
   const factory LanguageDTO({
-    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
     required String digital,
     required int hours,
     required int minutes,
@@ -88,6 +87,7 @@ class LanguageDTO with _$LanguageDTO {
     required double percent,
     required int seconds,
     required String text,
+    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
     @JsonKey(name: "total_seconds") required double totalSeconds,
   }) = _LanguageDTO;
 
@@ -97,7 +97,6 @@ class LanguageDTO with _$LanguageDTO {
 @freezed
 class OperatingSystemsDTO with _$OperatingSystemsDTO {
   const factory OperatingSystemsDTO({
-    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
     required String digital,
     required int hours,
     required int minutes,
@@ -105,6 +104,7 @@ class OperatingSystemsDTO with _$OperatingSystemsDTO {
     required double percent,
     required int seconds,
     required String text,
+    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
     @JsonKey(name: "total_seconds") required double totalSeconds,
   }) = _OperatingSystemsDTO;
 
@@ -115,7 +115,6 @@ class OperatingSystemsDTO with _$OperatingSystemsDTO {
 @freezed
 class EditorsDTO with _$EditorsDTO {
   const factory EditorsDTO({
-    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
     required String digital,
     required int hours,
     required int minutes,
@@ -123,10 +122,35 @@ class EditorsDTO with _$EditorsDTO {
     required double percent,
     required int seconds,
     required String text,
+    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
     @JsonKey(name: "total_seconds") required double totalSeconds,
   }) = _EditorsDTO;
 
   factory EditorsDTO.fromJson(Map<String, dynamic> json) => _$EditorsDTOFromJson(json);
+}
+
+@freezed
+class CategoriesDTO with _$CategoriesDTO {
+  const factory CategoriesDTO({
+    required String digital,
+    required int seconds,
+    required String text,
+    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
+  }) = _CategoriesDTO;
+
+  factory CategoriesDTO.fromJson(Map<String, dynamic> json) => _$CategoriesDTOFromJson(json);
+}
+
+@freezed
+class MachinesDTO with _$MachinesDTO {
+  const factory MachinesDTO({
+    required String digital,
+    required int seconds,
+    required String text,
+    @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
+  }) = _MachinesDTO;
+
+  factory MachinesDTO.fromJson(Map<String, dynamic> json) => _$MachinesDTOFromJson(json);
 }
 
 double _stringToDouble(String number) => double.parse(number);
