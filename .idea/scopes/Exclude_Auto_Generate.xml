@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Exclude Auto-Generate" pattern="(file[WakaTimeApp]:lib//*&amp;&amp;!file[WakaTimeApp]:.idea/*&amp;&amp;!file[WakaTimeApp]:.idea//*||file[WakaTimeApp]:test//*)&amp;&amp;!file:lib/*.freezed.dart&amp;&amp;!file:lib/*.g.dart&amp;&amp;!file:test/*.mocks.dart" />
+</component>

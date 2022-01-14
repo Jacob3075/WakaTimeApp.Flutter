@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Project Cusotm" pattern="(file[WakaTimeApp]:lib//*&amp;&amp;!file[WakaTimeApp]:.idea/*&amp;&amp;!file[WakaTimeApp]:.idea//*||file[WakaTimeApp]:test//*)&amp;&amp;!file:lib/*.freezed.dart&amp;&amp;!file:lib/*.g.dart&amp;&amp;!file:test/*.mocks.dart||ext:*||file[WakaTimeApp]:android/*||file[WakaTimeApp]:assets/*||file:.flutter-plugins||file:.flutter-plugins-dependencies||file:.gitignore||file:.metadata||file:.packages||file:analysis_options.yaml||file:pubspec.lock||file:pubspec.yaml||file:README.md||file[WakaTimeApp]:assets//*||file[WakaTimeApp]:android//*" />
+</component>

@@ -14,7 +14,6 @@ pubspec.lock
 *.iml
 *.ipr
 *.iws
-.idea/
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
@@ -52,3 +51,4 @@ app.*.map.json
 **/*.gr.dart
 **/*.freezed.dart
 **/*.mocks.dart
+/.idea/sonarlint/issuestore/
