@@ -2,7 +2,7 @@ import "package:dartz/dartz.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:http/http.dart" as http;
 import "package:mockito/mockito.dart";
-import "package:waka_time_app/common/data/network/errors.dart";
+import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/features/home/domain/usecases/get_last_7_days_stats_uc.dart";
 
 import "../../../../../mocks.mocks.dart";

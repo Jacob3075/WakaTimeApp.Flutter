@@ -2,7 +2,8 @@ import "dart:io";
 
 import "package:dartz/dartz.dart";
 import "package:http/http.dart" as http;
-import "package:waka_time_app/common/data/network/errors.dart";
+import "package:waka_time_app/common/domain/errors/errors.dart";
+import "package:waka_time_app/common/domain/errors/network_errors.dart";
 
 extension Range on num {
   /// Checks if number is between [from] and [to] parameters.
@@ -26,13 +27,15 @@ Future<Either<Errors, T>> getDataOrErrorFromApi<T>({
       successResponseProcessing: successResponseProcessing,
     );
   } on SocketException {
-    result = const Left(Errors.network());
+    result = const Left(Errors.networkError(networkError: NetworkErrors.network()));
   } on HttpException {
-    result = const Left(Errors.network());
+    result = const Left(Errors.networkError(networkError: NetworkErrors.network()));
   } on FormatException catch (exception) {
-    result = Left(Errors(errorMessage: "Format Exception, ${exception.message}"));
+    result = Left(Errors.networkError(
+        networkError: NetworkErrors(errorMessage: "Format Exception, ${exception.message}")));
   } on Exception catch (exception) {
-    result = Left(Errors(errorMessage: exception.toString()));
+    result =
+        Left(Errors.networkError(networkError: NetworkErrors(errorMessage: exception.toString())));
   }
   return result;
 }
@@ -46,19 +49,27 @@ Either<Errors, T> _getDataOrErrorFromResponse<T>({
   if (statusCode.isBetween(200, 299)) {
     result = successResponseProcessing(response);
   } else if (statusCode == 401) {
-    result = Left(Errors.unauthorized());
+    result = Left(Errors.networkError(networkError: NetworkErrors.unauthorized()));
   } else if (statusCode.isBetween(400, 499)) {
-    result = Left(Errors.clientError(
-      errorMessage: response.body,
-      code: statusCode,
-    ));
+    result = Left(
+      Errors.networkError(
+        networkError: NetworkErrors.clientError(
+          errorMessage: response.body,
+          code: statusCode,
+        ),
+      ),
+    );
   } else if (statusCode.isBetween(500, 599)) {
-    result = Left(Errors.serverError(
-      errorMessage: response.body,
-      code: statusCode,
-    ));
+    result = Left(
+      Errors.networkError(
+        networkError: NetworkErrors.serverError(
+          errorMessage: response.body,
+          code: statusCode,
+        ),
+      ),
+    );
   } else {
-    result = Left(Errors(errorMessage: response.body));
+    result = Left(Errors.networkError(networkError: NetworkErrors(errorMessage: response.body)));
   }
 
   return result;
@@ -66,10 +77,13 @@ Either<Errors, T> _getDataOrErrorFromResponse<T>({
 
 extension ErrorMessage on Errors {
   String getErrorMessage() => map(
-        (value) => value.errorMessage,
-        network: (error) => "Network Error",
-        clientError: (error) => error.errorMessage,
-        serverError: (error) => error.errorMessage,
+        networkError: (networkError) => networkError.networkError.map(
+          (value) => value.errorMessage,
+          network: (error) => "Network Error",
+          clientError: (error) => error.errorMessage,
+          serverError: (error) => error.errorMessage,
+        ),
+        domainError: (domainError) => domainError.domainErrors.errorMessage,
       );
 }
 

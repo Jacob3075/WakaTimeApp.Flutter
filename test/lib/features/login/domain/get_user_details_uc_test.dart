@@ -4,7 +4,8 @@ import "package:dartz/dartz.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:http/http.dart" as http;
 import "package:mockito/mockito.dart";
-import "package:waka_time_app/common/data/network/errors.dart";
+import "package:waka_time_app/common/domain/errors/errors.dart";
+import "package:waka_time_app/common/domain/errors/network_errors.dart";
 import "package:waka_time_app/features/login/domain/get_user_details_uc.dart";
 
 import "../../../../mocks.mocks.dart";
@@ -32,7 +33,8 @@ main() {
 
           expect(result, isA<Left>());
           result.fold(
-            (errors) => expect(errors, const Errors.network()),
+            (errors) =>
+                expect(errors, const Errors.networkError(networkError: NetworkErrors.network())),
             (_) => null,
           );
         },
@@ -47,7 +49,8 @@ main() {
 
           expect(result, isA<Left>());
           result.fold(
-            (errors) => expect(errors, const Errors.network()),
+            (errors) =>
+                expect(errors, const Errors.networkError(networkError: NetworkErrors.network())),
             (_) => null,
           );
         },
@@ -62,7 +65,10 @@ main() {
 
           expect(result, isA<Left>());
           result.fold(
-            (errors) => expect(errors, const Errors(errorMessage: "Exception: ")),
+            (errors) => expect(
+              errors,
+              const Errors.networkError(networkError: NetworkErrors(errorMessage: "Exception: ")),
+            ),
             (_) => null,
           );
         },
@@ -99,7 +105,8 @@ main() {
 
           expect(result, isA<Left>());
           result.fold(
-            (error) => expect(error, Errors.unauthorized()),
+            (error) =>
+                expect(error, Errors.networkError(networkError: NetworkErrors.unauthorized())),
             (_) => null,
           );
         },
@@ -117,9 +124,11 @@ main() {
           result.fold(
             (error) => expect(
               error,
-              const Errors.clientError(
-                errorMessage: """{"error":"Not found"}""",
-                code: 404,
+              const Errors.networkError(
+                networkError: NetworkErrors.clientError(
+                  errorMessage: """{"error":"Not found"}""",
+                  code: 404,
+                ),
               ),
             ),
             (_) => null,

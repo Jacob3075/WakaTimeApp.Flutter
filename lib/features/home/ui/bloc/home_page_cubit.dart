@@ -1,7 +1,7 @@
 import "package:bloc/bloc.dart";
 import "package:dartz/dartz.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
-import "package:waka_time_app/common/data/network/errors.dart";
+import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
