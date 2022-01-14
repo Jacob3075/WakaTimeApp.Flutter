@@ -9,4 +9,15 @@ abstract class ApiEndpoints {
 
   static Uri getWeeklyStats(String apiKey) => Uri.parse(
       "${Constants.wakaTimeApiUrl}/users/current/summaries?range=last_7_days&api_key=$apiKey");
+
+  static Uri getStatsForProject(Map<String, dynamic> parameters) => Uri.parse(
+        "${Constants.wakaTimeApiUrl}/users/current/summaries?${_getQueryStringFromMap(parameters)}",
+      );
+
+  static Uri getProjectDetails(Map<String, dynamic> parameters) => Uri.parse(
+        "${Constants.wakaTimeApiUrl}/users/current/projects?${_getQueryStringFromMap(parameters)}",
+      );
+
+  static String _getQueryStringFromMap(Map<String, dynamic> parameters) =>
+      parameters.entries.map((item) => "${item.key}=${item.value.toString()}").toList().join("&");
 }
