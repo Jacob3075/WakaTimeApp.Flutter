@@ -1,5 +1,11 @@
 import "package:bloc/bloc.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
+import "package:intl/intl.dart";
+import "package:waka_time_app/common/domain/models/summaries.dart";
+import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
+import "package:waka_time_app/features/detailed_stats/by_project/domain/models/project_details.dart";
+import "package:waka_time_app/features/detailed_stats/by_project/domain/usecases/get_project_details_uc.dart";
+import "package:waka_time_app/features/detailed_stats/by_project/domain/usecases/get_project_stats_uc.dart";
 
 part "detailed_project_stats_bloc.freezed.dart";
 part "detailed_project_stats_event.dart";
@@ -9,12 +15,43 @@ typedef _State = DetailedProjectStatsState;
 typedef _Event = DetailedProjectStatsEvent;
 
 class DetailedProjectStatsBloc extends Bloc<_Event, _State> {
-  DetailedProjectStatsBloc() : super(const _State.dataLoaded()) {
+  final GetProjectStatsUC getStatsForProject;
+  final GetProjectDetailsUC getProjectDetailsUC;
+  late final String apiKey;
+
+  DetailedProjectStatsBloc({
+    required this.getStatsForProject,
+    required this.getProjectDetailsUC,
+    required UserAuthCubit userAuthCubit,
+  }) : super(const _State.loading()) {
+    apiKey = userAuthCubit.apiKey;
     on<LoadData>(_onLoadData);
-    on<LoadedData>(_onLoadedData);
   }
 
-  void _onLoadData(LoadData event, Emitter emitter) {}
+  Future<void> _onLoadData(LoadData event, Emitter emit) async {
+    final projectDetailsResult = await getProjectDetailsUC(
+      GetProjectDetailsUCParameters(apiKey: apiKey, project: event.projectName),
+    );
 
-  void _onLoadedData(LoadedData event, Emitter emitter) {}
+    projectDetailsResult.fold(
+      (error) => null,
+      (data) => _onProjectDetailsSuccess(data, emit),
+    );
+  }
+
+  void _onProjectDetailsSuccess(ProjectDetails projectDetails, Emitter emit) async {
+    final formatter = DateFormat("yyyy-MM-dd");
+    final projectStatsResult = await getStatsForProject(
+      GetProjectStatsUCParameters(
+        apiKey: apiKey,
+        start: formatter.format(projectDetails.createdDate),
+        end: formatter.format(DateTime.now()),
+        project: projectDetails.projectName,
+      ),
+    );
+    projectStatsResult.fold(
+      (error) => null,
+      (data) => emit(_State.dataLoaded(projectStats: data)),
+    );
+  }
 }
