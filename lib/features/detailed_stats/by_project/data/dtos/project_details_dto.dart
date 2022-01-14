@@ -40,7 +40,7 @@ class ProjectDataDTO with _$ProjectDataDTO {
 class RepositoryDTO with _$RepositoryDTO {
   const factory RepositoryDTO({
     required String? badge,
-    required String description,
+    required String? description,
     required String? homepage,
     required String id,
     required String name,
