@@ -6,4 +6,6 @@ class DetailedProjectStatsState with _$DetailedProjectStatsState {
 
   const factory DetailedProjectStatsState.dataLoaded({required Summaries projectStats}) =
       DataLoaded;
+
+  const factory DetailedProjectStatsState.error({required Errors errorMessage}) = Error;
 }

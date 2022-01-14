@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/ui/widgets/loading_animation.dart";
 import "package:waka_time_app/features/detailed_stats/by_project/ui/bloc/detailed_project_stats_bloc.dart";
@@ -20,9 +21,10 @@ class DetailedProjectStats extends StatelessWidget {
         child: BlocProvider(
           create: (context) => getIt<DetailedProjectStatsBloc>(),
           child: BlocBuilder<DetailedProjectStatsBloc, DetailedProjectStatsState>(
-            builder: (context, state) => state.when(
+            builder: (_, state) => state.when(
               loading: _onLoadingState,
               dataLoaded: _onDataLoadedState,
+              error: _onErrorSate,
             ),
           ),
         ),
@@ -33,4 +35,7 @@ class DetailedProjectStats extends StatelessWidget {
   Widget _onLoadingState() => const LoadingAnimation();
 
   Widget _onDataLoadedState(Summaries projectStats) => Container();
+
+  // TODO: ADD ERROR SCREEN
+  Widget _onErrorSate(Errors errors) => Container();
 }

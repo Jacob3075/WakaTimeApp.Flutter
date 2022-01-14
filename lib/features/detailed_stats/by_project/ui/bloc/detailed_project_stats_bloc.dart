@@ -1,6 +1,7 @@
 import "package:bloc/bloc.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:intl/intl.dart";
+import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
 import "package:waka_time_app/features/detailed_stats/by_project/domain/models/project_details.dart";
@@ -34,7 +35,7 @@ class DetailedProjectStatsBloc extends Bloc<_Event, _State> {
     );
 
     projectDetailsResult.fold(
-      (error) => null,
+      (error) => _onError(error, emit),
       (data) => _onProjectDetailsSuccess(data, emit),
     );
   }
@@ -50,8 +51,10 @@ class DetailedProjectStatsBloc extends Bloc<_Event, _State> {
       ),
     );
     projectStatsResult.fold(
-      (error) => null,
+      (error) => _onError(error, emit),
       (data) => emit(_State.dataLoaded(projectStats: data)),
     );
   }
+
+  void _onError(Errors error, Emitter emit) => emit(_State.error(errorMessage: error));
 }
