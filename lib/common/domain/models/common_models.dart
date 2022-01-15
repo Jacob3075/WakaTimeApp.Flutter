@@ -26,6 +26,12 @@ class Time with _$Time {
 
   factory Time.fromJson(Map<String, dynamic> json) => _$TimeFromJson(json);
 
+  factory Time.fromDigital(String digitalTime, double decimal) {
+    List<String> split = digitalTime.split(":");
+    assert(split.length == 2);
+    return Time(hours: int.parse(split.first), minutes: int.parse(split.last), decimal: decimal);
+  }
+
   Time operator +(Time other) {
     double newHours = (hours + other.hours).toDouble();
     var newMinutes = minutes + other.minutes;

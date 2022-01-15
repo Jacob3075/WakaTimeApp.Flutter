@@ -1394,7 +1394,7 @@ const sampleLast7DaysStatsDataJson = """{
 """;
 
 final sampleLast7DaysStats = Summaries(
-  totalTime: const Time(hours: 34, minutes: 5, decimal: 34.09),
+  totalTime: const Time(hours: 34, minutes: 9, decimal: 34.15),
   dailyStats: [
     DailyStats(
       timeSpent: const Time(hours: 5, minutes: 22, decimal: 5.37),
