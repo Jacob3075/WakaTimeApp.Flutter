@@ -4,12 +4,12 @@ import "package:dartz/dartz.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:http/http.dart" as http;
 import "package:waka_time_app/common/data/network/api_endpoints.dart";
-import "package:waka_time_app/common/data/network/dtos/summaries_dto.dart";
-import "package:waka_time_app/common/data/network/mappers/summaries_mapper.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/usecases/base_use_case.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/utils/utils.dart";
+import "package:waka_time_app/features/detailed_stats/by_project/data/dtos/project_summaries_dto.dart";
+import "package:waka_time_app/features/detailed_stats/by_project/data/mappers/project_summaries_mapper.dart";
 
 part "get_project_stats_uc.freezed.dart";
 part "get_project_stats_uc.g.dart";
@@ -20,7 +20,7 @@ typedef _ReturnType = Future<Either<Errors, Summaries>>;
 class GetProjectStatsUC extends BaseUseCase<_Parameters, _ReturnType> {
   final http.Client _client;
 
-  GetProjectStatsUC({required client}) : _client = client;
+  GetProjectStatsUC({required http.Client client}) : _client = client;
 
   @override
   _ReturnType call(_Parameters parameters) async => await getDataOrErrorFromApi(
@@ -35,8 +35,8 @@ class GetProjectStatsUC extends BaseUseCase<_Parameters, _ReturnType> {
     http.Response response,
   ) {
     final jsonMap = jsonDecode(response.body);
-    final SummariesDTO dailyStatsDTO = SummariesDTO.fromJson(jsonMap);
-    return Right(SummariesMapper().fromDto(dailyStatsDTO));
+    final dailyStatsDTO = ProjectSummariesDTO.fromJson(jsonMap);
+    return Right(ProjectSummariesMapper().fromDto(dailyStatsDTO));
   }
 }
 
