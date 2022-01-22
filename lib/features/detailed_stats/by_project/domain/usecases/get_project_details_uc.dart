@@ -22,7 +22,7 @@ typedef _ReturnType = Future<Either<Errors, ProjectDetails>>;
 class GetProjectDetailsUC extends BaseUseCase<_Parameters, _ReturnType> {
   final http.Client _client;
 
-  GetProjectDetailsUC({required client}) : _client = client;
+  GetProjectDetailsUC({required http.Client client}) : _client = client;
 
   @override
   _ReturnType call(_Parameters parameters) async => await getDataOrErrorFromApi(
@@ -31,7 +31,7 @@ class GetProjectDetailsUC extends BaseUseCase<_Parameters, _ReturnType> {
       );
 
   Future<http.Response> _apiCall(_Parameters parameters) async =>
-      await _client.get(ApiEndpoints.getStatsForProject(parameters.toJson()));
+      await _client.get(ApiEndpoints.getProjectDetails(parameters.toJson()));
 
   Either<Errors, ProjectDetails> _successResponseProcessing(
     http.Response response,
@@ -39,6 +39,13 @@ class GetProjectDetailsUC extends BaseUseCase<_Parameters, _ReturnType> {
     final jsonMap = jsonDecode(response.body);
     final projectDetailsDTO = ProjectDetailsDTO.fromJson(jsonMap);
     final projectDetailsList = ProjectDetailsMapper().fromDto(projectDetailsDTO);
+
+    if (projectDetailsList.isEmpty) {
+      return const Left(
+        Errors.domainError(domainErrors: DomainErrors(errorMessage: "No projects found.")),
+      );
+    }
+
     return projectDetailsList.length == 1
         ? Right(projectDetailsList.first)
         : const Left(Errors.domainError(
@@ -52,7 +59,7 @@ class GetProjectDetailsUCParameters extends BaseUseCaseParameters
     with _$GetProjectDetailsUCParameters {
   const factory GetProjectDetailsUCParameters({
     @JsonKey(name: "api_key") required String apiKey,
-    required String project,
+    @JsonKey(name: "q") required String project,
   }) = _GetProjectDetailsUCParameters;
 
   factory GetProjectDetailsUCParameters.fromJson(Map<String, dynamic> json) =>

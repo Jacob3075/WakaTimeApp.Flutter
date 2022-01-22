@@ -19,7 +19,7 @@ main() {
   test(
     "When api returns data with stats for 1 project should return Either.Right with the correct data",
     () async {
-      when(client.get(any)).thenAnswer((realInvocation) async => http.Response(
+      when(client.get(any)).thenAnswer((_) async => http.Response(
             sampleSingleProjectDetailsJson,
             200,
           ));
@@ -39,7 +39,7 @@ main() {
   test(
     "When api returns data with stats for more than 1 project, use case should return Either.Left",
     () async {
-      when(client.get(any)).thenAnswer((realInvocation) async => http.Response(
+      when(client.get(any)).thenAnswer((_) async => http.Response(
             sampleMultipleProjectsDetailsJson,
             200,
           ));
@@ -56,6 +56,48 @@ main() {
         ),
         (r) => null,
       );
+    },
+  );
+
+  test(
+    "When api does not return any project data, use case should return Either.Left",
+    () async {
+      when(client.get(any)).thenAnswer((_) async => http.Response(
+            sampleEmptyProjectDetailsJson,
+            200,
+          ));
+
+      final result =
+          await getProjectDetailsUC(const GetProjectDetailsUCParameters(apiKey: "", project: ""));
+
+      expect(result, isA<Left>());
+
+      result.fold(
+        (error) => error.when(
+          networkError: (_) => expect(false, true),
+          domainError: (data) => expect(data.errorMessage, "No projects found."),
+        ),
+        (r) => null,
+      );
+    },
+  );
+
+  test(
+    "Correct query parameters are added when getting project details endpoint is called",
+    () async {
+      when(client.get(any))
+          .thenAnswer((_) async => http.Response(sampleSingleProjectDetailsJson, 200));
+      final parametersMap = {
+        "api_key": "abcd-1234-efgh",
+        "q": "Waka Time App",
+      };
+
+      await getProjectDetailsUC(GetProjectDetailsUCParameters.fromJson(parametersMap));
+
+      final Uri calledUri = verify(client.get(captureAny)).captured.first;
+
+      expect(calledUri.hasQuery, true);
+      expect(calledUri.queryParameters, parametersMap);
     },
   );
 }

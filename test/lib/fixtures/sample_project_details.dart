@@ -123,3 +123,13 @@ final sampleMultipleProjectsDetails = [
     lastHeartBeat: DateTime.parse("2022-01-11T07:45:25Z"),
   )
 ];
+
+const sampleEmptyProjectDetailsJson = """{
+  "data": [],
+  "next_page": 1,
+  "page": 1,
+  "prev_page": 1,
+  "total": 0,
+  "total_pages": 1
+}
+""";
