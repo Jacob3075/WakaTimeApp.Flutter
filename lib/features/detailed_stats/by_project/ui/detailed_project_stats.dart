@@ -6,6 +6,8 @@ import "package:waka_time_app/common/ui/widgets/loading_animation.dart";
 import "package:waka_time_app/features/detailed_stats/by_project/ui/bloc/detailed_project_stats_bloc.dart";
 import "package:waka_time_app/injection_container.dart";
 
+typedef _Event = DetailedProjectStatsEvent;
+
 class DetailedProjectStats extends StatelessWidget {
   final String projectName;
 
@@ -19,7 +21,8 @@ class DetailedProjectStats extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: BlocProvider(
-          create: (context) => getIt<DetailedProjectStatsBloc>(),
+          create: (context) =>
+              getIt<DetailedProjectStatsBloc>()..add(_Event.loadData(projectName: projectName)),
           child: BlocBuilder<DetailedProjectStatsBloc, DetailedProjectStatsState>(
             builder: (_, state) => state.when(
               loading: _onLoadingState,
@@ -37,5 +40,7 @@ class DetailedProjectStats extends StatelessWidget {
   Widget _onDataLoadedState(Summaries projectStats) => Container();
 
   // TODO: ADD ERROR SCREEN
-  Widget _onErrorSate(Errors errors) => Container();
+  Widget _onErrorSate(Errors errors) => Center(
+        child: Text("ERROR: $errors"),
+      );
 }

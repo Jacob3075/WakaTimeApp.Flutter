@@ -16,12 +16,12 @@ typedef _State = DetailedProjectStatsState;
 typedef _Event = DetailedProjectStatsEvent;
 
 class DetailedProjectStatsBloc extends Bloc<_Event, _State> {
-  final GetProjectStatsUC getStatsForProject;
+  final GetProjectStatsUC getProjectStats;
   final GetProjectDetailsUC getProjectDetailsUC;
   late final String apiKey;
 
   DetailedProjectStatsBloc({
-    required this.getStatsForProject,
+    required this.getProjectStats,
     required this.getProjectDetailsUC,
     required UserAuthCubit userAuthCubit,
   }) : super(const _State.loading()) {
@@ -30,19 +30,21 @@ class DetailedProjectStatsBloc extends Bloc<_Event, _State> {
   }
 
   Future<void> _onLoadData(LoadData event, Emitter emit) async {
+    emit(const _State.loading());
+
     final projectDetailsResult = await getProjectDetailsUC(
       GetProjectDetailsUCParameters(apiKey: apiKey, project: event.projectName),
     );
 
-    projectDetailsResult.fold(
+    await projectDetailsResult.fold(
       (error) => _onError(error, emit),
-      (data) => _onProjectDetailsSuccess(data, emit),
+      (data) async => await _onProjectDetailsSuccess(data, emit),
     );
   }
 
-  void _onProjectDetailsSuccess(ProjectDetails projectDetails, Emitter emit) async {
+  Future<void> _onProjectDetailsSuccess(ProjectDetails projectDetails, Emitter emit) async {
     final formatter = DateFormat("yyyy-MM-dd");
-    final projectStatsResult = await getStatsForProject(
+    final projectStatsResult = await getProjectStats(
       GetProjectStatsUCParameters(
         apiKey: apiKey,
         start: formatter.format(projectDetails.createdDate),
@@ -56,5 +58,5 @@ class DetailedProjectStatsBloc extends Bloc<_Event, _State> {
     );
   }
 
-  void _onError(Errors error, Emitter emit) => emit(_State.error(errorMessage: error));
+  Future<void> _onError(Errors error, Emitter emit) async => emit(_State.error(error: error));
 }

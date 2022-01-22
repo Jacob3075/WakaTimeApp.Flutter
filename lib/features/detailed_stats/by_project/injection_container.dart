@@ -10,11 +10,10 @@ void initDetailedProjectStatsServices() {
   _getIt.registerSingleton(GetProjectDetailsUC(client: _getIt()));
 
   _getIt.registerFactory(
-        () =>
-        DetailedProjectStatsBloc(
-          getStatsForProject: _getIt(),
-          userAuthCubit: _getIt(),
-          getProjectDetailsUC: _getIt(),
-        ),
+    () => DetailedProjectStatsBloc(
+      getProjectStats: _getIt(),
+      userAuthCubit: _getIt(),
+      getProjectDetailsUC: _getIt(),
+    ),
   );
 }
