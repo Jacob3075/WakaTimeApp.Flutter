@@ -1,3 +1,5 @@
+import "dart:math";
+
 abstract class AppAssets {
   static const icons = _Icons();
   static const images = _Images();
@@ -27,21 +29,24 @@ class _Images {
 class _Illustrations {
   const _Illustrations();
 
-  final astronaut01 = "astronaut_01.svg";
-  final bookReading = "book_reading.svg";
-  final emptyBox = "empty_box.svg";
-  final intoTheNight = "into_the_night.svg";
-  final loading = "loading.svg";
-  final meditation = "meditation.svg";
-  final noData = "no_data.svg";
-  final notFound = "not_found.svg";
+  final astronaut01 = "assets/illustrations/astronaut_01.svg";
+  final bookReading = "assets/illustrations/book_reading.svg";
+  final emptyBox = "assets/illustrations/empty_box.svg";
+  final intoTheNight = "assets/illustrations/into_the_night.svg";
+  final loading = "assets/illustrations/loading.svg";
+  final meditation = "assets/illustrations/meditation.svg";
+  final noData = "assets/illustrations/no_data.svg";
+  final notFound = "assets/illustrations/not_found.svg";
 
-  List<String> get empty => [
+  List<String> get emptyIllustrations => [
         emptyBox,
         noData,
         notFound,
         meditation,
       ];
+
+  String get randomEmptyIllustration =>
+      emptyIllustrations[Random().nextInt(emptyIllustrations.length)];
 }
 
 class _Animation {
@@ -97,4 +102,7 @@ class _Animation {
         // worldLocations,
         // loading2,
       ];
+
+  String get randomLoadingAnimation =>
+      loadingAnimations[Random().nextInt(loadingAnimations.length)];
 }

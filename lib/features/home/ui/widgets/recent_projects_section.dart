@@ -47,14 +47,15 @@ class RecentProjectsSection extends StatelessWidget {
         ],
       );
 
-  Widget _buildProjectList(List<Project> projects, BuildContext context) {
-    final projectCards =
-        projects.take(3).map((item) => _buildRecentProjectItem(item, context)).toList();
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12.w),
-      child: Column(children: projectCards),
-    );
-  }
+  Widget _buildProjectList(List<Project> projects, BuildContext context) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.w),
+        child: projects.isEmpty
+            ? SvgPicture.asset(AppAssets.illustrations.randomEmptyIllustration)
+            : Column(
+                children:
+                    projects.take(3).map((item) => _buildRecentProjectItem(item, context)).toList(),
+              ),
+      );
 
   Widget _buildRecentProjectItem(Project project, BuildContext context) {
     final borderRadius = BorderRadius.circular(20.r);
