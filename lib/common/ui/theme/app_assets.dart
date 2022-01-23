@@ -2,6 +2,7 @@ abstract class AppAssets {
   static const icons = _Icons();
   static const images = _Images();
   static const animations = _Animation();
+  static const illustrations = _Illustrations();
 }
 
 class _Icons {
@@ -21,6 +22,26 @@ class _Images {
   const _Images();
 
   final launcherIcon = "assets/images/ic_launcher.png";
+}
+
+class _Illustrations {
+  const _Illustrations();
+
+  final astronaut01 = "astronaut_01.svg";
+  final bookReading = "book_reading.svg";
+  final emptyBox = "empty_box.svg";
+  final intoTheNight = "into_the_night.svg";
+  final loading = "loading.svg";
+  final meditation = "meditation.svg";
+  final noData = "no_data.svg";
+  final notFound = "not_found.svg";
+
+  List<String> get empty => [
+        emptyBox,
+        noData,
+        notFound,
+        meditation,
+      ];
 }
 
 class _Animation {
