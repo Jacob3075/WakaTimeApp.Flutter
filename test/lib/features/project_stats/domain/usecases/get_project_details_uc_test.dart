@@ -2,10 +2,10 @@ import "package:dartz/dartz.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:http/http.dart" as http;
 import "package:mockito/mockito.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/domain/usecases/get_project_details_uc.dart";
+import "package:waka_time_app/features/project_stats/domain/usecases/get_project_details_uc.dart";
 
-import "../../../../../../mocks.mocks.dart";
-import "../../../../../fixtures/sample_project_details.dart";
+import "../../../../../mocks.mocks.dart";
+import "../../../../fixtures/sample_project_details.dart";
 
 main() {
   late GetProjectDetailsUC getProjectDetailsUC;

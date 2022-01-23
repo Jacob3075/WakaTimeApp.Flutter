@@ -7,10 +7,10 @@ import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/errors/network_errors.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/domain/models/project_details.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/ui/bloc/detailed_project_stats_bloc.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_details.dart";
+import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
 
-import "../../../../../../mocks.mocks.dart";
+import "../../../../../mocks.mocks.dart";
 
 typedef _Event = DetailedProjectStatsEvent;
 typedef _State = DetailedProjectStatsState;

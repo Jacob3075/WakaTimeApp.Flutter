@@ -8,9 +8,9 @@ import "package:waka_time_app/common/domain/errors/domain_errors.dart";
 import "package:waka_time_app/common/domain/usecases/base_use_case.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/utils/utils.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/data/dtos/project_details_dto.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/data/mappers/project_details_mapper.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/domain/models/project_details.dart";
+import "package:waka_time_app/features/project_stats/data/dtos/project_details_dto.dart";
+import "package:waka_time_app/features/project_stats/data/mappers/project_details_mapper.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_details.dart";
 
 part "get_project_details_uc.freezed.dart";
 

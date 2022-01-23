@@ -1,4 +1,4 @@
-import "package:waka_time_app/features/detailed_stats/by_project/domain/models/project_details.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_details.dart";
 
 const sampleSingleProjectDetailsJson = """{
   "data": [

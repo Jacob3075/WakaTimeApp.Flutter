@@ -4,9 +4,9 @@ import "package:intl/intl.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/domain/models/project_details.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/domain/usecases/get_project_details_uc.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/domain/usecases/get_project_stats_uc.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_details.dart";
+import "package:waka_time_app/features/project_stats/domain/usecases/get_project_details_uc.dart";
+import "package:waka_time_app/features/project_stats/domain/usecases/get_project_stats_uc.dart";
 
 part "detailed_project_stats_bloc.freezed.dart";
 part "detailed_project_stats_event.dart";

@@ -3,7 +3,7 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/ui/widgets/loading_animation.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/ui/bloc/detailed_project_stats_bloc.dart";
+import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
 import "package:waka_time_app/injection_container.dart";
 
 typedef _Event = DetailedProjectStatsEvent;

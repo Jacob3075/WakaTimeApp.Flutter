@@ -1,7 +1,7 @@
 import "package:get_it/get_it.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/domain/usecases/get_project_details_uc.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/domain/usecases/get_project_stats_uc.dart";
-import "package:waka_time_app/features/detailed_stats/by_project/ui/bloc/detailed_project_stats_bloc.dart";
+import "package:waka_time_app/features/project_stats/domain/usecases/get_project_details_uc.dart";
+import "package:waka_time_app/features/project_stats/domain/usecases/get_project_stats_uc.dart";
+import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
 
 void initDetailedProjectStatsServices() {
   final _getIt = GetIt.instance;
