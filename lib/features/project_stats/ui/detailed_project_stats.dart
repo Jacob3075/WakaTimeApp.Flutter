@@ -1,10 +1,14 @@
+import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/ui/widgets/loading_animation.dart";
 import "package:waka_time_app/di/injection.dart";
 import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
+import "package:waka_time_app/features/project_stats/ui/widgets/header_section.dart";
+import "package:waka_time_app/features/project_stats/ui/widgets/stats_pager.dart";
 
 typedef _Event = DetailedProjectStatsEvent;
 
@@ -26,7 +30,7 @@ class DetailedProjectStats extends StatelessWidget {
           child: BlocBuilder<DetailedProjectStatsBloc, DetailedProjectStatsState>(
             builder: (_, state) => state.when(
               loading: _onLoadingState,
-              dataLoaded: _onDataLoadedState,
+              dataLoaded: (it) => _onDataLoadedState(it, context),
               error: _onErrorSate,
             ),
           ),
@@ -35,12 +39,19 @@ class DetailedProjectStats extends StatelessWidget {
     );
   }
 
+  Widget _onDataLoadedState(Summaries projectStats, BuildContext context) => Column(
+        children: [
+          SizedBox(height: 20.h),
+          HeaderSection(
+            projectName: projectName,
+            onClick: () => context.router.pop(),
+          ),
+          const StatsPager(),
+        ],
+      );
+
   Widget _onLoadingState() => const LoadingAnimation();
 
-  Widget _onDataLoadedState(Summaries projectStats) => Container();
-
   // TODO: ADD ERROR SCREEN
-  Widget _onErrorSate(Errors errors) => Center(
-        child: Text("ERROR: $errors"),
-      );
+  Widget _onErrorSate(Errors errors) => Center(child: Text("ERROR: $errors"));
 }
