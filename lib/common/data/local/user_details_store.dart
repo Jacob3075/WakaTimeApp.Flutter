@@ -1,8 +1,10 @@
 import "dart:convert";
 
 import "package:flutter_secure_storage/flutter_secure_storage.dart";
+import "package:injectable/injectable.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 
+@singleton
 class UserDetailsStore {
   final FlutterSecureStorage _storage;
 

@@ -422,6 +422,20 @@
             </list>
           </value>
         </entry>
+        <entry key="injectable">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/injectable-1.5.3/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="injectable_generator">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/injectable_generator-1.5.2/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="intl">
           <value>
             <list>
@@ -931,6 +945,8 @@
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/http_multi_server-3.0.1/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0/lib" />
+      <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/injectable-1.5.3/lib" />
+      <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/injectable_generator-1.5.2/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/io-1.0.3/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3/lib" />

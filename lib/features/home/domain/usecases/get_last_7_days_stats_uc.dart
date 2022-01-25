@@ -2,6 +2,7 @@ import "dart:convert";
 
 import "package:dartz/dartz.dart";
 import "package:http/http.dart" as http;
+import "package:injectable/injectable.dart";
 import "package:waka_time_app/common/data/network/api_endpoints.dart";
 import "package:waka_time_app/common/data/network/dtos/summaries_dto.dart";
 import "package:waka_time_app/common/data/network/mappers/summaries_mapper.dart";
@@ -13,6 +14,7 @@ import "package:waka_time_app/common/utils/utils.dart";
 typedef _Parameters = GetLast7DaysStatsUCParameters;
 typedef _ReturnType = Future<Either<Errors, Summaries>>;
 
+@singleton
 class GetLast7DaysStatsUC extends BaseUseCase<_Parameters, _ReturnType> {
   final http.Client _client;
 

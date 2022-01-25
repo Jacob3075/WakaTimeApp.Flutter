@@ -2,7 +2,7 @@ import "package:auto_route/auto_route.dart";
 import "package:waka_time_app/common/data/local/user_details_store.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/common/routing/routes.gr.dart";
-import "package:waka_time_app/injection_container.dart";
+import "package:waka_time_app/di/injection.dart";
 
 class AuthGuard extends AutoRouteGuard {
   @override

@@ -1,5 +1,6 @@
 import "package:bloc/bloc.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
+import "package:injectable/injectable.dart";
 import "package:intl/intl.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
@@ -15,6 +16,7 @@ part "detailed_project_stats_state.dart";
 typedef _State = DetailedProjectStatsState;
 typedef _Event = DetailedProjectStatsEvent;
 
+@injectable
 class DetailedProjectStatsBloc extends Bloc<_Event, _State> {
   final GetProjectStatsUC getProjectStats;
   final GetProjectDetailsUC getProjectDetailsUC;

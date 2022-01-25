@@ -5,10 +5,10 @@ import "package:url_launcher/url_launcher.dart";
 import "package:waka_time_app/common/routing/routes.gr.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/common/utils/constants.dart";
+import "package:waka_time_app/di/injection.dart";
 import "package:waka_time_app/features/login/ui/bloc/login_page_cubit.dart";
 import "package:waka_time_app/features/login/ui/widgets/api_key_input_field.dart";
 import "package:waka_time_app/features/login/ui/widgets/login_button.dart";
-import "package:waka_time_app/injection_container.dart";
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

@@ -4,13 +4,13 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/common/ui/widgets/loading_animation.dart";
+import "package:waka_time_app/di/injection.dart";
 import "package:waka_time_app/features/home/ui/bloc/home_page_cubit.dart";
 import "package:waka_time_app/features/home/ui/widgets/other_daily_stats_section.dart";
 import "package:waka_time_app/features/home/ui/widgets/recent_projects_section.dart";
 import "package:waka_time_app/features/home/ui/widgets/time_spent_today_card.dart";
 import "package:waka_time_app/features/home/ui/widgets/user_details_section.dart";
 import "package:waka_time_app/features/home/ui/widgets/weekly_report_section.dart";
-import "package:waka_time_app/injection_container.dart";
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

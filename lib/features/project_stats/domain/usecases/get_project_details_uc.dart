@@ -3,6 +3,7 @@ import "dart:convert";
 import "package:http/http.dart" as http;
 import "package:dartz/dartz.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
+import "package:injectable/injectable.dart";
 import "package:waka_time_app/common/data/network/api_endpoints.dart";
 import "package:waka_time_app/common/domain/errors/domain_errors.dart";
 import "package:waka_time_app/common/domain/usecases/base_use_case.dart";
@@ -19,6 +20,7 @@ part "get_project_details_uc.g.dart";
 typedef _Parameters = GetProjectDetailsUCParameters;
 typedef _ReturnType = Future<Either<Errors, ProjectDetails>>;
 
+@singleton
 class GetProjectDetailsUC extends BaseUseCase<_Parameters, _ReturnType> {
   final http.Client _client;
 

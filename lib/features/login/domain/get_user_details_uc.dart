@@ -2,6 +2,7 @@ import "dart:convert";
 
 import "package:dartz/dartz.dart";
 import "package:http/http.dart" as http;
+import "package:injectable/injectable.dart";
 import "package:waka_time_app/common/data/network/api_endpoints.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
@@ -12,6 +13,7 @@ import "package:waka_time_app/features/login/data/mappers/user_details_mapper.da
 
 typedef GetUserDetailsUCReturn = Future<Either<Errors, UserDetails>>;
 
+@singleton
 class GetUserDetailsUC extends BaseUseCase<GetUserDetailsUCParameters, GetUserDetailsUCReturn> {
   final http.Client _client;
 

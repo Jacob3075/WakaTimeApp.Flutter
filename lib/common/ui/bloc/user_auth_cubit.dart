@@ -1,5 +1,6 @@
 import "package:bloc/bloc.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
+import "package:injectable/injectable.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/features/login/domain/check_auth_status_uc.dart";
 import "package:waka_time_app/features/login/domain/get_user_details_uc.dart";
@@ -7,6 +8,7 @@ import "package:waka_time_app/features/login/domain/get_user_details_uc.dart";
 part "user_auth_cubit.freezed.dart";
 part "user_auth_state.dart";
 
+@lazySingleton
 class UserAuthCubit extends Cubit<UserAuthState> {
   final CheckAuthStatusUC _checkAuthStatus;
   final GetUserDetailsUC _getUserDetailsUC;
