@@ -3,9 +3,12 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 
 class CustomAppBar extends AppBar {
+  final Function() onPressed;
+
   CustomAppBar({
     Key? key,
     projectName,
+    required this.onPressed,
   }) : super(
           key: key,
           backgroundColor: Colors.transparent,
@@ -18,7 +21,10 @@ class CustomAppBar extends AppBar {
             ),
           ),
           titleSpacing: 0,
-          leading: Icon(Icons.arrow_back_ios, size: 28.sp),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios, size: 28.sp),
+            onPressed: onPressed,
+          ),
           bottom: const TabBar(
             indicatorColor: AppColors.accentIcons,
             isScrollable: true,

@@ -1,3 +1,4 @@
+import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
@@ -35,7 +36,10 @@ class DetailedProjectStats extends StatelessWidget {
         child: DefaultTabController(
           length: 5,
           child: Scaffold(
-            appBar: CustomAppBar(projectName: projectName),
+            appBar: CustomAppBar(
+              projectName: projectName,
+              onPressed: () => context.router.pop(),
+            ),
             body: TabBarView(
               physics: const BouncingScrollPhysics(),
               children: [
