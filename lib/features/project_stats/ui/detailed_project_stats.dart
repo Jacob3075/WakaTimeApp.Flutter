@@ -6,6 +6,7 @@ import "package:waka_time_app/common/ui/widgets/loading_animation.dart";
 import "package:waka_time_app/di/injection.dart";
 import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/custom_app_bar.dart";
+import "package:waka_time_app/features/project_stats/ui/widgets/time_stats_page.dart";
 
 typedef _Event = DetailedProjectStatsEvent;
 
@@ -30,26 +31,24 @@ class DetailedProjectStats extends StatelessWidget {
         ),
       );
 
-  Widget _onDataLoadedState(Summaries projectStats, BuildContext context) {
-    return SafeArea(
-      child: DefaultTabController(
-        length: 5,
-        child: Scaffold(
-          appBar: CustomAppBar(projectName: projectName),
-          body: const TabBarView(
-            physics: BouncingScrollPhysics(),
-            children: [
-              Text("Page 1"),
-              Text("Page 2"),
-              Text("Page 3"),
-              Text("Page 4"),
-              Text("Page 5"),
-            ],
+  Widget _onDataLoadedState(Summaries projectStats, BuildContext context) => SafeArea(
+        child: DefaultTabController(
+          length: 5,
+          child: Scaffold(
+            appBar: CustomAppBar(projectName: projectName),
+            body: TabBarView(
+              physics: const BouncingScrollPhysics(),
+              children: [
+                TimeStatsPage(projectStats: projectStats),
+                const Text("Page 2"),
+                const Text("Page 3"),
+                const Text("Page 4"),
+                const Text("Page 5"),
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 
   Widget _onLoadingState() => const Scaffold(
         body: SafeArea(
