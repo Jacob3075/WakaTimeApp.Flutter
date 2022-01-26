@@ -3,12 +3,14 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
+import "package:waka_time_app/common/ui/theme/app_assets.dart";
+import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/common/ui/widgets/loading_animation.dart";
+import "package:waka_time_app/common/ui/widgets/stats_card.dart";
 import "package:waka_time_app/di/injection.dart";
 import "package:waka_time_app/features/home/ui/bloc/home_page_cubit.dart";
 import "package:waka_time_app/features/home/ui/widgets/other_daily_stats_section.dart";
 import "package:waka_time_app/features/home/ui/widgets/recent_projects_section.dart";
-import "package:waka_time_app/features/home/ui/widgets/time_spent_today_card.dart";
 import "package:waka_time_app/features/home/ui/widgets/user_details_section.dart";
 import "package:waka_time_app/features/home/ui/widgets/weekly_report_section.dart";
 
@@ -45,7 +47,16 @@ class HomePage extends StatelessWidget {
               SizedBox(height: 24.h),
               UserDetailsSection(userDetails: userDetails),
               SizedBox(height: 20.h),
-              TimeSpentTodayCard(summaries: last7daysStats),
+              StatsCard(
+                gradient: AppGradients.primary,
+                text: "Total Time Spent\nToday",
+                value: last7daysStats.currentDay.timeSpent.formattedPrint(),
+                icon: AppAssets.icons.time,
+                cardHeight: 72.h,
+                borderRadius: BorderRadius.circular(16.r),
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                margin: EdgeInsets.symmetric(horizontal: 12.w),
+              ),
               SizedBox(height: 16.h),
               RecentProjectsSection(summaries: last7daysStats),
               SizedBox(height: 4.h),

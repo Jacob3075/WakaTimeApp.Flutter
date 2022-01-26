@@ -4,7 +4,8 @@ import "package:waka_time_app/common/ui/theme/app_colors.dart";
 class CustomInkWellCard extends StatelessWidget {
   final Widget child;
   final BorderRadius? borderRadius;
-  final EdgeInsets? margin;
+  final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
   final Color? containerColor;
   final Color? splashColor;
   final BoxDecoration? decoration;
@@ -20,6 +21,7 @@ class CustomInkWellCard extends StatelessWidget {
     this.splashColor,
     this.decoration,
     this.onTap,
+    this.padding,
   }) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class CustomInkWellCard extends StatelessWidget {
     return Container(
       decoration: decoration,
       margin: margin,
+      padding: padding,
       child: Material(
         borderRadius: borderRadius,
         color: containerColor ?? AppColors.cardBGPrimary,
