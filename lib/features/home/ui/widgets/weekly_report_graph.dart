@@ -34,22 +34,22 @@ class WeeklyReportGraph extends StatelessWidget {
         ),
       );
 
-  List<BarChartGroupData> get _chartData => summaries.dailyStats.mapIndexed((index, item) {
-        return BarChartGroupData(
-          x: index,
-          barRods: [
-            BarChartRodData(
-              colors: [AppColors.accentIcons],
-              y: item.timeSpent.decimal,
-              width: 10,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(6.r),
-                topRight: Radius.circular(6.r),
-              ),
-            )
-          ],
-        );
-      }).toList();
+  List<BarChartGroupData> get _chartData => summaries.dailyStats
+      .mapIndexed((index, item) => BarChartGroupData(
+            x: index,
+            barRods: [
+              BarChartRodData(
+                colors: [AppColors.accentIcons],
+                y: item.timeSpent.decimal,
+                width: 10,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(6.r),
+                  topRight: Radius.circular(6.r),
+                ),
+              )
+            ],
+          ))
+      .toList();
 
   BarTouchData get _barTouchData => BarTouchData(
         enabled: true,

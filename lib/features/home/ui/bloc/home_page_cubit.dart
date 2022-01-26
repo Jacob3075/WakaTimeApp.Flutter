@@ -6,7 +6,7 @@ import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
-import "package:waka_time_app/common/utils/utils.dart";
+import "package:waka_time_app/common/utils/extensions.dart";
 import "package:waka_time_app/features/home/domain/usecases/get_last_7_days_stats_uc.dart";
 
 part "home_page_cubit.freezed.dart";

@@ -7,9 +7,9 @@ part "errors.g.dart";
 
 @freezed
 class Errors with _$Errors {
-  const factory Errors.networkError({required NetworkErrors networkError}) = NetworkError;
+  const factory Errors.networkError(NetworkErrors networkError) = NetworkError;
 
-  const factory Errors.domainError({required DomainErrors domainErrors}) = DomainError;
+  const factory Errors.domainError(DomainErrors domainError) = DomainError;
 
   factory Errors.fromJson(Map<String, dynamic> json) => _$ErrorsFromJson(json);
 }

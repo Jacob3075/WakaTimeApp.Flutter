@@ -33,8 +33,7 @@ main() {
 
           expect(result, isA<Left>());
           result.fold(
-            (errors) =>
-                expect(errors, const Errors.networkError(networkError: NetworkErrors.network())),
+            (errors) => expect(errors, const Errors.networkError(NetworkErrors.network())),
             (_) => null,
           );
         },
@@ -49,8 +48,7 @@ main() {
 
           expect(result, isA<Left>());
           result.fold(
-            (errors) =>
-                expect(errors, const Errors.networkError(networkError: NetworkErrors.network())),
+            (errors) => expect(errors, const Errors.networkError(NetworkErrors.network())),
             (_) => null,
           );
         },
@@ -67,7 +65,7 @@ main() {
           result.fold(
             (errors) => expect(
               errors,
-              const Errors.networkError(networkError: NetworkErrors(errorMessage: "Exception: ")),
+              const Errors.networkError(NetworkErrors(errorMessage: "Exception: ")),
             ),
             (_) => null,
           );
@@ -105,8 +103,7 @@ main() {
 
           expect(result, isA<Left>());
           result.fold(
-            (error) =>
-                expect(error, Errors.networkError(networkError: NetworkErrors.unauthorized())),
+            (error) => expect(error, Errors.networkError(NetworkErrors.unauthorized())),
             (_) => null,
           );
         },
@@ -125,7 +122,7 @@ main() {
             (error) => expect(
               error,
               const Errors.networkError(
-                networkError: NetworkErrors.clientError(
+                NetworkErrors.clientError(
                   errorMessage: """{"error":"Not found"}""",
                   code: 404,
                 ),

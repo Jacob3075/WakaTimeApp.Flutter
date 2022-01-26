@@ -83,7 +83,7 @@ main() {
     blocTest(
       "and getting project stats returns an error, error state is emitted",
       setUp: () {
-        errors = const Errors.networkError(networkError: NetworkErrors.network());
+        errors = const Errors.networkError(NetworkErrors.network());
         when(getProjectStats(any)).thenAnswer((realInvocation) async => Left(errors));
       },
       build: () => projectStatsBloc,
@@ -103,7 +103,7 @@ main() {
       blocTest(
         "When the error is multiple project details being returned, error state is emitted",
         setUp: () {
-          error = const Errors.domainError(domainErrors: DomainErrors(errorMessage: ""));
+          error = const Errors.domainError(DomainErrors(errorMessage: ""));
           when(getProjectDetails(any)).thenAnswer((_) async => Left(error));
         },
         build: () => projectStatsBloc,

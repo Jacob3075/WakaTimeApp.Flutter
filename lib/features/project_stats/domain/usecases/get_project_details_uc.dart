@@ -44,14 +44,14 @@ class GetProjectDetailsUC extends BaseUseCase<_Parameters, _ReturnType> {
 
     if (projectDetailsList.isEmpty) {
       return const Left(
-        Errors.domainError(domainErrors: DomainErrors(errorMessage: "No projects found.")),
+        Errors.domainError(DomainErrors(errorMessage: "No projects found.")),
       );
     }
 
     return projectDetailsList.length == 1
         ? Right(projectDetailsList.first)
         : const Left(Errors.domainError(
-            domainErrors: DomainErrors(errorMessage: "More than 1 project with given name"),
+            DomainErrors(errorMessage: "More than 1 project with given name"),
           ));
   }
 }
