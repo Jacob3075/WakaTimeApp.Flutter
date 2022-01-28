@@ -10,14 +10,14 @@ abstract class AppAssets {
 class _Icons {
   const _Icons();
 
-  final time = "assets/icons/ic_time.svg";
-  final code = "assets/icons/ic_code.svg";
-  final codeFile = "assets/icons/ic_code_file.svg";
-  final git = "assets/icons/ic_git.svg";
-  final laptop = "assets/icons/ic_laptop.svg";
-  final logo = "assets/icons/ic_logo.svg";
-  final logoFull = "assets/icons/ic_logo_full.svg";
-  final arrow = "assets/icons/ic_arrow.svg";
+  final time = "assets/icons/time.svg";
+  final code = "assets/icons/code.svg";
+  final codeFile = "assets/icons/code_file.svg";
+  final git = "assets/icons/git.svg";
+  final laptop = "assets/icons/laptop.svg";
+  final logo = "assets/icons/logo.svg";
+  final logoFull = "assets/icons/logo_full.svg";
+  final arrow = "assets/icons/arrow.svg";
 }
 
 class _Images {

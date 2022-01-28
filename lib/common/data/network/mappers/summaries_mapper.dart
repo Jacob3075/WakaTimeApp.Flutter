@@ -43,16 +43,16 @@ class SummariesMapper extends BaseDtoMapper<Summaries, SummariesDTO> {
                   .reversed
                   .firstOrNull
                   ?.name ??
-              "",
+              "-",
           mostUsedEditor:
               data.editors.sortedBy<num>((element) => element.decimal).reversed.firstOrNull?.name ??
-                  "",
+                  "-",
           mostUsedOs: data.operatingSystems
                   .sortedBy<num>((element) => element.decimal)
                   .reversed
                   .firstOrNull
                   ?.name ??
-              "",
+              "-",
           date: DateTime.parse(data.range.date),
         ),
       )
