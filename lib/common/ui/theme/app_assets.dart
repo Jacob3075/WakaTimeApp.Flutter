@@ -31,7 +31,16 @@ class _Illustrations {
 
   final astronaut01 = "assets/illustrations/astronaut_01.svg";
   final bookReading = "assets/illustrations/book_reading.svg";
-  final emptyBox = "assets/illustrations/empty_box.svg";
+  final emptyBox1 = "assets/illustrations/empty_box_1.svg";
+  final emptyBox2 = "assets/illustrations/empty_box_2.svg";
+  final emptyBox3 = "assets/illustrations/empty_box_3.svg";
+  final closedBox = "assets/illustrations/closed_box.svg";
+  final emptyEnvelop = "assets/illustrations/empty_envelop.svg";
+  final noConnection1 = "assets/illustrations/no_connection_1.svg";
+  final noConnection2 = "assets/illustrations/no_connection_2.svg";
+  final noConnection3 = "assets/illustrations/no_connection_3.svg";
+  final noConnection4 = "assets/illustrations/no_connection_4.svg";
+  final search = "assets/illustrations/search.svg";
   final intoTheNight = "assets/illustrations/into_the_night.svg";
   final loading = "assets/illustrations/loading.svg";
   final meditation = "assets/illustrations/meditation.svg";
@@ -39,10 +48,15 @@ class _Illustrations {
   final notFound = "assets/illustrations/not_found.svg";
 
   List<String> get emptyIllustrations => [
-        emptyBox,
+        astronaut01,
+        bookReading,
+        emptyBox1,
+        emptyBox2,
+        emptyBox3,
+        emptyEnvelop,
         noData,
         notFound,
-        meditation,
+        meditation, // FIXME: CHANGE COLOR
       ];
 
   String get randomEmptyIllustration =>
