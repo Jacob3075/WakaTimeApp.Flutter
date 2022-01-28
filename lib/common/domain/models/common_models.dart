@@ -62,3 +62,22 @@ class StatsRange with _$StatsRange {
 
   factory StatsRange.fromJson(Map<String, dynamic> json) => _$StatsRangeFromJson(json);
 }
+
+@freezed
+class Entity with _$Entity {
+  const factory Entity({
+    required String name,
+    required EntityType type,
+    required Time time,
+    required double percentage,
+  }) = _Entity;
+
+  factory Entity.fromJson(Map<String, dynamic> json) => _$EntityFromJson(json);
+}
+
+@freezed
+class EntityType with _$EntityType {
+  const factory EntityType.file() = _File;
+
+  factory EntityType.fromJson(Map<String, dynamic> json) => _$EntityTypeFromJson(json);
+}
