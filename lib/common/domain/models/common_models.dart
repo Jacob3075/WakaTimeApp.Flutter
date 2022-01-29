@@ -1,4 +1,6 @@
+import "package:dartz/dartz.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
+import "package:waka_time_app/common/domain/models/time.dart";
 
 part "common_models.freezed.dart";
 part "common_models.g.dart";
@@ -100,6 +102,8 @@ class Language with _$Language {
   }) = _Language;
 
   factory Language.fromJson(Map<String, dynamic> json) => _$LanguageFromJson(json);
+
+  static Language none = const Language(name: "-", timeSpent: Time.zero, percent: 0);
 }
 
 @freezed
@@ -113,6 +117,8 @@ class Editor with _$Editor {
   }) = _Editor;
 
   factory Editor.fromJson(Map<String, dynamic> json) => _$EditorFromJson(json);
+
+  static const Editor none = Editor(name: "-", timeSpent: Time.zero, percent: 0);
 }
 
 @freezed
