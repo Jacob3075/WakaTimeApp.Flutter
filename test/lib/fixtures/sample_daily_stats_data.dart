@@ -1,6 +1,7 @@
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/daily_stats.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
+import "package:waka_time_app/common/domain/models/time.dart";
 
 const sampleLast7DaysStatsDataJson = """{
   "cummulative_total": {
@@ -79,39 +80,6 @@ const sampleLast7DaysStatsDataJson = """{
           "seconds": 13,
           "text": "3 mins",
           "total_seconds": 193.571
-        },
-        {
-          "decimal": "0.00",
-          "digital": "0:00:46",
-          "hours": 0,
-          "minutes": 0,
-          "name": "GitIgnore file",
-          "percent": 0.24,
-          "seconds": 46,
-          "text": "46 secs",
-          "total_seconds": 46.638
-        },
-        {
-          "decimal": "0.00",
-          "digital": "0:00:14",
-          "hours": 0,
-          "minutes": 0,
-          "name": "Markdown",
-          "percent": 0.08,
-          "seconds": 14,
-          "text": "14 secs",
-          "total_seconds": 14.933
-        },
-        {
-          "decimal": "0.00",
-          "digital": "0:00:08",
-          "hours": 0,
-          "minutes": 0,
-          "name": "JSON",
-          "percent": 0.04,
-          "seconds": 8,
-          "text": "8 secs",
-          "total_seconds": 8.019
         }
       ],
       "machines": [
@@ -253,28 +221,6 @@ const sampleLast7DaysStatsDataJson = """{
           "seconds": 58,
           "text": "5 mins",
           "total_seconds": 358.727
-        },
-        {
-          "decimal": "0.05",
-          "digital": "0:03:07",
-          "hours": 0,
-          "minutes": 3,
-          "name": "conf",
-          "percent": 0.88,
-          "seconds": 7,
-          "text": "3 mins",
-          "total_seconds": 187.565
-        },
-        {
-          "decimal": "0.00",
-          "digital": "0:00:35",
-          "hours": 0,
-          "minutes": 0,
-          "name": "Gradle",
-          "percent": 0.17,
-          "seconds": 35,
-          "text": "35 secs",
-          "total_seconds": 35.79
         }
       ],
       "machines": [
@@ -472,39 +418,6 @@ const sampleLast7DaysStatsDataJson = """{
           "seconds": 41,
           "text": "17 mins",
           "total_seconds": 1061.638
-        },
-        {
-          "decimal": "0.17",
-          "digital": "0:10:54",
-          "hours": 0,
-          "minutes": 10,
-          "name": "XML",
-          "percent": 2.43,
-          "seconds": 54,
-          "text": "10 mins",
-          "total_seconds": 654.84
-        },
-        {
-          "decimal": "0.02",
-          "digital": "0:01:10",
-          "hours": 0,
-          "minutes": 1,
-          "name": "Kotlin",
-          "percent": 0.26,
-          "seconds": 10,
-          "text": "1 min",
-          "total_seconds": 70.664
-        },
-        {
-          "decimal": "0.00",
-          "digital": "0:00:01",
-          "hours": 0,
-          "minutes": 0,
-          "name": "Groovy",
-          "percent": 0.01,
-          "seconds": 1,
-          "text": "1 sec",
-          "total_seconds": 1.503
         }
       ],
       "machines": [
@@ -768,83 +681,6 @@ const sampleLast7DaysStatsDataJson = """{
           "seconds": 20,
           "text": "13 mins",
           "total_seconds": 800.726
-        },
-        {
-          "decimal": "0.10",
-          "digital": "0:06:36",
-          "hours": 0,
-          "minutes": 6,
-          "name": "Kotlin",
-          "percent": 2.27,
-          "seconds": 36,
-          "text": "6 mins",
-          "total_seconds": 396.975
-        },
-        {
-          "decimal": "0.07",
-          "digital": "0:04:46",
-          "hours": 0,
-          "minutes": 4,
-          "name": "Python",
-          "percent": 1.63,
-          "seconds": 46,
-          "text": "4 mins",
-          "total_seconds": 286.163
-        },
-        {
-          "decimal": "0.07",
-          "digital": "0:04:29",
-          "hours": 0,
-          "minutes": 4,
-          "name": "YAML",
-          "percent": 1.54,
-          "seconds": 29,
-          "text": "4 mins",
-          "total_seconds": 269.247
-        },
-        {
-          "decimal": "0.00",
-          "digital": "0:00:52",
-          "hours": 0,
-          "minutes": 0,
-          "name": "Groovy",
-          "percent": 0.3,
-          "seconds": 52,
-          "text": "52 secs",
-          "total_seconds": 52.134
-        },
-        {
-          "decimal": "0.00",
-          "digital": "0:00:48",
-          "hours": 0,
-          "minutes": 0,
-          "name": "Gradle",
-          "percent": 0.28,
-          "seconds": 48,
-          "text": "48 secs",
-          "total_seconds": 48.751
-        },
-        {
-          "decimal": "0.00",
-          "digital": "0:00:39",
-          "hours": 0,
-          "minutes": 0,
-          "name": "XML",
-          "percent": 0.23,
-          "seconds": 39,
-          "text": "39 secs",
-          "total_seconds": 39.454
-        },
-        {
-          "decimal": "0.00",
-          "digital": "0:00:03",
-          "hours": 0,
-          "minutes": 0,
-          "name": "SVG",
-          "percent": 0.02,
-          "seconds": 3,
-          "text": "3 secs",
-          "total_seconds": 3.088
         }
       ],
       "machines": [
@@ -1195,17 +1031,6 @@ const sampleLast7DaysStatsDataJson = """{
           "seconds": 35,
           "text": "35 secs",
           "total_seconds": 35.78
-        },
-        {
-          "decimal": "0.00",
-          "digital": "0:00:30",
-          "hours": 0,
-          "minutes": 0,
-          "name": "exports",
-          "percent": 0.4,
-          "seconds": 30,
-          "text": "30 secs",
-          "total_seconds": 30.0
         }
       ],
       "machines": [
@@ -1415,9 +1240,57 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.89,
         )
       ],
-      mostUsedLanguage: "Dart",
-      mostUsedEditor: "IntelliJ",
-      mostUsedOs: "Linux",
+      editors: [
+        const Editor(
+          timeSpent: Time(
+            decimal: 5.33,
+            hours: 5,
+            minutes: 20,
+          ),
+          name: "IntelliJ",
+          percent: 99.39,
+        ),
+        const Editor(
+          timeSpent: Time(
+            decimal: 0.02,
+            hours: 0,
+            minutes: 1,
+          ),
+          name: "Neovim",
+          percent: 0.61,
+        )
+      ],
+      languages: [
+        const Language(
+          timeSpent: Time(
+            decimal: 5.30,
+            hours: 5,
+            minutes: 18,
+          ),
+          name: "Dart",
+          percent: 98.64,
+        ),
+        const Language(
+          timeSpent: Time(
+            decimal: 0.05,
+            hours: 0,
+            minutes: 3,
+          ),
+          name: "YAML",
+          percent: 1.0,
+        ),
+      ],
+      operatingSystems: [
+        const OperatingSystem(
+          timeSpent: Time(
+            decimal: 5.37,
+            hours: 5,
+            minutes: 22,
+          ),
+          name: "Linux",
+          percent: 100.0,
+        )
+      ],
       date: DateTime.parse("2022-01-04"),
     ),
     DailyStats(
@@ -1439,9 +1312,57 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.88,
         )
       ],
-      mostUsedLanguage: "Dart",
-      mostUsedEditor: "IntelliJ",
-      mostUsedOs: "Linux",
+      editors: [
+        const Editor(
+          timeSpent: Time(
+            decimal: 5.87,
+            hours: 5,
+            minutes: 52,
+          ),
+          name: "IntelliJ",
+          percent: 99.12,
+        ),
+        const Editor(
+          timeSpent: Time(
+            decimal: 0.05,
+            hours: 0,
+            minutes: 3,
+          ),
+          name: "Neovim",
+          percent: 0.88,
+        )
+      ],
+      languages: [
+        const Language(
+          timeSpent: Time(
+            decimal: 5.75,
+            hours: 5,
+            minutes: 45,
+          ),
+          name: "Dart",
+          percent: 97.27,
+        ),
+        const Language(
+          timeSpent: Time(
+            decimal: 0.08,
+            hours: 0,
+            minutes: 5,
+          ),
+          name: "YAML",
+          percent: 1.68,
+        ),
+      ],
+      operatingSystems: [
+        const OperatingSystem(
+          timeSpent: Time(
+            decimal: 5.92,
+            hours: 5,
+            minutes: 55,
+          ),
+          name: "Linux",
+          percent: 100.0,
+        )
+      ],
       date: DateTime.parse("2022-01-05"),
     ),
     DailyStats(
@@ -1463,9 +1384,57 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.26,
         )
       ],
-      mostUsedLanguage: "Dart",
-      mostUsedEditor: "IntelliJ",
-      mostUsedOs: "Linux",
+      editors: [
+        const Editor(
+          timeSpent: Time(
+            decimal: 7.47,
+            hours: 7,
+            minutes: 28,
+          ),
+          name: "IntelliJ",
+          percent: 99.74,
+        ),
+        const Editor(
+          timeSpent: Time(
+            decimal: 0.02,
+            hours: 0,
+            minutes: 1,
+          ),
+          name: "Neovim",
+          percent: 0.26,
+        )
+      ],
+      languages: [
+        const Language(
+          timeSpent: Time(
+            decimal: 6.98,
+            hours: 6,
+            minutes: 59,
+          ),
+          name: "Dart",
+          percent: 93.37,
+        ),
+        const Language(
+          timeSpent: Time(
+            decimal: 0.28,
+            hours: 0,
+            minutes: 17,
+          ),
+          name: "YAML",
+          percent: 3.93,
+        )
+      ],
+      operatingSystems: [
+        const OperatingSystem(
+          timeSpent: Time(
+            decimal: 7.48,
+            hours: 7,
+            minutes: 29,
+          ),
+          name: "Linux",
+          percent: 100.0,
+        )
+      ],
       date: DateTime.parse("2022-01-06"),
     ),
     DailyStats(
@@ -1487,9 +1456,57 @@ final sampleLast7DaysStats = Summaries(
           percent: 1.57,
         )
       ],
-      mostUsedLanguage: "Dart",
-      mostUsedEditor: "IntelliJ",
-      mostUsedOs: "Linux",
+      editors: [
+        const Editor(
+          timeSpent: Time(
+            decimal: 4.67,
+            hours: 4,
+            minutes: 40,
+          ),
+          name: "IntelliJ",
+          percent: 96.1,
+        ),
+        const Editor(
+          timeSpent: Time(
+            decimal: 0.18,
+            hours: 0,
+            minutes: 11,
+          ),
+          name: "Neovim",
+          percent: 3.9,
+        )
+      ],
+      languages: [
+        const Language(
+          timeSpent: Time(
+            decimal: 4.33,
+            hours: 4,
+            minutes: 20,
+          ),
+          name: "Dart",
+          percent: 89.17,
+        ),
+        const Language(
+          timeSpent: Time(
+            decimal: 0.22,
+            hours: 0,
+            minutes: 13,
+          ),
+          name: "Properties",
+          percent: 4.57,
+        )
+      ],
+      operatingSystems: [
+        const OperatingSystem(
+          timeSpent: Time(
+            decimal: 4.85,
+            hours: 4,
+            minutes: 51,
+          ),
+          name: "Linux",
+          percent: 100.0,
+        )
+      ],
       date: DateTime.parse("2022-01-07"),
     ),
     DailyStats(
@@ -1511,9 +1528,57 @@ final sampleLast7DaysStats = Summaries(
           percent: 2.31,
         )
       ],
-      mostUsedLanguage: "Dart",
-      mostUsedEditor: "IntelliJ",
-      mostUsedOs: "Linux",
+      editors: [
+        const Editor(
+          timeSpent: Time(
+            decimal: 2.23,
+            hours: 2,
+            minutes: 14,
+          ),
+          name: "IntelliJ",
+          percent: 94.53,
+        ),
+        const Editor(
+          timeSpent: Time(
+            decimal: 0.12,
+            hours: 0,
+            minutes: 7,
+          ),
+          name: "Neovim",
+          percent: 5.47,
+        )
+      ],
+      languages: [
+        const Language(
+          timeSpent: Time(
+            decimal: 2.23,
+            hours: 2,
+            minutes: 14,
+          ),
+          name: "Dart",
+          percent: 94.53,
+        ),
+        const Language(
+          timeSpent: Time(
+            decimal: 0.12,
+            hours: 0,
+            minutes: 7,
+          ),
+          name: "Kotlin",
+          percent: 5.47,
+        )
+      ],
+      operatingSystems: [
+        const OperatingSystem(
+          timeSpent: Time(
+            decimal: 2.35,
+            hours: 2,
+            minutes: 21,
+          ),
+          name: "Linux",
+          percent: 100.0,
+        )
+      ],
       date: DateTime.parse("2022-01-08"),
     ),
     DailyStats(
@@ -1535,9 +1600,57 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.87,
         )
       ],
-      mostUsedLanguage: "Dart",
-      mostUsedEditor: "IntelliJ",
-      mostUsedOs: "Linux",
+      editors: [
+        const Editor(
+          timeSpent: Time(
+            decimal: 2.08,
+            hours: 2,
+            minutes: 5,
+          ),
+          name: "IntelliJ",
+          percent: 99.13,
+        ),
+        const Editor(
+          timeSpent: Time(
+            decimal: 0.02,
+            hours: 0,
+            minutes: 1,
+          ),
+          name: "Neovim",
+          percent: 0.87,
+        )
+      ],
+      languages: [
+        const Language(
+          timeSpent: Time(
+            decimal: 2.08,
+            hours: 2,
+            minutes: 5,
+          ),
+          name: "Dart",
+          percent: 99.13,
+        ),
+        const Language(
+          timeSpent: Time(
+            decimal: 0.00,
+            hours: 0,
+            minutes: 0,
+          ),
+          name: "Kotlin",
+          percent: 0.47,
+        )
+      ],
+      operatingSystems: [
+        const OperatingSystem(
+          timeSpent: Time(
+            decimal: 2.10,
+            hours: 2,
+            minutes: 6,
+          ),
+          name: "Linux",
+          percent: 100.0,
+        )
+      ],
       date: DateTime.parse("2022-01-09"),
     ),
     DailyStats(
@@ -1554,9 +1667,39 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.7,
         )
       ],
-      mostUsedLanguage: "Dart",
-      mostUsedEditor: "IntelliJ",
-      mostUsedOs: "Linux",
+      editors: [
+        const Editor(
+          timeSpent: Time(
+            decimal: 6.02,
+            hours: 6,
+            minutes: 1,
+          ),
+          name: "IntelliJ",
+          percent: 100.0,
+        )
+      ],
+      languages: [
+        const Language(
+          timeSpent: Time(
+            decimal: 6.02,
+            hours: 6,
+            minutes: 1,
+          ),
+          name: "Dart",
+          percent: 100.0,
+        )
+      ],
+      operatingSystems: [
+        const OperatingSystem(
+          timeSpent: Time(
+            decimal: 6.02,
+            hours: 6,
+            minutes: 1,
+          ),
+          name: "Linux",
+          percent: 100.0,
+        )
+      ],
       date: DateTime.parse("2022-01-10"),
     )
   ],

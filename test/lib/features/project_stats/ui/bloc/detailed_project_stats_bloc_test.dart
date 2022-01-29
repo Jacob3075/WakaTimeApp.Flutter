@@ -6,6 +6,7 @@ import "package:waka_time_app/common/domain/errors/domain_errors.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/errors/network_errors.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
+import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_details.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
