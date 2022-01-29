@@ -1,6 +1,6 @@
 import "package:waka_time_app/common/domain/models/common_models.dart";
-import "package:waka_time_app/common/domain/models/daily_stats.dart";
-import "package:waka_time_app/common/domain/models/summaries.dart";
+import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 
 const sampleProjectStatsJson = """{
   "available_branches": [
@@ -373,23 +373,137 @@ const sampleProjectStatsJson = """{
 }
 """;
 
-final sampleProjectStatsData = Summaries(
+final sampleProjectStatsData = ProjectSummaries(
   totalTime: const Time(hours: 149, minutes: 37, decimal: 149.62),
-  dailyStats: [
-    DailyStats(
+  dailyProjectStats: [
+    DailyProjectStats(
       timeSpent: const Time(hours: 2, minutes: 56, decimal: 2.93),
-      projectsWorkedOn: [],
-      mostUsedLanguage: "Kotlin",
-      mostUsedEditor: "Android Studio",
-      mostUsedOs: "Linux",
+      entities: [],
+      languages: [
+        const Language(
+          timeSpent: Time(
+            decimal: 2.27,
+            hours: 2,
+            minutes: 16,
+          ),
+          name: "Kotlin",
+          percent: 76.97,
+        ),
+        const Language(
+          timeSpent: Time(
+            minutes: 37,
+            hours: 0,
+            decimal: 0.62,
+          ),
+          name: "Groovy",
+          percent: 21.26,
+        ),
+        const Language(
+          timeSpent: Time(
+            decimal: 0.05,
+            minutes: 3,
+            hours: 0,
+          ),
+          name: "VimL",
+          percent: 1.77,
+        ),
+        const Language(
+          timeSpent: Time(
+            decimal: 0.00,
+            hours: 0,
+            minutes: 0,
+          ),
+          name: "XML",
+          percent: 0,
+        )
+      ],
+      editors: [
+        const Editor(
+          timeSpent: Time(
+            hours: 2,
+            minutes: 56,
+            decimal: 2.93,
+          ),
+          name: "Android Studio",
+          percent: 100,
+        )
+      ],
+      operationSystems: [
+        const OperatingSystem(
+          timeSpent: Time(
+            decimal: 2.93,
+            hours: 2,
+            minutes: 56,
+          ),
+          name: "Linux",
+          percent: 100,
+        )
+      ],
       date: DateTime.parse("2021-08-30"),
     ),
-    DailyStats(
+    DailyProjectStats(
       timeSpent: const Time(hours: 5, minutes: 11, decimal: 5.18),
-      projectsWorkedOn: [],
-      mostUsedLanguage: "Dart",
-      mostUsedEditor: "IntelliJ",
-      mostUsedOs: "Linux",
+      entities: [],
+      languages: [
+        const Language(
+          timeSpent: Time(
+            decimal: 5.12,
+            hours: 5,
+            minutes: 7,
+          ),
+          name: "Dart",
+          percent: 98.64,
+        ),
+        const Language(
+          timeSpent: Time(
+            decimal: 0.03,
+            hours: 0,
+            minutes: 2,
+          ),
+          name: "YAML",
+          percent: 0.87,
+        ),
+        const Language(
+          timeSpent: Time(
+            decimal: 0.00,
+            hours: 0,
+            minutes: 0,
+          ),
+          name: "textmate",
+          percent: 0.28,
+        ),
+        const Language(
+          timeSpent: Time(
+            decimal: 0.00,
+            hours: 0,
+            minutes: 0,
+          ),
+          name: "Java",
+          percent: 0.21,
+        ),
+      ],
+      editors: [
+        const Editor(
+          timeSpent: Time(
+            hours: 5,
+            minutes: 11,
+            decimal: 5.18,
+          ),
+          name: "IntelliJ",
+          percent: 100,
+        )
+      ],
+      operationSystems: [
+        const OperatingSystem(
+          timeSpent: Time(
+            hours: 5,
+            minutes: 11,
+            decimal: 5.18,
+          ),
+          name: "Linux",
+          percent: 100,
+        )
+      ],
       date: DateTime.parse("2022-01-12"),
     ),
   ],

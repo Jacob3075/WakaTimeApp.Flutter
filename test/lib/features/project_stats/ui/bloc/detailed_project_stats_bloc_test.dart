@@ -6,8 +6,8 @@ import "package:waka_time_app/common/domain/errors/domain_errors.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/errors/network_errors.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
-import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_details.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
 
 import "../../../../../mocks.mocks.dart";
@@ -39,7 +39,7 @@ main() {
 
   group("When getting project details does not return any errors", () {
     late final Errors errors;
-    late final Summaries summaries;
+    late final ProjectSummaries projectSummaries;
 
     setUpAll(() {
       when(getProjectDetails(any)).thenAnswer(
@@ -57,8 +57,8 @@ main() {
     blocTest(
       "and getting project stats does not return any errors, data loaded state is emitted correctly",
       setUp: () {
-        summaries = Summaries(
-          dailyStats: [],
+        projectSummaries = ProjectSummaries(
+          dailyProjectStats: [],
           range: StatsRange(
             startDate: DateTime.now(),
             endDate: DateTime.now(),
@@ -70,13 +70,13 @@ main() {
           ),
         );
 
-        when(getProjectStats(any)).thenAnswer((realInvocation) async => Right(summaries));
+        when(getProjectStats(any)).thenAnswer((realInvocation) async => Right(projectSummaries));
       },
       build: () => projectStatsBloc,
       act: (DetailedProjectStatsBloc bloc) => bloc.add(const _Event.loadData(projectName: "")),
       expect: () => [
         const _State.loading(),
-        _State.dataLoaded(projectStats: summaries),
+        _State.dataLoaded(projectSummaries: projectSummaries),
       ],
     );
 
