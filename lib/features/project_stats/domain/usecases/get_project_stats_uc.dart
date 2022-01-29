@@ -5,27 +5,27 @@ import "package:freezed_annotation/freezed_annotation.dart";
 import "package:http/http.dart" as http;
 import "package:injectable/injectable.dart";
 import "package:waka_time_app/common/data/network/api_endpoints.dart";
-import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/usecases/base_use_case.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/utils/utils.dart";
 import "package:waka_time_app/features/project_stats/data/dtos/project_summaries_dto.dart";
 import "package:waka_time_app/features/project_stats/data/mappers/project_summaries_mapper.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 
 part "get_project_stats_uc.freezed.dart";
 part "get_project_stats_uc.g.dart";
 
 typedef _Parameters = GetProjectStatsUCParameters;
-typedef _ReturnType = Future<Either<Errors, Summaries>>;
+typedef _ReturnType = Either<Errors, ProjectSummaries>;
 
 @singleton
-class GetProjectStatsUC extends BaseUseCase<_Parameters, _ReturnType> {
+class GetProjectStatsUC extends BaseUseCase<_Parameters, Future<_ReturnType>> {
   final http.Client _client;
 
   GetProjectStatsUC({required http.Client client}) : _client = client;
 
   @override
-  _ReturnType call(_Parameters parameters) async => await getDataOrErrorFromApi(
+  Future<_ReturnType> call(_Parameters parameters) async => await getDataOrErrorFromApi(
         apiCall: () => _apiCall(parameters),
         successResponseProcessing: _successResponseProcessing,
       );
@@ -33,7 +33,7 @@ class GetProjectStatsUC extends BaseUseCase<_Parameters, _ReturnType> {
   Future<http.Response> _apiCall(_Parameters parameters) async =>
       await _client.get(ApiEndpoints.getStatsForProject(parameters.toJson()));
 
-  Either<Errors, Summaries> _successResponseProcessing(
+  _ReturnType _successResponseProcessing(
     http.Response response,
   ) {
     final jsonMap = jsonDecode(response.body);

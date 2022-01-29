@@ -2,9 +2,9 @@ import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
-import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/ui/widgets/loading_animation.dart";
 import "package:waka_time_app/di/injection.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/custom_app_bar.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/time_stats_page.dart";
@@ -32,7 +32,7 @@ class DetailedProjectStats extends StatelessWidget {
         ),
       );
 
-  Widget _onDataLoadedState(Summaries projectStats, BuildContext context) => SafeArea(
+  Widget _onDataLoadedState(ProjectSummaries projectSummaries, BuildContext context) => SafeArea(
         child: DefaultTabController(
           length: 5,
           child: Scaffold(
@@ -43,7 +43,7 @@ class DetailedProjectStats extends StatelessWidget {
             body: TabBarView(
               physics: const BouncingScrollPhysics(),
               children: [
-                TimeStatsPage(projectStats: projectStats),
+                TimeStatsPage(projectSummaries: projectSummaries),
                 const Text("Page 2"),
                 const Text("Page 3"),
                 const Text("Page 4"),

@@ -3,12 +3,12 @@ import "package:fl_chart/fl_chart.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:intl/intl.dart";
-import "package:waka_time_app/common/domain/models/daily_stats.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
+import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
 
 class TimeSpentOnProjectChart extends StatelessWidget {
-  final List<DailyStats> stats;
+  final List<DailyProjectStats> stats;
 
   final int graphLength = 30;
   final List<Color> gradientColors = [
@@ -105,5 +105,5 @@ class TimeSpentOnProjectChart extends StatelessWidget {
         ),
       );
 
-  List<DailyStats> get displayedStats => stats.takeLast(graphLength + 1);
+  List<DailyProjectStats> get displayedStats => stats.takeLast(graphLength + 1);
 }

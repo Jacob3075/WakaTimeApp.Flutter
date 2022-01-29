@@ -3,9 +3,9 @@ import "package:freezed_annotation/freezed_annotation.dart";
 import "package:injectable/injectable.dart";
 import "package:intl/intl.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
-import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_details.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 import "package:waka_time_app/features/project_stats/domain/usecases/get_project_details_uc.dart";
 import "package:waka_time_app/features/project_stats/domain/usecases/get_project_stats_uc.dart";
 
@@ -56,7 +56,7 @@ class DetailedProjectStatsBloc extends Bloc<_Event, _State> {
     );
     projectStatsResult.fold(
       (error) => _onError(error, emit),
-      (data) => emit(_State.dataLoaded(projectStats: data)),
+      (data) => emit(_State.dataLoaded(projectSummaries: data)),
     );
   }
 
