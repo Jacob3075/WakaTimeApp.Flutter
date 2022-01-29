@@ -11,41 +11,9 @@ class ProjectSummariesMapper extends BaseDtoMapper<ProjectSummaries, ProjectSumm
             .map((it) => DailyProjectStats(
                   timeSpent: it.grandTotal.timeSpent,
                   entities: [],
-                  languages: it.languages
-                      .map(
-                        (e) => Language(
-                          name: e.name,
-                          timeSpent: Time(
-                            minutes: e.minutes,
-                            hours: e.hours,
-                            decimal: e.decimal,
-                          ),
-                          percent: e.percent,
-                        ),
-                      )
-                      .toList(),
-                  editors: it.editors
-                      .map((editor) => Editor(
-                            name: editor.name,
-                            timeSpent: Time(
-                              minutes: editor.minutes,
-                              hours: editor.hours,
-                              decimal: editor.decimal,
-                            ),
-                            percent: editor.percent,
-                          ))
-                      .toList(),
-                  operatingSystems: it.operatingSystems
-                      .map((os) => OperatingSystem(
-                            name: os.name,
-                            timeSpent: Time(
-                              minutes: os.minutes,
-                              hours: os.hours,
-                              decimal: os.decimal,
-                            ),
-                            percent: os.percent,
-                          ))
-                      .toList(),
+                  languages: it.languages.map((language) => language.convertToModel()).toList(),
+                  editors: it.editors.map((editor) => editor.convertToModel()).toList(),
+                  operatingSystems: it.operatingSystems.map((os) => os.convertToModel()).toList(),
                   date: DateTime.parse(it.range.date),
                 ))
             .toList(),

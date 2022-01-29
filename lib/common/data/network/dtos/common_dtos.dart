@@ -92,6 +92,8 @@ class ProjectDTO with _$ProjectDTO {
 
 @freezed
 class LanguageDTO with _$LanguageDTO {
+  const LanguageDTO._();
+
   const factory LanguageDTO({
     required String digital,
     required int hours,
@@ -105,10 +107,22 @@ class LanguageDTO with _$LanguageDTO {
   }) = _LanguageDTO;
 
   factory LanguageDTO.fromJson(Map<String, dynamic> json) => _$LanguageDTOFromJson(json);
+
+  Language convertToModel() => Language(
+        name: name,
+        timeSpent: Time(
+          minutes: minutes,
+          hours: hours,
+          decimal: decimal,
+        ),
+        percent: percent,
+      );
 }
 
 @freezed
 class OperatingSystemsDTO with _$OperatingSystemsDTO {
+  const OperatingSystemsDTO._();
+
   const factory OperatingSystemsDTO({
     required String digital,
     required int hours,
@@ -123,10 +137,22 @@ class OperatingSystemsDTO with _$OperatingSystemsDTO {
 
   factory OperatingSystemsDTO.fromJson(Map<String, dynamic> json) =>
       _$OperatingSystemsDTOFromJson(json);
+
+  OperatingSystem convertToModel() => OperatingSystem(
+        name: name,
+        timeSpent: Time(
+          minutes: minutes,
+          hours: hours,
+          decimal: decimal,
+        ),
+        percent: percent,
+      );
 }
 
 @freezed
 class EditorsDTO with _$EditorsDTO {
+  const EditorsDTO._();
+
   const factory EditorsDTO({
     required String digital,
     required int hours,
@@ -140,6 +166,16 @@ class EditorsDTO with _$EditorsDTO {
   }) = _EditorsDTO;
 
   factory EditorsDTO.fromJson(Map<String, dynamic> json) => _$EditorsDTOFromJson(json);
+
+  Editor convertToModel() => Editor(
+        name: name,
+        timeSpent: Time(
+          minutes: minutes,
+          hours: hours,
+          decimal: decimal,
+        ),
+        percent: percent,
+      );
 }
 
 @freezed
