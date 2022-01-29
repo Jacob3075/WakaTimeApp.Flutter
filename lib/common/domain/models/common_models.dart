@@ -48,6 +48,13 @@ class Time with _$Time {
     return Time(hours: newHours.toInt(), minutes: newMinutes, decimal: newDecimal);
   }
 
+  Time operator /(int value) {
+    final newDecimal = decimal / value;
+    final newHours = newDecimal.toInt();
+    final newMinutes = ((newDecimal * 60) % 60).toInt();
+    return Time(hours: newHours, minutes: newMinutes, decimal: newDecimal);
+  }
+
   String formattedPrint() {
     return "${hours}H, ${minutes}M";
   }
@@ -80,4 +87,43 @@ class EntityType with _$EntityType {
   const factory EntityType.file() = _File;
 
   factory EntityType.fromJson(Map<String, dynamic> json) => _$EntityTypeFromJson(json);
+}
+
+@freezed
+class Language with _$Language {
+  const Language._();
+
+  const factory Language({
+    required String name,
+    required Time timeSpent,
+    required double percent,
+  }) = _Language;
+
+  factory Language.fromJson(Map<String, dynamic> json) => _$LanguageFromJson(json);
+}
+
+@freezed
+class Editor with _$Editor {
+  const Editor._();
+
+  const factory Editor({
+    required String name,
+    required Time timeSpent,
+    required double percent,
+  }) = _Editor;
+
+  factory Editor.fromJson(Map<String, dynamic> json) => _$EditorFromJson(json);
+}
+
+@freezed
+class OperatingSystem with _$OperatingSystem {
+  const OperatingSystem._();
+
+  const factory OperatingSystem({
+    required String name,
+    required Time timeSpent,
+    required double percent,
+  }) = _OperatingSystem;
+
+  factory OperatingSystem.fromJson(Map<String, dynamic> json) => _$OperatingSystemFromJson(json);
 }

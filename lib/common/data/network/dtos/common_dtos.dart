@@ -1,4 +1,5 @@
 import "package:freezed_annotation/freezed_annotation.dart";
+import "package:waka_time_app/common/domain/models/common_models.dart";
 
 part "common_dtos.freezed.dart";
 part "common_dtos.g.dart";
@@ -36,6 +37,8 @@ class RangeDTO with _$RangeDTO {
 
 @freezed
 class GrandTotalDTO with _$GrandTotalDTO {
+  const GrandTotalDTO._();
+
   const factory GrandTotalDTO({
     required String digital,
     required int hours,
@@ -46,10 +49,18 @@ class GrandTotalDTO with _$GrandTotalDTO {
   }) = _GrandTotalDTO;
 
   factory GrandTotalDTO.fromJson(Map<String, dynamic> json) => _$GrandTotalDTOFromJson(json);
+
+  Time get timeSpent => Time(
+        hours: hours,
+        minutes: minutes,
+        decimal: decimal,
+      );
 }
 
 @freezed
 class CumulativeTotalDTO with _$CumulativeTotalDTO {
+  const CumulativeTotalDTO._();
+
   const factory CumulativeTotalDTO({
     required String digital,
     required double seconds,
@@ -59,6 +70,8 @@ class CumulativeTotalDTO with _$CumulativeTotalDTO {
 
   factory CumulativeTotalDTO.fromJson(Map<String, dynamic> json) =>
       _$CumulativeTotalDTOFromJson(json);
+
+  Time get totalTimeSpent => Time.fromDigital(digital, decimal);
 }
 
 @freezed

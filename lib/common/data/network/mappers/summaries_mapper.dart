@@ -9,7 +9,7 @@ import "package:waka_time_app/common/domain/models/summaries.dart";
 class SummariesMapper extends BaseDtoMapper<Summaries, SummariesDTO> {
   @override
   Summaries fromDto(SummariesDTO dto) => Summaries(
-        totalTime: Time.fromDigital(dto.cumulativeTotal.digital, dto.cumulativeTotal.decimal),
+        totalTime: dto.cumulativeTotal.totalTimeSpent,
         dailyStats: _getDailyStatsFromDTO(dto.data),
         range: StatsRange(
           startDate: DateTime.parse(dto.start),
@@ -20,11 +20,7 @@ class SummariesMapper extends BaseDtoMapper<Summaries, SummariesDTO> {
   List<DailyStats> _getDailyStatsFromDTO(List<DataDTO> dtos) => dtos
       .map(
         (data) => DailyStats(
-          timeSpent: Time(
-            hours: data.grandTotal.hours,
-            minutes: data.grandTotal.minutes,
-            decimal: data.grandTotal.decimal,
-          ),
+          timeSpent: data.grandTotal.timeSpent,
           projectsWorkedOn: data.projects
               .map(
                 (project) => Project(
