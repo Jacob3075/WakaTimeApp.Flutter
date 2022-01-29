@@ -428,7 +428,7 @@ final sampleProjectStatsData = ProjectSummaries(
           percent: 100,
         )
       ],
-      operationSystems: [
+      operatingSystems: [
         const OperatingSystem(
           timeSpent: Time(
             decimal: 2.93,
@@ -493,7 +493,7 @@ final sampleProjectStatsData = ProjectSummaries(
           percent: 100,
         )
       ],
-      operationSystems: [
+      operatingSystems: [
         const OperatingSystem(
           timeSpent: Time(
             hours: 5,

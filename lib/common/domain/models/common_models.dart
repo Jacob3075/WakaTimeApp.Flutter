@@ -126,4 +126,30 @@ class OperatingSystem with _$OperatingSystem {
   }) = _OperatingSystem;
 
   factory OperatingSystem.fromJson(Map<String, dynamic> json) => _$OperatingSystemFromJson(json);
+
+  static const OperatingSystem none = OperatingSystem(name: "", timeSpent: Time.zero, percent: 0);
+}
+
+abstract class LanguageStats {
+  List<Language> get languages;
+
+  Option<Language> get mostUsedLanguage => optionOf(
+        languages.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
+      );
+}
+
+abstract class EditorStats {
+  List<Editor> get editors;
+
+  Option<Editor> get mostUsedEditor => optionOf(
+        editors.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
+      );
+}
+
+abstract class OperatingSystemStats {
+  List<OperatingSystem> get operatingSystems;
+
+  Option<OperatingSystem> get mostUsedOperatingSystem => optionOf(
+        operatingSystems.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
+      );
 }

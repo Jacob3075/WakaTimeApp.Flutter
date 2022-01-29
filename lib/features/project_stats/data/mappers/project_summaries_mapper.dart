@@ -35,7 +35,7 @@ class ProjectSummariesMapper extends BaseDtoMapper<ProjectSummaries, ProjectSumm
                             percent: editor.percent,
                           ))
                       .toList(),
-                  operationSystems: it.operatingSystems
+                  operatingSystems: it.operatingSystems
                       .map((os) => OperatingSystem(
                             name: os.name,
                             timeSpent: Time(
