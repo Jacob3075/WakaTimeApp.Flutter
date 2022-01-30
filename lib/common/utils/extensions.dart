@@ -1,4 +1,4 @@
-import 'dart:math';
+import "dart:math";
 
 import "package:waka_time_app/common/domain/errors/errors.dart";
 

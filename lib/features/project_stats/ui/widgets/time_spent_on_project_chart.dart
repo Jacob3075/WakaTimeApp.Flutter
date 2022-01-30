@@ -9,29 +9,23 @@ import "package:waka_time_app/features/project_stats/domain/models/daily_project
 
 class TimeSpentOnProjectChart extends StatelessWidget {
   final List<DailyProjectStats> stats;
-
   final int graphLength = 30;
-  final List<Color> gradientColors = [
-    AppGradients.primary.startColor,
-    AppGradients.primary.endColor,
-  ];
 
-  TimeSpentOnProjectChart({Key? key, required this.stats}) : super(key: key);
+  const TimeSpentOnProjectChart({Key? key, required this.stats}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container(
         margin: EdgeInsets.only(top: 32.h, right: 10.w),
         height: 180.h,
         width: double.infinity,
-        child: LineChart(
-          LineChartData(
-            gridData: _gridData,
+        child: BarChart(
+          BarChartData(
             titlesData: _titlesData,
-            lineTouchData: _lineTouchData,
-            lineBarsData: [_lineChartBarData],
+            barTouchData: _barTouchData,
+            barGroups: _chartData,
+            // lineBarsData: [_lineChartBarData],
+            gridData: _gridData,
             borderData: FlBorderData(show: false),
-            minX: 0,
-            maxX: graphLength.toDouble(),
           ),
         ),
       );
@@ -41,47 +35,39 @@ class TimeSpentOnProjectChart extends StatelessWidget {
         drawHorizontalLine: true,
         drawVerticalLine: false,
         getDrawingHorizontalLine: (value) => FlLine(
-          color: const Color(0xff37434d).withAlpha(80),
+          color: const Color(0xff37434d),
           strokeWidth: 1,
         ),
       );
 
-  LineTouchData get _lineTouchData => LineTouchData(
+  BarTouchData get _barTouchData => BarTouchData(
         enabled: true,
-        touchTooltipData: LineTouchTooltipData(
-          tooltipBgColor: AppColors.accentIcons,
+        touchTooltipData: BarTouchTooltipData(
           tooltipPadding: EdgeInsets.all(6.r),
           tooltipRoundedRadius: 6.r,
-          getTooltipItems: (index) => [
-            LineTooltipItem(
-              displayedStats[index.first.spotIndex].timeSpent.formattedPrint(),
-              TextStyle(fontSize: 12.sp),
-            ),
-          ],
+          getTooltipItem: (groupData, groupIndex, rodData, rodIndex) => BarTooltipItem(
+            displayedStats[groupIndex].timeSpent.formattedPrint(),
+            const TextStyle(),
+          ),
         ),
-        getTouchedSpotIndicator: (barData, spotIndexes) => [
-          TouchedSpotIndicatorData(
-            FlLine(color: Colors.transparent, strokeWidth: 0),
-            FlDotData(
-              getDotPainter: (_, __, ___, ____) => FlDotCirclePainter(color: AppColors.accentIcons),
-            ),
-          )
-        ],
       );
 
-  LineChartBarData get _lineChartBarData => LineChartBarData(
-        spots:
-            displayedStats.mapIndexed((i, e) => FlSpot(i.toDouble(), e.timeSpent.decimal)).toList(),
-        isCurved: true,
-        colors: gradientColors,
-        barWidth: 2,
-        isStrokeCapRound: true,
-        dotData: FlDotData(show: false),
-        belowBarData: BarAreaData(
-          show: true,
-          colors: gradientColors.map((color) => color.withOpacity(0.3)).toList(),
-        ),
-      );
+  List<BarChartGroupData> get _chartData => displayedStats
+      .mapIndexed((index, item) => BarChartGroupData(
+            x: index,
+            barRods: [
+              BarChartRodData(
+                colors: [AppColors.accentIcons],
+                y: item.timeSpent.decimal,
+                width: 10,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(6.r),
+                  topRight: Radius.circular(6.r),
+                ),
+              )
+            ],
+          ))
+      .toList();
 
   FlTitlesData get _titlesData => FlTitlesData(
         topTitles: SideTitles(showTitles: false),
@@ -97,7 +83,9 @@ class TimeSpentOnProjectChart extends StatelessWidget {
         ),
         bottomTitles: SideTitles(
           showTitles: true,
-          getTitles: (index) => DateFormat("E").format(displayedStats[index.toInt()].date),
+          getTitles: (index) => index.toInt() % 4 == 0
+              ? DateFormat("E").format(displayedStats[index.toInt()].date)
+              : "",
           getTextStyles: (_, __) => TextStyle(
             fontSize: 10.sp,
             fontWeight: FontWeight.w300,
