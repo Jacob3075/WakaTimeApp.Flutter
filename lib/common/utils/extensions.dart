@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import "package:waka_time_app/common/domain/errors/errors.dart";
 
 extension ObjectExt<T> on T {
@@ -22,6 +24,12 @@ extension Range on num {
   /// Both [from] and [to] are inclusive
   /// [Source](https://stackoverflow.com/questions/53797581/easily-check-if-a-number-is-in-a-given-range-in-dart)
   bool isBetween(num from, num to) => from <= this && this <= to;
+
+  /// [Source](https://stackoverflow.com/a/53500405/13181948)
+  double roundToDecimal(int places) {
+    num mod = pow(10.0, places);
+    return ((this * mod).round().toDouble() / mod);
+  }
 }
 
 extension DateTimeX on DateTime {

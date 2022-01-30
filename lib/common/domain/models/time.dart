@@ -1,4 +1,5 @@
 import "package:freezed_annotation/freezed_annotation.dart";
+import "package:waka_time_app/common/utils/extensions.dart";
 
 part "time.freezed.dart";
 part "time.g.dart";
@@ -43,7 +44,7 @@ class Time with _$Time {
     final newDecimal = decimal / value;
     final newHours = newDecimal.toInt();
     final newMinutes = ((newDecimal * 60) % 60).toInt();
-    return Time(hours: newHours, minutes: newMinutes, decimal: newDecimal);
+    return Time(hours: newHours, minutes: newMinutes, decimal: newDecimal.roundToDecimal(3));
   }
 
   String formattedPrint() {
