@@ -7,7 +7,7 @@ import "package:waka_time_app/di/injection.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/custom_app_bar.dart";
-import "package:waka_time_app/features/project_stats/ui/widgets/time_stats_page.dart";
+import "package:waka_time_app/features/project_stats/ui/widgets/time_stats/time_stats_page.dart";
 
 typedef _Event = DetailedProjectStatsEvent;
 

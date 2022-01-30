@@ -38,4 +38,6 @@ class DaysWorked with _$DaysWorked {
   factory DaysWorked.fromJson(Map<String, dynamic> json) => _$DaysWorkedFromJson(json);
 
   int get totalDays => (months * 30) + days;
+
+  String formattedPrint() => "${months}M, ${days}D";
 }

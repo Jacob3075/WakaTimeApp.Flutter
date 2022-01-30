@@ -47,7 +47,5 @@ class Time with _$Time {
     return Time(hours: newHours, minutes: newMinutes, decimal: newDecimal.roundToDecimal(3));
   }
 
-  String formattedPrint() {
-    return "${hours}H, ${minutes}M";
-  }
+  String formattedPrint() => "${hours}H, ${minutes}M";
 }
