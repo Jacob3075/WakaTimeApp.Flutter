@@ -7,28 +7,46 @@ import "package:waka_time_app/common/ui/widgets/custom_ink_well_card.dart";
 class StatsCard extends StatelessWidget {
   final app_colors.Gradient gradient;
   final String text;
-  final String value;
+  late final Widget valueWidget;
   final String icon;
   final double cardHeight;
   final BorderRadius borderRadius;
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry margin;
 
+  static TextStyle valueTextStyle = TextStyle(
+    fontSize: 22.sp,
+    fontWeight: FontWeight.bold,
+  );
+
+  // FIXME: IMPROVE HOW value AND valueWidget ARE HANDLED
   StatsCard({
     Key? key,
     required this.gradient,
     required this.text,
-    required this.value,
     required this.icon,
+    valueWidget,
+    value,
     cardHeight,
     borderRadius,
     padding,
     margin,
-  })  : padding = padding ?? EdgeInsets.symmetric(horizontal: 18.w),
+  })  : assert(value != null || valueWidget != null),
+        assert(!(value != null && valueWidget != null)),
+        padding = padding ?? EdgeInsets.symmetric(horizontal: 18.w),
         margin = margin ?? EdgeInsets.zero,
         borderRadius = borderRadius ?? BorderRadius.circular(20.r),
         cardHeight = cardHeight ?? 60.h,
-        super(key: key);
+        super(key: key) {
+    if (value != null) {
+      this.valueWidget = Text(
+        value,
+        style: valueTextStyle,
+      );
+    } else {
+      this.valueWidget = valueWidget;
+    }
+  }
 
   @override
   Widget build(BuildContext context) => CustomInkWellCard(
@@ -58,13 +76,7 @@ class StatsCard extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Text(
-                    value,
-                    style: TextStyle(
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  valueWidget,
                 ],
               ),
               Positioned(
