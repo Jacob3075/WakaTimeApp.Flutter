@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/time_stats/history_list_item.dart";
 
@@ -15,14 +16,35 @@ class ProjectHistorySection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 24.h),
-            Text(
-              "History",
-              style: TextStyle(
-                fontSize: 30.sp,
-                fontWeight: FontWeight.w600,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "History",
+                  style: TextStyle(
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.filter_alt_outlined,
+                    color: AppColors.accentIcons,
+                  ),
+                  iconSize: 30.r,
+                  constraints: const BoxConstraints(),
+                  onPressed: () {},
+                  padding: EdgeInsets.zero,
+                  splashRadius: 28.r,
+                ),
+              ],
             ),
-            _historyList(),
+            SizedBox(height: 14.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: _historyList(),
+            ),
           ],
         ),
       );
