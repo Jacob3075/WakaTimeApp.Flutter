@@ -7,6 +7,7 @@ import "package:waka_time_app/di/injection.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/custom_app_bar.dart";
+import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/language_stats_page.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/time_stats/time_stats_page.dart";
 
 typedef _Event = DetailedProjectStatsEvent;
@@ -44,7 +45,10 @@ class DetailedProjectStats extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               children: [
                 TimeStatsPage(projectSummaries: projectSummaries),
-                const Text("Page 2"),
+                LanguageStatsPage(
+                  languages:
+                      projectSummaries.dailyProjectStats.expand((it) => it.languages).toList(),
+                ),
                 const Text("Page 3"),
                 const Text("Page 4"),
                 const Text("Page 5"),
@@ -54,11 +58,7 @@ class DetailedProjectStats extends StatelessWidget {
         ),
       );
 
-  Widget _onLoadingState() => const Scaffold(
-        body: SafeArea(
-          child: LoadingAnimation(),
-        ),
-      );
+  Widget _onLoadingState() => const Scaffold(body: SafeArea(child: LoadingAnimation()));
 
   // TODO: ADD ERROR SCREEN
   Widget _onErrorSate(Errors errors) => Center(child: Text("ERROR: $errors"));
