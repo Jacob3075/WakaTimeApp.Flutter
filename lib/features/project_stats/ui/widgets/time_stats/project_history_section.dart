@@ -15,7 +15,7 @@ class ProjectHistorySection extends StatefulWidget {
 }
 
 class _ProjectHistorySectionState extends State<ProjectHistorySection> {
-  bool _filtered = false;
+  bool _filtered = true;
   late final List<DailyProjectStats> allDailyProjectStats;
   late final List<DailyProjectStats> filteredDailyProjectStats;
 
@@ -50,9 +50,9 @@ class _ProjectHistorySectionState extends State<ProjectHistorySection> {
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.filter_alt_outlined,
-                    color: AppColors.accentIcons,
+                    color: _filtered ? AppColors.accentIcons : Colors.white,
                   ),
                   iconSize: 30.r,
                   constraints: const BoxConstraints(),

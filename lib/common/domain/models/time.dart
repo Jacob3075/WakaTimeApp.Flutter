@@ -48,4 +48,6 @@ class Time with _$Time {
   }
 
   String formattedPrint() => "${hours}H, ${minutes}M";
+
+  String longFormattedPrint() => "$hours Hours, $minutes Minutes";
 }
