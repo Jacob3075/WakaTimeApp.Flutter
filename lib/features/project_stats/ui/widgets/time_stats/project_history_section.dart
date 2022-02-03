@@ -1,13 +1,35 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
+import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/time_stats/history_list_item.dart";
 
-class ProjectHistorySection extends StatelessWidget {
+class ProjectHistorySection extends StatefulWidget {
   final ProjectSummaries projectSummaries;
 
   const ProjectHistorySection({Key? key, required this.projectSummaries}) : super(key: key);
+
+  @override
+  State<ProjectHistorySection> createState() => _ProjectHistorySectionState();
+}
+
+class _ProjectHistorySectionState extends State<ProjectHistorySection> {
+  bool _filtered = false;
+  late final List<DailyProjectStats> allDailyProjectStats;
+  late final List<DailyProjectStats> filteredDailyProjectStats;
+
+  List<DailyProjectStats> get dailyProjectStats =>
+      _filtered ? filteredDailyProjectStats : allDailyProjectStats;
+
+  @override
+  void initState() {
+    super.initState();
+
+    allDailyProjectStats = widget.projectSummaries.dailyProjectStats.reversed.toList();
+    filteredDailyProjectStats =
+        allDailyProjectStats.where((it) => it.timeSpent.decimal != 0).toList();
+  }
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -34,7 +56,7 @@ class ProjectHistorySection extends StatelessWidget {
                   ),
                   iconSize: 30.r,
                   constraints: const BoxConstraints(),
-                  onPressed: () {},
+                  onPressed: _toggleFilteredState,
                   padding: EdgeInsets.zero,
                   splashRadius: 28.r,
                 ),
@@ -53,9 +75,11 @@ class ProjectHistorySection extends StatelessWidget {
   Widget _historyList() => ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: projectSummaries.dailyProjectStats.length,
+        itemCount: dailyProjectStats.length,
         itemBuilder: (context, index) => HistoryListItem(
-          dailyProjectStat: projectSummaries.dailyProjectStats[index],
+          dailyProjectStat: dailyProjectStats[index],
         ),
       );
+
+  void _toggleFilteredState() => setState(() => _filtered = !_filtered);
 }
