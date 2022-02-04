@@ -39,10 +39,10 @@ class TimeStatsPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 10.w),
         child: Column(
           children: [
-            StatsCard(
+            StatsCard.valueAsText(
               gradient: AppGradients.primary,
               text: "Total Time\nSpent",
-              value: projectSummaries.totalTime.formattedPrint(),
+              valueText: projectSummaries.totalTime.formattedPrint(),
               icon: AppAssets.icons.time,
               cardHeight: 65.h,
               borderRadius: BorderRadius.circular(16.r),

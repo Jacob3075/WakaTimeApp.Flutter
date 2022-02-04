@@ -51,24 +51,24 @@ class OtherDailyStatsSection extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: Column(
           children: [
-            StatsCard(
+            StatsCard.valueAsText(
               gradient: app_colors.AppGradients.greenCyan,
               text: "Most Used Language",
-              value: summaries.currentDay.mostUsedLanguage.getOrElse(() => Language.none).name,
+              valueText: summaries.currentDay.mostUsedLanguage.getOrElse(() => Language.none).name,
               icon: AppAssets.icons.codeFile,
             ),
             SizedBox(height: 14.h),
-            StatsCard(
+            StatsCard.valueAsText(
               gradient: app_colors.AppGradients.blueCyan,
               text: "Most Used Editor",
-              value: summaries.currentDay.mostUsedEditor.getOrElse(() => Editor.none).name,
+              valueText: summaries.currentDay.mostUsedEditor.getOrElse(() => Editor.none).name,
               icon: AppAssets.icons.laptop,
             ),
             SizedBox(height: 14.h),
-            StatsCard(
+            StatsCard.valueAsText(
               gradient: app_colors.AppGradients.purpleCyanDark,
               text: "Most Used OS",
-              value: summaries.currentDay.mostUsedOperatingSystem
+              valueText: summaries.currentDay.mostUsedOperatingSystem
                   .getOrElse(() => OperatingSystem.none)
                   .name,
               icon: AppAssets.icons.code,

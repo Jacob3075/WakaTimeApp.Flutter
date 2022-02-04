@@ -19,7 +19,7 @@ class MostUsedLanguageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.w),
-        child: StatsCard(
+        child: StatsCard.valueAsWidget(
           gradient: AppGradients.greenCyan,
           text: "Most Time\nSpent On",
           valueWidget: Column(

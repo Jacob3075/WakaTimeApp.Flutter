@@ -5,9 +5,9 @@ import "package:waka_time_app/common/ui/theme/app_colors.dart" as app_colors;
 import "package:waka_time_app/common/ui/widgets/custom_ink_well_card.dart";
 
 class StatsCard extends StatelessWidget {
-  final app_colors.Gradient gradient;
   final String text;
   late final Widget valueWidget;
+  final app_colors.Gradient gradient;
   final String icon;
   final double cardHeight;
   final BorderRadius borderRadius;
@@ -19,34 +19,65 @@ class StatsCard extends StatelessWidget {
     fontWeight: FontWeight.bold,
   );
 
-  // FIXME: IMPROVE HOW value AND valueWidget ARE HANDLED
-  StatsCard({
+  StatsCard.valueAsWidget({
+    Key? key,
+    required String text,
+    required Widget valueWidget,
+    required app_colors.Gradient gradient,
+    required String icon,
+    double? cardHeight,
+    BorderRadius? borderRadius,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+  }) : this._(
+          key: key,
+          text: text,
+          icon: icon,
+          gradient: gradient,
+          valueWidget: valueWidget,
+          cardHeight: cardHeight,
+          borderRadius: borderRadius,
+          padding: padding,
+          margin: margin,
+        );
+
+  StatsCard.valueAsText({
+    Key? key,
+    required String text,
+    required String valueText,
+    required app_colors.Gradient gradient,
+    required String icon,
+    double? cardHeight,
+    BorderRadius? borderRadius,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+  }) : this._(
+          key: key,
+          text: text,
+          icon: icon,
+          gradient: gradient,
+          valueWidget: Text(valueText, style: valueTextStyle),
+          cardHeight: cardHeight,
+          borderRadius: borderRadius,
+          padding: padding,
+          margin: margin,
+        );
+
+  StatsCard._({
     Key? key,
     required this.gradient,
     required this.text,
     required this.icon,
-    valueWidget,
-    value,
-    cardHeight,
-    borderRadius,
-    padding,
-    margin,
-  })  : assert(value != null || valueWidget != null),
-        assert(!(value != null && valueWidget != null)),
-        padding = padding ?? EdgeInsets.symmetric(horizontal: 18.w),
+    required this.valueWidget,
+    required double? cardHeight,
+    required BorderRadius? borderRadius,
+    required EdgeInsetsGeometry? padding,
+    required EdgeInsetsGeometry? margin,
+  })  : padding = padding ?? EdgeInsets.symmetric(horizontal: 18.w),
         margin = margin ?? EdgeInsets.zero,
         borderRadius = borderRadius ?? BorderRadius.circular(20.r),
         cardHeight = cardHeight ?? 60.h,
-        super(key: key) {
-    if (value != null) {
-      this.valueWidget = Text(
-        value,
-        style: valueTextStyle,
-      );
-    } else {
-      this.valueWidget = valueWidget;
-    }
-  }
+        super(key: key);
 
   @override
   Widget build(BuildContext context) => CustomInkWellCard(

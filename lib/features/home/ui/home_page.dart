@@ -47,10 +47,10 @@ class HomePage extends StatelessWidget {
               SizedBox(height: 24.h),
               UserDetailsSection(userDetails: userDetails),
               SizedBox(height: 20.h),
-              StatsCard(
+              StatsCard.valueAsText(
                 gradient: AppGradients.primary,
                 text: "Total Time Spent\nToday",
-                value: last7daysStats.currentDay.timeSpent.formattedPrint(),
+                valueText: last7daysStats.currentDay.timeSpent.formattedPrint(),
                 icon: AppAssets.icons.time,
                 cardHeight: 72.h,
                 borderRadius: BorderRadius.circular(16.r),

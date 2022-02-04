@@ -64,11 +64,7 @@ main() {
             startDate: DateTime.now(),
             endDate: DateTime.now(),
           ),
-          totalTime: const Time(
-            hours: 0,
-            minutes: 0,
-            decimal: 0,
-          ),
+          totalTime: Time.zero,
         );
 
         when(getProjectStats(any)).thenAnswer((realInvocation) async => Right(projectSummaries));
