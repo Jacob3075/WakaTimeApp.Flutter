@@ -1,7 +1,7 @@
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
-import 'package:waka_time_app/common/utils/extensions.dart';
+import "package:waka_time_app/common/utils/extensions.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
 
 part "project_summaries.freezed.dart";
@@ -28,10 +28,10 @@ class ProjectSummaries with _$ProjectSummaries {
 
   List<Language> languagesUsed() => dailyProjectStats
       .expand((it) => it.languages)
-      .groupFoldBy(
+      .groupFoldBy<String, Language>(
         (it) => it.name,
         (it1, it2) {
-          final timeSpent = ((it1 as Language?)?.timeSpent ?? Time.zero) + it2.timeSpent;
+          final timeSpent = (it1?.timeSpent ?? Time.zero) + it2.timeSpent;
           return Language(
             name: (it2).name,
             timeSpent: timeSpent,

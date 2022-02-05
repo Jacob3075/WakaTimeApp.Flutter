@@ -1,3 +1,6 @@
+import "dart:math";
+
+import "package:collection/collection.dart";
 import "package:fl_chart/fl_chart.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
@@ -14,7 +17,7 @@ class TimeSpentOnLanguageChart extends StatelessWidget {
         child: PieChart(
           PieChartData(
             sections: getPieChartSections(),
-            centerSpaceRadius: 0.r,
+            centerSpaceRadius: 30.r,
             pieTouchData: PieTouchData(),
             borderData: FlBorderData(
               show: true,
@@ -24,14 +27,25 @@ class TimeSpentOnLanguageChart extends StatelessWidget {
         ),
       );
 
-  List<PieChartSectionData> getPieChartSections() => languages
-      .map(
-        (it) => PieChartSectionData(
-          value: it.percent,
-          radius: 80,
-          title: it.name,
-          showTitle: true,
-        ),
-      )
-      .toList();
+  List<PieChartSectionData> getPieChartSections() {
+    final sortedLangs = languages.sortedBy<num>((it) => it.percent).reversed.toList();
+    final top4Langs = sortedLangs.sublist(0, 4);
+    final otherLangs = sortedLangs.sublist(4).fold<Language>(
+          Language.none,
+          (previousValue, element) => Language(
+            name: "Other Langs",
+            percent: previousValue.percent + element.percent,
+            timeSpent: previousValue.timeSpent + element.timeSpent,
+          ),
+        );
+    return (top4Langs + [otherLangs])
+        .map((it) => PieChartSectionData(
+              value: it.percent,
+              radius: 70,
+              title: it.name,
+              showTitle: true,
+              color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+            ))
+        .toList();
+  }
 }

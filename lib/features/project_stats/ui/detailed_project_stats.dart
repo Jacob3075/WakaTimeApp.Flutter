@@ -41,6 +41,7 @@ class DetailedProjectStats extends StatelessWidget {
               projectName: projectName,
               onPressed: () => context.router.pop(),
             ),
+            // TODO: PERSIST TABS
             body: TabBarView(
               physics: const BouncingScrollPhysics(),
               children: [
