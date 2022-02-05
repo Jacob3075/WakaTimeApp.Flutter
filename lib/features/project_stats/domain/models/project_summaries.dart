@@ -4,56 +4,71 @@ import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
 
-part "project_summaries.freezed.dart";
-part "project_summaries.g.dart";
+class ProjectSummaries with LanguageStats {
+  final Time totalTime;
+  final List<DailyProjectStats> dailyProjectStats;
+  final StatsRange range;
 
-@freezed
-class ProjectSummaries with _$ProjectSummaries, LanguageStats {
-  const ProjectSummaries._();
+  @override
+  late final List<Language> languages;
 
-  const factory ProjectSummaries({
-    required Time totalTime,
-    required List<DailyProjectStats> dailyProjectStats,
-    required StatsRange range,
-  }) = _ProjectSummaries;
-
-  factory ProjectSummaries.fromJson(Map<String, dynamic> json) => _$ProjectSummariesFromJson(json);
+  ProjectSummaries({
+    required this.totalTime,
+    required this.dailyProjectStats,
+    required this.range,
+  }) {
+    languages = dailyProjectStats
+        .expand((it) => it.languages)
+        .groupFoldBy<String, Language>(
+          (it) => it.name,
+          (it1, it2) {
+        final timeSpent = (it1?.timeSpent ?? Time.zero) + it2.timeSpent;
+        return Language(
+          name: (it2).name,
+          timeSpent: timeSpent,
+          percent: ((timeSpent.decimal / totalTime.decimal) * 100).roundToDecimal(2),
+        );
+      },
+    )
+        .values
+        .toList();
+  }
 
   Time get averageTime => totalTime / daysWorked.totalDays;
 
   DaysWorked get daysWorked {
-    final totalDays = dailyProjectStats.where((element) => element.timeSpent.decimal != 0).length;
+    final totalDays = dailyProjectStats
+        .where((element) => element.timeSpent.decimal != 0)
+        .length;
     return DaysWorked(months: totalDays ~/ 30, days: totalDays % 30);
   }
 
   @override
-  List<Language> get languages => dailyProjectStats
-      .expand((it) => it.languages)
-      .groupFoldBy<String, Language>(
-        (it) => it.name,
-        (it1, it2) {
-          final timeSpent = (it1?.timeSpent ?? Time.zero) + it2.timeSpent;
-          return Language(
-            name: (it2).name,
-            timeSpent: timeSpent,
-            percent: ((timeSpent.decimal / totalTime.decimal) * 100).roundToDecimal(2),
-          );
-        },
-      )
-      .values
-      .toList();
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+          (other.runtimeType == runtimeType &&
+              other is ProjectSummaries &&
+              const DeepCollectionEquality().equals(other.totalTime, totalTime) &&
+              const DeepCollectionEquality().equals(other.dailyProjectStats, dailyProjectStats) &&
+              const DeepCollectionEquality().equals(other.range, range));
+
+  @override
+  int get hashCode =>
+      Object.hash(
+          runtimeType,
+          const DeepCollectionEquality().hash(totalTime),
+          const DeepCollectionEquality().hash(dailyProjectStats),
+          const DeepCollectionEquality().hash(range));
 }
 
-@freezed
-class DaysWorked with _$DaysWorked {
-  const DaysWorked._();
+class DaysWorked {
+  final int days;
+  final int months;
 
-  const factory DaysWorked({
-    required int days,
-    required int months,
-  }) = _DaysWorked;
-
-  factory DaysWorked.fromJson(Map<String, dynamic> json) => _$DaysWorkedFromJson(json);
+  const DaysWorked({
+    required this.days,
+    required this.months,
+  });
 
   int get totalDays => (months * 30) + days;
 
