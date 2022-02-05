@@ -18,26 +18,40 @@ class Language with _$Language {
 }
 
 class Languages {
-  final List<Language> languages;
+  final List<Language> values;
 
-  Languages(this.languages);
-
-  Option<Language> get mostUsedLanguage => mostUsedLanguageFrom(languages);
+  Languages(this.values);
 
   static Option<Language> mostUsedLanguageFrom(List<Language> languages) => optionOf(
         languages.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
       );
+
+  Option<Language> get mostUsedLanguage => mostUsedLanguageFrom(values);
+
+  Languages reduceToTopNLanguages(int count) {
+    final sortedLangs = values.sortedBy<num>((it) => it.percent).reversed.toList();
+    final topNLangs = sortedLangs.sublist(0, count);
+    final otherLangs = sortedLangs.sublist(count).fold<Language>(
+          Language.none,
+          (previousValue, element) => Language(
+            name: "Other Langs",
+            percent: previousValue.percent + element.percent,
+            timeSpent: previousValue.timeSpent + element.timeSpent,
+          ),
+        );
+    return Languages(topNLangs + [otherLangs]);
+  }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Languages &&
           runtimeType == other.runtimeType &&
-          const DeepCollectionEquality().equals(other.languages, languages);
+          const DeepCollectionEquality().equals(other.values, values);
 
   @override
   int get hashCode => Object.hash(
         runtimeType,
-        const DeepCollectionEquality().hash(languages),
+        const DeepCollectionEquality().hash(values),
       );
 }

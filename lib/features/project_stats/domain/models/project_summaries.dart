@@ -19,7 +19,7 @@ class ProjectSummaries {
   }) {
     languages = Languages(
       dailyProjectStats
-          .expand((it) => it.languages.languages)
+          .expand((it) => it.languages.values)
           .groupFoldBy<String, Language>(
             (it) => it.name,
             (it1, it2) {
