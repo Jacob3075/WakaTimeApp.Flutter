@@ -34,6 +34,7 @@ class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveCl
             child: Column(
               children: [
                 _summaryStats(),
+                SizedBox(height: 24.h),
                 ProjectHistorySection(projectSummaries: widget.projectSummaries),
               ],
             ),

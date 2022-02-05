@@ -9,7 +9,6 @@ class ProjectSummaries {
   final Time totalTime;
   final List<DailyProjectStats> dailyProjectStats;
   final StatsRange range;
-
   late final Languages languages;
 
   ProjectSummaries({
@@ -32,6 +31,8 @@ class ProjectSummaries {
             },
           )
           .values
+          .sortedBy<num>((element) => element.timeSpent.decimal)
+          .reversed
           .toList(),
     );
   }

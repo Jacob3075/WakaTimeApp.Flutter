@@ -9,7 +9,6 @@ class CustomInkWellCard extends StatelessWidget {
   final Color? containerColor;
   final Color? splashColor;
   final BoxDecoration? decoration;
-
   final Function()? onTap;
 
   const CustomInkWellCard({
@@ -25,21 +24,19 @@ class CustomInkWellCard extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: decoration,
-      margin: margin,
-      padding: padding,
-      child: Material(
-        borderRadius: borderRadius,
-        color: containerColor ?? AppColors.cardBGPrimary,
-        child: InkWell(
-          splashColor: splashColor,
+  Widget build(BuildContext context) => Container(
+        decoration: decoration ?? const BoxDecoration(boxShadow: [AppShadows.cardShadow]),
+        margin: margin,
+        padding: padding,
+        child: Material(
           borderRadius: borderRadius,
-          onTap: onTap ?? () {},
-          child: child,
+          color: containerColor ?? AppColors.cardBGPrimary,
+          child: InkWell(
+            splashColor: splashColor,
+            borderRadius: borderRadius,
+            onTap: onTap ?? () {},
+            child: child,
+          ),
         ),
-      ),
-    );
-  }
+      );
 }
