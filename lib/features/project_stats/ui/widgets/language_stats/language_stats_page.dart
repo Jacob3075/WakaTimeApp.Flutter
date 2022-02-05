@@ -18,16 +18,20 @@ class _LanguageStatsPageState extends State<LanguageStatsPage> with AutomaticKee
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Column(
-        children: [
-          TimeSpentOnLanguageChart(
-            languages: widget.languages,
-          ),
-          MostUsedLanguageCard(languages: widget.languages),
-          OtherLanguagesSection(languages: widget.languages),
-        ],
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        child: Column(
+          children: [
+            TimeSpentOnLanguageChart(
+              languages: widget.languages,
+            ),
+            MostUsedLanguageCard(languages: widget.languages),
+            SizedBox(height: 24.h),
+            OtherLanguagesSection(languages: widget.languages),
+          ],
+        ),
       ),
     );
   }

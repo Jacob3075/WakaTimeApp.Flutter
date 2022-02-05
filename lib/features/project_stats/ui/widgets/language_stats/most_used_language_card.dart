@@ -27,9 +27,24 @@ class MostUsedLanguageCard extends StatelessWidget {
                 mostUsedLanguage.timeSpent.formattedPrint(),
                 style: StatsCard.valueTextStyle,
               ),
-              Text(
-                mostUsedLanguage.name,
-                style: TextStyle(fontSize: 16.sp),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    "${mostUsedLanguage.name}, ",
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Text(
+                    "${mostUsedLanguage.percent}%",
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
               )
             ],
           ),
