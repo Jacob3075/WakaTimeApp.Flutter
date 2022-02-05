@@ -5,22 +5,33 @@ import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/m
 import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/other_languages_section.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/time_spent_on_language_chart.dart";
 
-class LanguageStatsPage extends StatelessWidget {
+class LanguageStatsPage extends StatefulWidget {
   final List<Language> languages;
 
   const LanguageStatsPage({Key? key, required this.languages}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: Column(
-          children: [
-            TimeSpentOnLanguageChart(
-              languages: languages,
-            ),
-            MostUsedLanguageCard(languages: languages),
-            OtherLanguagesSection(languages: languages),
-          ],
-        ),
-      );
+  State<LanguageStatsPage> createState() => _LanguageStatsPageState();
+}
+
+class _LanguageStatsPageState extends State<LanguageStatsPage> with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: Column(
+        children: [
+          TimeSpentOnLanguageChart(
+            languages: widget.languages,
+          ),
+          MostUsedLanguageCard(languages: widget.languages),
+          OtherLanguagesSection(languages: widget.languages),
+        ],
+      ),
+    );
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 }
