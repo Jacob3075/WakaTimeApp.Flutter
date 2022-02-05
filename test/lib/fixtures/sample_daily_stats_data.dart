@@ -1261,26 +1261,28 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.61,
         )
       ],
-      languages: [
-        const Language(
-          timeSpent: Time(
-            decimal: 5.30,
-            hours: 5,
-            minutes: 18,
+      languages: Languages(
+        const [
+          Language(
+            timeSpent: Time(
+              decimal: 5.30,
+              hours: 5,
+              minutes: 18,
+            ),
+            name: "Dart",
+            percent: 98.64,
           ),
-          name: "Dart",
-          percent: 98.64,
-        ),
-        const Language(
-          timeSpent: Time(
-            decimal: 0.05,
-            hours: 0,
-            minutes: 3,
+          Language(
+            timeSpent: Time(
+              decimal: 0.05,
+              hours: 0,
+              minutes: 3,
+            ),
+            name: "YAML",
+            percent: 1.0,
           ),
-          name: "YAML",
-          percent: 1.0,
-        ),
-      ],
+        ],
+      ),
       operatingSystems: [
         const OperatingSystem(
           timeSpent: Time(
@@ -1333,26 +1335,28 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.88,
         )
       ],
-      languages: [
-        const Language(
-          timeSpent: Time(
-            decimal: 5.75,
-            hours: 5,
-            minutes: 45,
+      languages: Languages(
+        const [
+          Language(
+            timeSpent: Time(
+              decimal: 5.75,
+              hours: 5,
+              minutes: 45,
+            ),
+            name: "Dart",
+            percent: 97.27,
           ),
-          name: "Dart",
-          percent: 97.27,
-        ),
-        const Language(
-          timeSpent: Time(
-            decimal: 0.08,
-            hours: 0,
-            minutes: 5,
+          Language(
+            timeSpent: Time(
+              decimal: 0.08,
+              hours: 0,
+              minutes: 5,
+            ),
+            name: "YAML",
+            percent: 1.68,
           ),
-          name: "YAML",
-          percent: 1.68,
-        ),
-      ],
+        ],
+      ),
       operatingSystems: [
         const OperatingSystem(
           timeSpent: Time(
@@ -1405,26 +1409,28 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.26,
         )
       ],
-      languages: [
-        const Language(
-          timeSpent: Time(
-            decimal: 6.98,
-            hours: 6,
-            minutes: 59,
+      languages: Languages(
+        [
+          const Language(
+            timeSpent: Time(
+              decimal: 6.98,
+              hours: 6,
+              minutes: 59,
+            ),
+            name: "Dart",
+            percent: 93.37,
           ),
-          name: "Dart",
-          percent: 93.37,
-        ),
-        const Language(
-          timeSpent: Time(
-            decimal: 0.28,
-            hours: 0,
-            minutes: 17,
-          ),
-          name: "YAML",
-          percent: 3.93,
-        )
-      ],
+          const Language(
+            timeSpent: Time(
+              decimal: 0.28,
+              hours: 0,
+              minutes: 17,
+            ),
+            name: "YAML",
+            percent: 3.93,
+          )
+        ],
+      ),
       operatingSystems: [
         const OperatingSystem(
           timeSpent: Time(
@@ -1477,26 +1483,28 @@ final sampleLast7DaysStats = Summaries(
           percent: 3.9,
         )
       ],
-      languages: [
-        const Language(
-          timeSpent: Time(
-            decimal: 4.33,
-            hours: 4,
-            minutes: 20,
+      languages: Languages(
+        const [
+          Language(
+            timeSpent: Time(
+              decimal: 4.33,
+              hours: 4,
+              minutes: 20,
+            ),
+            name: "Dart",
+            percent: 89.17,
           ),
-          name: "Dart",
-          percent: 89.17,
-        ),
-        const Language(
-          timeSpent: Time(
-            decimal: 0.22,
-            hours: 0,
-            minutes: 13,
-          ),
-          name: "Properties",
-          percent: 4.57,
-        )
-      ],
+          Language(
+            timeSpent: Time(
+              decimal: 0.22,
+              hours: 0,
+              minutes: 13,
+            ),
+            name: "Properties",
+            percent: 4.57,
+          )
+        ],
+      ),
       operatingSystems: [
         const OperatingSystem(
           timeSpent: Time(
@@ -1549,26 +1557,28 @@ final sampleLast7DaysStats = Summaries(
           percent: 5.47,
         )
       ],
-      languages: [
-        const Language(
-          timeSpent: Time(
-            decimal: 2.23,
-            hours: 2,
-            minutes: 14,
+      languages: Languages(
+        const [
+          Language(
+            timeSpent: Time(
+              decimal: 2.23,
+              hours: 2,
+              minutes: 14,
+            ),
+            name: "Dart",
+            percent: 94.53,
           ),
-          name: "Dart",
-          percent: 94.53,
-        ),
-        const Language(
-          timeSpent: Time(
-            decimal: 0.12,
-            hours: 0,
-            minutes: 7,
-          ),
-          name: "Kotlin",
-          percent: 5.47,
-        )
-      ],
+          Language(
+            timeSpent: Time(
+              decimal: 0.12,
+              hours: 0,
+              minutes: 7,
+            ),
+            name: "Kotlin",
+            percent: 5.47,
+          )
+        ],
+      ),
       operatingSystems: [
         const OperatingSystem(
           timeSpent: Time(
@@ -1621,26 +1631,28 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.87,
         )
       ],
-      languages: [
-        const Language(
-          timeSpent: Time(
-            decimal: 2.08,
-            hours: 2,
-            minutes: 5,
+      languages: Languages(
+        const [
+          Language(
+            timeSpent: Time(
+              decimal: 2.08,
+              hours: 2,
+              minutes: 5,
+            ),
+            name: "Dart",
+            percent: 99.13,
           ),
-          name: "Dart",
-          percent: 99.13,
-        ),
-        const Language(
-          timeSpent: Time(
-            decimal: 0.00,
-            hours: 0,
-            minutes: 0,
-          ),
-          name: "Kotlin",
-          percent: 0.47,
-        )
-      ],
+          Language(
+            timeSpent: Time(
+              decimal: 0.00,
+              hours: 0,
+              minutes: 0,
+            ),
+            name: "Kotlin",
+            percent: 0.47,
+          )
+        ],
+      ),
       operatingSystems: [
         const OperatingSystem(
           timeSpent: Time(
@@ -1679,17 +1691,19 @@ final sampleLast7DaysStats = Summaries(
           percent: 100.0,
         )
       ],
-      languages: [
-        const Language(
-          timeSpent: Time(
-            decimal: 6.02,
-            hours: 6,
-            minutes: 1,
-          ),
-          name: "Dart",
-          percent: 100.0,
-        )
-      ],
+      languages: Languages(
+        const [
+          Language(
+            timeSpent: Time(
+              decimal: 6.02,
+              hours: 6,
+              minutes: 1,
+            ),
+            name: "Dart",
+            percent: 100.0,
+          )
+        ],
+      ),
       operatingSystems: [
         const OperatingSystem(
           timeSpent: Time(

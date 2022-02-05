@@ -58,23 +58,25 @@ main() {
     );
     expect(
       projectSummaries.languages,
-      const [
-        Language(
-          name: "L1",
-          timeSpent: Time(hours: 12, minutes: 30, decimal: 12.5),
-          percent: 46.3,
-        ),
-        Language(
-          name: "L2",
-          timeSpent: Time(hours: 8, minutes: 30, decimal: 8.5),
-          percent: 31.48,
-        ),
-        Language(
-          name: "L3",
-          timeSpent: Time(hours: 6, minutes: 0, decimal: 6.0),
-          percent: 22.22,
-        ),
-      ],
+      Languages(
+        const [
+          Language(
+            name: "L1",
+            timeSpent: Time(hours: 12, minutes: 30, decimal: 12.5),
+            percent: 46.3,
+          ),
+          Language(
+            name: "L2",
+            timeSpent: Time(hours: 8, minutes: 30, decimal: 8.5),
+            percent: 31.48,
+          ),
+          Language(
+            name: "L3",
+            timeSpent: Time(hours: 6, minutes: 0, decimal: 6.0),
+            percent: 22.22,
+          ),
+        ],
+      ),
     );
   });
 }

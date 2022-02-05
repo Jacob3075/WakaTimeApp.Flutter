@@ -17,19 +17,27 @@ class Language with _$Language {
   static Language none = const Language(name: "-", timeSpent: Time.zero, percent: 0);
 }
 
-class Languages with LanguageStats {
-  @override
+class Languages {
   final List<Language> languages;
 
   Languages(this.languages);
-}
-
-abstract class LanguageStats {
-  List<Language> get languages;
 
   Option<Language> get mostUsedLanguage => mostUsedLanguageFrom(languages);
 
   static Option<Language> mostUsedLanguageFrom(List<Language> languages) => optionOf(
         languages.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
+      );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Languages &&
+          runtimeType == other.runtimeType &&
+          const DeepCollectionEquality().equals(other.languages, languages);
+
+  @override
+  int get hashCode => Object.hash(
+        runtimeType,
+        const DeepCollectionEquality().hash(languages),
       );
 }

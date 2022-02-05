@@ -15,7 +15,5 @@ class Summaries with _$Summaries {
     required StatsRange range,
   }) = _Summaries;
 
-  factory Summaries.fromJson(Map<String, dynamic> json) => _$SummariesFromJson(json);
-
   DailyStats get currentDay => dailyStats.last;
 }
