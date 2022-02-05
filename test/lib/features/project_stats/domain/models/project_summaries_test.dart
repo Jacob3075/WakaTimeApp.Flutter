@@ -54,7 +54,7 @@ main() {
       ),
     );
     expect(
-      projectSummaries.languagesUsed(),
+      projectSummaries.languages,
       const [
         Language(
           name: "L1",

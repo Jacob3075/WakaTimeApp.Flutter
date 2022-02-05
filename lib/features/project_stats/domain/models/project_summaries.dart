@@ -8,7 +8,7 @@ part "project_summaries.freezed.dart";
 part "project_summaries.g.dart";
 
 @freezed
-class ProjectSummaries with _$ProjectSummaries {
+class ProjectSummaries with _$ProjectSummaries, LanguageStats {
   const ProjectSummaries._();
 
   const factory ProjectSummaries({
@@ -26,7 +26,8 @@ class ProjectSummaries with _$ProjectSummaries {
     return DaysWorked(months: totalDays ~/ 30, days: totalDays % 30);
   }
 
-  List<Language> languagesUsed() => dailyProjectStats
+  @override
+  List<Language> get languages => dailyProjectStats
       .expand((it) => it.languages)
       .groupFoldBy<String, Language>(
         (it) => it.name,

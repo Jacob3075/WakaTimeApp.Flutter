@@ -93,7 +93,9 @@ class OperatingSystem with _$OperatingSystem {
 abstract class LanguageStats {
   List<Language> get languages;
 
-  Option<Language> get mostUsedLanguage => optionOf(
+  Option<Language> get mostUsedLanguage => mostUsedLanguageFrom(languages);
+
+  static Option<Language> mostUsedLanguageFrom(List<Language> languages) => optionOf(
         languages.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
       );
 }

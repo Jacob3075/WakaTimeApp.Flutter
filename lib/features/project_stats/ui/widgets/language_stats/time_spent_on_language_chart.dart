@@ -27,7 +27,17 @@ class TimeSpentOnLanguageChart extends StatelessWidget {
         ),
       );
 
-  List<PieChartSectionData> getPieChartSections() {
+  List<PieChartSectionData> getPieChartSections() => getReducedLanguages()
+      .map((it) => PieChartSectionData(
+            value: it.percent,
+            radius: 70,
+            title: it.name,
+            showTitle: true,
+            color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
+          ))
+      .toList();
+
+  List<Language> getReducedLanguages() {
     final sortedLangs = languages.sortedBy<num>((it) => it.percent).reversed.toList();
     final top4Langs = sortedLangs.sublist(0, 4);
     final otherLangs = sortedLangs.sublist(4).fold<Language>(
@@ -38,14 +48,6 @@ class TimeSpentOnLanguageChart extends StatelessWidget {
             timeSpent: previousValue.timeSpent + element.timeSpent,
           ),
         );
-    return (top4Langs + [otherLangs])
-        .map((it) => PieChartSectionData(
-              value: it.percent,
-              radius: 70,
-              title: it.name,
-              showTitle: true,
-              color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-            ))
-        .toList();
+    return top4Langs + [otherLangs];
   }
 }

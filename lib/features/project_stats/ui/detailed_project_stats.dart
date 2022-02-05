@@ -46,7 +46,7 @@ class DetailedProjectStats extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               children: [
                 TimeStatsPage(projectSummaries: projectSummaries),
-                LanguageStatsPage(languages: projectSummaries.languagesUsed()),
+                LanguageStatsPage(languages: projectSummaries.languages),
                 const Text("Page 3"),
                 const Text("Page 4"),
                 const Text("Page 5"),
