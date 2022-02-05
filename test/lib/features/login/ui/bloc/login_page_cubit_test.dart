@@ -13,11 +13,13 @@ void main() {
   late LoginPageCubit cubit;
   late MockUserDetailsStore store;
   late MockGetUserDetailsUC loginApi;
+  late MockUserAuthCubit userAuthCubit;
 
   setUp(() {
     store = MockUserDetailsStore();
     loginApi = MockGetUserDetailsUC();
-    cubit = LoginPageCubit(loginApi: loginApi, store: store);
+    userAuthCubit = MockUserAuthCubit();
+    cubit = LoginPageCubit(loginApi: loginApi, store: store, userAuthCubit: userAuthCubit);
   });
 
   group(
