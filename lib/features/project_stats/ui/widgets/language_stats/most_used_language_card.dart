@@ -1,16 +1,16 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:waka_time_app/common/domain/models/common_models.dart";
+import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/common/ui/widgets/stats_card.dart";
 
 class MostUsedLanguageCard extends StatelessWidget {
-  final List<Language> languages;
+  final Languages languages;
   late final Language mostUsedLanguage;
 
   MostUsedLanguageCard({Key? key, required this.languages}) : super(key: key) {
-    mostUsedLanguage = LanguageStats.mostUsedLanguageFrom(languages).getOrElse(() => Language.none);
+    mostUsedLanguage = languages.mostUsedLanguage.getOrElse(() => Language.none);
   }
 
   @override

@@ -4,7 +4,6 @@ import "package:waka_time_app/common/domain/models/daily_stats.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
 part "summaries.freezed.dart";
-part "summaries.g.dart";
 
 @freezed
 class Summaries with _$Summaries {

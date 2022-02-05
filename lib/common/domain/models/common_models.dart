@@ -46,21 +46,6 @@ class EntityType with _$EntityType {
 }
 
 @freezed
-class Language with _$Language {
-  const Language._();
-
-  const factory Language({
-    required String name,
-    required Time timeSpent,
-    required double percent,
-  }) = _Language;
-
-  factory Language.fromJson(Map<String, dynamic> json) => _$LanguageFromJson(json);
-
-  static Language none = const Language(name: "-", timeSpent: Time.zero, percent: 0);
-}
-
-@freezed
 class Editor with _$Editor {
   const Editor._();
 
@@ -88,16 +73,6 @@ class OperatingSystem with _$OperatingSystem {
   factory OperatingSystem.fromJson(Map<String, dynamic> json) => _$OperatingSystemFromJson(json);
 
   static const OperatingSystem none = OperatingSystem(name: "-", timeSpent: Time.zero, percent: 0);
-}
-
-abstract class LanguageStats {
-  List<Language> get languages;
-
-  Option<Language> get mostUsedLanguage => mostUsedLanguageFrom(languages);
-
-  static Option<Language> mostUsedLanguageFrom(List<Language> languages) => optionOf(
-        languages.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
-      );
 }
 
 abstract class EditorStats {

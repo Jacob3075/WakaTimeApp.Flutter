@@ -4,10 +4,10 @@ import "package:collection/collection.dart";
 import "package:fl_chart/fl_chart.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:waka_time_app/common/domain/models/common_models.dart";
+import "package:waka_time_app/common/domain/models/language.dart";
 
 class TimeSpentOnLanguageChart extends StatelessWidget {
-  final List<Language> languages;
+  final Languages languages;
 
   const TimeSpentOnLanguageChart({Key? key, required this.languages}) : super(key: key);
 
@@ -38,7 +38,7 @@ class TimeSpentOnLanguageChart extends StatelessWidget {
       .toList();
 
   List<Language> getReducedLanguages() {
-    final sortedLangs = languages.sortedBy<num>((it) => it.percent).reversed.toList();
+    final sortedLangs = languages.languages.sortedBy<num>((it) => it.percent).reversed.toList();
     final top4Langs = sortedLangs.sublist(0, 4);
     final otherLangs = sortedLangs.sublist(4).fold<Language>(
           Language.none,

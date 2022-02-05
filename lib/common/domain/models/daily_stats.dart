@@ -1,9 +1,9 @@
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
+import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
 part "daily_stats.freezed.dart";
-part "daily_stats.g.dart";
 
 @freezed
 class DailyStats with _$DailyStats, LanguageStats, EditorStats, OperatingSystemStats {
@@ -17,6 +17,4 @@ class DailyStats with _$DailyStats, LanguageStats, EditorStats, OperatingSystemS
     required List<OperatingSystem> operatingSystems,
     required DateTime date,
   }) = _DailyStats;
-
-  factory DailyStats.fromJson(Map<String, dynamic> json) => _$DailyStatsFromJson(json);
 }

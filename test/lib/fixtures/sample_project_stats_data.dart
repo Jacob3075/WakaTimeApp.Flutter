@@ -1,4 +1,5 @@
 import "package:waka_time_app/common/domain/models/common_models.dart";
+import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
@@ -380,44 +381,46 @@ final sampleProjectStatsData = ProjectSummaries(
     DailyProjectStats(
       timeSpent: const Time(hours: 2, minutes: 56, decimal: 2.93),
       entities: [],
-      languages: [
-        const Language(
-          timeSpent: Time(
-            decimal: 2.27,
-            hours: 2,
-            minutes: 16,
+      languages: Languages(
+        const [
+          Language(
+            timeSpent: Time(
+              decimal: 2.27,
+              hours: 2,
+              minutes: 16,
+            ),
+            name: "Kotlin",
+            percent: 76.97,
           ),
-          name: "Kotlin",
-          percent: 76.97,
-        ),
-        const Language(
-          timeSpent: Time(
-            minutes: 37,
-            hours: 0,
-            decimal: 0.62,
+          Language(
+            timeSpent: Time(
+              minutes: 37,
+              hours: 0,
+              decimal: 0.62,
+            ),
+            name: "Groovy",
+            percent: 21.26,
           ),
-          name: "Groovy",
-          percent: 21.26,
-        ),
-        const Language(
-          timeSpent: Time(
-            decimal: 0.05,
-            minutes: 3,
-            hours: 0,
+          Language(
+            timeSpent: Time(
+              decimal: 0.05,
+              minutes: 3,
+              hours: 0,
+            ),
+            name: "VimL",
+            percent: 1.77,
           ),
-          name: "VimL",
-          percent: 1.77,
-        ),
-        const Language(
-          timeSpent: Time(
-            decimal: 0.00,
-            hours: 0,
-            minutes: 0,
-          ),
-          name: "XML",
-          percent: 0,
-        )
-      ],
+          Language(
+            timeSpent: Time(
+              decimal: 0.00,
+              hours: 0,
+              minutes: 0,
+            ),
+            name: "XML",
+            percent: 0,
+          )
+        ],
+      ),
       editors: [
         const Editor(
           timeSpent: Time(
@@ -445,44 +448,46 @@ final sampleProjectStatsData = ProjectSummaries(
     DailyProjectStats(
       timeSpent: const Time(hours: 5, minutes: 11, decimal: 5.18),
       entities: [],
-      languages: [
-        const Language(
-          timeSpent: Time(
-            decimal: 5.12,
-            hours: 5,
-            minutes: 7,
+      languages: Languages(
+        const [
+          Language(
+            timeSpent: Time(
+              decimal: 5.12,
+              hours: 5,
+              minutes: 7,
+            ),
+            name: "Dart",
+            percent: 98.64,
           ),
-          name: "Dart",
-          percent: 98.64,
-        ),
-        const Language(
-          timeSpent: Time(
-            decimal: 0.03,
-            hours: 0,
-            minutes: 2,
+          Language(
+            timeSpent: Time(
+              decimal: 0.03,
+              hours: 0,
+              minutes: 2,
+            ),
+            name: "YAML",
+            percent: 0.87,
           ),
-          name: "YAML",
-          percent: 0.87,
-        ),
-        const Language(
-          timeSpent: Time(
-            decimal: 0.00,
-            hours: 0,
-            minutes: 0,
+          Language(
+            timeSpent: Time(
+              decimal: 0.00,
+              hours: 0,
+              minutes: 0,
+            ),
+            name: "textmate",
+            percent: 0.28,
           ),
-          name: "textmate",
-          percent: 0.28,
-        ),
-        const Language(
-          timeSpent: Time(
-            decimal: 0.00,
-            hours: 0,
-            minutes: 0,
+          Language(
+            timeSpent: Time(
+              decimal: 0.00,
+              hours: 0,
+              minutes: 0,
+            ),
+            name: "Java",
+            percent: 0.21,
           ),
-          name: "Java",
-          percent: 0.21,
-        ),
-      ],
+        ],
+      ),
       editors: [
         const Editor(
           timeSpent: Time(
