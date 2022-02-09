@@ -75,6 +75,7 @@ class OperatingSystem with _$OperatingSystem {
   static const OperatingSystem none = OperatingSystem(name: "-", timeSpent: Time.zero, percent: 0);
 }
 
+@Deprecated("")
 abstract class EditorStats {
   List<Editor> get editors;
 
@@ -83,6 +84,7 @@ abstract class EditorStats {
       );
 }
 
+@Deprecated("")
 abstract class OperatingSystemStats {
   List<OperatingSystem> get operatingSystems;
 

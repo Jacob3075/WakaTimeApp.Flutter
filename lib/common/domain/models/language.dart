@@ -22,11 +22,9 @@ class Languages {
 
   Languages(this.values);
 
-  static Option<Language> mostUsedLanguageFrom(List<Language> languages) => optionOf(
-        languages.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
+  Option<Language> get mostUsedLanguage => optionOf(
+        values.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
       );
-
-  Option<Language> get mostUsedLanguage => mostUsedLanguageFrom(values);
 
   Languages reduceToTopNLanguages(int count) {
     final sortedLangs = values.sortedBy<num>((it) => it.percent).reversed.toList();

@@ -1,20 +1,35 @@
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
+import "package:waka_time_app/common/domain/models/daily_stats.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
-part "daily_project_stats.freezed.dart";
+class DailyProjectStats extends BaseDailyStats {
+  final List<Entity> entities;
 
-@freezed
-class DailyProjectStats with _$DailyProjectStats, OperatingSystemStats, EditorStats {
-  const DailyProjectStats._();
-
-  const factory DailyProjectStats({
+  const DailyProjectStats({
+    required this.entities,
     required Time timeSpent,
-    required List<Entity> entities,
     required Languages languages,
     required List<Editor> editors,
     required List<OperatingSystem> operatingSystems,
     required DateTime date,
-  }) = _DailyProjectStats;
+  }) : super(
+          timeSpent: timeSpent,
+          languages: languages,
+          editors: editors,
+          operatingSystems: operatingSystems,
+          date: date,
+        );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DailyProjectStats &&
+          runtimeType == other.runtimeType &&
+          super == other &&
+          const DeepCollectionEquality().equals(other.entities, entities);
+
+  @override
+  int get hashCode => Object.hash(const DeepCollectionEquality().hash(entities), super.hashCode);
 }
