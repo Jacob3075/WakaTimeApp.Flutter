@@ -6,7 +6,7 @@ import "package:http/http.dart" as http;
 import "package:mockito/mockito.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/errors/network_errors.dart";
-import "package:waka_time_app/features/login/domain/get_user_details_uc.dart";
+import "package:waka_time_app/features/login/domain/usecases/get_user_details_uc.dart";
 
 import "../../../../mocks.mocks.dart";
 import "../../../fixtures/sample_user_details.dart";

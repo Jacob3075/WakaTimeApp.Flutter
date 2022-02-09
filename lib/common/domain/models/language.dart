@@ -2,19 +2,30 @@ import "package:dartz/dartz.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
-part "language.freezed.dart";
+class Language {
+  final String name;
+  final Time timeSpent;
+  final double percent;
 
-@freezed
-class Language with _$Language {
-  const Language._();
-
-  const factory Language({
-    required String name,
-    required Time timeSpent,
-    required double percent,
-  }) = _Language;
+  const Language({
+    required this.name,
+    required this.timeSpent,
+    required this.percent,
+  });
 
   static Language none = const Language(name: "-", timeSpent: Time.zero, percent: 0);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Language &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          timeSpent == other.timeSpent &&
+          percent == other.percent;
+
+  @override
+  int get hashCode => name.hashCode ^ timeSpent.hashCode ^ percent.hashCode;
 }
 
 class Languages {
@@ -26,7 +37,7 @@ class Languages {
         values.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
       );
 
-  Languages reduceToTopNLanguages(int count) {
+  Languages topNAndCombineOthers(int count) {
     final sortedLangs = values.sortedBy<num>((it) => it.percent).reversed.toList();
     final topNLangs = sortedLangs.sublist(0, count);
     final otherLangs = sortedLangs.sublist(count).fold<Language>(

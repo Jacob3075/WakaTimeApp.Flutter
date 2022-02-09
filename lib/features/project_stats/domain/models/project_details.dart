@@ -1,16 +1,27 @@
-import "package:freezed_annotation/freezed_annotation.dart";
+class ProjectDetails {
+  final String projectName;
+  final DateTime createdDate;
+  final DateTime lastHeartBeat;
+  final String id;
 
-part "project_details.freezed.dart";
-part "project_details.g.dart";
+  const ProjectDetails({
+    required this.projectName,
+    required this.createdDate,
+    required this.lastHeartBeat,
+    required this.id,
+  });
 
-@freezed
-class ProjectDetails with _$ProjectDetails {
-  const factory ProjectDetails({
-    required String projectName,
-    required DateTime createdDate,
-    required DateTime lastHeartBeat,
-    required String id,
-  }) = _ProjectDetails;
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ProjectDetails &&
+          runtimeType == other.runtimeType &&
+          projectName == other.projectName &&
+          createdDate == other.createdDate &&
+          lastHeartBeat == other.lastHeartBeat &&
+          id == other.id;
 
-  factory ProjectDetails.fromJson(Map<String, dynamic> json) => _$ProjectDetailsFromJson(json);
+  @override
+  int get hashCode =>
+      projectName.hashCode ^ createdDate.hashCode ^ lastHeartBeat.hashCode ^ id.hashCode;
 }

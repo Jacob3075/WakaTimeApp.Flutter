@@ -27,7 +27,7 @@ class TimeSpentOnLanguageChart extends StatelessWidget {
       );
 
   List<PieChartSectionData> getPieChartSections() => languages
-      .reduceToTopNLanguages(3)
+      .topNAndCombineOthers(3)
       .values
       .map((it) => PieChartSectionData(
             value: it.percent,
