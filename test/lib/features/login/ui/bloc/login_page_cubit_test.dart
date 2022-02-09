@@ -28,9 +28,13 @@ void main() {
       blocTest<LoginPageCubit, LoginPageState>(
         "and api request returns valid data, then loading and success states should be emitted",
         build: () => cubit,
-        setUp: () => when(loginApi(any)).thenAnswer(
-          (realInvocation) async => const Right(sampleUserDetails),
-        ),
+        setUp: () {
+          when(loginApi(any)).thenAnswer(
+            (_) async => const Right(sampleUserDetails),
+          );
+          when(userAuthCubit.updateLoginStateAndDetails())
+              .thenAnswer((_) async => Future.value(""));
+        },
         act: (bloc) async => await bloc.login("api key"),
         expect: () => [
           const LoginPageState.loading(),
