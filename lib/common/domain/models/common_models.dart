@@ -1,78 +1,90 @@
+import "package:collection/collection.dart";
 import "package:dartz/dartz.dart";
-import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
-part "common_models.freezed.dart";
-part "common_models.g.dart";
+class Project {
+  final Time time;
+  final String name;
+  final double percent;
 
-@freezed
-class Project with _$Project {
-  const factory Project({
-    required Time time,
-    required String name,
-    required double percent,
-  }) = _Project;
-
-  factory Project.fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
+  const Project({
+    required this.time,
+    required this.name,
+    required this.percent,
+  });
 }
 
-@freezed
-class StatsRange with _$StatsRange {
-  const factory StatsRange({
-    required DateTime startDate,
-    required DateTime endDate,
-  }) = _StatsRange;
+class StatsRange {
+  final DateTime startDate;
+  final DateTime endDate;
 
-  factory StatsRange.fromJson(Map<String, dynamic> json) => _$StatsRangeFromJson(json);
+  const StatsRange({
+    required this.startDate,
+    required this.endDate,
+  });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is StatsRange &&
+          runtimeType == other.runtimeType &&
+          startDate == other.startDate &&
+          endDate == other.endDate;
+
+  @override
+  int get hashCode => startDate.hashCode ^ endDate.hashCode;
 }
 
-@freezed
-class Entity with _$Entity {
-  const factory Entity({
-    required String name,
-    required EntityType type,
-    required Time time,
-    required double percentage,
-  }) = _Entity;
+class Editor {
+  final String name;
+  final Time timeSpent;
+  final double percent;
 
-  factory Entity.fromJson(Map<String, dynamic> json) => _$EntityFromJson(json);
-}
-
-@freezed
-class EntityType with _$EntityType {
-  const factory EntityType.file() = _File;
-
-  factory EntityType.fromJson(Map<String, dynamic> json) => _$EntityTypeFromJson(json);
-}
-
-@freezed
-class Editor with _$Editor {
-  const Editor._();
-
-  const factory Editor({
-    required String name,
-    required Time timeSpent,
-    required double percent,
-  }) = _Editor;
-
-  factory Editor.fromJson(Map<String, dynamic> json) => _$EditorFromJson(json);
+  const Editor({
+    required this.name,
+    required this.timeSpent,
+    required this.percent,
+  });
 
   static const Editor none = Editor(name: "-", timeSpent: Time.zero, percent: 0);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Editor &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          timeSpent == other.timeSpent &&
+          percent == other.percent;
+
+  @override
+  int get hashCode => name.hashCode ^ timeSpent.hashCode ^ percent.hashCode;
 }
 
-@freezed
-class OperatingSystem with _$OperatingSystem {
-  const OperatingSystem._();
+class OperatingSystem {
+  final String name;
+  final Time timeSpent;
+  final double percent;
 
-  const factory OperatingSystem({
-    required String name,
-    required Time timeSpent,
-    required double percent,
-  }) = _OperatingSystem;
-
-  factory OperatingSystem.fromJson(Map<String, dynamic> json) => _$OperatingSystemFromJson(json);
+  const OperatingSystem({
+    required this.name,
+    required this.timeSpent,
+    required this.percent,
+  });
 
   static const OperatingSystem none = OperatingSystem(name: "-", timeSpent: Time.zero, percent: 0);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is OperatingSystem &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          timeSpent == other.timeSpent &&
+          percent == other.percent;
+
+  @override
+  int get hashCode => name.hashCode ^ timeSpent.hashCode ^ percent.hashCode;
 }
 
 @Deprecated("")

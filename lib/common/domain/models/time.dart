@@ -1,20 +1,15 @@
-import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
 
-part "time.freezed.dart";
-part "time.g.dart";
+class Time {
+  final int hours;
+  final int minutes;
+  final double decimal;
 
-@freezed
-class Time with _$Time {
-  const Time._();
-
-  const factory Time({
-    required int hours,
-    required int minutes,
-    required double decimal,
-  }) = _Time;
-
-  factory Time.fromJson(Map<String, dynamic> json) => _$TimeFromJson(json);
+  const Time({
+    required this.hours,
+    required this.minutes,
+    required this.decimal,
+  });
 
   static const Time zero = Time(decimal: 0, minutes: 0, hours: 0);
 
@@ -52,4 +47,16 @@ class Time with _$Time {
   String longFormattedPrint() => "$hours Hours, $minutes Minutes";
 
   int compareTo(Time other) => decimal.compareTo(other.decimal);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Time &&
+          runtimeType == other.runtimeType &&
+          hours == other.hours &&
+          minutes == other.minutes &&
+          decimal == other.decimal;
+
+  @override
+  int get hashCode => hours.hashCode ^ minutes.hashCode ^ decimal.hashCode;
 }
