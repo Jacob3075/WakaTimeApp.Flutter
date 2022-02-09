@@ -3,7 +3,6 @@ import "package:freezed_annotation/freezed_annotation.dart";
 import "package:injectable/injectable.dart";
 import "package:waka_time_app/common/data/local/user_details_store.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
-import "package:waka_time_app/common/utils/extensions.dart";
 import "package:waka_time_app/features/login/domain/get_user_details_uc.dart";
 
 part "login_page_cubit.freezed.dart";

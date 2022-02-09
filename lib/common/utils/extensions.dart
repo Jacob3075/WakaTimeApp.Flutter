@@ -1,22 +1,8 @@
 import "dart:math";
 
-import "package:waka_time_app/common/domain/errors/errors.dart";
-
 extension ObjectExt<T> on T {
   /// [Source](https://stackoverflow.com/a/58762538/13181948)
   R let<R>(R Function(T that) op) => op(this);
-}
-
-extension ErrorMessage on Errors {
-  String getErrorMessage() => map(
-        networkError: (networkError) => networkError.networkError.map(
-          (value) => value.errorMessage,
-          network: (error) => "Network Error",
-          clientError: (error) => error.errorMessage,
-          serverError: (error) => error.errorMessage,
-        ),
-        domainError: (domainError) => domainError.domainError.errorMessage,
-      );
 }
 
 extension Range on num {
@@ -32,12 +18,6 @@ extension Range on num {
   }
 }
 
-extension DateTimeX on DateTime {
-  /// [Source](https://stackoverflow.com/a/49399168/13181948)
-  int get dayOfYear => DateTime.now().difference(DateTime(year, 1, 1, 0, 0)).inDays;
-}
-
 extension ListX<T> on List<T> {
-  // FIXME: HANDLE CASE WHERE n IS LESS THAN length
-  List<T> takeLast(int n) => skip(length - n).toList();
+  List<T> takeLast(int n) => length >= n ? sublist(length - n) : this;
 }
