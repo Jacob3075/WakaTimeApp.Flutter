@@ -1,66 +1,38 @@
-import "package:dartz/dartz.dart";
-import "package:freezed_annotation/freezed_annotation.dart";
+// ignore_for_file: unnecessary_overrides
+
+import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
-class Language {
-  final String name;
-  final Time timeSpent;
-  final double percent;
-
+class Language extends SecondaryStat {
   const Language({
-    required this.name,
-    required this.timeSpent,
-    required this.percent,
-  });
+    required name,
+    required timeSpent,
+    required percent,
+  }) : super(
+          name: name,
+          timeSpent: timeSpent,
+          percent: percent,
+        );
 
-  static Language none = const Language(name: "-", timeSpent: Time.zero, percent: 0);
+  static Language none = Language(name: "-", timeSpent: Time.zero, percent: 0);
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Language &&
-          runtimeType == other.runtimeType &&
-          name == other.name &&
-          timeSpent == other.timeSpent &&
-          percent == other.percent;
+      super == other && other is Language && runtimeType == other.runtimeType;
 
   @override
-  int get hashCode => name.hashCode ^ timeSpent.hashCode ^ percent.hashCode;
+  int get hashCode => super.hashCode;
 }
 
-class Languages {
-  final List<Language> values;
-
-  Languages(this.values);
-
-  Option<Language> get mostUsedLanguage => optionOf(
-        values.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
-      );
-
-  Languages topNAndCombineOthers(int count) {
-    final sortedLangs = values.sortedBy<num>((it) => it.percent).reversed.toList();
-    final topNLangs = sortedLangs.sublist(0, count);
-    final otherLangs = sortedLangs.sublist(count).fold<Language>(
-          Language.none,
-          (previousValue, element) => Language(
-            name: "Other Langs",
-            percent: previousValue.percent + element.percent,
-            timeSpent: previousValue.timeSpent + element.timeSpent,
-          ),
-        );
-    return Languages(topNLangs + [otherLangs]);
-  }
+class Languages extends SecondaryStats<Language> {
+  Languages(List<Language> values) : super(values);
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Languages &&
-          runtimeType == other.runtimeType &&
-          const DeepCollectionEquality().equals(other.values, values);
+      super == other && other is Languages && runtimeType == other.runtimeType;
 
   @override
-  int get hashCode => Object.hash(
-        runtimeType,
-        const DeepCollectionEquality().hash(values),
-      );
+  int get hashCode => super.hashCode;
 }

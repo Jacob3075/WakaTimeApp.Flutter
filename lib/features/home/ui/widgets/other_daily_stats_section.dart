@@ -55,9 +55,8 @@ class OtherDailyStatsSection extends StatelessWidget {
             StatsCard.valueAsText(
               gradient: app_colors.AppGradients.greenCyan,
               text: "Most Used Language",
-              valueText: summaries.currentDay.languages.mostUsedLanguage
-                  .getOrElse(() => Language.none)
-                  .name,
+              valueText:
+                  summaries.currentDay.languages.mostUsed.getOrElse(() => Language.none).name,
               icon: AppAssets.icons.codeFile,
             ),
             SizedBox(height: 14.h),

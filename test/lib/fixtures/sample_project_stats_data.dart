@@ -417,7 +417,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 0,
             ),
             name: "XML",
-            percent: 0,
+            percent: 0.0,
           )
         ],
       ),

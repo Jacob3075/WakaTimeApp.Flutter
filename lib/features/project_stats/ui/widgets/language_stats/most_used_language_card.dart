@@ -10,7 +10,7 @@ class MostUsedLanguageCard extends StatelessWidget {
   late final Language mostUsedLanguage;
 
   MostUsedLanguageCard({Key? key, required this.languages}) : super(key: key) {
-    mostUsedLanguage = languages.mostUsedLanguage.getOrElse(() => Language.none);
+    mostUsedLanguage = languages.mostUsed.getOrElse(() => Language.none);
   }
 
   @override

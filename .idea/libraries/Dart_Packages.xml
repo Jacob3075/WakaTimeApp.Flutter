@@ -499,6 +499,13 @@
             </list>
           </value>
         </entry>
+        <entry key="material_color_utilities">
+          <value>
+            <list>
+              <option value="$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/material_color_utilities-0.1.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="meta">
           <value>
             <list>
@@ -566,13 +573,6 @@
           <value>
             <list>
               <option value="$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/path_parsing-1.0.0/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="pedantic">
-          <value>
-            <list>
-              <option value="$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1/lib" />
             </list>
           </value>
         </entry>
@@ -733,21 +733,21 @@
         <entry key="test">
           <value>
             <list>
-              <option value="$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/test-1.17.12/lib" />
+              <option value="$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/test-1.19.5/lib" />
             </list>
           </value>
         </entry>
         <entry key="test_api">
           <value>
             <list>
-              <option value="$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.3/lib" />
+              <option value="$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.8/lib" />
             </list>
           </value>
         </entry>
         <entry key="test_core">
           <value>
             <list>
-              <option value="$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/test_core-0.4.2/lib" />
+              <option value="$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/test_core-0.4.9/lib" />
             </list>
           </value>
         </entry>
@@ -956,6 +956,7 @@
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/logging-1.0.2/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/lottie-1.2.1/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.11/lib" />
+      <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/material_color_utilities-0.1.3/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/mime-1.0.1/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/mockito-5.0.17/lib" />
@@ -966,7 +967,6 @@
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/path_drawing-1.0.0/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/path_parsing-1.0.0/lib" />
-      <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-4.4.0/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.0.2/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/pool-1.5.0/lib" />
@@ -987,9 +987,9 @@
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/stream_transform-2.0.0/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.1.0/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.2.0/lib" />
-      <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/test-1.17.12/lib" />
-      <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.3/lib" />
-      <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/test_core-0.4.2/lib" />
+      <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/test-1.19.5/lib" />
+      <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.8/lib" />
+      <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/test_core-0.4.9/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/timing-1.0.0/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.0/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/universal_html-2.0.8/lib" />

@@ -10,6 +10,7 @@ class TimeSpentOnLanguageChart extends StatelessWidget {
 
   const TimeSpentOnLanguageChart({Key? key, required this.languages}) : super(key: key);
 
+  // TODO: ADD SHADOW (WRAP WITH CIRCULAR CONTAINER AND ADD SHADOW TO IT)
   @override
   Widget build(BuildContext context) => SizedBox(
         height: 200.h,
