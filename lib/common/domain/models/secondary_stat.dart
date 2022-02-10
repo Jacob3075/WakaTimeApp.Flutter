@@ -41,20 +41,23 @@ class SecondaryStats<T extends SecondaryStat> {
         values.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
       );
 
-  SecondaryStats<T> topNAndCombineOthers(int count) {
+  SecondaryStats<SecondaryStat> topNAndCombineOthers(int count) {
     if (values.length <= count) return this;
 
-    final sortedLangs = values.sortedBy<num>((it) => it.timeSpent.decimal).reversed.toList();
-    final topNLangs = sortedLangs.sublist(0, count);
-    final otherLangs = sortedLangs.sublist(count).fold<SecondaryStat>(
+    final sortedStats = values.sortedBy<num>((it) => it.timeSpent.decimal).reversed.toList();
+    final topNStats = sortedStats
+        .sublist(0, count)
+        .map((it) => SecondaryStat(name: it.name, timeSpent: it.timeSpent, percent: it.percent))
+        .toList();
+    final otherStats = sortedStats.sublist(count).fold<SecondaryStat>(
           SecondaryStat._none,
           (previousValue, element) => SecondaryStat(
             name: "Others",
             percent: previousValue.percent + element.percent,
             timeSpent: previousValue.timeSpent + element.timeSpent,
           ),
-        ) as T;
-    return SecondaryStats<T>(topNLangs + [otherLangs]);
+        );
+    return SecondaryStats<SecondaryStat>(topNStats + [otherStats]);
   }
 
   @override

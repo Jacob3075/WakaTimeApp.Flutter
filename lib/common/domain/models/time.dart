@@ -59,4 +59,7 @@ class Time {
 
   @override
   int get hashCode => hours.hashCode ^ minutes.hashCode ^ decimal.hashCode;
+
+  @override
+  String toString() => formattedPrint();
 }

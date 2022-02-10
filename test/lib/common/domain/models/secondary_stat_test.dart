@@ -112,7 +112,7 @@ main() {
               final stats = SecondaryStats(stats1.values + stats2.values + stats3.values);
 
               expect(
-                stats.topNAndCombineOthers(4).toString(),
+                stats.topNAndCombineOthers(4),
                 SecondaryStats([
                   stat1,
                   stat2,
@@ -121,9 +121,9 @@ main() {
                   const SecondaryStat(
                     percent: 0,
                     name: "Others",
-                    timeSpent: Time(hours: 3, minutes: 30, decimal: 3.5),
+                    timeSpent: Time(hours: 2, minutes: 30, decimal: 2.5),
                   )
-                ]).toString(),
+                ]),
               );
             },
           );

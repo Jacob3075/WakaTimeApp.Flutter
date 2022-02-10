@@ -5,16 +5,16 @@ import "package:waka_time_app/common/domain/models/time.dart";
 
 class Language extends SecondaryStat {
   const Language({
-    required name,
-    required timeSpent,
-    required percent,
+    required String name,
+    required Time timeSpent,
+    required double percent,
   }) : super(
           name: name,
           timeSpent: timeSpent,
           percent: percent,
         );
 
-  static Language none = Language(name: "-", timeSpent: Time.zero, percent: 0);
+  static const Language none = Language(name: "-", timeSpent: Time.zero, percent: 0);
 
   @override
   bool operator ==(Object other) =>
@@ -27,6 +27,16 @@ class Language extends SecondaryStat {
 
 class Languages extends SecondaryStats<Language> {
   Languages(List<Language> values) : super(values);
+
+  @override
+  Languages topNAndCombineOthers(int count) =>
+      _convertFromBaseClass(super.topNAndCombineOthers(count));
+
+  Languages _convertFromBaseClass(SecondaryStats stats) => Languages(
+        stats.values
+            .map((it) => Language(name: it.name, timeSpent: it.timeSpent, percent: it.percent))
+            .toList(),
+      );
 
   @override
   bool operator ==(Object other) =>
