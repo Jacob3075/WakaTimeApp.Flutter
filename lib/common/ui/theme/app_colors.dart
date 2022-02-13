@@ -34,4 +34,11 @@ abstract class AppShadows {
     offset: Offset(0, 4),
     spreadRadius: 1,
   );
+
+  static const chartShadow = BoxShadow(
+    color: Colors.black,
+    blurRadius: 10,
+    offset: Offset(0, 4),
+    spreadRadius: 5,
+  );
 }
