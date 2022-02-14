@@ -16,13 +16,14 @@ dependencies:
   http: ^0.13.4
   dartz: ^0.10.1
 
-  fl_chart: ^0.41.0
+  fl_chart: ^0.45.0
   flutter_secure_storage: ^5.0.2
   auto_route: ^3.2.2
-  url_launcher: ^6.0.18
-  flutter_screenutil: ^5.1.0
+  url_launcher: ^6.0.20
+  flutter_screenutil: ^5.2.0
   flutter_svg: ^1.0.3
   lottie: ^1.2.1
+  flutter_staggered_animations: 1.0.0
 
   splashscreen:
     git:
@@ -36,7 +37,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.0.17
+  mockito: ^5.1.0
   bloc_test: ^9.0.2
 
   build_runner: ^2.1.7

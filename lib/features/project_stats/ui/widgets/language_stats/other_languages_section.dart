@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_staggered_animations/flutter_staggered_animations.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/other_languages_list_item.dart";
 
@@ -9,35 +10,41 @@ class OtherLanguagesSection extends StatelessWidget {
   const OtherLanguagesSection({Key? key, required this.languages}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Other Languages",
-            style: TextStyle(
-              fontSize: 30.sp,
-              fontWeight: FontWeight.w600,
+  Widget build(BuildContext context) => SizedBox(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Other Languages",
+              style: TextStyle(
+                fontSize: 30.sp,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          SizedBox(height: 14.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.w),
-            child: _otherLanguagesList(),
-          )
-        ],
-      ),
-    );
-  }
+            SizedBox(height: 14.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: _otherLanguagesList(),
+            )
+          ],
+        ),
+      );
 
   Widget _otherLanguagesList() => ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: languages.values.length - 1,
-        itemBuilder: (context, index) => OtherLanguagesListItem(
-          language: languages.values[index + 1],
+        itemBuilder: (context, index) => AnimationConfiguration.staggeredList(
+          position: index,
+          duration: const Duration(milliseconds: 1000),
+          child: SlideAnimation(
+            // duration: const Duration(milliseconds: 1000),
+            verticalOffset: 200.h,
+            child: OtherLanguagesListItem(
+              language: languages.values[index + 1],
+            ),
+          ),
         ),
       );
 }
