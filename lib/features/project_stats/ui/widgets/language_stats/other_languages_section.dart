@@ -4,13 +4,12 @@ import "package:flutter_staggered_animations/flutter_staggered_animations.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/other_languages_list_item.dart";
 
-class OtherLanguagesSection extends StatelessWidget {
+class OtherLanguagesSection {
   final Languages languages;
 
-  const OtherLanguagesSection({Key? key, required this.languages}) : super(key: key);
+  const OtherLanguagesSection({Key? key, required this.languages});
 
-  @override
-  Widget build(BuildContext context) => SizedBox(
+  Widget sectionHeader() => SizedBox(
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,27 +22,15 @@ class OtherLanguagesSection extends StatelessWidget {
               ),
             ),
             SizedBox(height: 14.h),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12.w),
-              child: _otherLanguagesList(),
-            )
           ],
         ),
       );
 
-  Widget _otherLanguagesList() => ListView.builder(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: languages.values.length - 1,
-        itemBuilder: (context, index) => AnimationConfiguration.staggeredList(
-          position: index,
-          duration: const Duration(milliseconds: 1000),
-          child: SlideAnimation(
-            // duration: const Duration(milliseconds: 1000),
-            verticalOffset: 200.h,
-            child: OtherLanguagesListItem(
-              language: languages.values[index + 1],
-            ),
+  Widget listItem(int index) => SlideAnimation(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
+          child: OtherLanguagesListItem(
+            language: languages.values[index],
           ),
         ),
       );
