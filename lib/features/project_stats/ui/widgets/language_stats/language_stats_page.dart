@@ -19,35 +19,35 @@ class _LanguageStatsPageState extends State<LanguageStatsPage> with AutomaticKee
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    final otherLanguagesSection = OtherLanguagesSection(languages: widget.languages);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: ListView.builder(
-        itemCount: widget.languages.values.length,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (_, index) => AnimationConfiguration.staggeredList(
-          position: index,
-          child: body(index),
+      child: AnimationLimiter(
+        child: ListView.builder(
+          itemCount: widget.languages.values.length,
+          physics: const BouncingScrollPhysics(),
+          itemBuilder: (_, index) => AnimationConfiguration.staggeredList(
+            duration: const Duration(milliseconds: 500),
+            position: index,
+            child: SlideAnimation(
+              verticalOffset: 250,
+              child: index == 0 ? pageHeader() : otherLanguagesSection.listItem(index),
+            ),
+          ),
         ),
       ),
     );
   }
 
-  Widget body(int index) {
-    final otherLanguagesSection = OtherLanguagesSection(languages: widget.languages);
-    return index == 0 ? pageHeader(otherLanguagesSection) : otherLanguagesSection.listItem(index);
-  }
-
-  Widget pageHeader(OtherLanguagesSection otherLanguagesSection) => SlideAnimation(
-        child: Column(
-          children: [
-            TimeSpentOnLanguageChart(
-              languages: widget.languages,
-            ),
-            MostUsedLanguageCard(languages: widget.languages),
-            SizedBox(height: 24.h),
-            otherLanguagesSection.sectionHeader(),
-          ],
-        ),
+  Widget pageHeader() => Column(
+        children: [
+          TimeSpentOnLanguageChart(
+            languages: widget.languages,
+          ),
+          MostUsedLanguageCard(languages: widget.languages),
+          SizedBox(height: 24.h),
+          OtherLanguagesSection.sectionHeader(),
+        ],
       );
 
   @override

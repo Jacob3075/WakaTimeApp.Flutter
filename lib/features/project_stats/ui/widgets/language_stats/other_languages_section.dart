@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:flutter_staggered_animations/flutter_staggered_animations.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/other_languages_list_item.dart";
 
@@ -9,7 +8,7 @@ class OtherLanguagesSection {
 
   const OtherLanguagesSection({Key? key, required this.languages});
 
-  Widget sectionHeader() => SizedBox(
+  static Widget sectionHeader() => SizedBox(
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,12 +25,10 @@ class OtherLanguagesSection {
         ),
       );
 
-  Widget listItem(int index) => SlideAnimation(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
-          child: OtherLanguagesListItem(
-            language: languages.values[index],
-          ),
+  Widget listItem(int index) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.w),
+        child: OtherLanguagesListItem(
+          language: languages.values[index],
         ),
       );
 }
