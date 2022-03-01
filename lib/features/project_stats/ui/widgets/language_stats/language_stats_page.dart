@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:flutter_staggered_animations/flutter_staggered_animations.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
+import "package:waka_time_app/common/ui/widgets/staggered_list_animation.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/most_used_language_card.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/other_languages_section.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/time_spent_on_language_chart.dart";
@@ -22,19 +22,9 @@ class _LanguageStatsPageState extends State<LanguageStatsPage> with AutomaticKee
     final otherLanguagesSection = OtherLanguagesSection(languages: widget.languages);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: AnimationLimiter(
-        child: ListView.builder(
-          itemCount: widget.languages.values.length,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: (_, index) => AnimationConfiguration.staggeredList(
-            duration: const Duration(milliseconds: 1000),
-            position: index,
-            child: SlideAnimation(
-              verticalOffset: ScreenUtil().screenHeight,
-              child: index == 0 ? pageHeader() : otherLanguagesSection.listItem(index),
-            ),
-          ),
-        ),
+      child: StaggeredListAnimation(
+        itemCount: widget.languages.values.length,
+        getChild: (index) => index == 0 ? pageHeader() : otherLanguagesSection.listItem(index),
       ),
     );
   }

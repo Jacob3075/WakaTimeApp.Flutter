@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:flutter_staggered_animations/flutter_staggered_animations.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
+import "package:waka_time_app/common/ui/widgets/staggered_list_animation.dart";
 import "package:waka_time_app/common/ui/widgets/stats_card.dart";
 import "package:waka_time_app/common/ui/widgets/stats_chip.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
@@ -26,29 +26,16 @@ class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveCl
   @override
   void initState() {
     super.initState();
-    filteredDailyProjectStats =
-        ProjectHistorySection.getFilteredProjectStats(widget.projectSummaries);
-
-    projectHistorySection =
-        ProjectHistorySection(filteredDailyProjectStats: filteredDailyProjectStats);
+    projectHistorySection = ProjectHistorySection(projectSummaries: widget.projectSummaries);
+    filteredDailyProjectStats = projectHistorySection.filteredDailyProjectStats;
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return AnimationLimiter(
-      child: ListView.builder(
-        itemCount: filteredDailyProjectStats.length + 4,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (_, index) => AnimationConfiguration.staggeredList(
-          duration: const Duration(milliseconds: 1000),
-          position: index,
-          child: SlideAnimation(
-            verticalOffset: ScreenUtil().screenHeight,
-            child: _getItemToDisplayForIndex(index),
-          ),
-        ),
-      ),
+    return StaggeredListAnimation(
+      itemCount: filteredDailyProjectStats.length + 4,
+      getChild: _getItemToDisplayForIndex,
     );
   }
 
@@ -61,9 +48,9 @@ class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveCl
       case 2:
         return _statsChipsRow();
       case 3:
-        return ProjectHistorySection.sectionHeader();
+        return _nestedPadding(ProjectHistorySection.sectionHeader());
       default:
-        return projectHistorySection.historyListItem(index - 4);
+        return _nestedPadding(projectHistorySection.historyListItem(index - 4));
     }
   }
 
@@ -77,7 +64,7 @@ class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveCl
       );
 
   Column _totalTimeCard() => Column(
-        children: [
+    children: [
           StatsCard.valueAsText(
             gradient: AppGradients.primary,
             text: "Total Time\nSpent",
@@ -87,14 +74,14 @@ class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveCl
             borderRadius: BorderRadius.circular(16.r),
           ),
           SizedBox(height: 24.h),
-        ],
+        ].map((it) => _nestedPadding(it)).toList(),
       );
 
   Column _statsChipsRow() => Column(
-        children: [
+    children: [
           _statsChips(),
           SizedBox(height: 24.h),
-        ],
+        ].map((it) => _nestedPadding(it)).toList(),
       );
 
   Row _statsChips() => Row(
@@ -121,6 +108,11 @@ class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveCl
             ),
           ),
         ],
+      );
+
+  Padding _nestedPadding(Widget child) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        child: child,
       );
 
   @override

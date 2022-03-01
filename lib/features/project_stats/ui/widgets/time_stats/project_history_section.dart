@@ -5,12 +5,10 @@ import "package:waka_time_app/features/project_stats/domain/models/project_summa
 import "package:waka_time_app/features/project_stats/ui/widgets/time_stats/history_list_item.dart";
 
 class ProjectHistorySection {
-  final List<DailyProjectStats> filteredDailyProjectStats;
+  late final List<DailyProjectStats> filteredDailyProjectStats;
 
-  const ProjectHistorySection({required this.filteredDailyProjectStats});
-
-  static List<DailyProjectStats> getFilteredProjectStats(ProjectSummaries projectSummaries) {
-    return projectSummaries.dailyProjectStats.reversed
+  ProjectHistorySection({required ProjectSummaries projectSummaries}) {
+    filteredDailyProjectStats = projectSummaries.dailyProjectStats.reversed
         .toList()
         .where((it) => it.timeSpent.decimal != 0)
         .toList();
