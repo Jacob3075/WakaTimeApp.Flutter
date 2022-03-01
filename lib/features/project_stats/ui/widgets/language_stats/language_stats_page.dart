@@ -27,10 +27,10 @@ class _LanguageStatsPageState extends State<LanguageStatsPage> with AutomaticKee
           itemCount: widget.languages.values.length,
           physics: const BouncingScrollPhysics(),
           itemBuilder: (_, index) => AnimationConfiguration.staggeredList(
-            duration: const Duration(milliseconds: 600),
+            duration: const Duration(milliseconds: 1000),
             position: index,
             child: SlideAnimation(
-              verticalOffset: 250,
+              verticalOffset: ScreenUtil().screenHeight,
               child: index == 0 ? pageHeader() : otherLanguagesSection.listItem(index),
             ),
           ),

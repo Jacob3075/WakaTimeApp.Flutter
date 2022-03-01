@@ -5,6 +5,7 @@ import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/common/ui/widgets/stats_card.dart";
 import "package:waka_time_app/common/ui/widgets/stats_chip.dart";
+import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/time_stats/project_history_section.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/time_stats/time_spent_on_project_chart.dart";
@@ -19,44 +20,82 @@ class TimeStatsPage extends StatefulWidget {
 }
 
 class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveClientMixin {
+  late final ProjectHistorySection projectHistorySection;
+  late final List<DailyProjectStats> filteredDailyProjectStats;
+
+  @override
+  void initState() {
+    super.initState();
+    filteredDailyProjectStats =
+        ProjectHistorySection.getFilteredProjectStats(widget.projectSummaries);
+
+    projectHistorySection =
+        ProjectHistorySection(filteredDailyProjectStats: filteredDailyProjectStats);
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Column(
-        children: AnimationConfiguration.toStaggeredList(
-          duration: const Duration(milliseconds: 600),
-          childAnimationBuilder: (it) => SlideAnimation(
-            verticalOffset: 300.0,
-            child: it,
+    return AnimationLimiter(
+      child: ListView.builder(
+        itemCount: filteredDailyProjectStats.length + 4,
+        physics: const BouncingScrollPhysics(),
+        itemBuilder: (_, index) => AnimationConfiguration.staggeredList(
+          duration: const Duration(milliseconds: 1000),
+          position: index,
+          child: SlideAnimation(
+            verticalOffset: ScreenUtil().screenHeight,
+            child: _getItemToDisplayForIndex(index),
           ),
-          children: [
-            TimeSpentOnProjectChart(
-              stats: widget.projectSummaries.dailyProjectStats,
-            ),
-            SizedBox(height: 20.h),
-            ..._pageBody(),
-          ],
         ),
       ),
     );
   }
 
-  List<Padding> _pageBody() => [
-        StatsCard.valueAsText(
-          gradient: AppGradients.primary,
-          text: "Total Time\nSpent",
-          valueText: widget.projectSummaries.totalTime.formattedPrint(),
-          icon: AppAssets.icons.time,
-          cardHeight: 65.h,
-          borderRadius: BorderRadius.circular(16.r),
-        ),
-        SizedBox(height: 20.h),
-        _statsChips(),
-        SizedBox(height: 24.h),
-        ProjectHistorySection(projectSummaries: widget.projectSummaries),
-      ].map((it) => _nestedPadding(it)).toList();
+  Widget _getItemToDisplayForIndex(int index) {
+    switch (index) {
+      case 0:
+        return _chart();
+      case 1:
+        return _totalTimeCard();
+      case 2:
+        return _statsChipsRow();
+      case 3:
+        return ProjectHistorySection.sectionHeader();
+      default:
+        return projectHistorySection.historyListItem(index - 4);
+    }
+  }
+
+  Widget _chart() => Column(
+        children: [
+          TimeSpentOnProjectChart(
+            stats: widget.projectSummaries.dailyProjectStats,
+          ),
+          SizedBox(height: 20.h),
+        ],
+      );
+
+  Column _totalTimeCard() => Column(
+        children: [
+          StatsCard.valueAsText(
+            gradient: AppGradients.primary,
+            text: "Total Time\nSpent",
+            valueText: widget.projectSummaries.totalTime.formattedPrint(),
+            icon: AppAssets.icons.time,
+            cardHeight: 65.h,
+            borderRadius: BorderRadius.circular(16.r),
+          ),
+          SizedBox(height: 24.h),
+        ],
+      );
+
+  Column _statsChipsRow() => Column(
+        children: [
+          _statsChips(),
+          SizedBox(height: 24.h),
+        ],
+      );
 
   Row _statsChips() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -82,11 +121,6 @@ class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveCl
             ),
           ),
         ],
-      );
-
-  Padding _nestedPadding(Widget child) => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: child,
       );
 
   @override
