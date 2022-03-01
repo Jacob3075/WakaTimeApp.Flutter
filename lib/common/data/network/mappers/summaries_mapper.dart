@@ -4,6 +4,7 @@ import "package:waka_time_app/common/data/network/mappers/base_dto_mapper.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/daily_stats.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
+import "package:waka_time_app/common/domain/models/operating_systems.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
@@ -38,7 +39,9 @@ class SummariesMapper extends BaseDtoMapper<Summaries, SummariesDTO> {
           languages:
               Languages(data.languages.map((language) => language.convertToModel()).toList()),
           editors: data.editors.map((editor) => editor.convertToModel()).toList(),
-          operatingSystems: data.operatingSystems.map((os) => os.convertToModel()).toList(),
+          operatingSystems: OperatingSystems(
+            data.operatingSystems.map((os) => os.convertToModel()).toList(),
+          ),
           date: DateTime.parse(data.range.date),
         ),
       )

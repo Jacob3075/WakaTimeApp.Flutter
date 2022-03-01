@@ -61,46 +61,11 @@ class Editor {
   int get hashCode => name.hashCode ^ timeSpent.hashCode ^ percent.hashCode;
 }
 
-class OperatingSystem {
-  final String name;
-  final Time timeSpent;
-  final double percent;
-
-  const OperatingSystem({
-    required this.name,
-    required this.timeSpent,
-    required this.percent,
-  });
-
-  static const OperatingSystem none = OperatingSystem(name: "-", timeSpent: Time.zero, percent: 0);
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is OperatingSystem &&
-          runtimeType == other.runtimeType &&
-          name == other.name &&
-          timeSpent == other.timeSpent &&
-          percent == other.percent;
-
-  @override
-  int get hashCode => name.hashCode ^ timeSpent.hashCode ^ percent.hashCode;
-}
-
 @Deprecated("")
 abstract class EditorStats {
   List<Editor> get editors;
 
   Option<Editor> get mostUsedEditor => optionOf(
         editors.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
-      );
-}
-
-@Deprecated("")
-abstract class OperatingSystemStats {
-  List<OperatingSystem> get operatingSystems;
-
-  Option<OperatingSystem> get mostUsedOperatingSystem => optionOf(
-        operatingSystems.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
       );
 }

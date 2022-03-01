@@ -1,5 +1,6 @@
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
+import "package:waka_time_app/common/domain/models/operating_systems.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
@@ -432,17 +433,19 @@ final sampleProjectStatsData = ProjectSummaries(
           percent: 100,
         )
       ],
-      operatingSystems: [
-        const OperatingSystem(
-          timeSpent: Time(
-            decimal: 2.93,
-            hours: 2,
-            minutes: 56,
-          ),
-          name: "Linux",
-          percent: 100,
-        )
-      ],
+      operatingSystems: OperatingSystems(
+        const [
+          OperatingSystem(
+            timeSpent: Time(
+              decimal: 2.93,
+              hours: 2,
+              minutes: 56,
+            ),
+            name: "Linux",
+            percent: 100,
+          )
+        ],
+      ),
       date: DateTime.parse("2021-08-30"),
     ),
     DailyProjectStats(
@@ -499,17 +502,19 @@ final sampleProjectStatsData = ProjectSummaries(
           percent: 100,
         )
       ],
-      operatingSystems: [
-        const OperatingSystem(
-          timeSpent: Time(
-            hours: 5,
-            minutes: 11,
-            decimal: 5.18,
-          ),
-          name: "Linux",
-          percent: 100,
-        )
-      ],
+      operatingSystems: OperatingSystems(
+        const [
+          OperatingSystem(
+            timeSpent: Time(
+              hours: 5,
+              minutes: 11,
+              decimal: 5.18,
+            ),
+            name: "Linux",
+            percent: 100,
+          )
+        ],
+      ),
       date: DateTime.parse("2022-01-12"),
     ),
   ],

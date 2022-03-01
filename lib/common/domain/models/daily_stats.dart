@@ -1,17 +1,17 @@
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
+import "package:waka_time_app/common/domain/models/operating_systems.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
-abstract class BaseDailyStats with EditorStats, OperatingSystemStats {
+abstract class BaseDailyStats with EditorStats {
   final Time timeSpent;
   final Languages languages;
+  final OperatingSystems operatingSystems;
   final DateTime date;
 
   @override
   final List<Editor> editors;
-  @override
-  final List<OperatingSystem> operatingSystems;
 
   const BaseDailyStats({
     required this.timeSpent,
@@ -52,7 +52,7 @@ class DailyStats extends BaseDailyStats {
     required Languages languages,
     required DateTime date,
     required List<Editor> editors,
-    required List<OperatingSystem> operatingSystems,
+    required OperatingSystems operatingSystems,
   }) : super(
           timeSpent: timeSpent,
           languages: languages,

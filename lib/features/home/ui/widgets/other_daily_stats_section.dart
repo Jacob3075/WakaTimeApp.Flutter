@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
+import "package:waka_time_app/common/domain/models/operating_systems.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart" as app_colors;
@@ -70,7 +71,7 @@ class OtherDailyStatsSection extends StatelessWidget {
             StatsCard.valueAsText(
               gradient: app_colors.AppGradients.purpleCyanDark,
               text: "Most Used OS",
-              valueText: summaries.currentDay.mostUsedOperatingSystem
+              valueText: summaries.currentDay.operatingSystems.mostUsed
                   .getOrElse(() => OperatingSystem.none)
                   .name,
               icon: AppAssets.icons.code,

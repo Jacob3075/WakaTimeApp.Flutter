@@ -1,6 +1,7 @@
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/daily_stats.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
+import "package:waka_time_app/common/domain/models/operating_systems.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
@@ -1283,17 +1284,19 @@ final sampleLast7DaysStats = Summaries(
           ),
         ],
       ),
-      operatingSystems: [
-        const OperatingSystem(
-          timeSpent: Time(
-            decimal: 5.37,
-            hours: 5,
-            minutes: 22,
-          ),
-          name: "Linux",
-          percent: 100.0,
-        )
-      ],
+      operatingSystems: OperatingSystems(
+        const [
+          OperatingSystem(
+            timeSpent: Time(
+              decimal: 5.37,
+              hours: 5,
+              minutes: 22,
+            ),
+            name: "Linux",
+            percent: 100.0,
+          )
+        ],
+      ),
       date: DateTime.parse("2022-01-04"),
     ),
     DailyStats(
@@ -1357,17 +1360,19 @@ final sampleLast7DaysStats = Summaries(
           ),
         ],
       ),
-      operatingSystems: [
-        const OperatingSystem(
-          timeSpent: Time(
-            decimal: 5.92,
-            hours: 5,
-            minutes: 55,
-          ),
-          name: "Linux",
-          percent: 100.0,
-        )
-      ],
+      operatingSystems: OperatingSystems(
+        const [
+          OperatingSystem(
+            timeSpent: Time(
+              decimal: 5.92,
+              hours: 5,
+              minutes: 55,
+            ),
+            name: "Linux",
+            percent: 100.0,
+          )
+        ],
+      ),
       date: DateTime.parse("2022-01-05"),
     ),
     DailyStats(
@@ -1431,17 +1436,19 @@ final sampleLast7DaysStats = Summaries(
           )
         ],
       ),
-      operatingSystems: [
-        const OperatingSystem(
-          timeSpent: Time(
-            decimal: 7.48,
-            hours: 7,
-            minutes: 29,
-          ),
-          name: "Linux",
-          percent: 100.0,
-        )
-      ],
+      operatingSystems: OperatingSystems(
+        const [
+          OperatingSystem(
+            timeSpent: Time(
+              decimal: 7.48,
+              hours: 7,
+              minutes: 29,
+            ),
+            name: "Linux",
+            percent: 100.0,
+          )
+        ],
+      ),
       date: DateTime.parse("2022-01-06"),
     ),
     DailyStats(
@@ -1505,17 +1512,19 @@ final sampleLast7DaysStats = Summaries(
           )
         ],
       ),
-      operatingSystems: [
-        const OperatingSystem(
-          timeSpent: Time(
-            decimal: 4.85,
-            hours: 4,
-            minutes: 51,
-          ),
-          name: "Linux",
-          percent: 100.0,
-        )
-      ],
+      operatingSystems: OperatingSystems(
+        const [
+          OperatingSystem(
+            timeSpent: Time(
+              decimal: 4.85,
+              hours: 4,
+              minutes: 51,
+            ),
+            name: "Linux",
+            percent: 100.0,
+          )
+        ],
+      ),
       date: DateTime.parse("2022-01-07"),
     ),
     DailyStats(
@@ -1579,17 +1588,19 @@ final sampleLast7DaysStats = Summaries(
           )
         ],
       ),
-      operatingSystems: [
-        const OperatingSystem(
-          timeSpent: Time(
-            decimal: 2.35,
-            hours: 2,
-            minutes: 21,
-          ),
-          name: "Linux",
-          percent: 100.0,
-        )
-      ],
+      operatingSystems: OperatingSystems(
+        const [
+          OperatingSystem(
+            timeSpent: Time(
+              decimal: 2.35,
+              hours: 2,
+              minutes: 21,
+            ),
+            name: "Linux",
+            percent: 100.0,
+          )
+        ],
+      ),
       date: DateTime.parse("2022-01-08"),
     ),
     DailyStats(
@@ -1653,17 +1664,19 @@ final sampleLast7DaysStats = Summaries(
           )
         ],
       ),
-      operatingSystems: [
-        const OperatingSystem(
-          timeSpent: Time(
-            decimal: 2.10,
-            hours: 2,
-            minutes: 6,
-          ),
-          name: "Linux",
-          percent: 100.0,
-        )
-      ],
+      operatingSystems: OperatingSystems(
+        const [
+          OperatingSystem(
+            timeSpent: Time(
+              decimal: 2.10,
+              hours: 2,
+              minutes: 6,
+            ),
+            name: "Linux",
+            percent: 100.0,
+          )
+        ],
+      ),
       date: DateTime.parse("2022-01-09"),
     ),
     DailyStats(
@@ -1704,17 +1717,19 @@ final sampleLast7DaysStats = Summaries(
           )
         ],
       ),
-      operatingSystems: [
-        const OperatingSystem(
-          timeSpent: Time(
-            decimal: 6.02,
-            hours: 6,
-            minutes: 1,
-          ),
-          name: "Linux",
-          percent: 100.0,
-        )
-      ],
+      operatingSystems: OperatingSystems(
+        const [
+          OperatingSystem(
+            timeSpent: Time(
+              decimal: 6.02,
+              hours: 6,
+              minutes: 1,
+            ),
+            name: "Linux",
+            percent: 100.0,
+          )
+        ],
+      ),
       date: DateTime.parse("2022-01-10"),
     )
   ],

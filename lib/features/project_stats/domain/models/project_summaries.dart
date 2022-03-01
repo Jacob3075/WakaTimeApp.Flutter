@@ -1,6 +1,7 @@
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
+import "package:waka_time_app/common/domain/models/operating_systems.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
@@ -10,13 +11,19 @@ class ProjectSummaries {
   final List<DailyProjectStats> dailyProjectStats;
   final StatsRange range;
   late final Languages languages;
+  late final OperatingSystems operatingSystems;
 
   ProjectSummaries({
     required this.totalTime,
     required this.dailyProjectStats,
     required this.range,
   }) {
-    languages = Languages(
+    languages = _extractLanguages();
+    operatingSystems = _extractOperatingSystems();
+  }
+
+  Languages _extractLanguages() {
+    return Languages(
       dailyProjectStats
           .expand((it) => it.languages.values)
           .groupFoldBy<String, Language>(
@@ -36,6 +43,26 @@ class ProjectSummaries {
           .toList(),
     );
   }
+
+  OperatingSystems _extractOperatingSystems() => OperatingSystems(
+        dailyProjectStats
+            .expand((it) => it.operatingSystems.values)
+            .groupFoldBy<String, OperatingSystem>(
+              (it) => it.name,
+              (it1, it2) {
+                final timeSpent = (it1?.timeSpent ?? Time.zero) + it2.timeSpent;
+                return OperatingSystem(
+                  name: (it2).name,
+                  timeSpent: timeSpent,
+                  percent: ((timeSpent.decimal / totalTime.decimal) * 100).roundToDecimal(2),
+                );
+              },
+            )
+            .values
+            .sortedBy<num>((element) => element.timeSpent.decimal)
+            .reversed
+            .toList(),
+      );
 
   Time get averageTime => totalTime / daysWorked.totalDays;
 
