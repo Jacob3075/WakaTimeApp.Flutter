@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_staggered_animations/flutter_staggered_animations.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/common/ui/widgets/stats_card.dart";
@@ -24,66 +25,68 @@ class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveCl
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Column(
-        children: [
-          TimeSpentOnProjectChart(
-            stats: widget.projectSummaries.dailyProjectStats,
+        children: AnimationConfiguration.toStaggeredList(
+          duration: const Duration(milliseconds: 600),
+          childAnimationBuilder: (it) => SlideAnimation(
+            verticalOffset: 300.0,
+            child: it,
           ),
-          SizedBox(height: 20.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Column(
-              children: [
-                _summaryStats(),
-                SizedBox(height: 24.h),
-                ProjectHistorySection(projectSummaries: widget.projectSummaries),
-              ],
+          children: [
+            TimeSpentOnProjectChart(
+              stats: widget.projectSummaries.dailyProjectStats,
             ),
-          ),
-        ],
+            SizedBox(height: 20.h),
+            ..._pageBody(),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _summaryStats() => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10.w),
-        child: Column(
-          children: [
-            StatsCard.valueAsText(
-              gradient: AppGradients.primary,
-              text: "Total Time\nSpent",
-              valueText: widget.projectSummaries.totalTime.formattedPrint(),
-              icon: AppAssets.icons.time,
-              cardHeight: 65.h,
-              borderRadius: BorderRadius.circular(16.r),
-            ),
-            SizedBox(height: 20.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: StatsChip(
-                    title: "Average Time",
-                    value: widget.projectSummaries.averageTime.formattedPrint(),
-                    gradient: AppGradients.orangeYellow,
-                    icon: AppAssets.icons.time,
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                ),
-                SizedBox(width: 24.w),
-                Expanded(
-                  child: StatsChip(
-                    title: "Days worked On",
-                    value: widget.projectSummaries.daysWorked.formattedPrint(),
-                    gradient: AppGradients.redPurple,
-                    // TODO: ADD ICON FOR CALENDAR/DATEs
-                    icon: AppAssets.icons.time,
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                ),
-              ],
-            ),
-          ],
+  List<Padding> _pageBody() => [
+        StatsCard.valueAsText(
+          gradient: AppGradients.primary,
+          text: "Total Time\nSpent",
+          valueText: widget.projectSummaries.totalTime.formattedPrint(),
+          icon: AppAssets.icons.time,
+          cardHeight: 65.h,
+          borderRadius: BorderRadius.circular(16.r),
         ),
+        SizedBox(height: 20.h),
+        _statsChips(),
+        SizedBox(height: 24.h),
+        ProjectHistorySection(projectSummaries: widget.projectSummaries),
+      ].map((it) => _nestedPadding(it)).toList();
+
+  Row _statsChips() => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: StatsChip(
+              title: "Average Time",
+              value: widget.projectSummaries.averageTime.formattedPrint(),
+              gradient: AppGradients.orangeYellow,
+              icon: AppAssets.icons.time,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+          ),
+          SizedBox(width: 24.w),
+          Expanded(
+            child: StatsChip(
+              title: "Days worked On",
+              value: widget.projectSummaries.daysWorked.formattedPrint(),
+              gradient: AppGradients.redPurple,
+              // TODO: ADD ICON FOR CALENDAR/DATEs
+              icon: AppAssets.icons.time,
+              borderRadius: BorderRadius.circular(12.r),
+            ),
+          ),
+        ],
+      );
+
+  Padding _nestedPadding(Widget child) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        child: child,
       );
 
   @override
