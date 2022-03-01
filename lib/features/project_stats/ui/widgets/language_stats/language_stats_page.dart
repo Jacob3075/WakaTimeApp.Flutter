@@ -4,7 +4,7 @@ import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/ui/widgets/staggered_list_animation.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/most_used_language_card.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/other_languages_section.dart";
-import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/time_spent_on_language_chart.dart";
+import "package:waka_time_app/features/project_stats/ui/widgets/time_spent_on_secondary_stats_chart.dart";
 
 class LanguageStatsPage extends StatefulWidget {
   final Languages languages;
@@ -31,8 +31,8 @@ class _LanguageStatsPageState extends State<LanguageStatsPage> with AutomaticKee
 
   Widget pageHeader() => Column(
         children: [
-          TimeSpentOnLanguageChart(
-            languages: widget.languages,
+          TimeSpentOnSecondaryStatsChart<Language>(
+            secondaryStats: widget.languages,
           ),
           MostUsedLanguageCard(languages: widget.languages),
           SizedBox(height: 24.h),

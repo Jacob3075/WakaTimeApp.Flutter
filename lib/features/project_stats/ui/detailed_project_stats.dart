@@ -8,6 +8,7 @@ import "package:waka_time_app/features/project_stats/domain/models/project_summa
 import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/custom_app_bar.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/language_stats/language_stats_page.dart";
+import "package:waka_time_app/features/project_stats/ui/widgets/os_stats/os_stats_page.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/time_stats/time_stats_page.dart";
 
 typedef _Event = DetailedProjectStatsEvent;
@@ -46,7 +47,7 @@ class DetailedProjectStats extends StatelessWidget {
               children: [
                 TimeStatsPage(projectSummaries: projectSummaries),
                 LanguageStatsPage(languages: projectSummaries.languages),
-                const Text("Page 3"),
+                OsStatsPage(operatingSystems: projectSummaries.operatingSystems),
                 const Text("Page 4"),
                 const Text("Page 5"),
               ],

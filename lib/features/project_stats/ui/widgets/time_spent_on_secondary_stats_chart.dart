@@ -3,13 +3,13 @@ import "dart:math";
 import "package:fl_chart/fl_chart.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:waka_time_app/common/domain/models/language.dart";
+import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 
-class TimeSpentOnLanguageChart extends StatelessWidget {
-  final Languages languages;
+class TimeSpentOnSecondaryStatsChart<T extends SecondaryStat> extends StatelessWidget {
+  final SecondaryStats<T> secondaryStats;
 
-  const TimeSpentOnLanguageChart({Key? key, required this.languages}) : super(key: key);
+  const TimeSpentOnSecondaryStatsChart({Key? key, required this.secondaryStats}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Container(
@@ -32,7 +32,7 @@ class TimeSpentOnLanguageChart extends StatelessWidget {
         ),
       );
 
-  List<PieChartSectionData> getPieChartSections() => languages
+  List<PieChartSectionData> getPieChartSections() => secondaryStats
       .topNAndCombineOthers(3)
       .values
       .map((it) => PieChartSectionData(
