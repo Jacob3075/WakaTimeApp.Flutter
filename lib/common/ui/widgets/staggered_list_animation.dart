@@ -18,7 +18,7 @@ class StaggeredListAnimation extends StatelessWidget {
           itemCount: itemCount,
           physics: const BouncingScrollPhysics(),
           itemBuilder: (_, index) => AnimationConfiguration.staggeredList(
-            duration: const Duration(milliseconds: 1000),
+            duration: const Duration(milliseconds: 800),
             position: index,
             child: SlideAnimation(
               verticalOffset: ScreenUtil().screenHeight,

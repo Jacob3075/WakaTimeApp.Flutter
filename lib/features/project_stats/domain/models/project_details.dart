@@ -24,4 +24,8 @@ class ProjectDetails {
   @override
   int get hashCode =>
       projectName.hashCode ^ createdDate.hashCode ^ lastHeartBeat.hashCode ^ id.hashCode;
+
+  @override
+  String toString() =>
+      "ProjectDetails{projectName: $projectName, createdDate: $createdDate, lastHeartBeat: $lastHeartBeat, id: $id}";
 }

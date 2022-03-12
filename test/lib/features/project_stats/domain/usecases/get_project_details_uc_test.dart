@@ -2,6 +2,7 @@ import "package:dartz/dartz.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:http/http.dart" as http;
 import "package:mockito/mockito.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_details.dart";
 import "package:waka_time_app/features/project_stats/domain/usecases/get_project_details_uc.dart";
 
 import "../../../../../mocks.mocks.dart";
@@ -37,24 +38,33 @@ main() {
   );
 
   test(
-    "When api returns data with stats for more than 1 project, use case should return Either.Left",
+    "When api returns data with stats for more than 1 project, use case should return the correct project",
     () async {
-      when(client.get(any)).thenAnswer((_) async => http.Response(
-            sampleMultipleProjectsDetailsJson,
-            200,
-          ));
+      when(client.get(any)).thenAnswer(
+        (_) async => http.Response(
+          sampleMultipleProjectsDetailsJson,
+          200,
+          request: http.Request("GET", Uri(queryParameters: {"q": "Waka Time App", "api_key": ""})),
+        ),
+      );
 
-      final result =
-          await getProjectDetailsUC(const GetProjectDetailsUCParameters(apiKey: "", project: ""));
+      final result = await getProjectDetailsUC(
+        const GetProjectDetailsUCParameters(apiKey: "", project: "Waka Time App"),
+      );
 
-      expect(result, isA<Left>());
+      expect(result, isA<Right>());
 
       result.fold(
-        (error) => error.when(
-          networkError: (_) => expect(false, true),
-          domainError: (data) => expect(data.errorMessage, "More than 1 project with given name"),
+        (error) => null,
+        (data) => expect(
+          data,
+          ProjectDetails(
+            projectName: "Waka Time App",
+            createdDate: DateTime.parse("2021-08-30 06:13:00.000Z"),
+            lastHeartBeat: DateTime.parse("2022-01-14 05:01:40.000Z"),
+            id: "93c2eb5d-5a78-4f8c-b8a7-e10e3cf77ebf",
+          ),
         ),
-        (r) => null,
       );
     },
   );
