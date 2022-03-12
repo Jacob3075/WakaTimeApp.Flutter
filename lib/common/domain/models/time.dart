@@ -19,6 +19,13 @@ class Time {
     return Time(hours: int.parse(split.first), minutes: int.parse(split.last), decimal: decimal);
   }
 
+  factory Time.fromDecimal(double decimal) {
+    int hours = decimal.toInt();
+    double minutesDecimal = ((decimal - hours) * 60);
+    int minutes = minutesDecimal.toInt();
+    return Time(decimal: decimal, hours: hours, minutes: minutes);
+  }
+
   Time operator +(Time other) {
     double newHours = (hours + other.hours).toDouble();
     var newMinutes = minutes + other.minutes;

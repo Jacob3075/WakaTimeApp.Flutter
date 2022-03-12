@@ -43,6 +43,43 @@ main() {
     });
   });
 
+  group("Creating time from decimal value", () {
+    test("when decimal value is 0", () {
+      const decimalValue = 0.0;
+
+      final timeFromDigital = Time.fromDecimal(decimalValue);
+
+      expect(timeFromDigital, const Time(hours: 0, minutes: 0, decimal: 0));
+    });
+
+    test("when decimal value is a non zero whole number", () {
+      const decimalValue = 2.0;
+
+      expect(
+        Time.fromDecimal(decimalValue),
+        const Time(hours: 2, minutes: 0, decimal: decimalValue),
+      );
+    });
+
+    test("when decimal value has only fractional part", () {
+      const decimalValue = 0.20;
+
+      expect(
+        Time.fromDecimal(decimalValue),
+        const Time(hours: 0, minutes: 12, decimal: decimalValue),
+      );
+    });
+
+    test("when decimal value has both whole and fractional part", () {
+      const decimalValue = 5.20;
+
+      expect(
+        Time.fromDecimal(decimalValue),
+        const Time(hours: 5, minutes: 12, decimal: decimalValue),
+      );
+    });
+  });
+
   group("Adding 2 time objects", () {
     test("when addition of both minutes does not carry over and increase the hour", () {
       const time1 = Time(hours: 2, minutes: 15, decimal: 2.25);
