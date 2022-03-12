@@ -1,12 +1,12 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:waka_time_app/common/domain/models/language.dart";
+import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/ui/widgets/custom_ink_well_card.dart";
 
-class OtherLanguagesListItem extends StatelessWidget {
-  final Language language;
+class OtherSecondaryStatListItem extends StatelessWidget {
+  final SecondaryStat secondaryStat;
 
-  const OtherLanguagesListItem({Key? key, required this.language}) : super(key: key);
+  const OtherSecondaryStatListItem({Key? key, required this.secondaryStat}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => CustomInkWellCard(
@@ -21,7 +21,7 @@ class OtherLanguagesListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                language.name,
+                secondaryStat.name,
                 style: TextStyle(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.w600,
@@ -32,14 +32,14 @@ class OtherLanguagesListItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    language.timeSpent.formattedPrint(),
+                    secondaryStat.timeSpent.formattedPrint(),
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(
-                    "${language.percent}%",
+                    "${secondaryStat.percent}%",
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w200,

@@ -40,6 +40,9 @@ class OperatingSystems extends SecondaryStats<OperatingSystem> {
       );
 
   @override
+  String get statsType => "Operating Systems";
+
+  @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       super == other && other is OperatingSystems && runtimeType == other.runtimeType;

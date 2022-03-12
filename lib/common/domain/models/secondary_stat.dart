@@ -14,7 +14,7 @@ class SecondaryStat {
     required this.percent,
   });
 
-  static const SecondaryStat _none = SecondaryStat(name: "-", timeSpent: Time.zero, percent: 0);
+  static const SecondaryStat none = SecondaryStat(name: "-", timeSpent: Time.zero, percent: 0);
 
   @override
   bool operator ==(Object other) =>
@@ -41,6 +41,8 @@ class SecondaryStats<T extends SecondaryStat> {
         values.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
       );
 
+  String get statsType => "Secondary Stats";
+
   SecondaryStats<SecondaryStat> topNAndCombineOthers(int count) {
     if (values.length <= count) return this;
 
@@ -50,7 +52,7 @@ class SecondaryStats<T extends SecondaryStat> {
         .map((it) => SecondaryStat(name: it.name, timeSpent: it.timeSpent, percent: it.percent))
         .toList();
     final otherStats = sortedStats.sublist(count).fold<SecondaryStat>(
-          SecondaryStat._none,
+          SecondaryStat.none,
           (previousValue, element) => SecondaryStat(
             name: "Others",
             percent: previousValue.percent + element.percent,

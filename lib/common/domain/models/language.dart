@@ -39,6 +39,9 @@ class Languages extends SecondaryStats<Language> {
       );
 
   @override
+  String get statsType => "Languages";
+
+  @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       super == other && other is Languages && runtimeType == other.runtimeType;

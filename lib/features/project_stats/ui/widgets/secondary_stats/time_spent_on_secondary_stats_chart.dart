@@ -6,8 +6,8 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 
-class TimeSpentOnSecondaryStatsChart<T extends SecondaryStat> extends StatelessWidget {
-  final SecondaryStats<T> secondaryStats;
+class TimeSpentOnSecondaryStatsChart extends StatelessWidget {
+  final SecondaryStats secondaryStats;
 
   const TimeSpentOnSecondaryStatsChart({Key? key, required this.secondaryStats}) : super(key: key);
 
