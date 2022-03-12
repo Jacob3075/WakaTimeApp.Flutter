@@ -5,7 +5,7 @@ extension ObjectExt<T> on T {
   R let<R>(R Function(T that) op) => op(this);
 }
 
-extension Range on num {
+extension NumX on num {
   /// Checks if number is between [from] and [to] parameters.
   /// Both [from] and [to] are inclusive
   /// [Source](https://stackoverflow.com/questions/53797581/easily-check-if-a-number-is-in-a-given-range-in-dart)
@@ -16,6 +16,9 @@ extension Range on num {
     num mod = pow(10.0, places);
     return ((this * mod).round().toDouble() / mod);
   }
+
+  /// [Source](https://stackoverflow.com/a/61477875/13181948)
+  bool get isInt => (this % 1) == 0;
 }
 
 extension ListX<T> on List<T> {
