@@ -17,7 +17,7 @@ class OtherLanguagesSection {
               "Other Languages",
               style: TextStyle(
                 fontSize: 30.sp,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w700,
               ),
             ),
             SizedBox(height: 14.h),

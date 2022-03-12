@@ -35,7 +35,7 @@ class _LanguageStatsPageState extends State<LanguageStatsPage> with AutomaticKee
             secondaryStats: widget.languages,
           ),
           MostUsedLanguageCard(languages: widget.languages),
-          SizedBox(height: 24.h),
+          SizedBox(height: 18.h),
           OtherLanguagesSection.sectionHeader(),
         ],
       );

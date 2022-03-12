@@ -5,6 +5,7 @@ import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/common/ui/widgets/staggered_list_animation.dart";
 import "package:waka_time_app/common/ui/widgets/stats_card.dart";
 import "package:waka_time_app/common/ui/widgets/stats_chip.dart";
+import "package:waka_time_app/common/utils/extensions.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/time_stats/project_history_section.dart";
@@ -31,13 +32,10 @@ class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveCl
   }
 
   @override
-  Widget build(BuildContext context) {
-    super.build(context);
-    return StaggeredListAnimation(
-      itemCount: filteredDailyProjectStats.length + 4,
-      getChild: _getItemToDisplayForIndex,
-    );
-  }
+  Widget build(BuildContext context) => super.build(context).let((_) => StaggeredListAnimation(
+        itemCount: filteredDailyProjectStats.length + 4,
+        getChild: _getItemToDisplayForIndex,
+      ));
 
   Widget _getItemToDisplayForIndex(int index) {
     switch (index) {
@@ -59,7 +57,7 @@ class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveCl
           TimeSpentOnProjectChart(
             stats: widget.projectSummaries.dailyProjectStats,
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 18.h),
         ],
       );
 
@@ -73,14 +71,14 @@ class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveCl
             cardHeight: 65.h,
             borderRadius: BorderRadius.circular(16.r),
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 18.h),
         ].map((it) => _nestedPadding(it)).toList(),
       );
 
   Column _statsChipsRow() => Column(
     children: [
           _statsChips(),
-          SizedBox(height: 24.h),
+          SizedBox(height: 16.h),
         ].map((it) => _nestedPadding(it)).toList(),
       );
 

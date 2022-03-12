@@ -22,7 +22,11 @@ class CustomAppBar extends AppBar {
           ),
           titleSpacing: 0,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios, size: 28.sp),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: 28.sp,
+              color: AppColors.accentIcons,
+            ),
             onPressed: onPressed,
           ),
           bottom: const TabBar(
