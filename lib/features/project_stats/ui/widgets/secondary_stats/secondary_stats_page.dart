@@ -49,12 +49,13 @@ class SecondaryStatsPage extends StatefulWidget {
 
 class _SecondaryStatsPageState extends State<SecondaryStatsPage>
     with AutomaticKeepAliveClientMixin {
+  // TODO: ADD TESTS
   @override
   Widget build(BuildContext context) => super.build(context).let(
         (_) => Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: StaggeredListAnimation(
-            itemCount: widget.otherSecondaryStatsSection.numberOfItems + 2,
+            itemCount: widget.otherSecondaryStatsSection.numberOfItems + 3,
             getChild: getChild,
           ),
         ),
@@ -69,7 +70,7 @@ class _SecondaryStatsPageState extends State<SecondaryStatsPage>
       case 2:
         return widget.otherSecondaryStatsSection.sectionHeader();
       default:
-        return widget.otherSecondaryStatsSection.listItem(index - 2);
+        return widget.otherSecondaryStatsSection.listItem(index - 3);
     }
   }
 

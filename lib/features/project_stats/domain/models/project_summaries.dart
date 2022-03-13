@@ -10,7 +10,11 @@ class ProjectSummaries {
   final Time totalTime;
   final List<DailyProjectStats> dailyProjectStats;
   final StatsRange range;
+
+  /// Contains SORTED lst of Languages
   late final Languages languages;
+
+  /// Contains SORTED lst of Operating Systems
   late final OperatingSystems operatingSystems;
 
   ProjectSummaries({
@@ -22,27 +26,25 @@ class ProjectSummaries {
     operatingSystems = _extractOperatingSystems();
   }
 
-  Languages _extractLanguages() {
-    return Languages(
-      dailyProjectStats
-          .expand((it) => it.languages.values)
-          .groupFoldBy<String, Language>(
-            (it) => it.name,
-            (it1, it2) {
-              final timeSpent = (it1?.timeSpent ?? Time.zero) + it2.timeSpent;
-              return Language(
-                name: (it2).name,
-                timeSpent: timeSpent,
-                percent: ((timeSpent.decimal / totalTime.decimal) * 100).roundToDecimal(2),
-              );
-            },
-          )
-          .values
-          .sortedBy<num>((element) => element.timeSpent.decimal)
-          .reversed
-          .toList(),
-    );
-  }
+  Languages _extractLanguages() => Languages(
+        dailyProjectStats
+            .expand((it) => it.languages.values)
+            .groupFoldBy<String, Language>(
+              (it) => it.name,
+              (it1, it2) {
+                final timeSpent = (it1?.timeSpent ?? Time.zero) + it2.timeSpent;
+                return Language(
+                  name: (it2).name,
+                  timeSpent: timeSpent,
+                  percent: ((timeSpent.decimal / totalTime.decimal) * 100).roundToDecimal(2),
+                );
+              },
+            )
+            .values
+            .sortedBy<num>((element) => element.timeSpent.decimal)
+            .reversed
+            .toList(),
+      );
 
   OperatingSystems _extractOperatingSystems() => OperatingSystems(
         dailyProjectStats
@@ -82,10 +84,11 @@ class ProjectSummaries {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(totalTime),
-      const DeepCollectionEquality().hash(dailyProjectStats),
-      const DeepCollectionEquality().hash(range));
+        runtimeType,
+        const DeepCollectionEquality().hash(totalTime),
+        const DeepCollectionEquality().hash(dailyProjectStats),
+        const DeepCollectionEquality().hash(range),
+      );
 }
 
 class DaysWorked {

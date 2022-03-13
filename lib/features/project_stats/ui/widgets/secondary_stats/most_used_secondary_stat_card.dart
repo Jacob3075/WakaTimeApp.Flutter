@@ -15,10 +15,7 @@ class MostUsedSecondaryStatCard extends StatelessWidget {
     required this.gradient,
     required this.icon,
   }) : super(key: key) {
-    secondaryStats.mostUsed.fold(
-      () => mostUsedSecondaryStat = SecondaryStat.none,
-      (it) => mostUsedSecondaryStat = it,
-    );
+    mostUsedSecondaryStat = secondaryStats.mostUsed ?? SecondaryStat.none;
   }
 
   @override

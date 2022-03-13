@@ -1,7 +1,6 @@
-// ignore_for_file: unnecessary_overrides
-
 import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
+import "package:waka_time_app/common/utils/extensions.dart";
 
 class OperatingSystem extends SecondaryStat {
   const OperatingSystem({
@@ -15,14 +14,6 @@ class OperatingSystem extends SecondaryStat {
         );
 
   static const OperatingSystem none = OperatingSystem(name: "-", timeSpent: Time.zero, percent: 0);
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other && other is OperatingSystem && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => super.hashCode;
 }
 
 class OperatingSystems extends SecondaryStats<OperatingSystem> {
@@ -30,23 +21,13 @@ class OperatingSystems extends SecondaryStats<OperatingSystem> {
 
   @override
   OperatingSystems topNAndCombineOthers(int count) =>
-      _convertFromBaseClass(super.topNAndCombineOthers(count));
+      super.topNAndCombineOthers(count).let((it) => _convertFromBaseClass(it));
 
-  OperatingSystems _convertFromBaseClass(SecondaryStats stats) => OperatingSystems(
-        stats.values
-            .map((it) =>
-                OperatingSystem(name: it.name, timeSpent: it.timeSpent, percent: it.percent))
-            .toList(),
-      );
+  OperatingSystems _convertFromBaseClass(SecondaryStats stats) => stats.values
+      .map((it) => OperatingSystem(name: it.name, timeSpent: it.timeSpent, percent: it.percent))
+      .toList()
+      .let((it) => OperatingSystems(it));
 
   @override
   String get statsType => "Operating Systems";
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other && other is OperatingSystems && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => super.hashCode;
 }

@@ -1,5 +1,4 @@
 import "package:collection/collection.dart";
-import "package:dartz/dartz.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
@@ -37,21 +36,20 @@ class SecondaryStats<T extends SecondaryStat> {
 
   SecondaryStats(this.values);
 
-  Option<T> get mostUsed => optionOf(
-        values.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
-      );
+  T? get mostUsed => values.firstOrNull;
+
+  List<T> get allExceptMostUsed => values.slice(1).toList(growable: false);
 
   String get statsType => "Secondary Stats";
 
   SecondaryStats<SecondaryStat> topNAndCombineOthers(int count) {
     if (values.length <= count) return this;
 
-    final sortedStats = values.sortedBy<num>((it) => it.timeSpent.decimal).reversed.toList();
-    final topNStats = sortedStats
+    final topNStats = values
         .sublist(0, count)
         .map((it) => SecondaryStat(name: it.name, timeSpent: it.timeSpent, percent: it.percent))
         .toList();
-    final otherStats = sortedStats.sublist(count).fold<SecondaryStat>(
+    final otherStats = values.sublist(count).fold<SecondaryStat>(
           SecondaryStat.none,
           (previousValue, element) => SecondaryStat(
             name: "Others",

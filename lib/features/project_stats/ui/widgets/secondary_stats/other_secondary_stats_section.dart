@@ -10,7 +10,8 @@ class OtherSecondaryStatsSection {
   late final int numberOfItems;
 
   OtherSecondaryStatsSection({Key? key, required this.secondaryStats}) {
-    numberOfItems = secondaryStats.values.length == 1 ? 2 : secondaryStats.values.length;
+    numberOfItems =
+        secondaryStats.allExceptMostUsed.isEmpty ? 1 : secondaryStats.allExceptMostUsed.length;
   }
 
   Widget sectionHeader() => SizedBox(
@@ -30,12 +31,12 @@ class OtherSecondaryStatsSection {
         ),
       );
 
-  Widget listItem(int index) => secondaryStats.values.length == 1
+  Widget listItem(int index) => secondaryStats.allExceptMostUsed.isEmpty
       ? _noOtherItems()
       : Padding(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           child: OtherSecondaryStatListItem(
-            secondaryStat: secondaryStats.values[index],
+            secondaryStat: secondaryStats.allExceptMostUsed[index],
           ),
         );
 

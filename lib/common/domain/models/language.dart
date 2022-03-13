@@ -1,7 +1,6 @@
-// ignore_for_file: unnecessary_overrides
-
 import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
+import "package:waka_time_app/common/utils/extensions.dart";
 
 class Language extends SecondaryStat {
   const Language({
@@ -15,14 +14,6 @@ class Language extends SecondaryStat {
         );
 
   static const Language none = Language(name: "-", timeSpent: Time.zero, percent: 0);
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other && other is Language && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => super.hashCode;
 }
 
 class Languages extends SecondaryStats<Language> {
@@ -30,22 +21,13 @@ class Languages extends SecondaryStats<Language> {
 
   @override
   Languages topNAndCombineOthers(int count) =>
-      _convertFromBaseClass(super.topNAndCombineOthers(count));
+      super.topNAndCombineOthers(count).let((it) => _convertFromBaseClass(it));
 
-  Languages _convertFromBaseClass(SecondaryStats stats) => Languages(
-        stats.values
-            .map((it) => Language(name: it.name, timeSpent: it.timeSpent, percent: it.percent))
-            .toList(),
-      );
+  Languages _convertFromBaseClass(SecondaryStats stats) => stats.values
+      .map((it) => Language(name: it.name, timeSpent: it.timeSpent, percent: it.percent))
+      .toList()
+      .let((it) => Languages(it));
 
   @override
   String get statsType => "Languages";
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      super == other && other is Languages && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => super.hashCode;
 }
