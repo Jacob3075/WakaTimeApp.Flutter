@@ -50,28 +50,42 @@ class SecondaryStatsPage extends StatefulWidget {
 class _SecondaryStatsPageState extends State<SecondaryStatsPage>
     with AutomaticKeepAliveClientMixin {
   @override
-  Widget build(BuildContext context) => super.build(context).let((_) => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w),
-        child: StaggeredListAnimation(
-          itemCount: widget.secondaryStats.values.length,
-          getChild: (index) =>
-              index == 0 ? pageHeader() : widget.otherSecondaryStatsSection.listItem(index),
-        ),
-      ));
-
-  Widget pageHeader() => Column(
-        children: [
-          TimeSpentOnSecondaryStatsChart(
-            secondaryStats: widget.secondaryStats,
+  Widget build(BuildContext context) => super.build(context).let(
+        (_) => Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: StaggeredListAnimation(
+            itemCount: widget.otherSecondaryStatsSection.numberOfItems + 2,
+            getChild: getChild,
           ),
+        ),
+      );
+
+  Widget getChild(int index) {
+    switch (index) {
+      case 0:
+        return timeSpentOnSecondaryStatsChart();
+      case 1:
+        return mostUsedStatCard();
+      case 2:
+        return widget.otherSecondaryStatsSection.sectionHeader();
+      default:
+        return widget.otherSecondaryStatsSection.listItem(index - 2);
+    }
+  }
+
+  Widget mostUsedStatCard() => Column(
+        children: [
           MostUsedSecondaryStatCard(
             secondaryStats: widget.secondaryStats,
             icon: widget.icon,
             gradient: widget.gradient,
           ),
           SizedBox(height: 18.h),
-          widget.otherSecondaryStatsSection.sectionHeader(),
         ],
+      );
+
+  Widget timeSpentOnSecondaryStatsChart() => TimeSpentOnSecondaryStatsChart(
+        secondaryStats: widget.secondaryStats,
       );
 
   @override

@@ -5,7 +5,7 @@ import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
-import "package:waka_time_app/common/ui/widgets/loading_animation.dart";
+import "package:waka_time_app/common/ui/widgets/animations.dart";
 import "package:waka_time_app/common/ui/widgets/stats_card.dart";
 import "package:waka_time_app/di/injection.dart";
 import "package:waka_time_app/features/home/ui/bloc/home_page_cubit.dart";
@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
               builder: (context, state) {
                 final userDetails = context.read<HomePageCubit>().userDetails;
                 return state.when(
-                  loading: () => const LoadingAnimation(),
+                  loading: () => Animations.loading(),
                   loaded: (data) => _buildUI(userDetails, data),
                   authError: () => _errorScreen(context),
                   error: (error) => _errorScreen(context, error),

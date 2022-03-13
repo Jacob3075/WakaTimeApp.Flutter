@@ -2,7 +2,7 @@ import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
-import "package:waka_time_app/common/ui/widgets/loading_animation.dart";
+import "package:waka_time_app/common/ui/widgets/animations.dart";
 import "package:waka_time_app/di/injection.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
@@ -58,7 +58,7 @@ class DetailedProjectStats extends StatelessWidget {
         ),
       );
 
-  Widget _onLoadingState() => const Scaffold(body: SafeArea(child: LoadingAnimation()));
+  Widget _onLoadingState() => Scaffold(body: SafeArea(child: Animations.loading()));
 
   // TODO: ADD ERROR SCREEN
   Widget _onErrorSate(Errors errors) => Center(child: Text("ERROR: $errors"));

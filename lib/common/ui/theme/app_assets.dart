@@ -92,7 +92,7 @@ class _Animation {
         emptyBox1,
         empty,
         internet,
-        noMobileInternet,
+        // noMobileInternet,
         // emptyBox2,
       ];
 
@@ -119,4 +119,8 @@ class _Animation {
 
   String get randomLoadingAnimation =>
       loadingAnimations[Random().nextInt(loadingAnimations.length)];
+
+  String get randomErrorAnimation => errorAnimations[Random().nextInt(errorAnimations.length)];
+
+  String get randomOtherAnimation => otherAnimations[Random().nextInt(otherAnimations.length)];
 }
