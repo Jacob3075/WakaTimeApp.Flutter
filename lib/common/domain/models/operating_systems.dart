@@ -13,20 +13,26 @@ class OperatingSystem extends SecondaryStat {
           percent: percent,
         );
 
+  factory OperatingSystem.convertFromSuper(SecondaryStat secondaryStat) => OperatingSystem(
+        name: secondaryStat.name,
+        timeSpent: secondaryStat.timeSpent,
+        percent: secondaryStat.percent,
+      );
+
   static const OperatingSystem none = OperatingSystem(name: "-", timeSpent: Time.zero, percent: 0);
 }
 
 class OperatingSystems extends SecondaryStats<OperatingSystem> {
-  OperatingSystems(List<OperatingSystem> values) : super(values);
+  OperatingSystems(Iterable<OperatingSystem> values) : super(values);
+
+  factory OperatingSystems.convertFromSuper(SecondaryStats<SecondaryStat> secondaryStats) =>
+      secondaryStats.values
+          .map((e) => OperatingSystem.convertFromSuper(e))
+          .let((it) => OperatingSystems(it));
 
   @override
   OperatingSystems topNAndCombineOthers(int count) =>
-      super.topNAndCombineOthers(count).let((it) => _convertFromBaseClass(it));
-
-  OperatingSystems _convertFromBaseClass(SecondaryStats stats) => stats.values
-      .map((it) => OperatingSystem(name: it.name, timeSpent: it.timeSpent, percent: it.percent))
-      .toList()
-      .let((it) => OperatingSystems(it));
+      super.topNAndCombineOthers(count).let((it) => OperatingSystems.convertFromSuper(it));
 
   @override
   String get statsType => "Operating Systems";

@@ -34,7 +34,7 @@ class SecondaryStat {
 class SecondaryStats<T extends SecondaryStat> {
   final List<T> values;
 
-  SecondaryStats(this.values);
+  SecondaryStats(Iterable<T> values) : values = values.toList(growable: false);
 
   T? get mostUsed => values.firstOrNull;
 

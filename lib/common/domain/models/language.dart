@@ -13,20 +13,24 @@ class Language extends SecondaryStat {
           percent: percent,
         );
 
+  factory Language.convertFromSuper(SecondaryStat secondaryStat) => Language(
+        name: secondaryStat.name,
+        timeSpent: secondaryStat.timeSpent,
+        percent: secondaryStat.percent,
+      );
+
   static const Language none = Language(name: "-", timeSpent: Time.zero, percent: 0);
 }
 
 class Languages extends SecondaryStats<Language> {
-  Languages(List<Language> values) : super(values);
+  Languages(Iterable<Language> values) : super(values);
+
+  factory Languages.convertFromSuper(SecondaryStats<SecondaryStat> secondaryStats) =>
+      secondaryStats.values.map((e) => Language.convertFromSuper(e)).let((it) => Languages(it));
 
   @override
   Languages topNAndCombineOthers(int count) =>
-      super.topNAndCombineOthers(count).let((it) => _convertFromBaseClass(it));
-
-  Languages _convertFromBaseClass(SecondaryStats stats) => stats.values
-      .map((it) => Language(name: it.name, timeSpent: it.timeSpent, percent: it.percent))
-      .toList()
-      .let((it) => Languages(it));
+      super.topNAndCombineOthers(count).let((it) => Languages.convertFromSuper(it));
 
   @override
   String get statsType => "Languages";

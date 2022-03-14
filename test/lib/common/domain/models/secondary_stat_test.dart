@@ -1,4 +1,3 @@
-import "package:dartz/dartz.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
@@ -88,12 +87,12 @@ main() {
         () {
           test(
             "returns None when stats are empty",
-            () => expect(SecondaryStats<SecondaryStat>([]).mostUsed, const None()),
+            () => expect(SecondaryStats<SecondaryStat>([]).mostUsed, null),
           );
 
           test(
             "returns the correct value when stats are present",
-            () => expect(stats1.mostUsed, Some(stat1)),
+            () => expect(stats1.mostUsed, stat1),
           );
         },
       );

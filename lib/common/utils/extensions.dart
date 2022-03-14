@@ -2,7 +2,7 @@ import "dart:math";
 
 extension ObjectExt<T> on T {
   /// [Source](https://stackoverflow.com/a/58762538/13181948)
-  R let<R>(R Function(T that) op) => op(this);
+  R let<R>(R Function(T it) op) => op(this);
 }
 
 extension NumX on num {

@@ -1,4 +1,3 @@
-import "package:dartz/dartz.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
@@ -77,12 +76,12 @@ main() {
     group("Get most used lang", () {
       test(
         "returns None when langs are empty",
-        () => expect(Languages([]).mostUsed, const None()),
+        () => expect(Languages([]).mostUsed, null),
       );
 
       test(
         "returns the correct value when langs are present",
-        () => expect(langs1.mostUsed, Some(lang1)),
+        () => expect(langs1.mostUsed, lang1),
       );
     });
 

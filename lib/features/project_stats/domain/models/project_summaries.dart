@@ -2,6 +2,7 @@ import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/domain/models/operating_systems.dart";
+import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
@@ -10,11 +11,7 @@ class ProjectSummaries {
   final Time totalTime;
   final List<DailyProjectStats> dailyProjectStats;
   final StatsRange range;
-
-  /// Contains SORTED lst of Languages
   late final Languages languages;
-
-  /// Contains SORTED lst of Operating Systems
   late final OperatingSystems operatingSystems;
 
   ProjectSummaries({
@@ -26,51 +23,37 @@ class ProjectSummaries {
     operatingSystems = _extractOperatingSystems();
   }
 
-  Languages _extractLanguages() => Languages(
-        dailyProjectStats
-            .expand((it) => it.languages.values)
-            .groupFoldBy<String, Language>(
-              (it) => it.name,
-              (it1, it2) {
-                final timeSpent = (it1?.timeSpent ?? Time.zero) + it2.timeSpent;
-                return Language(
-                  name: (it2).name,
-                  timeSpent: timeSpent,
-                  percent: ((timeSpent.decimal / totalTime.decimal) * 100).roundToDecimal(2),
-                );
-              },
-            )
-            .values
-            .sortedBy<num>((element) => element.timeSpent.decimal)
-            .reversed
-            .toList(),
-      );
-
-  OperatingSystems _extractOperatingSystems() => OperatingSystems(
-        dailyProjectStats
-            .expand((it) => it.operatingSystems.values)
-            .groupFoldBy<String, OperatingSystem>(
-              (it) => it.name,
-              (it1, it2) {
-                final timeSpent = (it1?.timeSpent ?? Time.zero) + it2.timeSpent;
-                return OperatingSystem(
-                  name: (it2).name,
-                  timeSpent: timeSpent,
-                  percent: ((timeSpent.decimal / totalTime.decimal) * 100).roundToDecimal(2),
-                );
-              },
-            )
-            .values
-            .sortedBy<num>((element) => element.timeSpent.decimal)
-            .reversed
-            .toList(),
-      );
-
   Time get averageTime => totalTime / daysWorked.totalDays;
 
   DaysWorked get daysWorked {
     final totalDays = dailyProjectStats.where((element) => element.timeSpent.decimal != 0).length;
     return DaysWorked(months: totalDays ~/ 30, days: totalDays % 30);
+  }
+
+  Languages _extractLanguages() => dailyProjectStats
+      .expand((element) => element.languages.values)
+      .let(_mergeStatsByName)
+      .let((it) => Languages.convertFromSuper(it));
+
+  OperatingSystems _extractOperatingSystems() => dailyProjectStats
+      .expand((element) => element.operatingSystems.values)
+      .let(_mergeStatsByName)
+      .let((it) => OperatingSystems.convertFromSuper(it));
+
+  SecondaryStats _mergeStatsByName(Iterable<SecondaryStat> values) => values
+      .groupFoldBy<String, SecondaryStat>((it) => it.name, _mergingGroupByItems)
+      .values
+      .sortedBy<num>((element) => element.timeSpent.decimal)
+      .reversed
+      .let((it) => SecondaryStats(it));
+
+  SecondaryStat _mergingGroupByItems(SecondaryStat? previous, SecondaryStat element) {
+    final timeSpent = (previous?.timeSpent ?? Time.zero) + element.timeSpent;
+    return SecondaryStat(
+      name: (element).name,
+      timeSpent: timeSpent,
+      percent: ((timeSpent.decimal / totalTime.decimal) * 100).roundToDecimal(2),
+    );
   }
 
   @override
