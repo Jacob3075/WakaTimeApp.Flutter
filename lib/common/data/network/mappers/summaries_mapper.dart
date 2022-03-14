@@ -3,10 +3,12 @@ import "package:waka_time_app/common/data/network/dtos/summaries_dto.dart";
 import "package:waka_time_app/common/data/network/mappers/base_dto_mapper.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/daily_stats.dart";
+import "package:waka_time_app/common/domain/models/editor.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
-import "package:waka_time_app/common/domain/models/operating_systems.dart";
+import "package:waka_time_app/common/domain/models/operating_system.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
+import "package:waka_time_app/common/utils/extensions.dart";
 
 class SummariesMapper extends BaseDtoMapper<Summaries, SummariesDTO> {
   @override
@@ -36,12 +38,13 @@ class SummariesMapper extends BaseDtoMapper<Summaries, SummariesDTO> {
                 ),
               )
               .toList(),
-          languages:
-              Languages(data.languages.map((language) => language.convertToModel()).toList()),
-          editors: data.editors.map((editor) => editor.convertToModel()).toList(),
-          operatingSystems: OperatingSystems(
-            data.operatingSystems.map((os) => os.convertToModel()).toList(),
-          ),
+          languages: data.languages
+              .map((language) => language.convertToModel())
+              .let((it) => Languages(it)),
+          editors: data.editors.map((editor) => editor.convertToModel()).let((it) => Editors(it)),
+          operatingSystems: data.operatingSystems
+              .map((os) => os.convertToModel())
+              .let((it) => OperatingSystems(it)),
           date: DateTime.parse(data.range.date),
         ),
       )

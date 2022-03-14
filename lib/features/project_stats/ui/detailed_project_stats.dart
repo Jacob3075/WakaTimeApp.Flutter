@@ -50,7 +50,7 @@ class DetailedProjectStats extends StatelessWidget {
                 SecondaryStatsPage.operatingSystem(
                   secondaryStats: projectSummaries.operatingSystems,
                 ),
-                const Text("Page 4"),
+                SecondaryStatsPage.operatingSystem(secondaryStats: projectSummaries.editors),
                 const Text("Page 5"),
               ],
             ),

@@ -1,7 +1,8 @@
 import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/daily_stats.dart";
+import "package:waka_time_app/common/domain/models/editor.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
-import "package:waka_time_app/common/domain/models/operating_systems.dart";
+import "package:waka_time_app/common/domain/models/operating_system.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
@@ -1242,8 +1243,8 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.89,
         )
       ],
-      editors: [
-        const Editor(
+      editors: Editors(const [
+        Editor(
           timeSpent: Time(
             decimal: 5.33,
             hours: 5,
@@ -1252,7 +1253,7 @@ final sampleLast7DaysStats = Summaries(
           name: "IntelliJ",
           percent: 99.39,
         ),
-        const Editor(
+        Editor(
           timeSpent: Time(
             decimal: 0.02,
             hours: 0,
@@ -1261,7 +1262,7 @@ final sampleLast7DaysStats = Summaries(
           name: "Neovim",
           percent: 0.61,
         )
-      ],
+      ]),
       languages: Languages(
         const [
           Language(
@@ -1318,8 +1319,8 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.88,
         )
       ],
-      editors: [
-        const Editor(
+      editors: Editors(const [
+        Editor(
           timeSpent: Time(
             decimal: 5.87,
             hours: 5,
@@ -1328,7 +1329,7 @@ final sampleLast7DaysStats = Summaries(
           name: "IntelliJ",
           percent: 99.12,
         ),
-        const Editor(
+        Editor(
           timeSpent: Time(
             decimal: 0.05,
             hours: 0,
@@ -1337,7 +1338,7 @@ final sampleLast7DaysStats = Summaries(
           name: "Neovim",
           percent: 0.88,
         )
-      ],
+      ]),
       languages: Languages(
         const [
           Language(
@@ -1394,8 +1395,8 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.26,
         )
       ],
-      editors: [
-        const Editor(
+      editors: Editors(const [
+        Editor(
           timeSpent: Time(
             decimal: 7.47,
             hours: 7,
@@ -1404,7 +1405,7 @@ final sampleLast7DaysStats = Summaries(
           name: "IntelliJ",
           percent: 99.74,
         ),
-        const Editor(
+        Editor(
           timeSpent: Time(
             decimal: 0.02,
             hours: 0,
@@ -1413,7 +1414,7 @@ final sampleLast7DaysStats = Summaries(
           name: "Neovim",
           percent: 0.26,
         )
-      ],
+      ]),
       languages: Languages(
         [
           const Language(
@@ -1470,8 +1471,8 @@ final sampleLast7DaysStats = Summaries(
           percent: 1.57,
         )
       ],
-      editors: [
-        const Editor(
+      editors: Editors(const [
+        Editor(
           timeSpent: Time(
             decimal: 4.67,
             hours: 4,
@@ -1480,7 +1481,7 @@ final sampleLast7DaysStats = Summaries(
           name: "IntelliJ",
           percent: 96.1,
         ),
-        const Editor(
+        Editor(
           timeSpent: Time(
             decimal: 0.18,
             hours: 0,
@@ -1489,7 +1490,7 @@ final sampleLast7DaysStats = Summaries(
           name: "Neovim",
           percent: 3.9,
         )
-      ],
+      ]),
       languages: Languages(
         const [
           Language(
@@ -1546,8 +1547,8 @@ final sampleLast7DaysStats = Summaries(
           percent: 2.31,
         )
       ],
-      editors: [
-        const Editor(
+      editors: Editors(const [
+        Editor(
           timeSpent: Time(
             decimal: 2.23,
             hours: 2,
@@ -1556,7 +1557,7 @@ final sampleLast7DaysStats = Summaries(
           name: "IntelliJ",
           percent: 94.53,
         ),
-        const Editor(
+        Editor(
           timeSpent: Time(
             decimal: 0.12,
             hours: 0,
@@ -1565,7 +1566,7 @@ final sampleLast7DaysStats = Summaries(
           name: "Neovim",
           percent: 5.47,
         )
-      ],
+      ]),
       languages: Languages(
         const [
           Language(
@@ -1622,8 +1623,8 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.87,
         )
       ],
-      editors: [
-        const Editor(
+      editors: Editors(const [
+        Editor(
           timeSpent: Time(
             decimal: 2.08,
             hours: 2,
@@ -1632,7 +1633,7 @@ final sampleLast7DaysStats = Summaries(
           name: "IntelliJ",
           percent: 99.13,
         ),
-        const Editor(
+        Editor(
           timeSpent: Time(
             decimal: 0.02,
             hours: 0,
@@ -1641,7 +1642,7 @@ final sampleLast7DaysStats = Summaries(
           name: "Neovim",
           percent: 0.87,
         )
-      ],
+      ]),
       languages: Languages(
         const [
           Language(
@@ -1693,8 +1694,8 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.7,
         )
       ],
-      editors: [
-        const Editor(
+      editors: Editors(const [
+        Editor(
           timeSpent: Time(
             decimal: 6.02,
             hours: 6,
@@ -1703,7 +1704,7 @@ final sampleLast7DaysStats = Summaries(
           name: "IntelliJ",
           percent: 100.0,
         )
-      ],
+      ]),
       languages: Languages(
         const [
           Language(

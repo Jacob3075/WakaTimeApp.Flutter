@@ -1,6 +1,7 @@
 import "package:waka_time_app/common/domain/models/common_models.dart";
+import "package:waka_time_app/common/domain/models/editor.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
-import "package:waka_time_app/common/domain/models/operating_systems.dart";
+import "package:waka_time_app/common/domain/models/operating_system.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
@@ -422,8 +423,8 @@ final sampleProjectStatsData = ProjectSummaries(
           )
         ],
       ),
-      editors: [
-        const Editor(
+      editors: Editors(const [
+        Editor(
           timeSpent: Time(
             hours: 2,
             minutes: 56,
@@ -432,7 +433,7 @@ final sampleProjectStatsData = ProjectSummaries(
           name: "Android Studio",
           percent: 100,
         )
-      ],
+      ]),
       operatingSystems: OperatingSystems(
         const [
           OperatingSystem(
@@ -491,8 +492,8 @@ final sampleProjectStatsData = ProjectSummaries(
           ),
         ],
       ),
-      editors: [
-        const Editor(
+      editors: Editors(const [
+        Editor(
           timeSpent: Time(
             hours: 5,
             minutes: 11,
@@ -501,7 +502,7 @@ final sampleProjectStatsData = ProjectSummaries(
           name: "IntelliJ",
           percent: 100,
         )
-      ],
+      ]),
       operatingSystems: OperatingSystems(
         const [
           OperatingSystem(

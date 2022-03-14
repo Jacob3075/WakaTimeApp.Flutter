@@ -1,8 +1,8 @@
 import "package:freezed_annotation/freezed_annotation.dart";
-import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/daily_stats.dart";
+import "package:waka_time_app/common/domain/models/editor.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
-import "package:waka_time_app/common/domain/models/operating_systems.dart";
+import "package:waka_time_app/common/domain/models/operating_system.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/features/project_stats/domain/models/entity.dart";
 
@@ -13,7 +13,7 @@ class DailyProjectStats extends BaseDailyStats {
     required this.entities,
     required Time timeSpent,
     required Languages languages,
-    required List<Editor> editors,
+    required Editors editors,
     required OperatingSystems operatingSystems,
     required DateTime date,
   }) : super(

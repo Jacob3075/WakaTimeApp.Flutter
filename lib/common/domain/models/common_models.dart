@@ -1,5 +1,3 @@
-import "package:collection/collection.dart";
-import "package:dartz/dartz.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
 class Project {
@@ -33,39 +31,4 @@ class StatsRange {
 
   @override
   int get hashCode => startDate.hashCode ^ endDate.hashCode;
-}
-
-class Editor {
-  final String name;
-  final Time timeSpent;
-  final double percent;
-
-  const Editor({
-    required this.name,
-    required this.timeSpent,
-    required this.percent,
-  });
-
-  static const Editor none = Editor(name: "-", timeSpent: Time.zero, percent: 0);
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Editor &&
-          runtimeType == other.runtimeType &&
-          name == other.name &&
-          timeSpent == other.timeSpent &&
-          percent == other.percent;
-
-  @override
-  int get hashCode => name.hashCode ^ timeSpent.hashCode ^ percent.hashCode;
-}
-
-@Deprecated("")
-abstract class EditorStats {
-  List<Editor> get editors;
-
-  Option<Editor> get mostUsedEditor => optionOf(
-        editors.sortedBy<num>((element) => element.timeSpent.decimal).reversed.firstOrNull,
-      );
 }

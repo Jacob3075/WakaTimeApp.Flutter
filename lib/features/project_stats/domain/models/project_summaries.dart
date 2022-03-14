@@ -1,7 +1,8 @@
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
+import "package:waka_time_app/common/domain/models/editor.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
-import "package:waka_time_app/common/domain/models/operating_systems.dart";
+import "package:waka_time_app/common/domain/models/operating_system.dart";
 import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
@@ -13,6 +14,7 @@ class ProjectSummaries {
   final StatsRange range;
   late final Languages languages;
   late final OperatingSystems operatingSystems;
+  late final Editors editors;
 
   ProjectSummaries({
     required this.totalTime,
@@ -21,6 +23,7 @@ class ProjectSummaries {
   }) {
     languages = _extractLanguages();
     operatingSystems = _extractOperatingSystems();
+    editors = _extractEditors();
   }
 
   Time get averageTime => totalTime / daysWorked.totalDays;
@@ -39,6 +42,11 @@ class ProjectSummaries {
       .expand((element) => element.operatingSystems.values)
       .let(_mergeStatsByName)
       .let((it) => OperatingSystems.convertFromSuper(it));
+
+  Editors _extractEditors() => dailyProjectStats
+      .expand((element) => element.operatingSystems.values)
+      .let(_mergeStatsByName)
+      .let((it) => Editors.convertFromSuper(it));
 
   SecondaryStats _mergeStatsByName(Iterable<SecondaryStat> values) => values
       .groupFoldBy<String, SecondaryStat>((it) => it.name, _mergingGroupByItems)

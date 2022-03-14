@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:waka_time_app/common/domain/models/common_models.dart";
+import "package:waka_time_app/common/domain/models/editor.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
-import "package:waka_time_app/common/domain/models/operating_systems.dart";
+import "package:waka_time_app/common/domain/models/operating_system.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart" as app_colors;
@@ -63,7 +63,7 @@ class OtherDailyStatsSection extends StatelessWidget {
             StatsCard.valueAsText(
               gradient: app_colors.AppGradients.blueCyan,
               text: "Most Used Editor",
-              valueText: summaries.currentDay.mostUsedEditor.getOrElse(() => Editor.none).name,
+              valueText: summaries.currentDay.editors.mostUsed?.name ?? Editor.none.name,
               icon: AppAssets.icons.laptop,
             ),
             SizedBox(height: 14.h),
