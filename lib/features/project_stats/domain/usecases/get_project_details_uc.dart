@@ -15,7 +15,6 @@ import "package:waka_time_app/features/project_stats/data/mappers/project_detail
 import "package:waka_time_app/features/project_stats/domain/models/project_details.dart";
 
 part "get_project_details_uc.freezed.dart";
-
 part "get_project_details_uc.g.dart";
 
 typedef _Parameters = GetProjectDetailsUCParameters;
@@ -54,7 +53,7 @@ class GetProjectDetailsUC extends BaseUseCase<_Parameters, Future<_ReturnType>> 
     final projectDetailsParameters = GetProjectDetailsUCParameters.fromResponse(response);
     return projectDetailsList
             .firstWhereOrNull((it) => it.projectName == projectDetailsParameters.project)
-            ?.let((it) => Right(it)) ??
+            ?.let(Right.new) ??
         const Left(Errors.domainError(DomainErrors(errorMessage: "No projects found.")));
   }
 }

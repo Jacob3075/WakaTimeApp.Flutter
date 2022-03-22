@@ -36,24 +36,24 @@ class ProjectSummaries {
   Languages _extractLanguages() => dailyProjectStats
       .expand((element) => element.languages.values)
       .let(_mergeStatsByName)
-      .let((it) => Languages.convertFromSuper(it));
+      .let(Languages.convertFromSuper);
 
   OperatingSystems _extractOperatingSystems() => dailyProjectStats
       .expand((element) => element.operatingSystems.values)
       .let(_mergeStatsByName)
-      .let((it) => OperatingSystems.convertFromSuper(it));
+      .let(OperatingSystems.convertFromSuper);
 
   Editors _extractEditors() => dailyProjectStats
       .expand((element) => element.operatingSystems.values)
       .let(_mergeStatsByName)
-      .let((it) => Editors.convertFromSuper(it));
+      .let(Editors.convertFromSuper);
 
   SecondaryStats _mergeStatsByName(Iterable<SecondaryStat> values) => values
       .groupFoldBy<String, SecondaryStat>((it) => it.name, _mergingGroupByItems)
       .values
       .sortedBy<num>((element) => element.timeSpent.decimal)
       .reversed
-      .let((it) => SecondaryStats(it));
+      .let(SecondaryStats.new);
 
   SecondaryStat _mergingGroupByItems(SecondaryStat? previous, SecondaryStat element) {
     final timeSpent = (previous?.timeSpent ?? Time.zero) + element.timeSpent;

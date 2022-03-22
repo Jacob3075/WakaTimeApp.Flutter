@@ -26,13 +26,11 @@ class OperatingSystems extends SecondaryStats<OperatingSystem> {
   OperatingSystems(Iterable<OperatingSystem> values) : super(values);
 
   factory OperatingSystems.convertFromSuper(SecondaryStats<SecondaryStat> secondaryStats) =>
-      secondaryStats.values
-          .map((e) => OperatingSystem.convertFromSuper(e))
-          .let((it) => OperatingSystems(it));
+      secondaryStats.values.map(OperatingSystem.convertFromSuper).let(OperatingSystems.new);
 
   @override
   OperatingSystems topNAndCombineOthers(int count) =>
-      super.topNAndCombineOthers(count).let((it) => OperatingSystems.convertFromSuper(it));
+      super.topNAndCombineOthers(count).let(OperatingSystems.convertFromSuper);
 
   @override
   String get statsType => "Operating Systems";

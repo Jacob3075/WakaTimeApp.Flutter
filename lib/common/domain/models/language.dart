@@ -26,11 +26,11 @@ class Languages extends SecondaryStats<Language> {
   Languages(Iterable<Language> values) : super(values);
 
   factory Languages.convertFromSuper(SecondaryStats<SecondaryStat> secondaryStats) =>
-      secondaryStats.values.map((e) => Language.convertFromSuper(e)).let((it) => Languages(it));
+      secondaryStats.values.map((e) => Language.convertFromSuper(e)).let(Languages.new);
 
   @override
   Languages topNAndCombineOthers(int count) =>
-      super.topNAndCombineOthers(count).let((it) => Languages.convertFromSuper(it));
+      super.topNAndCombineOthers(count).let(Languages.convertFromSuper);
 
   @override
   String get statsType => "Languages";

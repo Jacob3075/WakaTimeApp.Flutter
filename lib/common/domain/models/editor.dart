@@ -26,11 +26,11 @@ class Editors extends SecondaryStats<Editor> {
   Editors(Iterable<Editor> values) : super(values);
 
   factory Editors.convertFromSuper(SecondaryStats<SecondaryStat> secondaryStats) =>
-      secondaryStats.values.map((e) => Editor.convertFromSuper(e)).let((it) => Editors(it));
+      secondaryStats.values.map((e) => Editor.convertFromSuper(e)).let(Editors.new);
 
   @override
   Editors topNAndCombineOthers(int count) =>
-      super.topNAndCombineOthers(count).let((it) => Editors.convertFromSuper(it));
+      super.topNAndCombineOthers(count).let(Editors.convertFromSuper);
 
   @override
   String get statsType => "Operating Systems";

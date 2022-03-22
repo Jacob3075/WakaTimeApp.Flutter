@@ -38,13 +38,10 @@ class SummariesMapper extends BaseDtoMapper<Summaries, SummariesDTO> {
                 ),
               )
               .toList(),
-          languages: data.languages
-              .map((language) => language.convertToModel())
-              .let((it) => Languages(it)),
-          editors: data.editors.map((editor) => editor.convertToModel()).let((it) => Editors(it)),
-          operatingSystems: data.operatingSystems
-              .map((os) => os.convertToModel())
-              .let((it) => OperatingSystems(it)),
+          languages: data.languages.map((language) => language.convertToModel()).let(Languages.new),
+          editors: data.editors.map((editor) => editor.convertToModel()).let(Editors.new),
+          operatingSystems:
+              data.operatingSystems.map((os) => os.convertToModel()).let(OperatingSystems.new),
           date: DateTime.parse(data.range.date),
         ),
       )
