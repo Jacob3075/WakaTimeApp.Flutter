@@ -36,29 +36,31 @@ class ProjectSummaries {
   Languages _extractLanguages() => dailyProjectStats
       .expand((element) => element.languages.values)
       .let(_mergeStatsByName)
-      .let(Languages.convertFromSuper);
+      .map(Language.convertFromSuper)
+      .let(Languages.new);
 
   OperatingSystems _extractOperatingSystems() => dailyProjectStats
       .expand((element) => element.operatingSystems.values)
       .let(_mergeStatsByName)
-      .let(OperatingSystems.convertFromSuper);
+      .map(OperatingSystem.convertFromSuper)
+      .let(OperatingSystems.new);
 
   Editors _extractEditors() => dailyProjectStats
-      .expand((element) => element.operatingSystems.values)
+      .expand((element) => element.editors.values)
       .let(_mergeStatsByName)
-      .let(Editors.convertFromSuper);
+      .map(Editor.convertFromSuper)
+      .let(Editors.new);
 
-  SecondaryStats _mergeStatsByName(Iterable<SecondaryStat> values) => values
+  Iterable<SecondaryStat> _mergeStatsByName(Iterable<SecondaryStat> values) => values
       .groupFoldBy<String, SecondaryStat>((it) => it.name, _mergingGroupByItems)
       .values
       .sortedBy<num>((element) => element.timeSpent.decimal)
-      .reversed
-      .let(SecondaryStats.new);
+      .reversed;
 
   SecondaryStat _mergingGroupByItems(SecondaryStat? previous, SecondaryStat element) {
     final timeSpent = (previous?.timeSpent ?? Time.zero) + element.timeSpent;
     return SecondaryStat(
-      name: (element).name,
+      name: element.name,
       timeSpent: timeSpent,
       percent: ((timeSpent.decimal / totalTime.decimal) * 100).roundToDecimal(2),
     );

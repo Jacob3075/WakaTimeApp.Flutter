@@ -1,6 +1,5 @@
 import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
-import "package:waka_time_app/common/utils/extensions.dart";
 
 class Language extends SecondaryStat {
   const Language({
@@ -25,12 +24,17 @@ class Language extends SecondaryStat {
 class Languages extends SecondaryStats<Language> {
   Languages(Iterable<Language> values) : super(values);
 
-  factory Languages.convertFromSuper(SecondaryStats<SecondaryStat> secondaryStats) =>
-      secondaryStats.values.map((e) => Language.convertFromSuper(e)).let(Languages.new);
-
   @override
-  Languages topNAndCombineOthers(int count) =>
-      super.topNAndCombineOthers(count).let(Languages.convertFromSuper);
+  Languages topNAndCombineOthers(int count) => super.topNAndCombineOthersBase(
+        count,
+        initialValue: Language.none,
+        itemMerger: (previousValue, element) => Language(
+          name: "Others",
+          percent: previousValue.percent + element.percent,
+          timeSpent: previousValue.timeSpent + element.timeSpent,
+        ),
+        finalListCreator: Languages.new,
+      );
 
   @override
   String get statsType => "Languages";

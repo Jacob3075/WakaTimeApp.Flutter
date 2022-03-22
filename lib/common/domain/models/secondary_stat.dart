@@ -1,4 +1,3 @@
-import "package:collection/collection.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
@@ -31,7 +30,7 @@ class SecondaryStat {
   String toString() => "SecondaryStat{name: $name, timeSpent: $timeSpent, percent: $percent}";
 }
 
-class SecondaryStats<T extends SecondaryStat> {
+abstract class SecondaryStats<T extends SecondaryStat> {
   final List<T> values;
 
   SecondaryStats(Iterable<T> values) : values = values.toList(growable: false);
@@ -42,22 +41,20 @@ class SecondaryStats<T extends SecondaryStat> {
 
   String get statsType => "Secondary Stats";
 
-  SecondaryStats<SecondaryStat> topNAndCombineOthers(int count) {
-    if (values.length <= count) return this;
+  SecondaryStats topNAndCombineOthers(int count);
 
-    final topNStats = values
-        .sublist(0, count)
-        .map((it) => SecondaryStat(name: it.name, timeSpent: it.timeSpent, percent: it.percent))
-        .toList();
-    final otherStats = values.sublist(count).fold<SecondaryStat>(
-          SecondaryStat.none,
-          (previousValue, element) => SecondaryStat(
-            name: "Others",
-            percent: previousValue.percent + element.percent,
-            timeSpent: previousValue.timeSpent + element.timeSpent,
-          ),
-        );
-    return SecondaryStats<SecondaryStat>(topNStats + [otherStats]);
+  @protected
+  L topNAndCombineOthersBase<L extends SecondaryStats>(
+    int count, {
+    required T initialValue,
+    required T Function(T, T) itemMerger,
+    required L Function(Iterable<T>) finalListCreator,
+  }) {
+    if (values.length <= count) return finalListCreator(values);
+
+    final topNStats = values.sublist(0, count);
+    final T otherStats = values.sublist(count).fold<T>(initialValue, itemMerger);
+    return finalListCreator(topNStats + [otherStats]);
   }
 
   @override

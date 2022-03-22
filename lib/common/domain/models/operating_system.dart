@@ -1,6 +1,5 @@
 import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
-import "package:waka_time_app/common/utils/extensions.dart";
 
 class OperatingSystem extends SecondaryStat {
   const OperatingSystem({
@@ -25,12 +24,17 @@ class OperatingSystem extends SecondaryStat {
 class OperatingSystems extends SecondaryStats<OperatingSystem> {
   OperatingSystems(Iterable<OperatingSystem> values) : super(values);
 
-  factory OperatingSystems.convertFromSuper(SecondaryStats<SecondaryStat> secondaryStats) =>
-      secondaryStats.values.map(OperatingSystem.convertFromSuper).let(OperatingSystems.new);
-
   @override
-  OperatingSystems topNAndCombineOthers(int count) =>
-      super.topNAndCombineOthers(count).let(OperatingSystems.convertFromSuper);
+  OperatingSystems topNAndCombineOthers(int count) => super.topNAndCombineOthersBase(
+        count,
+        initialValue: OperatingSystem.none,
+        itemMerger: (previousValue, element) => OperatingSystem(
+          name: "Others",
+          percent: previousValue.percent + element.percent,
+          timeSpent: previousValue.timeSpent + element.timeSpent,
+        ),
+        finalListCreator: OperatingSystems.new,
+      );
 
   @override
   String get statsType => "Operating Systems";

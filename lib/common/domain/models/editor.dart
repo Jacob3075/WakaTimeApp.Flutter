@@ -1,6 +1,5 @@
 import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
-import "package:waka_time_app/common/utils/extensions.dart";
 
 class Editor extends SecondaryStat {
   const Editor({
@@ -25,12 +24,17 @@ class Editor extends SecondaryStat {
 class Editors extends SecondaryStats<Editor> {
   Editors(Iterable<Editor> values) : super(values);
 
-  factory Editors.convertFromSuper(SecondaryStats<SecondaryStat> secondaryStats) =>
-      secondaryStats.values.map((e) => Editor.convertFromSuper(e)).let(Editors.new);
-
   @override
-  Editors topNAndCombineOthers(int count) =>
-      super.topNAndCombineOthers(count).let(Editors.convertFromSuper);
+  Editors topNAndCombineOthers(int count) => super.topNAndCombineOthersBase(
+        count,
+        initialValue: Editor.none,
+        itemMerger: (previousValue, element) => Editor(
+          name: "Others",
+          percent: previousValue.percent + element.percent,
+          timeSpent: previousValue.timeSpent + element.timeSpent,
+        ),
+        finalListCreator: Editors.new,
+      );
 
   @override
   String get statsType => "Operating Systems";
