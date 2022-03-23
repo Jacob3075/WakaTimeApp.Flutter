@@ -1,5 +1,6 @@
 import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
+import "package:waka_time_app/common/utils/extensions.dart";
 
 class Editor extends SecondaryStat {
   const Editor({
@@ -23,6 +24,9 @@ class Editor extends SecondaryStat {
 
 class Editors extends SecondaryStats<Editor> {
   Editors(Iterable<Editor> values) : super(values);
+
+  factory Editors.convertFromSuper(Iterable<SecondaryStat> secondaryStats) =>
+      secondaryStats.map((e) => Editor.convertFromSuper(e)).let(Editors.new);
 
   @override
   Editors topNAndCombineOthers(int count) => super.topNAndCombineOthersBase(

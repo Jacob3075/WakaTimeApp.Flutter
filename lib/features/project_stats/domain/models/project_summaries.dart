@@ -36,20 +36,17 @@ class ProjectSummaries {
   Languages _extractLanguages() => dailyProjectStats
       .expand((element) => element.languages.values)
       .let(_mergeStatsByName)
-      .map(Language.convertFromSuper)
-      .let(Languages.new);
+      .let(Languages.convertFromSuper);
 
   OperatingSystems _extractOperatingSystems() => dailyProjectStats
       .expand((element) => element.operatingSystems.values)
       .let(_mergeStatsByName)
-      .map(OperatingSystem.convertFromSuper)
-      .let(OperatingSystems.new);
+      .let(OperatingSystems.convertFromSuper);
 
   Editors _extractEditors() => dailyProjectStats
       .expand((element) => element.editors.values)
       .let(_mergeStatsByName)
-      .map(Editor.convertFromSuper)
-      .let(Editors.new);
+      .let(Editors.convertFromSuper);
 
   Iterable<SecondaryStat> _mergeStatsByName(Iterable<SecondaryStat> values) => values
       .groupFoldBy<String, SecondaryStat>((it) => it.name, _mergingGroupByItems)
@@ -57,14 +54,13 @@ class ProjectSummaries {
       .sortedBy<num>((element) => element.timeSpent.decimal)
       .reversed;
 
-  SecondaryStat _mergingGroupByItems(SecondaryStat? previous, SecondaryStat element) {
-    final timeSpent = (previous?.timeSpent ?? Time.zero) + element.timeSpent;
-    return SecondaryStat(
-      name: element.name,
-      timeSpent: timeSpent,
-      percent: ((timeSpent.decimal / totalTime.decimal) * 100).roundToDecimal(2),
-    );
-  }
+  SecondaryStat _mergingGroupByItems(SecondaryStat? previous, SecondaryStat element) =>
+      SecondaryStat(
+        name: element.name,
+        timeSpent: (previous?.timeSpent ?? Time.zero) + element.timeSpent,
+        percent: ((previous?.percent ?? 0) + (element.percent / dailyProjectStats.length))
+            .roundToDecimal(2),
+      );
 
   @override
   bool operator ==(dynamic other) =>
