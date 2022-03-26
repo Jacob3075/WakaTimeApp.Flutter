@@ -1,10 +1,11 @@
 import "package:freezed_annotation/freezed_annotation.dart";
+import "package:waka_time_app/common/domain/models/percent.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
 class SecondaryStat {
   final String name;
   final Time timeSpent;
-  final double percent;
+  final Percent percent;
 
   const SecondaryStat({
     required this.name,
@@ -12,7 +13,11 @@ class SecondaryStat {
     required this.percent,
   });
 
-  static const SecondaryStat none = SecondaryStat(name: "-", timeSpent: Time.zero, percent: 0);
+  static const SecondaryStat none = SecondaryStat(
+    name: "-",
+    timeSpent: Time.zero,
+    percent: Percent.zero,
+  );
 
   @override
   bool operator ==(Object other) =>

@@ -1,3 +1,4 @@
+import "package:waka_time_app/common/domain/models/percent.dart";
 import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
@@ -6,7 +7,7 @@ class Language extends SecondaryStat {
   const Language({
     required String name,
     required Time timeSpent,
-    required double percent,
+    required Percent percent,
   }) : super(
           name: name,
           timeSpent: timeSpent,
@@ -19,14 +20,18 @@ class Language extends SecondaryStat {
         percent: secondaryStat.percent,
       );
 
-  static const Language none = Language(name: "-", timeSpent: Time.zero, percent: 0);
+  static const Language none = Language(
+    name: "-",
+    timeSpent: Time.zero,
+    percent: Percent.zero,
+  );
 }
 
 class Languages extends SecondaryStats<Language> {
   Languages(Iterable<Language> values) : super(values);
 
   factory Languages.convertFromSuper(Iterable<SecondaryStat> secondaryStats) =>
-      secondaryStats.map((e) => Language.convertFromSuper(e)).let(Languages.new);
+      secondaryStats.map(Language.convertFromSuper).let(Languages.new);
 
   @override
   Languages topNAndCombineOthers(int count) => super.topNAndCombineOthersBase(
@@ -34,8 +39,8 @@ class Languages extends SecondaryStats<Language> {
         initialValue: Language.none,
         itemMerger: (previousValue, element) => Language(
           name: "Others",
-          percent: previousValue.percent + element.percent,
           timeSpent: previousValue.timeSpent + element.timeSpent,
+          percent: previousValue.percent.add(element.percent),
         ),
         finalListCreator: Languages.new,
       );

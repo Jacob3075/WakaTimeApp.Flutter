@@ -43,7 +43,7 @@ class MostUsedSecondaryStatCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${mostUsedSecondaryStat.percent}%",
+                    "${mostUsedSecondaryStat.percent.value}%",
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w300,

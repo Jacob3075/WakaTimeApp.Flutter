@@ -1,3 +1,4 @@
+import "package:waka_time_app/common/domain/models/percent.dart";
 import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
@@ -6,7 +7,7 @@ class Editor extends SecondaryStat {
   const Editor({
     required String name,
     required Time timeSpent,
-    required double percent,
+    required Percent percent,
   }) : super(
           name: name,
           timeSpent: timeSpent,
@@ -19,14 +20,18 @@ class Editor extends SecondaryStat {
         percent: secondaryStat.percent,
       );
 
-  static const Editor none = Editor(name: "-", timeSpent: Time.zero, percent: 0);
+  static const Editor none = Editor(
+    name: "-",
+    timeSpent: Time.zero,
+    percent: Percent.zero,
+  );
 }
 
 class Editors extends SecondaryStats<Editor> {
   Editors(Iterable<Editor> values) : super(values);
 
   factory Editors.convertFromSuper(Iterable<SecondaryStat> secondaryStats) =>
-      secondaryStats.map((e) => Editor.convertFromSuper(e)).let(Editors.new);
+      secondaryStats.map(Editor.convertFromSuper).let(Editors.new);
 
   @override
   Editors topNAndCombineOthers(int count) => super.topNAndCombineOthersBase(
@@ -34,8 +39,8 @@ class Editors extends SecondaryStats<Editor> {
         initialValue: Editor.none,
         itemMerger: (previousValue, element) => Editor(
           name: "Others",
-          percent: previousValue.percent + element.percent,
           timeSpent: previousValue.timeSpent + element.timeSpent,
+          percent: previousValue.percent.add(element.percent),
         ),
         finalListCreator: Editors.new,
       );

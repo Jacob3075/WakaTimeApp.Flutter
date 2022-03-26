@@ -36,7 +36,7 @@ class TimeSpentOnSecondaryStatsChart extends StatelessWidget {
       .topNAndCombineOthers(3)
       .values
       .map((it) => PieChartSectionData(
-            value: it.percent,
+            value: it.percent.value,
             radius: 80,
             title: it.name,
             showTitle: true,

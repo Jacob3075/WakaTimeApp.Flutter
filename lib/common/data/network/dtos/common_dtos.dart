@@ -2,6 +2,7 @@ import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/editor.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/domain/models/operating_system.dart";
+import "package:waka_time_app/common/domain/models/percent.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
 part "common_dtos.freezed.dart";
@@ -111,14 +112,14 @@ class LanguageDTO with _$LanguageDTO {
 
   factory LanguageDTO.fromJson(Map<String, dynamic> json) => _$LanguageDTOFromJson(json);
 
-  Language convertToModel() => Language(
+  Language convertToModel(Time totalTime) => Language(
         name: name,
         timeSpent: Time(
           minutes: minutes,
           hours: hours,
           decimal: decimal,
         ),
-        percent: percent,
+        percent: Percent(decimal, totalTime.decimal),
       );
 }
 
@@ -141,14 +142,14 @@ class OperatingSystemsDTO with _$OperatingSystemsDTO {
   factory OperatingSystemsDTO.fromJson(Map<String, dynamic> json) =>
       _$OperatingSystemsDTOFromJson(json);
 
-  OperatingSystem convertToModel() => OperatingSystem(
+  OperatingSystem convertToModel(Time totalTime) => OperatingSystem(
         name: name,
         timeSpent: Time(
           minutes: minutes,
           hours: hours,
           decimal: decimal,
         ),
-        percent: percent,
+        percent: Percent(decimal, totalTime.decimal),
       );
 }
 
@@ -170,14 +171,14 @@ class EditorsDTO with _$EditorsDTO {
 
   factory EditorsDTO.fromJson(Map<String, dynamic> json) => _$EditorsDTOFromJson(json);
 
-  Editor convertToModel() => Editor(
+  Editor convertToModel(Time totalTime) => Editor(
         name: name,
         timeSpent: Time(
           minutes: minutes,
           hours: hours,
           decimal: decimal,
         ),
-        percent: percent,
+        percent: Percent(decimal, totalTime.decimal),
       );
 }
 

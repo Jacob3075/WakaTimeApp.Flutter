@@ -39,7 +39,7 @@ class OtherSecondaryStatListItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${secondaryStat.percent}%",
+                    "${secondaryStat.percent.value}%",
                     style: TextStyle(
                       fontSize: 12.sp,
                       fontWeight: FontWeight.w200,

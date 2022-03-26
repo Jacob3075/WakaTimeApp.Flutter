@@ -15,11 +15,14 @@ class ProjectSummariesMapper extends BaseDtoMapper<ProjectSummaries, ProjectSumm
             .map((it) => DailyProjectStats(
                   timeSpent: it.grandTotal.timeSpent,
                   entities: [],
-                  languages:
-                      it.languages.map((language) => language.convertToModel()).let(Languages.new),
-                  editors: it.editors.map((editor) => editor.convertToModel()).let(Editors.new),
+                  languages: it.languages
+                      .map((language) => language.convertToModel(it.grandTotal.timeSpent))
+                      .let(Languages.new),
+                  editors: it.editors
+                      .map((editor) => editor.convertToModel(it.grandTotal.timeSpent))
+                      .let(Editors.new),
                   operatingSystems: it.operatingSystems
-                      .map((os) => os.convertToModel())
+                      .map((os) => os.convertToModel(it.grandTotal.timeSpent))
                       .let(OperatingSystems.new),
                   date: DateTime.parse(it.range.date),
                 ))
