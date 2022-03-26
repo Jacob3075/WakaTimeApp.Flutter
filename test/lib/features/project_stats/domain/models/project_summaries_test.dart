@@ -3,7 +3,9 @@ import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/editor.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/domain/models/operating_system.dart";
+import "package:waka_time_app/common/domain/models/percent.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
+import "package:waka_time_app/common/utils/extensions.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
 
@@ -11,42 +13,60 @@ import "package:waka_time_app/features/project_stats/domain/models/project_summa
 // https://wakatime.com/api/v1/users/current/summaries?start=2022-02-1&end=2022-03-23&project=Waka%20Time%20App&
 main() {
   test("languages used function returns stats for all the languages used in the project", () {
-    final dailyProjectStats = _createDailyProjectStats(
-      const [
-        _language1a,
-        _language2a,
-        _language3a,
-        _language1a,
-        _language1b,
-        _language2b,
-      ],
-    );
-    final testValues = [dailyProjectStats, dailyProjectStats];
-    final totalTime = testValues
-        .map((e) => e.timeSpent)
-        .fold<Time>(Time.zero, (previousValue, element) => previousValue + element);
-    final ProjectSummaries projectSummaries = _createProjectSummaries(
-      totalTime,
-      testValues,
-    );
+    final testValues = [
+      _createDailyProjectStats(
+        const [
+          Language(
+            name: "L1",
+            timeSpent: Time(hours: 2, minutes: 30, decimal: 2.5),
+            percent: Percent(2.5, 6.75),
+          ),
+          Language(
+            name: "L2",
+            timeSpent: Time(hours: 1, minutes: 15, decimal: 1.25),
+            percent: Percent(1.25, 6.75),
+          ),
+          Language(
+            name: "L3",
+            timeSpent: Time(hours: 3, minutes: 0, decimal: 3.0),
+            percent: Percent(3, 6.75),
+          ),
+        ],
+      ),
+      _createDailyProjectStats(
+        const [
+          Language(
+            name: "L1",
+            timeSpent: Time(hours: 1, minutes: 15, decimal: 1.25),
+            percent: Percent(1.25, 4.25),
+          ),
+          Language(
+            name: "L2",
+            timeSpent: Time(hours: 3, minutes: 0, decimal: 3.0),
+            percent: Percent(3, 4.25),
+          ),
+        ],
+      )
+    ];
+    final ProjectSummaries projectSummaries = _createProjectSummaries(testValues);
     expect(
       projectSummaries.languages,
       Languages(
         const [
           Language(
-            name: "L1",
-            timeSpent: Time(hours: 12, minutes: 30, decimal: 12.5),
-            percent: 46.3,
+            name: "L2",
+            timeSpent: Time(hours: 4, minutes: 15, decimal: 4.25),
+            percent: Percent(4.25, 11),
           ),
           Language(
-            name: "L2",
-            timeSpent: Time(hours: 8, minutes: 30, decimal: 8.5),
-            percent: 31.48,
+            name: "L1",
+            timeSpent: Time(hours: 3, minutes: 45, decimal: 3.75),
+            percent: Percent(3.75, 11),
           ),
           Language(
             name: "L3",
-            timeSpent: Time(hours: 6, minutes: 0, decimal: 6.0),
-            percent: 22.22,
+            timeSpent: Time(hours: 3, minutes: 0, decimal: 3.0),
+            percent: Percent(3, 11),
           ),
         ],
       ),
@@ -55,7 +75,7 @@ main() {
 }
 
 DailyProjectStats _createDailyProjectStats(List<Language> languages) => DailyProjectStats(
-      timeSpent: Time.zero,
+  timeSpent: languages.map((e) => e.timeSpent).getTotalTime,
       entities: List.empty(),
       languages: Languages(languages),
       editors: Editors([]),
@@ -64,46 +84,13 @@ DailyProjectStats _createDailyProjectStats(List<Language> languages) => DailyPro
     );
 
 ProjectSummaries _createProjectSummaries(
-  Time totalTime,
   List<DailyProjectStats> dailyProjectStats,
 ) =>
     ProjectSummaries(
-      totalTime: totalTime,
+      totalTime: dailyProjectStats.map((e) => e.timeSpent).getTotalTime,
       dailyProjectStats: dailyProjectStats,
       range: StatsRange(
         startDate: DateTime.now(),
         endDate: DateTime.now(),
       ),
     );
-
-const _language1a = Language(
-  name: "L1",
-  timeSpent: Time(hours: 2, minutes: 30, decimal: 2.5),
-  percent: 18.52,
-);
-const _language1b = Language(
-  name: "L1",
-  timeSpent: Time(hours: 1, minutes: 15, decimal: 1.25),
-  percent: 9.26,
-);
-const _language2a = Language(
-  name: "L2",
-  timeSpent: Time(hours: 1, minutes: 15, decimal: 1.25),
-  percent: 9.26,
-);
-const _language2b = Language(
-  name: "L2",
-  timeSpent: Time(hours: 3, minutes: 0, decimal: 3.0),
-  percent: 22.22,
-);
-const _language3a = Language(
-  name: "L3",
-  timeSpent: Time(hours: 3, minutes: 0, decimal: 3.0),
-  percent: 22.22,
-);
-
-final _editor1a = Editor(name: "E1", timeSpent: Time.fromDecimal(1.5), percent: 80);
-final _editor1b = Editor(name: "E1", timeSpent: Time.fromDecimal(1.0), percent: 80);
-
-final _editor2a = Editor(name: "E2", timeSpent: Time.fromDecimal(0.5), percent: 20);
-final _editor2b = Editor(name: "E2", timeSpent: Time.fromDecimal(3.5), percent: 20);

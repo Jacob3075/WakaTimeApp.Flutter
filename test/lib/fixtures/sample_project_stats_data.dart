@@ -2,6 +2,7 @@ import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/editor.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/domain/models/operating_system.dart";
+import "package:waka_time_app/common/domain/models/percent.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
@@ -392,7 +393,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 16,
             ),
             name: "Kotlin",
-            percent: 76.97,
+            percent: Percent.zero,
           ),
           Language(
             timeSpent: Time(
@@ -401,7 +402,7 @@ final sampleProjectStatsData = ProjectSummaries(
               decimal: 0.62,
             ),
             name: "Groovy",
-            percent: 21.26,
+            percent: Percent.zero,
           ),
           Language(
             timeSpent: Time(
@@ -410,7 +411,7 @@ final sampleProjectStatsData = ProjectSummaries(
               hours: 0,
             ),
             name: "VimL",
-            percent: 1.77,
+            percent: Percent.zero,
           ),
           Language(
             timeSpent: Time(
@@ -419,7 +420,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 0,
             ),
             name: "XML",
-            percent: 0.0,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -431,7 +432,7 @@ final sampleProjectStatsData = ProjectSummaries(
             decimal: 2.93,
           ),
           name: "Android Studio",
-          percent: 100,
+          percent: Percent.zero,
         )
       ]),
       operatingSystems: OperatingSystems(
@@ -443,7 +444,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 56,
             ),
             name: "Linux",
-            percent: 100,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -461,7 +462,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 7,
             ),
             name: "Dart",
-            percent: 98.64,
+            percent: Percent.zero,
           ),
           Language(
             timeSpent: Time(
@@ -470,7 +471,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 2,
             ),
             name: "YAML",
-            percent: 0.87,
+            percent: Percent.zero,
           ),
           Language(
             timeSpent: Time(
@@ -479,7 +480,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 0,
             ),
             name: "textmate",
-            percent: 0.28,
+            percent: Percent.zero,
           ),
           Language(
             timeSpent: Time(
@@ -488,7 +489,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 0,
             ),
             name: "Java",
-            percent: 0.21,
+            percent: Percent.zero,
           ),
         ],
       ),
@@ -500,7 +501,7 @@ final sampleProjectStatsData = ProjectSummaries(
             decimal: 5.18,
           ),
           name: "IntelliJ",
-          percent: 100,
+          percent: Percent.zero,
         )
       ]),
       operatingSystems: OperatingSystems(
@@ -512,7 +513,7 @@ final sampleProjectStatsData = ProjectSummaries(
               decimal: 5.18,
             ),
             name: "Linux",
-            percent: 100,
+            percent: Percent.zero,
           )
         ],
       ),

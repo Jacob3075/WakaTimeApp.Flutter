@@ -3,8 +3,6 @@ import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/editor.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/domain/models/operating_system.dart";
-import "package:waka_time_app/common/domain/models/percent.dart";
-import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
@@ -36,31 +34,18 @@ class ProjectSummaries {
 
   Languages _extractLanguages() => dailyProjectStats
       .expand((element) => element.languages.values)
-      .let(_mergeStatsByName)
-      .let(Languages.convertFromSuper);
+      .map((it) => it.updatePercentDenominator(totalTime.decimal))
+      .let(Languages.mergeDuplicates);
 
   OperatingSystems _extractOperatingSystems() => dailyProjectStats
       .expand((element) => element.operatingSystems.values)
-      .let(_mergeStatsByName)
-      .let(OperatingSystems.convertFromSuper);
+      .map((it) => it.updatePercentDenominator(totalTime.decimal))
+      .let(OperatingSystems.mergeDuplicates);
 
   Editors _extractEditors() => dailyProjectStats
       .expand((element) => element.editors.values)
-      .let(_mergeStatsByName)
-      .let(Editors.convertFromSuper);
-
-  Iterable<SecondaryStat> _mergeStatsByName(Iterable<SecondaryStat> values) => values
-      .groupFoldBy<String, SecondaryStat>((it) => it.name, _mergingGroupByItems)
-      .values
-      .sortedBy<num>((element) => element.timeSpent.decimal)
-      .reversed;
-
-  SecondaryStat _mergingGroupByItems(SecondaryStat? previous, SecondaryStat element) =>
-      SecondaryStat(
-        name: element.name,
-        timeSpent: (previous?.timeSpent ?? Time.zero) + element.timeSpent,
-        percent: (previous?.percent ?? Percent.zero).merge(element.percent),
-      );
+      .map((it) => it.updatePercentDenominator(totalTime.decimal))
+      .let(Editors.mergeDuplicates);
 
   @override
   bool operator ==(dynamic other) =>
@@ -69,13 +54,19 @@ class ProjectSummaries {
           other is ProjectSummaries &&
           const DeepCollectionEquality().equals(other.totalTime, totalTime) &&
           const DeepCollectionEquality().equals(other.dailyProjectStats, dailyProjectStats) &&
+          const DeepCollectionEquality().equals(other.languages, languages) &&
+          const DeepCollectionEquality().equals(other.operatingSystems, operatingSystems) &&
+          const DeepCollectionEquality().equals(other.editors, editors) &&
           const DeepCollectionEquality().equals(other.range, range));
 
   @override
   int get hashCode => Object.hash(
-        runtimeType,
+    runtimeType,
         const DeepCollectionEquality().hash(totalTime),
         const DeepCollectionEquality().hash(dailyProjectStats),
+        const DeepCollectionEquality().hash(languages),
+        const DeepCollectionEquality().hash(operatingSystems),
+        const DeepCollectionEquality().hash(editors),
         const DeepCollectionEquality().hash(range),
       );
 }

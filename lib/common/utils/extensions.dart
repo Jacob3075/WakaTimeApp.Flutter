@@ -1,5 +1,7 @@
 import "dart:math";
 
+import "package:waka_time_app/common/domain/models/time.dart";
+
 extension ObjectExt<T> on T {
   /// [Source](https://stackoverflow.com/a/58762538/13181948)
   R let<R>(R Function(T it) op) => op(this);
@@ -23,4 +25,9 @@ extension NumX on num {
 
 extension ListX<T> on List<T> {
   List<T> takeLast(int n) => length >= n ? sublist(length - n) : this;
+}
+
+extension ListTimeX on Iterable<Time> {
+  Time get getTotalTime =>
+      fold<Time>(Time.zero, (previousValue, element) => previousValue + element);
 }

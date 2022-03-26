@@ -3,6 +3,7 @@ import "package:waka_time_app/common/domain/models/daily_stats.dart";
 import "package:waka_time_app/common/domain/models/editor.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/domain/models/operating_system.dart";
+import "package:waka_time_app/common/domain/models/percent.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
@@ -1251,7 +1252,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 20,
           ),
           name: "IntelliJ",
-          percent: 99.39,
+          percent: Percent.zero,
         ),
         Editor(
           timeSpent: Time(
@@ -1260,7 +1261,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 1,
           ),
           name: "Neovim",
-          percent: 0.61,
+          percent: Percent.zero,
         )
       ]),
       languages: Languages(
@@ -1272,7 +1273,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 18,
             ),
             name: "Dart",
-            percent: 98.64,
+            percent: Percent.zero,
           ),
           Language(
             timeSpent: Time(
@@ -1281,7 +1282,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 3,
             ),
             name: "YAML",
-            percent: 1.0,
+            percent: Percent.zero,
           ),
         ],
       ),
@@ -1294,7 +1295,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 22,
             ),
             name: "Linux",
-            percent: 100.0,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -1327,7 +1328,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 52,
           ),
           name: "IntelliJ",
-          percent: 99.12,
+          percent: Percent.zero,
         ),
         Editor(
           timeSpent: Time(
@@ -1336,7 +1337,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 3,
           ),
           name: "Neovim",
-          percent: 0.88,
+          percent: Percent.zero,
         )
       ]),
       languages: Languages(
@@ -1348,7 +1349,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 45,
             ),
             name: "Dart",
-            percent: 97.27,
+            percent: Percent.zero,
           ),
           Language(
             timeSpent: Time(
@@ -1357,7 +1358,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 5,
             ),
             name: "YAML",
-            percent: 1.68,
+            percent: Percent.zero,
           ),
         ],
       ),
@@ -1370,7 +1371,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 55,
             ),
             name: "Linux",
-            percent: 100.0,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -1403,7 +1404,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 28,
           ),
           name: "IntelliJ",
-          percent: 99.74,
+          percent: Percent.zero,
         ),
         Editor(
           timeSpent: Time(
@@ -1412,7 +1413,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 1,
           ),
           name: "Neovim",
-          percent: 0.26,
+          percent: Percent.zero,
         )
       ]),
       languages: Languages(
@@ -1424,7 +1425,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 59,
             ),
             name: "Dart",
-            percent: 93.37,
+            percent: Percent.zero,
           ),
           const Language(
             timeSpent: Time(
@@ -1433,7 +1434,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 17,
             ),
             name: "YAML",
-            percent: 3.93,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -1446,7 +1447,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 29,
             ),
             name: "Linux",
-            percent: 100.0,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -1479,7 +1480,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 40,
           ),
           name: "IntelliJ",
-          percent: 96.1,
+          percent: Percent.zero,
         ),
         Editor(
           timeSpent: Time(
@@ -1488,7 +1489,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 11,
           ),
           name: "Neovim",
-          percent: 3.9,
+          percent: Percent.zero,
         )
       ]),
       languages: Languages(
@@ -1500,7 +1501,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 20,
             ),
             name: "Dart",
-            percent: 89.17,
+            percent: Percent.zero,
           ),
           Language(
             timeSpent: Time(
@@ -1509,7 +1510,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 13,
             ),
             name: "Properties",
-            percent: 4.57,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -1522,7 +1523,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 51,
             ),
             name: "Linux",
-            percent: 100.0,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -1555,7 +1556,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 14,
           ),
           name: "IntelliJ",
-          percent: 94.53,
+          percent: Percent.zero,
         ),
         Editor(
           timeSpent: Time(
@@ -1564,7 +1565,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 7,
           ),
           name: "Neovim",
-          percent: 5.47,
+          percent: Percent.zero,
         )
       ]),
       languages: Languages(
@@ -1576,7 +1577,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 14,
             ),
             name: "Dart",
-            percent: 94.53,
+            percent: Percent.zero,
           ),
           Language(
             timeSpent: Time(
@@ -1585,7 +1586,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 7,
             ),
             name: "Kotlin",
-            percent: 5.47,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -1598,7 +1599,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 21,
             ),
             name: "Linux",
-            percent: 100.0,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -1631,7 +1632,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 5,
           ),
           name: "IntelliJ",
-          percent: 99.13,
+          percent: Percent.zero,
         ),
         Editor(
           timeSpent: Time(
@@ -1640,7 +1641,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 1,
           ),
           name: "Neovim",
-          percent: 0.87,
+          percent: Percent.zero,
         )
       ]),
       languages: Languages(
@@ -1652,7 +1653,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 5,
             ),
             name: "Dart",
-            percent: 99.13,
+            percent: Percent.zero,
           ),
           Language(
             timeSpent: Time(
@@ -1661,7 +1662,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 0,
             ),
             name: "Kotlin",
-            percent: 0.47,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -1674,7 +1675,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 6,
             ),
             name: "Linux",
-            percent: 100.0,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -1702,7 +1703,7 @@ final sampleLast7DaysStats = Summaries(
             minutes: 1,
           ),
           name: "IntelliJ",
-          percent: 100.0,
+          percent: Percent.zero,
         )
       ]),
       languages: Languages(
@@ -1714,7 +1715,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 1,
             ),
             name: "Dart",
-            percent: 100.0,
+            percent: Percent.zero,
           )
         ],
       ),
@@ -1727,7 +1728,7 @@ final sampleLast7DaysStats = Summaries(
               minutes: 1,
             ),
             name: "Linux",
-            percent: 100.0,
+            percent: Percent.zero,
           )
         ],
       ),

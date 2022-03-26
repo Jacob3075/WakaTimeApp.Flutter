@@ -1,5 +1,6 @@
 import "package:flutter_test/flutter_test.dart";
 import "package:waka_time_app/common/domain/models/language.dart";
+import "package:waka_time_app/common/domain/models/percent.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
 main() {
@@ -11,19 +12,19 @@ main() {
     lang1 = const Language(
       name: "Stat 1",
       timeSpent: Time(hours: 1, minutes: 30, decimal: 1.5),
-      percent: 0.0,
+      percent: Percent.zero,
     );
 
     lang2 = const Language(
       name: "Stat 2",
       timeSpent: Time(hours: 0, minutes: 30, decimal: 0.5),
-      percent: 0.0,
+      percent: Percent.zero,
     );
 
     lang3 = const Language(
       name: "Stat 2",
       timeSpent: Time(hours: 0, minutes: 30, decimal: 0.5),
-      percent: 0.0,
+      percent: Percent.zero,
     );
   });
   group("Language Tests", () {
@@ -104,7 +105,7 @@ main() {
               lang2,
               lang2,
               const Language(
-                percent: 0,
+                percent: Percent.zero,
                 name: "Others",
                 timeSpent: Time(hours: 2, minutes: 30, decimal: 2.5),
               )

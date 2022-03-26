@@ -2,7 +2,7 @@ import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/domain/models/percent.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
-class SecondaryStat {
+abstract class SecondaryStat {
   final String name;
   final Time timeSpent;
   final Percent percent;
@@ -13,26 +13,29 @@ class SecondaryStat {
     required this.percent,
   });
 
-  static const SecondaryStat none = SecondaryStat(
-    name: "-",
-    timeSpent: Time.zero,
-    percent: Percent.zero,
-  );
+  SecondaryStat operator +(SecondaryStat? other);
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SecondaryStat &&
-          runtimeType == other.runtimeType &&
-          name == other.name &&
-          timeSpent == other.timeSpent &&
-          percent == other.percent;
+      (other.runtimeType == runtimeType &&
+          other is SecondaryStat &&
+          const DeepCollectionEquality().equals(other.name, name) &&
+          const DeepCollectionEquality().equals(other.timeSpent, timeSpent) &&
+          const DeepCollectionEquality().equals(other.percent, percent));
 
   @override
-  int get hashCode => name.hashCode ^ timeSpent.hashCode ^ percent.hashCode;
+  int get hashCode => Object.hash(
+        runtimeType,
+        const DeepCollectionEquality().hash(name),
+        const DeepCollectionEquality().hash(timeSpent),
+        const DeepCollectionEquality().hash(percent),
+      );
 
   @override
   String toString() => "SecondaryStat{name: $name, timeSpent: $timeSpent, percent: $percent}";
+
+  SecondaryStat updatePercentDenominator(double newDenominator);
 }
 
 abstract class SecondaryStats<T extends SecondaryStat> {
@@ -40,7 +43,17 @@ abstract class SecondaryStats<T extends SecondaryStat> {
 
   SecondaryStats(Iterable<T> values) : values = values.toList(growable: false);
 
-  T? get mostUsed => values.firstOrNull;
+  @protected
+  static Iterable<SecondaryStat> mergeStatsByName(Iterable<SecondaryStat> values) => values
+      .groupFoldBy<String, SecondaryStat>(
+        (it) => it.name,
+        ((previous, element) => element + previous),
+      )
+      .values
+      .sortedBy<num>((element) => element.timeSpent.decimal)
+      .reversed;
+
+  T get mostUsed;
 
   List<T> get allExceptMostUsed => values.slice(1).toList(growable: false);
 

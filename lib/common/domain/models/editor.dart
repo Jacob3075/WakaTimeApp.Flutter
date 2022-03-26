@@ -1,3 +1,4 @@
+import "package:collection/collection.dart";
 import "package:waka_time_app/common/domain/models/percent.dart";
 import "package:waka_time_app/common/domain/models/secondary_stat.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
@@ -25,6 +26,20 @@ class Editor extends SecondaryStat {
     timeSpent: Time.zero,
     percent: Percent.zero,
   );
+
+  @override
+  Editor operator +(SecondaryStat? other) => Editor(
+        name: name,
+        timeSpent: timeSpent + (other?.timeSpent ?? Time.zero),
+        percent: percent + (other?.percent ?? Percent.zero),
+      );
+
+  @override
+  SecondaryStat updatePercentDenominator(double newDenominator) => Editor(
+        name: name,
+        timeSpent: timeSpent,
+        percent: Percent(percent.numerator, newDenominator),
+      );
 }
 
 class Editors extends SecondaryStats<Editor> {
@@ -32,6 +47,9 @@ class Editors extends SecondaryStats<Editor> {
 
   factory Editors.convertFromSuper(Iterable<SecondaryStat> secondaryStats) =>
       secondaryStats.map(Editor.convertFromSuper).let(Editors.new);
+
+  factory Editors.mergeDuplicates(Iterable<SecondaryStat> values) =>
+      SecondaryStats.mergeStatsByName(values).let(Editors.convertFromSuper);
 
   @override
   Editors topNAndCombineOthers(int count) => super.topNAndCombineOthersBase(
@@ -47,4 +65,7 @@ class Editors extends SecondaryStats<Editor> {
 
   @override
   String get statsType => "Operating Systems";
+
+  @override
+  Editor get mostUsed => values.firstOrNull ?? Editor.none;
 }
