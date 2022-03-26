@@ -698,7 +698,7 @@
         <entry key="splashscreen">
           <value>
             <list>
-              <option value="$USER_HOME$/Tools/Flutter/.pub-cache/git/SplashScreenFlutterPackage-a05b64f8326f7c2615491e9f47a1f2dcf8b28a69/lib" />
+              <option value="$USER_HOME$/Tools/Flutter/.pub-cache/git/SplashScreenFlutterPackage-a05b64f8326f7c2615491e9f47a1f2dcf8b28a69//lib" />
             </list>
           </value>
         </entry>
@@ -856,6 +856,13 @@
             </list>
           </value>
         </entry>
+        <entry key="waka_time_app">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="watcher">
           <value>
             <list>
@@ -894,7 +901,8 @@
       </option>
     </properties>
     <CLASSES>
-      <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/git/SplashScreenFlutterPackage-a05b64f8326f7c2615491e9f47a1f2dcf8b28a69/lib" />
+      <root url="file://$PROJECT_DIR$/../lib" />
+      <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/git/SplashScreenFlutterPackage-a05b64f8326f7c2615491e9f47a1f2dcf8b28a69//lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/_fe_analyzer_shared-31.0.0/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-2.8.0/lib" />
       <root url="file://$USER_HOME$/Tools/Flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.2.1/lib" />
