@@ -520,6 +520,9 @@ final sampleProjectStatsData = ProjectSummaries(
       date: DateTime.parse("2022-01-12"),
     ),
   ],
+  languages: Languages([]),
+  editors: Editors([]),
+  operatingSystems: OperatingSystems([]),
   range: StatsRange(
     endDate: DateTime.parse("2022-01-12T18:29:59Z"),
     startDate: DateTime.parse("2021-08-29T18:30:00Z"),

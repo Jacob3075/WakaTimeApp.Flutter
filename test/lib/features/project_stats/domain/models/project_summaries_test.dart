@@ -75,7 +75,7 @@ main() {
 }
 
 DailyProjectStats _createDailyProjectStats(List<Language> languages) => DailyProjectStats(
-  timeSpent: languages.map((e) => e.timeSpent).getTotalTime,
+      timeSpent: languages.map((e) => e.timeSpent).getTotalTime,
       entities: List.empty(),
       languages: Languages(languages),
       editors: Editors([]),
@@ -93,4 +93,7 @@ ProjectSummaries _createProjectSummaries(
         startDate: DateTime.now(),
         endDate: DateTime.now(),
       ),
+      languages: Languages([]),
+      editors: Editors([]),
+      operatingSystems: OperatingSystems([]),
     );

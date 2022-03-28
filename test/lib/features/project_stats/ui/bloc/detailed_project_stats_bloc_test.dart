@@ -6,6 +6,9 @@ import "package:waka_time_app/common/domain/errors/domain_errors.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/errors/network_errors.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
+import "package:waka_time_app/common/domain/models/editor.dart";
+import "package:waka_time_app/common/domain/models/language.dart";
+import "package:waka_time_app/common/domain/models/operating_system.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_details.dart";
 import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
@@ -65,6 +68,9 @@ main() {
             endDate: DateTime.now(),
           ),
           totalTime: Time.zero,
+          operatingSystems: OperatingSystems([]),
+          editors: Editors([]),
+          languages: Languages([]),
         );
 
         when(getProjectStats(any)).thenAnswer((realInvocation) async => Right(projectSummaries));
