@@ -33,13 +33,6 @@ class OperatingSystem extends SecondaryStat {
         timeSpent: timeSpent + (other?.timeSpent ?? Time.zero),
         percent: percent + (other?.percent ?? Percent.zero),
       );
-
-  @override
-  SecondaryStat updatePercentDenominator(double newDenominator) => OperatingSystem(
-        name: name,
-        timeSpent: timeSpent,
-        percent: Percent(percent.numerator, newDenominator),
-      );
 }
 
 class OperatingSystems extends SecondaryStats<OperatingSystem> {
@@ -58,7 +51,7 @@ class OperatingSystems extends SecondaryStats<OperatingSystem> {
         itemMerger: (previousValue, element) => OperatingSystem(
           name: "Others",
           timeSpent: previousValue.timeSpent + element.timeSpent,
-          percent: previousValue.percent.add(element.percent),
+          percent: previousValue.percent + element.percent,
         ),
         finalListCreator: OperatingSystems.new,
       );

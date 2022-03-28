@@ -11,14 +11,6 @@ class Percent {
 
   static const Percent zero = Percent(0, 0);
 
-  Percent add(Percent other) {
-    assert(
-      denominator == other.denominator,
-      "Cannot add percents with different denominators",
-    );
-    return Percent(numerator + other.numerator, denominator);
-  }
-
   Percent operator +(Percent other) => Percent(numerator + other.numerator, denominator);
 
   Percent merge(Percent other) =>

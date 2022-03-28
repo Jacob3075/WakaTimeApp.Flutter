@@ -33,13 +33,6 @@ class Editor extends SecondaryStat {
         timeSpent: timeSpent + (other?.timeSpent ?? Time.zero),
         percent: percent + (other?.percent ?? Percent.zero),
       );
-
-  @override
-  SecondaryStat updatePercentDenominator(double newDenominator) => Editor(
-        name: name,
-        timeSpent: timeSpent,
-        percent: Percent(percent.numerator, newDenominator),
-      );
 }
 
 class Editors extends SecondaryStats<Editor> {
@@ -58,7 +51,7 @@ class Editors extends SecondaryStats<Editor> {
         itemMerger: (previousValue, element) => Editor(
           name: "Others",
           timeSpent: previousValue.timeSpent + element.timeSpent,
-          percent: previousValue.percent.add(element.percent),
+          percent: previousValue.percent + element.percent,
         ),
         finalListCreator: Editors.new,
       );

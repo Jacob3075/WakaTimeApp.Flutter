@@ -34,8 +34,6 @@ abstract class SecondaryStat {
 
   @override
   String toString() => "SecondaryStat{name: $name, timeSpent: $timeSpent, percent: $percent}";
-
-  SecondaryStat updatePercentDenominator(double newDenominator);
 }
 
 abstract class SecondaryStats<T extends SecondaryStat> {

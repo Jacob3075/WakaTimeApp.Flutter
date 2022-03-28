@@ -33,13 +33,6 @@ class Language extends SecondaryStat {
         timeSpent: timeSpent + (other?.timeSpent ?? Time.zero),
         percent: percent + (other?.percent ?? Percent.zero),
       );
-
-  @override
-  SecondaryStat updatePercentDenominator(double newDenominator) => Language(
-        name: name,
-        timeSpent: timeSpent,
-        percent: Percent(percent.numerator, newDenominator),
-      );
 }
 
 class Languages extends SecondaryStats<Language> {
@@ -58,7 +51,7 @@ class Languages extends SecondaryStats<Language> {
         itemMerger: (previousValue, element) => Language(
           name: "Others",
           timeSpent: previousValue.timeSpent + element.timeSpent,
-          percent: previousValue.percent.add(element.percent),
+          percent: previousValue.percent + element.percent,
         ),
         finalListCreator: Languages.new,
       );
