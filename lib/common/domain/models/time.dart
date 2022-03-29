@@ -4,26 +4,32 @@ class Time {
   final int hours;
   final int minutes;
   final double decimal;
+  final double totalSeconds;
 
   const Time({
     required this.hours,
     required this.minutes,
     required this.decimal,
-  });
+    double? totalSeconds,
+  }) : totalSeconds = totalSeconds ?? 0;
 
-  static const Time zero = Time(decimal: 0, minutes: 0, hours: 0);
+  static const Time zero = Time(decimal: 0, minutes: 0, hours: 0, totalSeconds: 0);
 
   factory Time.fromDigital(String digitalTime, double decimal) {
     List<String> split = digitalTime.split(":");
     assert(split.length == 2);
-    return Time(hours: int.parse(split.first), minutes: int.parse(split.last), decimal: decimal);
+    final hours = int.parse(split.first);
+    final minutes = int.parse(split.last);
+    final double totalSeconds = (hours * 60 * 60) + (minutes * 60);
+    return Time(hours: hours, minutes: minutes, totalSeconds: totalSeconds, decimal: decimal);
   }
 
   factory Time.fromDecimal(double decimal) {
     int hours = decimal.toInt();
     double minutesDecimal = ((decimal - hours) * 60);
     int minutes = minutesDecimal.toInt();
-    return Time(decimal: decimal, hours: hours, minutes: minutes);
+    final double totalSeconds = (hours * 60 * 60) + (minutes * 60);
+    return Time(decimal: decimal, hours: hours, minutes: minutes, totalSeconds: totalSeconds);
   }
 
   Time operator +(Time other) {
@@ -38,15 +44,26 @@ class Time {
       newHours += (newMinutes / 60);
       newMinutes %= 60;
     }
-
-    return Time(hours: newHours.toInt(), minutes: newMinutes, decimal: newDecimal);
+    final double newTotalSeconds = totalSeconds + other.totalSeconds;
+    return Time(
+      hours: newHours.toInt(),
+      minutes: newMinutes,
+      totalSeconds: newTotalSeconds,
+      decimal: newDecimal,
+    );
   }
 
   Time operator /(int value) {
     final newDecimal = decimal / value;
     final newHours = newDecimal.toInt();
     final newMinutes = ((newDecimal * 60) % 60).toInt();
-    return Time(hours: newHours, minutes: newMinutes, decimal: newDecimal.roundToDecimal(3));
+    final double newTotalSeconds = totalSeconds / value;
+    return Time(
+      hours: newHours,
+      minutes: newMinutes,
+      totalSeconds: newTotalSeconds,
+      decimal: newDecimal.roundToDecimal(3),
+    );
   }
 
   String formattedPrint() => "${hours}H, ${minutes}M";

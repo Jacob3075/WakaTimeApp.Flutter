@@ -31,6 +31,7 @@ class SummariesMapper extends BaseDtoMapper<Summaries, SummariesDTO> {
                   time: Time(
                     hours: project.hours,
                     minutes: project.minutes,
+                    totalSeconds: project.totalSeconds,
                     decimal: project.decimal,
                   ),
                   name: project.name,
@@ -39,13 +40,13 @@ class SummariesMapper extends BaseDtoMapper<Summaries, SummariesDTO> {
               )
               .toList(),
           languages: data.languages
-              .map((language) => language.convertToModel(data.grandTotal.timeSpent))
+              .map((language) => language.convertToModel(data.grandTotal.totalSeconds))
               .let(Languages.new),
           editors: data.editors
-              .map((editor) => editor.convertToModel(data.grandTotal.timeSpent))
+              .map((editor) => editor.convertToModel(data.grandTotal.totalSeconds))
               .let(Editors.new),
           operatingSystems: data.operatingSystems
-              .map((os) => os.convertToModel(data.grandTotal.timeSpent))
+              .map((os) => os.convertToModel(data.grandTotal.totalSeconds))
               .let(OperatingSystems.new),
           date: DateTime.parse(data.range.date),
         ),

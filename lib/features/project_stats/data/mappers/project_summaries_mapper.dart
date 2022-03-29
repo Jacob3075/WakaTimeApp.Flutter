@@ -21,13 +21,13 @@ class ProjectSummariesMapper extends BaseDtoMapper<ProjectSummaries, ProjectSumm
           timeSpent: it.grandTotal.timeSpent,
           entities: [],
           languages: it.languages
-              .map((language) => language.convertToModel(it.grandTotal.timeSpent))
+              .map((language) => language.convertToModel(it.grandTotal.totalSeconds))
               .let(Languages.new),
           editors: it.editors
-              .map((editor) => editor.convertToModel(it.grandTotal.timeSpent))
+              .map((editor) => editor.convertToModel(it.grandTotal.totalSeconds))
               .let(Editors.new),
           operatingSystems: it.operatingSystems
-              .map((os) => os.convertToModel(it.grandTotal.timeSpent))
+              .map((os) => os.convertToModel(it.grandTotal.totalSeconds))
               .let(OperatingSystems.new),
           date: DateTime.parse(it.range.date),
         ));
@@ -63,9 +63,9 @@ class ProjectSummariesMapper extends BaseDtoMapper<ProjectSummaries, ProjectSumm
 
   // FIXME: CHANGE LANGUAGE TO A NEW GENERAL CLASS (USE COPY_WITH)
   SecondaryStat _updatePercentOfStat(SecondaryStat it) => Language(
-        name: it.name,
+    name: it.name,
         timeSpent: it.timeSpent,
-        percent: Percent(it.percent.numerator, _totalTime.decimal),
+        percent: Percent(it.percent.numerator, _totalTime.totalSeconds),
       );
 
   @override

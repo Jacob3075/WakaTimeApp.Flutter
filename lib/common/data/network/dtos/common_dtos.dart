@@ -57,6 +57,7 @@ class GrandTotalDTO with _$GrandTotalDTO {
   Time get timeSpent => Time(
         hours: hours,
         minutes: minutes,
+        totalSeconds: totalSeconds,
         decimal: decimal,
       );
 }
@@ -89,6 +90,7 @@ class ProjectDTO with _$ProjectDTO {
     required int seconds,
     required String text,
     @JsonKey(fromJson: _stringToDouble, toJson: _doubleToString) required double decimal,
+    @JsonKey(name: "total_seconds") required double totalSeconds,
   }) = _ProjectDTO;
 
   factory ProjectDTO.fromJson(Map<String, dynamic> json) => _$ProjectDTOFromJson(json);
@@ -112,14 +114,15 @@ class LanguageDTO with _$LanguageDTO {
 
   factory LanguageDTO.fromJson(Map<String, dynamic> json) => _$LanguageDTOFromJson(json);
 
-  Language convertToModel(Time totalTime) => Language(
+  Language convertToModel(double totalSecondsOverall) => Language(
         name: name,
         timeSpent: Time(
-          minutes: minutes,
           hours: hours,
+          minutes: minutes,
+          totalSeconds: totalSeconds,
           decimal: decimal,
         ),
-        percent: Percent(decimal, totalTime.decimal),
+        percent: Percent(totalSeconds, totalSecondsOverall),
       );
 }
 
@@ -142,14 +145,15 @@ class OperatingSystemsDTO with _$OperatingSystemsDTO {
   factory OperatingSystemsDTO.fromJson(Map<String, dynamic> json) =>
       _$OperatingSystemsDTOFromJson(json);
 
-  OperatingSystem convertToModel(Time totalTime) => OperatingSystem(
+  OperatingSystem convertToModel(double totalSecondsOverall) => OperatingSystem(
         name: name,
         timeSpent: Time(
-          minutes: minutes,
           hours: hours,
+          minutes: minutes,
+          totalSeconds: totalSeconds,
           decimal: decimal,
         ),
-        percent: Percent(decimal, totalTime.decimal),
+        percent: Percent(totalSeconds, totalSecondsOverall),
       );
 }
 
@@ -171,14 +175,15 @@ class EditorsDTO with _$EditorsDTO {
 
   factory EditorsDTO.fromJson(Map<String, dynamic> json) => _$EditorsDTOFromJson(json);
 
-  Editor convertToModel(Time totalTime) => Editor(
+  Editor convertToModel(double totalSecondsOverall) => Editor(
         name: name,
         timeSpent: Time(
-          minutes: minutes,
           hours: hours,
+          minutes: minutes,
+          totalSeconds: totalSeconds,
           decimal: decimal,
         ),
-        percent: Percent(decimal, totalTime.decimal),
+        percent: Percent(totalSeconds, totalSecondsOverall),
       );
 }
 
