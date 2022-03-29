@@ -6,21 +6,23 @@ class Time {
   final double decimal;
   final double totalSeconds;
 
-  const Time({
+  Time({
     required this.hours,
     required this.minutes,
     required this.decimal,
     double? totalSeconds,
-  }) : totalSeconds = totalSeconds ?? 0;
+  }) : totalSeconds = totalSeconds ?? calculateTotalSeconds(hours, minutes);
 
-  static const Time zero = Time(decimal: 0, minutes: 0, hours: 0, totalSeconds: 0);
+  static Time zero = Time(decimal: 0, minutes: 0, hours: 0, totalSeconds: 0);
+
+  static double calculateTotalSeconds(int hours, int minutes) => (hours * 60 * 60) + (minutes * 60);
 
   factory Time.fromDigital(String digitalTime, double decimal) {
     List<String> split = digitalTime.split(":");
     assert(split.length == 2);
     final hours = int.parse(split.first);
     final minutes = int.parse(split.last);
-    final double totalSeconds = (hours * 60 * 60) + (minutes * 60);
+    final double totalSeconds = calculateTotalSeconds(hours, minutes);
     return Time(hours: hours, minutes: minutes, totalSeconds: totalSeconds, decimal: decimal);
   }
 
@@ -28,7 +30,7 @@ class Time {
     int hours = decimal.toInt();
     double minutesDecimal = ((decimal - hours) * 60);
     int minutes = minutesDecimal.toInt();
-    final double totalSeconds = (hours * 60 * 60) + (minutes * 60);
+    final double totalSeconds = calculateTotalSeconds(hours, minutes);
     return Time(decimal: decimal, hours: hours, minutes: minutes, totalSeconds: totalSeconds);
   }
 

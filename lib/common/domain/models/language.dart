@@ -15,7 +15,7 @@ class Language extends SecondaryStat {
           percent: percent,
         );
 
-  static const Language none = Language(
+  static Language none = Language(
     name: "-",
     timeSpent: Time.zero,
     percent: Percent.zero,

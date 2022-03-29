@@ -1223,11 +1223,11 @@ const sampleLast7DaysStatsDataJson = """{
 """;
 
 final sampleLast7DaysStats = Summaries(
-  totalTime: const Time(hours: 34, minutes: 9, decimal: 34.15),
+  totalTime: Time(hours: 34, minutes: 9, decimal: 34.15),
   dailyStats: [
     DailyStats(
-      timeSpent: const Time(hours: 5, minutes: 22, decimal: 5.37),
-      projectsWorkedOn: const [
+      timeSpent: Time(hours: 5, minutes: 22, decimal: 5.37),
+      projectsWorkedOn: [
         Project(
           time: Time(hours: 5, minutes: 15, decimal: 5.25),
           name: "Waka Time App",
@@ -1244,7 +1244,7 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.89,
         )
       ],
-      editors: Editors(const [
+      editors: Editors([
         Editor(
           timeSpent: Time(
             decimal: 5.33,
@@ -1265,7 +1265,7 @@ final sampleLast7DaysStats = Summaries(
         )
       ]),
       languages: Languages(
-        const [
+        [
           Language(
             timeSpent: Time(
               decimal: 5.30,
@@ -1287,7 +1287,7 @@ final sampleLast7DaysStats = Summaries(
         ],
       ),
       operatingSystems: OperatingSystems(
-        const [
+        [
           OperatingSystem(
             timeSpent: Time(
               decimal: 5.37,
@@ -1302,8 +1302,8 @@ final sampleLast7DaysStats = Summaries(
       date: DateTime.parse("2022-01-04"),
     ),
     DailyStats(
-      timeSpent: const Time(hours: 5, minutes: 55, decimal: 5.92),
-      projectsWorkedOn: const [
+      timeSpent: Time(hours: 5, minutes: 55, decimal: 5.92),
+      projectsWorkedOn: [
         Project(
           time: Time(hours: 5, minutes: 44, decimal: 5.73),
           name: "Waka Time App",
@@ -1320,7 +1320,7 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.88,
         )
       ],
-      editors: Editors(const [
+      editors: Editors([
         Editor(
           timeSpent: Time(
             decimal: 5.87,
@@ -1341,7 +1341,7 @@ final sampleLast7DaysStats = Summaries(
         )
       ]),
       languages: Languages(
-        const [
+        [
           Language(
             timeSpent: Time(
               decimal: 5.75,
@@ -1363,7 +1363,7 @@ final sampleLast7DaysStats = Summaries(
         ],
       ),
       operatingSystems: OperatingSystems(
-        const [
+        [
           OperatingSystem(
             timeSpent: Time(
               decimal: 5.92,
@@ -1378,8 +1378,8 @@ final sampleLast7DaysStats = Summaries(
       date: DateTime.parse("2022-01-05"),
     ),
     DailyStats(
-      timeSpent: const Time(hours: 7, minutes: 29, decimal: 7.48),
-      projectsWorkedOn: const [
+      timeSpent: Time(hours: 7, minutes: 29, decimal: 7.48),
+      projectsWorkedOn: [
         Project(
           time: Time(hours: 7, minutes: 20, decimal: 7.33),
           name: "Waka Time App",
@@ -1396,7 +1396,7 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.26,
         )
       ],
-      editors: Editors(const [
+      editors: Editors([
         Editor(
           timeSpent: Time(
             decimal: 7.47,
@@ -1418,7 +1418,7 @@ final sampleLast7DaysStats = Summaries(
       ]),
       languages: Languages(
         [
-          const Language(
+          Language(
             timeSpent: Time(
               decimal: 6.98,
               hours: 6,
@@ -1427,7 +1427,7 @@ final sampleLast7DaysStats = Summaries(
             name: "Dart",
             percent: Percent.zero,
           ),
-          const Language(
+          Language(
             timeSpent: Time(
               decimal: 0.28,
               hours: 0,
@@ -1439,7 +1439,7 @@ final sampleLast7DaysStats = Summaries(
         ],
       ),
       operatingSystems: OperatingSystems(
-        const [
+        [
           OperatingSystem(
             timeSpent: Time(
               decimal: 7.48,
@@ -1454,8 +1454,8 @@ final sampleLast7DaysStats = Summaries(
       date: DateTime.parse("2022-01-06"),
     ),
     DailyStats(
-      timeSpent: const Time(hours: 4, minutes: 51, decimal: 4.85),
-      projectsWorkedOn: const [
+      timeSpent: Time(hours: 4, minutes: 51, decimal: 4.85),
+      projectsWorkedOn: [
         Project(
           time: Time(hours: 4, minutes: 35, decimal: 4.58),
           name: "Waka Time App",
@@ -1472,7 +1472,7 @@ final sampleLast7DaysStats = Summaries(
           percent: 1.57,
         )
       ],
-      editors: Editors(const [
+      editors: Editors([
         Editor(
           timeSpent: Time(
             decimal: 4.67,
@@ -1493,7 +1493,7 @@ final sampleLast7DaysStats = Summaries(
         )
       ]),
       languages: Languages(
-        const [
+        [
           Language(
             timeSpent: Time(
               decimal: 4.33,
@@ -1515,7 +1515,7 @@ final sampleLast7DaysStats = Summaries(
         ],
       ),
       operatingSystems: OperatingSystems(
-        const [
+        [
           OperatingSystem(
             timeSpent: Time(
               decimal: 4.85,
@@ -1530,8 +1530,8 @@ final sampleLast7DaysStats = Summaries(
       date: DateTime.parse("2022-01-07"),
     ),
     DailyStats(
-      timeSpent: const Time(hours: 2, minutes: 21, decimal: 2.35),
-      projectsWorkedOn: const [
+      timeSpent: Time(hours: 2, minutes: 21, decimal: 2.35),
+      projectsWorkedOn: [
         Project(
           time: Time(hours: 2, minutes: 10, decimal: 2.17),
           name: "Waka Time App",
@@ -1548,7 +1548,7 @@ final sampleLast7DaysStats = Summaries(
           percent: 2.31,
         )
       ],
-      editors: Editors(const [
+      editors: Editors([
         Editor(
           timeSpent: Time(
             decimal: 2.23,
@@ -1569,7 +1569,7 @@ final sampleLast7DaysStats = Summaries(
         )
       ]),
       languages: Languages(
-        const [
+        [
           Language(
             timeSpent: Time(
               decimal: 2.23,
@@ -1591,7 +1591,7 @@ final sampleLast7DaysStats = Summaries(
         ],
       ),
       operatingSystems: OperatingSystems(
-        const [
+        [
           OperatingSystem(
             timeSpent: Time(
               decimal: 2.35,
@@ -1606,8 +1606,8 @@ final sampleLast7DaysStats = Summaries(
       date: DateTime.parse("2022-01-08"),
     ),
     DailyStats(
-      timeSpent: const Time(hours: 2, minutes: 6, decimal: 2.1),
-      projectsWorkedOn: const [
+      timeSpent: Time(hours: 2, minutes: 6, decimal: 2.1),
+      projectsWorkedOn: [
         Project(
           time: Time(hours: 2, minutes: 2, decimal: 2.03),
           name: "Waka Time App",
@@ -1624,7 +1624,7 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.87,
         )
       ],
-      editors: Editors(const [
+      editors: Editors([
         Editor(
           timeSpent: Time(
             decimal: 2.08,
@@ -1645,7 +1645,7 @@ final sampleLast7DaysStats = Summaries(
         )
       ]),
       languages: Languages(
-        const [
+        [
           Language(
             timeSpent: Time(
               decimal: 2.08,
@@ -1667,7 +1667,7 @@ final sampleLast7DaysStats = Summaries(
         ],
       ),
       operatingSystems: OperatingSystems(
-        const [
+        [
           OperatingSystem(
             timeSpent: Time(
               decimal: 2.10,
@@ -1682,8 +1682,8 @@ final sampleLast7DaysStats = Summaries(
       date: DateTime.parse("2022-01-09"),
     ),
     DailyStats(
-      timeSpent: const Time(hours: 6, minutes: 1, decimal: 6.02),
-      projectsWorkedOn: const [
+      timeSpent: Time(hours: 6, minutes: 1, decimal: 6.02),
+      projectsWorkedOn: [
         Project(
           time: Time(hours: 5, minutes: 59, decimal: 5.98),
           name: "Waka Time App",
@@ -1695,7 +1695,7 @@ final sampleLast7DaysStats = Summaries(
           percent: 0.7,
         )
       ],
-      editors: Editors(const [
+      editors: Editors([
         Editor(
           timeSpent: Time(
             decimal: 6.02,
@@ -1707,7 +1707,7 @@ final sampleLast7DaysStats = Summaries(
         )
       ]),
       languages: Languages(
-        const [
+        [
           Language(
             timeSpent: Time(
               decimal: 6.02,
@@ -1720,7 +1720,7 @@ final sampleLast7DaysStats = Summaries(
         ],
       ),
       operatingSystems: OperatingSystems(
-        const [
+        [
           OperatingSystem(
             timeSpent: Time(
               decimal: 6.02,

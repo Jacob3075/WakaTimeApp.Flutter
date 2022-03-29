@@ -15,7 +15,7 @@ class Editor extends SecondaryStat {
           percent: percent,
         );
 
-  static const Editor none = Editor(
+  static Editor none = Editor(
     name: "-",
     timeSpent: Time.zero,
     percent: Percent.zero,

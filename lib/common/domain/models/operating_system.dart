@@ -15,7 +15,7 @@ class OperatingSystem extends SecondaryStat {
           percent: percent,
         );
 
-  static const OperatingSystem none = OperatingSystem(
+  static OperatingSystem none = OperatingSystem(
     name: "-",
     timeSpent: Time.zero,
     percent: Percent.zero,

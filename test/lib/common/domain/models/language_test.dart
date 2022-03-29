@@ -9,19 +9,19 @@ main() {
   late Language lang3;
 
   setUp(() {
-    lang1 = const Language(
+    lang1 = Language(
       name: "Stat 1",
       timeSpent: Time(hours: 1, minutes: 30, decimal: 1.5),
       percent: Percent.zero,
     );
 
-    lang2 = const Language(
+    lang2 = Language(
       name: "Stat 2",
       timeSpent: Time(hours: 0, minutes: 30, decimal: 0.5),
       percent: Percent.zero,
     );
 
-    lang3 = const Language(
+    lang3 = Language(
       name: "Stat 2",
       timeSpent: Time(hours: 0, minutes: 30, decimal: 0.5),
       percent: Percent.zero,
@@ -104,7 +104,7 @@ main() {
               lang2,
               lang2,
               lang2,
-              const Language(
+              Language(
                 percent: Percent.zero,
                 name: "Others",
                 timeSpent: Time(hours: 2, minutes: 30, decimal: 2.5),

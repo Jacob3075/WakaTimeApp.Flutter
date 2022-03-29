@@ -15,35 +15,35 @@ main() {
   test("languages used function returns stats for all the languages used in the project", () {
     final testValues = [
       _createDailyProjectStats(
-        const [
+        [
           Language(
             name: "L1",
             timeSpent: Time(hours: 2, minutes: 30, decimal: 2.5),
-            percent: Percent(2.5, 6.75),
+            percent: const Percent(2.5, 6.75),
           ),
           Language(
             name: "L2",
             timeSpent: Time(hours: 1, minutes: 15, decimal: 1.25),
-            percent: Percent(1.25, 6.75),
+            percent: const Percent(1.25, 6.75),
           ),
           Language(
             name: "L3",
             timeSpent: Time(hours: 3, minutes: 0, decimal: 3.0),
-            percent: Percent(3, 6.75),
+            percent: const Percent(3, 6.75),
           ),
         ],
       ),
       _createDailyProjectStats(
-        const [
+        [
           Language(
             name: "L1",
             timeSpent: Time(hours: 1, minutes: 15, decimal: 1.25),
-            percent: Percent(1.25, 4.25),
+            percent: const Percent(1.25, 4.25),
           ),
           Language(
             name: "L2",
             timeSpent: Time(hours: 3, minutes: 0, decimal: 3.0),
-            percent: Percent(3, 4.25),
+            percent: const Percent(3, 4.25),
           ),
         ],
       )
@@ -52,21 +52,21 @@ main() {
     expect(
       projectSummaries.languages,
       Languages(
-        const [
+        [
           Language(
             name: "L2",
             timeSpent: Time(hours: 4, minutes: 15, decimal: 4.25),
-            percent: Percent(4.25, 11),
+            percent: const Percent(4.25, 11),
           ),
           Language(
             name: "L1",
             timeSpent: Time(hours: 3, minutes: 45, decimal: 3.75),
-            percent: Percent(3.75, 11),
+            percent: const Percent(3.75, 11),
           ),
           Language(
             name: "L3",
             timeSpent: Time(hours: 3, minutes: 0, decimal: 3.0),
-            percent: Percent(3, 11),
+            percent: const Percent(3, 11),
           ),
         ],
       ),

@@ -379,13 +379,13 @@ const sampleProjectStatsJson = """{
 """;
 
 final sampleProjectStatsData = ProjectSummaries(
-  totalTime: const Time(hours: 149, minutes: 37, decimal: 149.62),
+  totalTime: Time(hours: 149, minutes: 37, decimal: 149.62),
   dailyProjectStats: [
     DailyProjectStats(
-      timeSpent: const Time(hours: 2, minutes: 56, decimal: 2.93),
+      timeSpent: Time(hours: 2, minutes: 56, decimal: 2.93),
       entities: [],
       languages: Languages(
-        const [
+        [
           Language(
             timeSpent: Time(
               decimal: 2.27,
@@ -424,7 +424,7 @@ final sampleProjectStatsData = ProjectSummaries(
           )
         ],
       ),
-      editors: Editors(const [
+      editors: Editors([
         Editor(
           timeSpent: Time(
             hours: 2,
@@ -436,7 +436,7 @@ final sampleProjectStatsData = ProjectSummaries(
         )
       ]),
       operatingSystems: OperatingSystems(
-        const [
+        [
           OperatingSystem(
             timeSpent: Time(
               decimal: 2.93,
@@ -451,10 +451,10 @@ final sampleProjectStatsData = ProjectSummaries(
       date: DateTime.parse("2021-08-30"),
     ),
     DailyProjectStats(
-      timeSpent: const Time(hours: 5, minutes: 11, decimal: 5.18),
+      timeSpent: Time(hours: 5, minutes: 11, decimal: 5.18),
       entities: [],
       languages: Languages(
-        const [
+        [
           Language(
             timeSpent: Time(
               decimal: 5.12,
@@ -493,7 +493,7 @@ final sampleProjectStatsData = ProjectSummaries(
           ),
         ],
       ),
-      editors: Editors(const [
+      editors: Editors([
         Editor(
           timeSpent: Time(
             hours: 5,
@@ -505,7 +505,7 @@ final sampleProjectStatsData = ProjectSummaries(
         )
       ]),
       operatingSystems: OperatingSystems(
-        const [
+        [
           OperatingSystem(
             timeSpent: Time(
               hours: 5,
