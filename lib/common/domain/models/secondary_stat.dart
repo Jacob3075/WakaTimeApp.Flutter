@@ -15,6 +15,12 @@ abstract class SecondaryStat {
 
   SecondaryStat operator +(SecondaryStat? other);
 
+  SecondaryStat copyWith({
+    String? name,
+    Time? timeSpent,
+    Percent? percent,
+  });
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||

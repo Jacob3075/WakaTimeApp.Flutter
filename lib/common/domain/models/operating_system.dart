@@ -15,12 +15,6 @@ class OperatingSystem extends SecondaryStat {
           percent: percent,
         );
 
-  factory OperatingSystem.convertFromSuper(SecondaryStat secondaryStat) => OperatingSystem(
-        name: secondaryStat.name,
-        timeSpent: secondaryStat.timeSpent,
-        percent: secondaryStat.percent,
-      );
-
   static const OperatingSystem none = OperatingSystem(
     name: "-",
     timeSpent: Time.zero,
@@ -33,13 +27,25 @@ class OperatingSystem extends SecondaryStat {
         timeSpent: timeSpent + (other?.timeSpent ?? Time.zero),
         percent: percent + (other?.percent ?? Percent.zero),
       );
+
+  @override
+  OperatingSystem copyWith({
+    String? name,
+    Time? timeSpent,
+    Percent? percent,
+  }) =>
+      OperatingSystem(
+        name: name ?? this.name,
+        timeSpent: timeSpent ?? this.timeSpent,
+        percent: percent ?? this.percent,
+      );
 }
 
 class OperatingSystems extends SecondaryStats<OperatingSystem> {
   OperatingSystems(Iterable<OperatingSystem> values) : super(values);
 
   factory OperatingSystems.convertFromSuper(Iterable<SecondaryStat> secondaryStats) =>
-      secondaryStats.map(OperatingSystem.convertFromSuper).let(OperatingSystems.new);
+      secondaryStats.map((it) => it as OperatingSystem).let(OperatingSystems.new);
 
   factory OperatingSystems.mergeDuplicates(Iterable<SecondaryStat> values) =>
       SecondaryStats.mergeStatsByName(values).let(OperatingSystems.convertFromSuper);

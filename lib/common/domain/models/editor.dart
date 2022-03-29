@@ -15,12 +15,6 @@ class Editor extends SecondaryStat {
           percent: percent,
         );
 
-  factory Editor.convertFromSuper(SecondaryStat secondaryStat) => Editor(
-        name: secondaryStat.name,
-        timeSpent: secondaryStat.timeSpent,
-        percent: secondaryStat.percent,
-      );
-
   static const Editor none = Editor(
     name: "-",
     timeSpent: Time.zero,
@@ -33,13 +27,25 @@ class Editor extends SecondaryStat {
         timeSpent: timeSpent + (other?.timeSpent ?? Time.zero),
         percent: percent + (other?.percent ?? Percent.zero),
       );
+
+  @override
+  Editor copyWith({
+    String? name,
+    Time? timeSpent,
+    Percent? percent,
+  }) =>
+      Editor(
+        name: name ?? this.name,
+        timeSpent: timeSpent ?? this.timeSpent,
+        percent: percent ?? this.percent,
+      );
 }
 
 class Editors extends SecondaryStats<Editor> {
   Editors(Iterable<Editor> values) : super(values);
 
   factory Editors.convertFromSuper(Iterable<SecondaryStat> secondaryStats) =>
-      secondaryStats.map(Editor.convertFromSuper).let(Editors.new);
+      secondaryStats.map((it) => it as Editor).let(Editors.new);
 
   factory Editors.mergeDuplicates(Iterable<SecondaryStat> values) =>
       SecondaryStats.mergeStatsByName(values).let(Editors.convertFromSuper);

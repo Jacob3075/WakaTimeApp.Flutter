@@ -61,12 +61,9 @@ class ProjectSummariesMapper extends BaseDtoMapper<ProjectSummaries, ProjectSumm
       .map(_updatePercentOfStat)
       .let(Editors.mergeDuplicates);
 
-  // FIXME: CHANGE LANGUAGE TO A NEW GENERAL CLASS (USE COPY_WITH)
-  SecondaryStat _updatePercentOfStat(SecondaryStat it) => Language(
-    name: it.name,
-        timeSpent: it.timeSpent,
+  T _updatePercentOfStat<T extends SecondaryStat>(T it) => it.copyWith(
         percent: Percent(it.percent.numerator, _totalTime.totalSeconds),
-      );
+      ) as T;
 
   @override
   ProjectSummariesDTO fromModel(ProjectSummaries model) => throw UnimplementedError();

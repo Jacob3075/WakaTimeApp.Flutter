@@ -15,12 +15,6 @@ class Language extends SecondaryStat {
           percent: percent,
         );
 
-  factory Language.convertFromSuper(SecondaryStat secondaryStat) => Language(
-        name: secondaryStat.name,
-        timeSpent: secondaryStat.timeSpent,
-        percent: secondaryStat.percent,
-      );
-
   static const Language none = Language(
     name: "-",
     timeSpent: Time.zero,
@@ -33,13 +27,25 @@ class Language extends SecondaryStat {
         timeSpent: timeSpent + (other?.timeSpent ?? Time.zero),
         percent: percent + (other?.percent ?? Percent.zero),
       );
+
+  @override
+  Language copyWith({
+    String? name,
+    Time? timeSpent,
+    Percent? percent,
+  }) =>
+      Language(
+        name: name ?? this.name,
+        timeSpent: timeSpent ?? this.timeSpent,
+        percent: percent ?? this.percent,
+      );
 }
 
 class Languages extends SecondaryStats<Language> {
   Languages(Iterable<Language> values) : super(values);
 
   factory Languages.convertFromSuper(Iterable<SecondaryStat> secondaryStats) =>
-      secondaryStats.map(Language.convertFromSuper).let(Languages.new);
+      secondaryStats.map((it) => it as Language).let(Languages.new);
 
   factory Languages.mergeDuplicates(Iterable<SecondaryStat> values) =>
       SecondaryStats.mergeStatsByName(values).let(Languages.convertFromSuper);
