@@ -77,7 +77,7 @@ main() {
     group("Get most used lang", () {
       test(
         "returns None when langs are empty",
-        () => expect(Languages([]).mostUsed, null),
+        () => expect(Languages([]).mostUsed, Language.none),
       );
 
       test(

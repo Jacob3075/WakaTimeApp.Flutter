@@ -34,4 +34,8 @@ class DailyProjectStats extends BaseDailyStats {
 
   @override
   int get hashCode => Object.hash(const DeepCollectionEquality().hash(entities), super.hashCode);
+
+  @override
+  String toString() => "DailyStats(timeSpent: $timeSpent, date: $date, entities: $entities, "
+      "languages: $languages, editors: $editors, operatingSystems: $operatingSystems)";
 }

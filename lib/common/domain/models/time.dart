@@ -87,5 +87,5 @@ class Time {
   int get hashCode => hours.hashCode ^ minutes.hashCode ^ decimal.hashCode;
 
   @override
-  String toString() => formattedPrint();
+  String toString() => decimal.toString();
 }

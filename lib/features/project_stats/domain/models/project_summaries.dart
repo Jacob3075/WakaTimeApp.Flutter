@@ -14,6 +14,11 @@ class ProjectSummaries {
   final OperatingSystems operatingSystems;
   final Editors editors;
 
+  @override
+  String toString() =>
+      "ProjectSummaries(totalTime:$totalTime, dailyProjectStats: dailyProjectStats, $range: range,"
+      " languages: $languages, operatingSystems: $operatingSystems, editors: $editors)";
+
   ProjectSummaries({
     required this.totalTime,
     required Iterable<DailyProjectStats> dailyProjectStats,

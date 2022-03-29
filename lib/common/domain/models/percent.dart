@@ -7,7 +7,7 @@ class Percent {
   final double numerator;
   final double denominator;
 
-  double get value => ((numerator / denominator) * 100).roundToDecimal(2);
+  double get value => this == zero ? 0 : ((numerator / denominator) * 100).roundToDecimal(2);
 
   const Percent(this.numerator, this.denominator);
 

@@ -393,7 +393,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 16,
             ),
             name: "Kotlin",
-            percent: Percent.zero,
+            percent: const Percent(8160.541, 10602.609),
           ),
           Language(
             timeSpent: Time(
@@ -402,7 +402,7 @@ final sampleProjectStatsData = ProjectSummaries(
               decimal: 0.62,
             ),
             name: "Groovy",
-            percent: Percent.zero,
+            percent: const Percent(2254.391, 10602.609),
           ),
           Language(
             timeSpent: Time(
@@ -411,7 +411,7 @@ final sampleProjectStatsData = ProjectSummaries(
               hours: 0,
             ),
             name: "VimL",
-            percent: Percent.zero,
+            percent: const Percent(187.561, 10602.609),
           ),
           Language(
             timeSpent: Time(
@@ -420,7 +420,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 0,
             ),
             name: "XML",
-            percent: Percent.zero,
+            percent: const Percent(0.116, 10602.609),
           )
         ],
       ),
@@ -432,7 +432,7 @@ final sampleProjectStatsData = ProjectSummaries(
             decimal: 2.93,
           ),
           name: "Android Studio",
-          percent: Percent.zero,
+          percent: const Percent(10602.609, 10602.609),
         )
       ]),
       operatingSystems: OperatingSystems(
@@ -444,7 +444,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 56,
             ),
             name: "Linux",
-            percent: Percent.zero,
+            percent: const Percent(10602.609, 10602.609),
           )
         ],
       ),
@@ -462,7 +462,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 7,
             ),
             name: "Dart",
-            percent: Percent.zero,
+            percent: const Percent(18463.615, 18718.164),
           ),
           Language(
             timeSpent: Time(
@@ -471,7 +471,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 2,
             ),
             name: "YAML",
-            percent: Percent.zero,
+            percent: const Percent(162.881, 18718.164),
           ),
           Language(
             timeSpent: Time(
@@ -480,7 +480,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 0,
             ),
             name: "textmate",
-            percent: Percent.zero,
+            percent: const Percent(52.503, 18718.164),
           ),
           Language(
             timeSpent: Time(
@@ -489,7 +489,7 @@ final sampleProjectStatsData = ProjectSummaries(
               minutes: 0,
             ),
             name: "Java",
-            percent: Percent.zero,
+            percent: const Percent(39.165, 18718.164),
           ),
         ],
       ),
@@ -501,7 +501,7 @@ final sampleProjectStatsData = ProjectSummaries(
             decimal: 5.18,
           ),
           name: "IntelliJ",
-          percent: Percent.zero,
+          percent: const Percent(18718.164, 18718.164),
         )
       ]),
       operatingSystems: OperatingSystems(
@@ -513,16 +513,78 @@ final sampleProjectStatsData = ProjectSummaries(
               decimal: 5.18,
             ),
             name: "Linux",
-            percent: Percent.zero,
+            percent: const Percent(18718.164, 18718.164),
           )
         ],
       ),
       date: DateTime.parse("2022-01-12"),
     ),
   ],
-  languages: Languages([]),
-  editors: Editors([]),
-  operatingSystems: OperatingSystems([]),
+  languages: Languages([
+    Language(
+      name: "Dart",
+      timeSpent: Time(hours: 5, minutes: 7, decimal: 5.12),
+      percent: const Percent(18463.615, 538620.0),
+    ),
+    Language(
+      name: "Kotlin",
+      timeSpent: Time(hours: 2, minutes: 16, decimal: 2.27),
+      percent: const Percent(8160.541, 538620.0),
+    ),
+    Language(
+      name: "Groovy",
+      timeSpent: Time(hours: 0, minutes: 37, decimal: 0.62),
+      percent: const Percent(2254.391, 538620.0),
+    ),
+    Language(
+      name: "VimL",
+      timeSpent: Time(hours: 0, minutes: 3, decimal: 0.05),
+      percent: const Percent(187.561, 538620.0),
+    ),
+    Language(
+      name: "YAML",
+      timeSpent: Time(hours: 0, minutes: 2, decimal: 0.03),
+      percent: const Percent(162.881, 538620.0),
+    ),
+    Language(
+      name: "Java",
+      timeSpent: Time(hours: 0, minutes: 0, decimal: 0),
+      percent: const Percent(39.165, 538620.0),
+    ),
+    Language(
+      name: "textmate",
+      timeSpent: Time(hours: 0, minutes: 0, decimal: 0),
+      percent: const Percent(52.503, 538620.0),
+    ),
+    Language(
+      name: "XML",
+      timeSpent: Time(hours: 0, minutes: 0, decimal: 0),
+      percent: const Percent(0.116, 538620.0),
+    )
+  ]),
+  editors: Editors([
+    Editor(
+      name: "IntelliJ",
+      timeSpent: Time(hours: 5, minutes: 11, decimal: 5.18),
+      percent: const Percent(18718.164, 538620.0),
+    ),
+    Editor(
+      name: "Android Studio",
+      timeSpent: Time(
+        hours: 2,
+        minutes: 56,
+        decimal: 2.93,
+      ),
+      percent: const Percent(10602.609, 538620.0),
+    )
+  ]),
+  operatingSystems: OperatingSystems([
+    OperatingSystem(
+      name: "Linux",
+      timeSpent: Time(hours: 8, minutes: 7, decimal: 8.11),
+      percent: const Percent(29320.773, 538620.0),
+    ),
+  ]),
   range: StatsRange(
     endDate: DateTime.parse("2022-01-12T18:29:59Z"),
     startDate: DateTime.parse("2021-08-29T18:30:00Z"),
