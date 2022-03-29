@@ -1,3 +1,5 @@
+import "dart:math";
+
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
 
@@ -11,7 +13,10 @@ class Percent {
 
   static const Percent zero = Percent(0, 0);
 
-  Percent operator +(Percent other) => Percent(numerator + other.numerator, denominator);
+  /// Added the [numerator] values of this and [other],
+  /// Finds max of [denominator] and [other.denominator] because [Percent.zero] can be added sometimes
+  Percent operator +(Percent other) =>
+      Percent(numerator + other.numerator, max(denominator, other.denominator));
 
   Percent merge(Percent other) =>
       Percent(numerator + other.numerator, denominator + other.denominator);
