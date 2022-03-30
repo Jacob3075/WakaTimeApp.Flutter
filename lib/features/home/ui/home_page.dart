@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_staggered_animations/flutter_staggered_animations.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/models/user_details.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
@@ -43,28 +44,33 @@ class HomePage extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Column(
-            children: [
-              SizedBox(height: 24.h),
-              UserDetailsSection(userDetails: userDetails),
-              SizedBox(height: 20.h),
-              StatsCard.valueAsText(
-                gradient: AppGradients.primary,
-                text: "Total Time Spent\nToday",
-                valueText: last7daysStats.currentDay.timeSpent.formattedPrint(),
-                icon: AppAssets.icons.time,
-                cardHeight: 72.h,
-                borderRadius: BorderRadius.circular(16.r),
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                margin: EdgeInsets.symmetric(horizontal: 12.w),
-              ),
-              SizedBox(height: 16.h),
-              RecentProjectsSection(summaries: last7daysStats),
-              SizedBox(height: 4.h),
-              WeeklyReportSection(summaries: last7daysStats),
-              SizedBox(height: 20.h),
-              OtherDailyStatsSection(summaries: last7daysStats),
-              SizedBox(height: 20.h),
-            ],
+            children: AnimationConfiguration.toStaggeredList(
+              duration: const Duration(milliseconds: 800),
+              childAnimationBuilder: (widget) =>
+                  SlideAnimation(verticalOffset: ScreenUtil().screenHeight, child: widget),
+              children: [
+                SizedBox(height: 24.h),
+                UserDetailsSection(userDetails: userDetails),
+                SizedBox(height: 20.h),
+                StatsCard.valueAsText(
+                  gradient: AppGradients.primary,
+                  text: "Total Time Spent\nToday",
+                  valueText: last7daysStats.currentDay.timeSpent.formattedPrint(),
+                  icon: AppAssets.icons.time,
+                  cardHeight: 72.h,
+                  borderRadius: BorderRadius.circular(16.r),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  margin: EdgeInsets.symmetric(horizontal: 12.w),
+                ),
+                SizedBox(height: 16.h),
+                ...RecentProjectsSection(summaries: last7daysStats)(),
+                SizedBox(height: 4.h),
+                WeeklyReportSection(summaries: last7daysStats),
+                SizedBox(height: 20.h),
+                ...OtherDailyStatsSection(summaries: last7daysStats)(),
+                SizedBox(height: 20.h),
+              ],
+            ),
           ),
         ),
       );

@@ -5,27 +5,24 @@ import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart" as app_colors;
 import "package:waka_time_app/common/ui/widgets/stats_card.dart";
 
-class OtherDailyStatsSection extends StatelessWidget {
+class OtherDailyStatsSection {
   final Summaries summaries;
 
   const OtherDailyStatsSection({
-    Key? key,
     required this.summaries,
-  }) : super(key: key);
+  });
 
-  @override
-  Widget build(BuildContext context) => SizedBox(
-        width: double.infinity,
-        child: Column(
+  List<Widget> call() => [
+        Column(
           children: [
-            _buildSectionHeader(),
+            _sectionHeader(),
             SizedBox(height: 12.h),
-            _buildStatCards(),
           ],
         ),
-      );
+        ..._statCards(),
+      ];
 
-  Widget _buildSectionHeader() => Row(
+  Widget _sectionHeader() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
@@ -46,9 +43,8 @@ class OtherDailyStatsSection extends StatelessWidget {
         ],
       );
 
-  Widget _buildStatCards() => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.w),
-        child: Column(
+  Iterable<Widget> _statCards() => [
+        Column(
           children: [
             StatsCard.valueAsText(
               gradient: app_colors.AppGradients.greenCyan,
@@ -57,6 +53,10 @@ class OtherDailyStatsSection extends StatelessWidget {
               icon: AppAssets.icons.codeFile,
             ),
             SizedBox(height: 14.h),
+          ],
+        ),
+        Column(
+          children: [
             StatsCard.valueAsText(
               gradient: app_colors.AppGradients.blueCyan,
               text: "Most Used Editor",
@@ -64,13 +64,16 @@ class OtherDailyStatsSection extends StatelessWidget {
               icon: AppAssets.icons.laptop,
             ),
             SizedBox(height: 14.h),
-            StatsCard.valueAsText(
-              gradient: app_colors.AppGradients.purpleCyanDark,
-              text: "Most Used OS",
-              valueText: summaries.currentDay.operatingSystems.mostUsed.name,
-              icon: AppAssets.icons.code,
-            ),
           ],
         ),
-      );
+        StatsCard.valueAsText(
+          gradient: app_colors.AppGradients.purpleCyanDark,
+          text: "Most Used OS",
+          valueText: summaries.currentDay.operatingSystems.mostUsed.name,
+          icon: AppAssets.icons.code,
+        ),
+      ].map(_nestedPadding);
+
+  Widget _nestedPadding(Widget child) =>
+      Padding(padding: EdgeInsets.symmetric(horizontal: 12.w), child: child);
 }

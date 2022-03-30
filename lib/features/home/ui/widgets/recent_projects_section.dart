@@ -1,30 +1,27 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/flutter_svg.dart";
-import "package:waka_time_app/common/domain/models/common_models.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/features/home/ui/widgets/recent_project_list_item.dart";
 
-class RecentProjectsSection extends StatelessWidget {
-  final Summaries summaries;
+class RecentProjectsSection {
+  final Summaries _summaries;
 
-  const RecentProjectsSection({Key? key, required this.summaries}) : super(key: key);
+  const RecentProjectsSection({required Summaries summaries}) : _summaries = summaries;
 
-  @override
-  Widget build(BuildContext context) => SizedBox(
-        width: double.infinity,
-        child: Column(
+  List<Widget> call() => [
+        Column(
           children: [
-            _buildSectionHeader(),
+            _sectionHeader(),
             SizedBox(height: 12.h),
-            _buildProjectList(summaries.currentDay.projectsWorkedOn, context),
           ],
         ),
-      );
+        ..._getItems().map(_nestedPadding).toList(),
+      ];
 
-  Widget _buildSectionHeader() => Row(
+  Widget _sectionHeader() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
@@ -45,16 +42,18 @@ class RecentProjectsSection extends StatelessWidget {
         ],
       );
 
-  Widget _buildProjectList(List<Project> projects, BuildContext context) => Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.w),
-        child: projects.isEmpty
-            ? SvgPicture.asset(
-                AppAssets.illustrations.randomEmptyIllustration,
-                height: 250.h,
-              )
-            : Column(
-                children:
-                    projects.take(3).map((item) => RecentProjectListItem(project: item)).toList(),
-              ),
-      );
+  List<Widget> _getItems() {
+    final projectsWorkedOn = _summaries.currentDay.projectsWorkedOn;
+    return projectsWorkedOn.isEmpty
+        ? [
+            SvgPicture.asset(
+              AppAssets.illustrations.randomEmptyIllustration,
+              height: 250.h,
+            )
+          ]
+        : projectsWorkedOn.take(3).map((item) => RecentProjectListItem(project: item)).toList();
+  }
+
+  Widget _nestedPadding(Widget child) =>
+      Padding(padding: EdgeInsets.symmetric(horizontal: 12.w), child: child);
 }
