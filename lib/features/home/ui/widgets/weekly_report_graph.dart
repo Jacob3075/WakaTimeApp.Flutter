@@ -12,7 +12,7 @@ class WeeklyReportGraph extends BaseStatsChart {
 
   @override
   Widget build(BuildContext context) => Container(
-        margin: EdgeInsets.only(top: 10.h, right: 10.w),
+        margin: EdgeInsets.only(top: 4.h, right: 10.w, left: 10.w, bottom: 8.h),
         child: BarChart(
           BarChartData(
             titlesData: titlesData(),

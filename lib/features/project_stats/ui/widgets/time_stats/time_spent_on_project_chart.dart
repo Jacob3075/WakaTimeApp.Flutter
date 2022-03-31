@@ -14,9 +14,8 @@ class TimeSpentOnProjectChart extends BaseStatsChart {
 
   @override
   Widget build(BuildContext context) => Container(
-        margin: EdgeInsets.only(top: 4.h, right: 10.w),
+        margin: EdgeInsets.only(top: 4.h, right: 10.w, left: 10.w, bottom: 8.h),
         height: 200.h,
-        width: double.infinity,
         child: BarChart(
           BarChartData(
             titlesData: titlesData(),
@@ -30,7 +29,7 @@ class TimeSpentOnProjectChart extends BaseStatsChart {
 
   @override
   Widget getBottomTitles(double index, TitleMeta titleMeta) =>
-      index.toInt() % 4 == 0 ? super.getBottomTitles(index, titleMeta) : const Text("");
+      index.toInt() % 4 == 0 ? super.getBottomTitles(index, titleMeta) : const SizedBox.shrink();
 
   @override
   List<BaseDailyStats> get displayedStats => stats.takeLast(graphLength + 1);

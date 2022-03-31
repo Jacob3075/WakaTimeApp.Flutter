@@ -62,34 +62,26 @@ abstract class BaseStatsChart extends StatelessWidget {
   FlTitlesData titlesData() => FlTitlesData(
         topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
         rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-        leftTitles: axisTitlesData(getTitlesWidget: getLeftTitles),
-        bottomTitles: axisTitlesData(getTitlesWidget: getBottomTitles),
-      );
-
-  AxisTitles axisTitlesData({
-    Widget Function(double index, TitleMeta titleMeta)? getTitlesWidget,
-    Widget? axisNameWidget,
-  }) =>
-      AxisTitles(
-        axisNameWidget: axisNameWidget ?? getAxisNameWidget(),
-        sideTitles: SideTitles(
-          showTitles: true,
-          getTitlesWidget: getTitlesWidget,
+        leftTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            getTitlesWidget: getLeftTitles,
+          ),
+        ),
+        bottomTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            getTitlesWidget: getBottomTitles,
+          ),
         ),
       );
 
-  @deprecated
-  Widget getAxisNameWidget({double margin = 8, String name = ""}) => Container(
-        margin: EdgeInsets.all(margin),
+  Widget getBottomTitles(double index, TitleMeta titleMeta) => Padding(
+        padding: EdgeInsets.only(top: 4.h),
         child: Text(
-          name,
+          DateFormat("E").format(displayedStats[index.toInt()].date),
           style: titlesStyle,
         ),
-      );
-
-  Widget getBottomTitles(double index, TitleMeta titleMeta) => Text(
-        DateFormat("E").format(displayedStats[index.toInt()].date),
-        style: titlesStyle,
       );
 
   Widget getLeftTitles(double value, TitleMeta titleMeta) => value == titleMeta.max
