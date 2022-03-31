@@ -14,12 +14,12 @@ class TimeSpentOnProjectChart extends BaseStatsChart {
 
   @override
   Widget build(BuildContext context) => Container(
-        margin: EdgeInsets.only(top: 18.h, right: 10.w),
-        height: 180.h,
+        margin: EdgeInsets.only(top: 4.h, right: 10.w),
+        height: 200.h,
         width: double.infinity,
         child: BarChart(
           BarChartData(
-            titlesData: titlesData(margin: 8),
+            titlesData: titlesData(),
             barTouchData: barTouchData,
             barGroups: chartData,
             gridData: gridData,
@@ -29,8 +29,8 @@ class TimeSpentOnProjectChart extends BaseStatsChart {
       );
 
   @override
-  String getBottomTitles(double index) =>
-      index.toInt() % 4 == 0 ? super.getBottomTitles(index) : "";
+  Widget getBottomTitles(double index, TitleMeta titleMeta) =>
+      index.toInt() % 4 == 0 ? super.getBottomTitles(index, titleMeta) : const Text("");
 
   @override
   List<BaseDailyStats> get displayedStats => stats.takeLast(graphLength + 1);

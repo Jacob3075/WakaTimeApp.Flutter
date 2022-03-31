@@ -57,7 +57,7 @@ class _TimeStatsPageState extends State<TimeStatsPage> with AutomaticKeepAliveCl
           TimeSpentOnProjectChart(
             stats: widget.projectSummaries.dailyProjectStats,
           ),
-          SizedBox(height: 18.h),
+          SizedBox(height: 0.h),
         ],
       );
 

@@ -13,12 +13,6 @@ abstract class BaseStatsChart extends StatelessWidget {
 
   List<BaseDailyStats> get displayedStats;
 
-  String getBottomTitles(double index) =>
-      DateFormat("E").format(displayedStats[index.toInt()].date);
-
-  String getLeftTitles(double value) =>
-      value.isInt ? "${value.toInt()} H" : Time.fromDecimal(value).formattedPrint();
-
   FlGridData get gridData => FlGridData(
         show: true,
         drawHorizontalLine: true,
@@ -34,8 +28,8 @@ abstract class BaseStatsChart extends StatelessWidget {
             x: index,
             barRods: [
               BarChartRodData(
-                colors: [AppColors.accentIcons],
-                y: item.timeSpent.decimal,
+                color: AppColors.accentIcons,
+                toY: item.timeSpent.decimal,
                 width: 10,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(6.r),
@@ -60,28 +54,48 @@ abstract class BaseStatsChart extends StatelessWidget {
         ),
       );
 
-  FlTitlesData titlesData({double margin = 4}) => FlTitlesData(
-        topTitles: SideTitles(showTitles: false),
-        rightTitles: SideTitles(showTitles: false),
-        leftTitles: SideTitles(
+  TextStyle get titlesStyle => TextStyle(
+        fontSize: 10.sp,
+        fontWeight: FontWeight.w300,
+      );
+
+  FlTitlesData titlesData() => FlTitlesData(
+        topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        leftTitles: axisTitlesData(getTitlesWidget: getLeftTitles),
+        bottomTitles: axisTitlesData(getTitlesWidget: getBottomTitles),
+      );
+
+  AxisTitles axisTitlesData({
+    Widget Function(double index, TitleMeta titleMeta)? getTitlesWidget,
+    Widget? axisNameWidget,
+  }) =>
+      AxisTitles(
+        axisNameWidget: axisNameWidget ?? getAxisNameWidget(),
+        sideTitles: SideTitles(
           showTitles: true,
-          margin: margin,
-          getTextStyles: (_, __) => TextStyle(
-            fontSize: 10.sp,
-            fontWeight: FontWeight.w300,
-          ),
-          getTitles: getLeftTitles,
-          checkToShowTitle: (min, max, side, interval, value) => value == max ? false : true,
-        ),
-        bottomTitles: SideTitles(
-          showTitles: true,
-          getTitles: getBottomTitles,
-          getTextStyles: (_, __) => TextStyle(
-            fontSize: 10.sp,
-            fontWeight: FontWeight.w300,
-          ),
+          getTitlesWidget: getTitlesWidget,
         ),
       );
 
-  bool valueDivisibleByInterval(double value, double interval) => value % interval == 0;
+  @deprecated
+  Widget getAxisNameWidget({double margin = 8, String name = ""}) => Container(
+        margin: EdgeInsets.all(margin),
+        child: Text(
+          name,
+          style: titlesStyle,
+        ),
+      );
+
+  Widget getBottomTitles(double index, TitleMeta titleMeta) => Text(
+        DateFormat("E").format(displayedStats[index.toInt()].date),
+        style: titlesStyle,
+      );
+
+  Widget getLeftTitles(double value, TitleMeta titleMeta) => value == titleMeta.max
+      ? const SizedBox.shrink()
+      : Text(
+          value.isInt ? "${value.toInt()} H" : Time.fromDecimal(value).formattedPrint(),
+          style: titlesStyle,
+        );
 }
