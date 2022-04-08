@@ -20,6 +20,7 @@ class GetAllProjectsUC extends BaseUseCase<_P, _R> {
 
   GetAllProjectsUC({required http.Client client}) : _client = client;
 
+  // TODO: HANDLE PAGINATED DATA
   @override
   call(_P parameters) async => await getDataOrErrorFromApi(
         apiCall: () => _apiCall(parameters),

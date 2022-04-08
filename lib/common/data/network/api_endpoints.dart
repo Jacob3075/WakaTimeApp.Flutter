@@ -16,7 +16,7 @@ abstract class ApiEndpoints {
       );
 
   static Uri getAllProjects(String apiKey) =>
-      Uri.parse("${Constants.wakaTimeApiUrl}/users/current/projects?apiKey=$apiKey");
+      Uri.parse("${Constants.wakaTimeApiUrl}/users/current/projects?api_key=$apiKey");
 
   static String _getQueryStringFromMap(Map<String, dynamic> parameters) =>
       parameters.entries.map((item) => "${item.key}=${item.value.toString()}").toList().join("&");
