@@ -15,7 +15,6 @@ import "package:waka_time_app/common/utils/extensions.dart";
 import "package:waka_time_app/common/utils/utils.dart";
 
 part "get_project_details_uc.freezed.dart";
-
 part "get_project_details_uc.g.dart";
 
 typedef _P = GetProjectDetailsUCParameters;
