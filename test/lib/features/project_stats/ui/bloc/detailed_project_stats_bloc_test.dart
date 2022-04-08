@@ -86,7 +86,7 @@ main() {
     blocTest(
       "and getting project stats returns an error, error state is emitted",
       setUp: () {
-        errors = const Errors.networkError(NetworkErrors.network());
+        errors = const Errors.networkError(NetworkErrors.noConnection());
         when(getProjectStats(any)).thenAnswer((realInvocation) async => Left(errors));
       },
       build: () => projectStatsBloc,

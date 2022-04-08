@@ -21,12 +21,13 @@ Future<Either<Errors, T>> getDataOrErrorFromApi<T>({
       successResponseProcessing: successResponseProcessing,
     );
   } on SocketException {
-    result = const Left(Errors.networkError(NetworkErrors.network()));
+    result = const Left(Errors.networkError(NetworkErrors.noConnection()));
   } on HttpException {
-    result = const Left(Errors.networkError(NetworkErrors.network()));
+    result = const Left(Errors.networkError(NetworkErrors.noConnection()));
   } on FormatException catch (exception) {
     result = Left(
-        Errors.networkError(NetworkErrors(errorMessage: "Format Exception, ${exception.message}")));
+      Errors.networkError(NetworkErrors(errorMessage: "Format Exception, ${exception.message}")),
+    );
   } on Exception catch (exception) {
     result = Left(Errors.networkError(NetworkErrors(errorMessage: exception.toString())));
   }

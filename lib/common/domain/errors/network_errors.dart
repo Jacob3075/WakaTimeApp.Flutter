@@ -7,7 +7,7 @@ part "network_errors.g.dart";
 class NetworkErrors with _$NetworkErrors {
   const factory NetworkErrors({required String errorMessage}) = Data;
 
-  const factory NetworkErrors.network() = _Network;
+  const factory NetworkErrors.noConnection() = _NoConnection;
 
   factory NetworkErrors.unauthorized() =>
       const _ClientError(errorMessage: "Unauthorized", code: 401);

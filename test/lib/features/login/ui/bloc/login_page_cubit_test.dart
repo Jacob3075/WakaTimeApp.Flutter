@@ -50,7 +50,7 @@ void main() {
         "and api request returns NetworkError, then loading and error states should be emitted",
         build: () => cubit,
         setUp: () => when(loginApi(any)).thenAnswer(
-          (realInvocation) async => const Left(Errors.networkError(NetworkErrors.network())),
+          (realInvocation) async => const Left(Errors.networkError(NetworkErrors.noConnection())),
         ),
         act: (bloc) async => await bloc.login("api key"),
         expect: () => [

@@ -18,7 +18,7 @@ class Errors with _$Errors {
   String getErrorMessage() => map(
         networkError: (networkError) => networkError.networkError.map(
           (value) => value.errorMessage,
-          network: (error) => "Network Error",
+          noConnection: (error) => "No Network Connection",
           clientError: (error) => error.errorMessage,
           serverError: (error) => error.errorMessage,
         ),

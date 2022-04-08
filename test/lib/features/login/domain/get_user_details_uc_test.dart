@@ -33,7 +33,7 @@ main() {
 
           expect(result, isA<Left>());
           result.fold(
-            (errors) => expect(errors, const Errors.networkError(NetworkErrors.network())),
+            (errors) => expect(errors, const Errors.networkError(NetworkErrors.noConnection())),
             (_) => null,
           );
         },
@@ -48,7 +48,7 @@ main() {
 
           expect(result, isA<Left>());
           result.fold(
-            (errors) => expect(errors, const Errors.networkError(NetworkErrors.network())),
+                (errors) => expect(errors, const Errors.networkError(NetworkErrors.noConnection())),
             (_) => null,
           );
         },
