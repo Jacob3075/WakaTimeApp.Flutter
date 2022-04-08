@@ -1,6 +1,6 @@
+import "package:waka_time_app/common/data/network/dtos/project_details_dto.dart";
 import "package:waka_time_app/common/data/network/mappers/base_dto_mapper.dart";
-import "package:waka_time_app/features/project_stats/data/dtos/project_details_dto.dart";
-import "package:waka_time_app/features/project_stats/domain/models/project_details.dart";
+import "package:waka_time_app/common/domain/models/project_details.dart";
 
 class ProjectDetailsMapper extends BaseDtoMapper<List<ProjectDetails>, ProjectDetailsDTO> {
   @override
