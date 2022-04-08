@@ -11,10 +11,11 @@ import "package:waka_time_app/common/utils/utils.dart";
 import "package:waka_time_app/features/login/data/dtos/user_details_dto.dart";
 import "package:waka_time_app/features/login/data/mappers/user_details_mapper.dart";
 
-typedef GetUserDetailsUCReturn = Future<Either<Errors, UserDetails>>;
+typedef _P = GetUserDetailsUCParameters;
+typedef _R = Either<Errors, UserDetails>;
 
 @singleton
-class GetUserDetailsUC extends BaseUseCase<GetUserDetailsUCParameters, GetUserDetailsUCReturn> {
+class GetUserDetailsUC extends BaseUseCase<_P, _R> {
   final http.Client _client;
 
   GetUserDetailsUC({required http.Client client}) : _client = client;

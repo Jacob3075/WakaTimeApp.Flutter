@@ -11,22 +11,22 @@ import "package:waka_time_app/common/domain/models/summaries.dart";
 import "package:waka_time_app/common/domain/usecases/base_use_case.dart";
 import "package:waka_time_app/common/utils/utils.dart";
 
-typedef _Parameters = GetLast7DaysStatsUCParameters;
-typedef _ReturnType = Future<Either<Errors, Summaries>>;
+typedef _P = GetLast7DaysStatsUCParameters;
+typedef _R = Either<Errors, Summaries>;
 
 @singleton
-class GetLast7DaysStatsUC extends BaseUseCase<_Parameters, _ReturnType> {
+class GetLast7DaysStatsUC extends BaseUseCase<_P, _R> {
   final http.Client _client;
 
   GetLast7DaysStatsUC({required http.Client client}) : _client = client;
 
   @override
-  _ReturnType call(_Parameters parameters) async => await getDataOrErrorFromApi(
+  call(_P parameters) async => await getDataOrErrorFromApi(
         apiCall: () => _apiCall(parameters),
         successResponseProcessing: _successResponseProcessing,
       );
 
-  Future<http.Response> _apiCall(_Parameters parameters) async =>
+  Future<http.Response> _apiCall(_P parameters) async =>
       await _client.get(ApiEndpoints.getWeeklyStats(parameters.apiKey));
 
   Either<Errors, Summaries> _successResponseProcessing(

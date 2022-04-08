@@ -1,5 +1,5 @@
-abstract class BaseUseCase<Parameters extends BaseUseCaseParameters, Return> {
-  Return call(Parameters parameters);
+abstract class BaseUseCase<P extends BaseUseCaseParameters, R> {
+  Future<R> call(P parameters);
 }
 
 abstract class BaseUseCaseParameters {

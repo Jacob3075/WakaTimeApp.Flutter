@@ -18,25 +18,25 @@ part "get_project_details_uc.freezed.dart";
 
 part "get_project_details_uc.g.dart";
 
-typedef _Parameters = GetProjectDetailsUCParameters;
-typedef _ReturnType = Either<Errors, ProjectDetails>;
+typedef _P = GetProjectDetailsUCParameters;
+typedef _R = Either<Errors, ProjectDetails>;
 
 @singleton
-class GetProjectDetailsUC extends BaseUseCase<_Parameters, Future<_ReturnType>> {
+class GetProjectDetailsUC extends BaseUseCase<_P, _R> {
   final http.Client _client;
 
   GetProjectDetailsUC({required http.Client client}) : _client = client;
 
   @override
-  Future<_ReturnType> call(_Parameters parameters) async => await getDataOrErrorFromApi(
+  call(_P parameters) async => await getDataOrErrorFromApi(
         apiCall: () => _apiCall(parameters),
         successResponseProcessing: _successResponseProcessing,
       );
 
-  Future<http.Response> _apiCall(_Parameters parameters) async =>
+  Future<http.Response> _apiCall(_P parameters) async =>
       await _client.get(ApiEndpoints.getProjectDetails(parameters.toJson()));
 
-  _ReturnType _successResponseProcessing(
+  _R _successResponseProcessing(
     http.Response response,
   ) {
     final jsonMap = jsonDecode(response.body);
