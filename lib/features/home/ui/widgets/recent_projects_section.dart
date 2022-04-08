@@ -1,15 +1,22 @@
+import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:waka_time_app/common/domain/models/summaries.dart";
+import "package:waka_time_app/common/ui/routing/routes.gr.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/features/home/ui/widgets/recent_project_list_item.dart";
 
 class RecentProjectsSection {
   final Summaries _summaries;
+  final BuildContext _context;
 
-  const RecentProjectsSection({required Summaries summaries}) : _summaries = summaries;
+  const RecentProjectsSection({
+    required Summaries summaries,
+    required BuildContext context,
+  })  : _summaries = summaries,
+        _context = context;
 
   List<Widget> call() => [
         Column(
@@ -31,13 +38,16 @@ class RecentProjectsSection {
               fontWeight: FontWeight.w600,
             ),
           ),
-          Text(
-            "See All",
-            style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.normal,
-              color: AppColors.accentText,
+          GestureDetector(
+            child: Text(
+              "See All",
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.normal,
+                color: AppColors.accentText,
+              ),
             ),
+            onTap: _seeAllProjects,
           )
         ],
       );
@@ -56,4 +66,6 @@ class RecentProjectsSection {
 
   Widget _nestedPadding(Widget child) =>
       Padding(padding: EdgeInsets.symmetric(horizontal: 12.w), child: child);
+
+  _seeAllProjects() => _context.router.push(const SearchProjectsRoute());
 }

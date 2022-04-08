@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
                 final userDetails = context.read<HomePageCubit>().userDetails;
                 return state.when(
                   loading: () => Animations.loading(),
-                  loaded: (data) => _buildUI(userDetails, data),
+                  loaded: (data) => _buildUI(userDetails, data, context),
                   authError: () => _errorScreen(context),
                   error: (error) => _errorScreen(context, error),
                 );
@@ -38,7 +38,8 @@ class HomePage extends StatelessWidget {
         ),
       );
 
-  Widget _buildUI(UserDetails userDetails, Summaries last7daysStats) => SingleChildScrollView(
+  Widget _buildUI(UserDetails userDetails, Summaries last7daysStats, BuildContext context) =>
+      SingleChildScrollView(
         clipBehavior: Clip.none,
         physics: const BouncingScrollPhysics(),
         child: Padding(
@@ -63,7 +64,10 @@ class HomePage extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 12.w),
                 ),
                 SizedBox(height: 16.h),
-                ...RecentProjectsSection(summaries: last7daysStats)(),
+                ...RecentProjectsSection(
+                  summaries: last7daysStats,
+                  context: context,
+                )(),
                 SizedBox(height: 4.h),
                 WeeklyReportSection(summaries: last7daysStats),
                 SizedBox(height: 20.h),
