@@ -2,8 +2,8 @@ import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:splashscreen/splashscreen.dart";
-import "package:waka_time_app/common/routing/routes.gr.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
+import "package:waka_time_app/common/ui/routing/routes.gr.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 

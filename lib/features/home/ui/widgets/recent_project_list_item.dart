@@ -3,7 +3,7 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:waka_time_app/common/domain/models/common_models.dart";
-import "package:waka_time_app/common/routing/routes.gr.dart";
+import "package:waka_time_app/common/ui/routing/routes.gr.dart";
 import "package:waka_time_app/common/ui/theme/app_assets.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/common/ui/widgets/custom_ink_well_card.dart";

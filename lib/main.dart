@@ -1,12 +1,11 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:waka_time_app/common/routing/auth_guard.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
+import "package:waka_time_app/common/ui/routing/auth_guard.dart";
+import "package:waka_time_app/common/ui/routing/routes.gr.dart";
+import "package:waka_time_app/common/ui/theme/app_theme.dart";
 import "package:waka_time_app/di/injection.dart" as di;
-
-import "common/routing/routes.gr.dart";
-import "common/ui/theme/app_theme.dart";
 
 void main() {
   di.configureInjection();
@@ -15,7 +14,7 @@ void main() {
 
 class App extends StatelessWidget {
   App({Key? key}) : super(key: key);
-  final _appRouter = AppRouter(authGuard: AuthGuard());
+  final AppRouter _appRouter = AppRouter(authGuard: AuthGuard());
 
   @override
   Widget build(BuildContext context) => ScreenUtilInit(

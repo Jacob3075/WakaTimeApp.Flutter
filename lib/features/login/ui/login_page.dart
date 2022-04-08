@@ -2,7 +2,7 @@ import "package:auto_route/auto_route.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:url_launcher/url_launcher.dart";
-import "package:waka_time_app/common/routing/routes.gr.dart";
+import "package:waka_time_app/common/ui/routing/routes.gr.dart";
 import "package:waka_time_app/common/ui/theme/app_colors.dart";
 import "package:waka_time_app/common/utils/constants.dart";
 import "package:waka_time_app/di/injection.dart";
