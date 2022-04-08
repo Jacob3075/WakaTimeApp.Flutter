@@ -63,7 +63,7 @@ class Editors extends SecondaryStats<Editor> {
       );
 
   @override
-  String get statsType => "Operating Systems";
+  String get statsType => "Editors";
 
   @override
   Editor get mostUsed => values.firstOrNull ?? Editor.none;
