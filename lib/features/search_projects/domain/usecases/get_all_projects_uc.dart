@@ -21,37 +21,34 @@ class GetAllProjectsUC extends BaseUseCase<_P, _R> {
 
   GetAllProjectsUC({required http.Client client}) : _client = client;
 
-  // TODO: IMPROVE HANDLING PAGINATED DATA
   @override
   call(_P parameters) async {
     List<ProjectDetails> result = List.empty(growable: true);
-    Either<Errors, _ResponseData> apiResponse = await _getApiData(parameters);
-    if (apiResponse.isLeft()) {
-      return Left(apiResponse.getLeft()!);
-    }
-    _ResponseData _responseData = apiResponse.getRight()!;
-    final totalPages = _responseData.paginationData.totalPages;
+    int totalPages, currentPage;
 
-    for (int i = 1; i <= totalPages; i++) {
+    do {
+      Either<Errors, _ResponseData> apiResponse = await _getApiData(parameters);
+
+      if (apiResponse.isLeft()) return Left(apiResponse.getLeft()!);
+
+      parameters = parameters.nextPage();
+      _ResponseData _responseData = apiResponse.getRight()!;
+      totalPages = _responseData.paginationData.totalPages;
+      currentPage = _responseData.paginationData.currentPage;
+
       result.addAll(_responseData.data);
+    } while (currentPage != totalPages);
 
-      apiResponse = await _getApiData(parameters.nextPage());
-      if (apiResponse.isLeft()) {
-        return Left(apiResponse.getLeft()!);
-      }
-      _responseData = apiResponse.getRight()!;
-    }
     return Right(result);
   }
 
-  Future<Either<Errors, _ResponseData>> _getApiData(_P parameters) async =>
-      await getDataOrErrorFromApi(
+  Future<Either<Errors, _ResponseData>> _getApiData(_P parameters) => getDataOrErrorFromApi(
         apiCall: () => _apiCall(parameters),
         successResponseProcessing: _successResponseProcessing,
       );
 
-  Future<http.Response> _apiCall(_P parameters) async =>
-      await _client.get(ApiEndpoints.getAllProjects(parameters.apiKey, parameters.pageNumber));
+  Future<http.Response> _apiCall(_P parameters) =>
+      _client.get(ApiEndpoints.getAllProjects(parameters.apiKey, parameters.pageNumber));
 
   Either<Errors, _ResponseData> _successResponseProcessing(http.Response response) {
     final jsonMap = jsonDecode(response.body);
