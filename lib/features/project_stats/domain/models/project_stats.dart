@@ -6,7 +6,7 @@ import "package:waka_time_app/common/domain/models/operating_system.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
 
-class ProjectSummaries {
+class ProjectStats {
   final Time totalTime;
   final List<DailyProjectStats> dailyProjectStats;
   final StatsRange range;
@@ -19,7 +19,7 @@ class ProjectSummaries {
       "ProjectSummaries(totalTime:$totalTime, dailyProjectStats: dailyProjectStats, $range: range,"
       " languages: $languages, operatingSystems: $operatingSystems, editors: $editors)";
 
-  ProjectSummaries({
+  ProjectStats({
     required this.totalTime,
     required Iterable<DailyProjectStats> dailyProjectStats,
     required this.range,
@@ -39,7 +39,7 @@ class ProjectSummaries {
   bool operator ==(dynamic other) =>
       identical(this, other) ||
       (other.runtimeType == runtimeType &&
-          other is ProjectSummaries &&
+          other is ProjectStats &&
           const DeepCollectionEquality().equals(other.totalTime, totalTime) &&
           const DeepCollectionEquality().equals(other.dailyProjectStats, dailyProjectStats) &&
           const DeepCollectionEquality().equals(other.languages, languages) &&

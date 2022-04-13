@@ -7,12 +7,12 @@ import "package:waka_time_app/common/ui/widgets/stats_card.dart";
 import "package:waka_time_app/common/ui/widgets/stats_chip.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
-import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_stats.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/time_stats/project_history_section.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/time_stats/time_spent_on_project_chart.dart";
 
 class TimeStatsPage extends StatefulWidget {
-  final ProjectSummaries projectSummaries;
+  final ProjectStats projectSummaries;
 
   const TimeStatsPage({Key? key, required this.projectSummaries}) : super(key: key);
 

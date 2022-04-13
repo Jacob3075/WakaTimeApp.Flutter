@@ -11,13 +11,13 @@ import "package:waka_time_app/common/domain/models/language.dart";
 import "package:waka_time_app/common/domain/models/operating_system.dart";
 import "package:waka_time_app/common/domain/models/project_details.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
-import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_stats.dart";
 import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
 
 import "../../../../../mocks.mocks.dart";
 
-typedef _Event = DetailedProjectStatsEvent;
-typedef _State = DetailedProjectStatsState;
+typedef _E = DetailedProjectStatsEvent;
+typedef _S = DetailedProjectStatsState;
 
 main() {
   late DetailedProjectStatsBloc projectStatsBloc;
@@ -43,7 +43,7 @@ main() {
 
   group("When getting project details does not return any errors", () {
     late final Errors errors;
-    late final ProjectSummaries projectSummaries;
+    late final ProjectStats projectSummaries;
 
     setUpAll(() {
       when(getProjectDetails(any)).thenAnswer(
@@ -61,7 +61,7 @@ main() {
     blocTest(
       "and getting project stats does not return any errors, data loaded state is emitted correctly",
       setUp: () {
-        projectSummaries = ProjectSummaries(
+        projectSummaries = ProjectStats(
           dailyProjectStats: [],
           range: StatsRange(
             startDate: DateTime.now(),
@@ -76,10 +76,10 @@ main() {
         when(getProjectStats(any)).thenAnswer((realInvocation) async => Right(projectSummaries));
       },
       build: () => projectStatsBloc,
-      act: (DetailedProjectStatsBloc bloc) => bloc.add(const _Event.loadData(projectName: "")),
+      act: (DetailedProjectStatsBloc bloc) => bloc.add(const _E.loadData(projectName: "")),
       expect: () => [
-        const _State.loading(),
-        _State.dataLoaded(projectSummaries: projectSummaries),
+        const _S.loading(),
+        _S.dataLoaded(projectSummaries: projectSummaries),
       ],
     );
 
@@ -90,10 +90,10 @@ main() {
         when(getProjectStats(any)).thenAnswer((realInvocation) async => Left(errors));
       },
       build: () => projectStatsBloc,
-      act: (DetailedProjectStatsBloc bloc) => bloc.add(const _Event.loadData(projectName: "")),
+      act: (DetailedProjectStatsBloc bloc) => bloc.add(const _E.loadData(projectName: "")),
       expect: () => [
-        const _State.loading(),
-        _State.error(error: errors),
+        const _S.loading(),
+        _S.error(error: errors),
       ],
     );
   });
@@ -110,10 +110,10 @@ main() {
           when(getProjectDetails(any)).thenAnswer((_) async => Left(error));
         },
         build: () => projectStatsBloc,
-        act: (DetailedProjectStatsBloc bloc) => bloc.add(const _Event.loadData(projectName: "")),
+        act: (DetailedProjectStatsBloc bloc) => bloc.add(const _E.loadData(projectName: "")),
         expect: () => [
-          const _State.loading(),
-          _State.error(error: error),
+          const _S.loading(),
+          _S.error(error: error),
         ],
       );
     },

@@ -5,19 +5,21 @@ import "package:intl/intl.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/models/project_details.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
-import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_stats.dart";
 import "package:waka_time_app/features/project_stats/domain/usecases/get_project_details_uc.dart";
 import "package:waka_time_app/features/project_stats/domain/usecases/get_project_stats_uc.dart";
 
 part "detailed_project_stats_bloc.freezed.dart";
+
 part "detailed_project_stats_event.dart";
+
 part "detailed_project_stats_state.dart";
 
-typedef _State = DetailedProjectStatsState;
-typedef _Event = DetailedProjectStatsEvent;
+typedef _S = DetailedProjectStatsState;
+typedef _E = DetailedProjectStatsEvent;
 
 @injectable
-class DetailedProjectStatsBloc extends Bloc<_Event, _State> {
+class DetailedProjectStatsBloc extends Bloc<_E, _S> {
   final GetProjectStatsUC getProjectStats;
   final GetProjectDetailsUC getProjectDetailsUC;
   late final String apiKey;
@@ -26,13 +28,13 @@ class DetailedProjectStatsBloc extends Bloc<_Event, _State> {
     required this.getProjectStats,
     required this.getProjectDetailsUC,
     required UserAuthCubit userAuthCubit,
-  }) : super(const _State.loading()) {
+  }) : super(const _S.loading()) {
     apiKey = userAuthCubit.apiKey;
     on<LoadData>(_onLoadData);
   }
 
   Future<void> _onLoadData(LoadData event, Emitter emit) async {
-    emit(const _State.loading());
+    emit(const _S.loading());
 
     final projectDetailsResult = await getProjectDetailsUC(
       GetProjectDetailsUCParameters(apiKey: apiKey, project: event.projectName),
@@ -56,9 +58,9 @@ class DetailedProjectStatsBloc extends Bloc<_Event, _State> {
     );
     projectStatsResult.fold(
       (error) => _onError(error, emit),
-      (data) => emit(_State.dataLoaded(projectSummaries: data)),
+      (data) => emit(_S.dataLoaded(projectSummaries: data)),
     );
   }
 
-  Future<void> _onError(Errors error, Emitter emit) async => emit(_State.error(error: error));
+  Future<void> _onError(Errors error, Emitter emit) async => emit(_S.error(error: error));
 }

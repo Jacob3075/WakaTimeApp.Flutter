@@ -5,7 +5,7 @@ import "package:waka_time_app/common/domain/models/operating_system.dart";
 import "package:waka_time_app/common/domain/models/percent.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
-import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_stats.dart";
 
 const sampleProjectStatsJson = """{
   "available_branches": [
@@ -378,7 +378,7 @@ const sampleProjectStatsJson = """{
 }
 """;
 
-final sampleProjectStatsData = ProjectSummaries(
+final sampleProjectStatsData = ProjectStats(
   totalTime: Time(hours: 149, minutes: 37, decimal: 149.62),
   dailyProjectStats: [
     DailyProjectStats(

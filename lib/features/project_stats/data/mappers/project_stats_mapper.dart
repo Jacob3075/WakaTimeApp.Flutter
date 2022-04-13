@@ -9,13 +9,13 @@ import "package:waka_time_app/common/domain/models/time.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
 import "package:waka_time_app/features/project_stats/data/dtos/project_summaries_dto.dart";
 import "package:waka_time_app/features/project_stats/domain/models/daily_project_stats.dart";
-import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_stats.dart";
 
-class ProjectSummariesMapper extends BaseDtoMapper<ProjectSummaries, ProjectSummariesDTO> {
+class ProjectStatsMapper extends BaseDtoMapper<ProjectStats, ProjectSummariesDTO> {
   late final Time _totalTime;
 
   @override
-  ProjectSummaries fromDto(ProjectSummariesDTO dto) {
+  ProjectStats fromDto(ProjectSummariesDTO dto) {
     _totalTime = dto.cumulativeTotal.totalTimeSpent;
     final dailyProjectStats = dto.data.map((it) => DailyProjectStats(
           timeSpent: it.grandTotal.timeSpent,
@@ -32,7 +32,7 @@ class ProjectSummariesMapper extends BaseDtoMapper<ProjectSummaries, ProjectSumm
           date: DateTime.parse(it.range.date),
         ));
 
-    return ProjectSummaries(
+    return ProjectStats(
       totalTime: _totalTime,
       dailyProjectStats: dailyProjectStats,
       languages: _extractLanguages(dailyProjectStats),
@@ -66,5 +66,5 @@ class ProjectSummariesMapper extends BaseDtoMapper<ProjectSummaries, ProjectSumm
       ) as T;
 
   @override
-  ProjectSummariesDTO fromModel(ProjectSummaries model) => throw UnimplementedError();
+  ProjectSummariesDTO fromModel(ProjectStats model) => throw UnimplementedError();
 }

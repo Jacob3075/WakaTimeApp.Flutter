@@ -4,13 +4,13 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/ui/widgets/animations.dart";
 import "package:waka_time_app/di/injection.dart";
-import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_stats.dart";
 import "package:waka_time_app/features/project_stats/ui/bloc/detailed_project_stats_bloc.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/custom_app_bar.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/secondary_stats/secondary_stats_page.dart";
 import "package:waka_time_app/features/project_stats/ui/widgets/time_stats/time_stats_page.dart";
 
-typedef _Event = DetailedProjectStatsEvent;
+typedef _E = DetailedProjectStatsEvent;
 
 class DetailedProjectStats extends StatelessWidget {
   final String projectName;
@@ -23,7 +23,7 @@ class DetailedProjectStats extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider(
         create: (context) =>
-            getIt<DetailedProjectStatsBloc>()..add(_Event.loadData(projectName: projectName)),
+            getIt<DetailedProjectStatsBloc>()..add(_E.loadData(projectName: projectName)),
         child: BlocBuilder<DetailedProjectStatsBloc, DetailedProjectStatsState>(
           builder: (_, state) => state.when(
             loading: _onLoadingState,
@@ -33,7 +33,7 @@ class DetailedProjectStats extends StatelessWidget {
         ),
       );
 
-  Widget _onDataLoadedState(ProjectSummaries projectSummaries, BuildContext context) => SafeArea(
+  Widget _onDataLoadedState(ProjectStats projectSummaries, BuildContext context) => SafeArea(
         child: DefaultTabController(
           length: 5,
           child: Scaffold(

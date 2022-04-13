@@ -9,15 +9,15 @@ import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/usecases/base_use_case.dart";
 import "package:waka_time_app/common/utils/utils.dart";
 import "package:waka_time_app/features/project_stats/data/dtos/project_summaries_dto.dart";
-import "package:waka_time_app/features/project_stats/data/mappers/project_summaries_mapper.dart";
-import "package:waka_time_app/features/project_stats/domain/models/project_summaries.dart";
+import "package:waka_time_app/features/project_stats/data/mappers/project_stats_mapper.dart";
+import "package:waka_time_app/features/project_stats/domain/models/project_stats.dart";
 
 part "get_project_stats_uc.freezed.dart";
 
 part "get_project_stats_uc.g.dart";
 
 typedef _P = GetProjectStatsUCParameters;
-typedef _R = Either<Errors, ProjectSummaries>;
+typedef _R = Either<Errors, ProjectStats>;
 
 @singleton
 class GetProjectStatsUC extends BaseUseCase<_P, _R> {
@@ -39,7 +39,7 @@ class GetProjectStatsUC extends BaseUseCase<_P, _R> {
   ) {
     final jsonMap = jsonDecode(response.body);
     final dailyStatsDTO = ProjectSummariesDTO.fromJson(jsonMap);
-    return Right(ProjectSummariesMapper().fromDto(dailyStatsDTO));
+    return Right(ProjectStatsMapper().fromDto(dailyStatsDTO));
   }
 }
 
