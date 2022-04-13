@@ -1,5 +1,6 @@
 import "dart:math";
 
+import "package:dartz/dartz.dart";
 import "package:waka_time_app/common/domain/models/time.dart";
 
 extension ObjectExt<T> on T {
@@ -30,4 +31,10 @@ extension ListX<T> on List<T> {
 extension ListTimeX on Iterable<Time> {
   Time get getTotalTime =>
       fold<Time>(Time.zero, (previousValue, element) => previousValue + element);
+}
+
+extension EitherX<L, R> on Either<L, R> {
+  R? getRight() => toOption().toNullable();
+
+  L? getLeft() => swap().toOption().toNullable();
 }

@@ -26,10 +26,11 @@ class ProjectDataDTO with _$ProjectDataDTO {
     required String name,
     required RepositoryDTO? repository,
     required String url,
-    @JsonKey(name: "last_heartbeat_at") required String lastHeartbeatAt,
+    @JsonKey(name: "last_heartbeat_at") required String? lastHeartbeatAt,
     @JsonKey(name: "created_at") required String createdAt,
     @JsonKey(name: "has_public_url") required bool hasPublicUrl,
-    @JsonKey(name: "human_readable_last_heartbeat_at") required String humanReadableLastHeartbeatAt,
+    @JsonKey(name: "human_readable_last_heartbeat_at")
+        required String? humanReadableLastHeartbeatAt,
     @JsonKey(name: "urlencoded_name") required String urlencodedName,
   }) = _ProjectDataDTO;
 

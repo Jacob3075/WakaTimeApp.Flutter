@@ -1,7 +1,7 @@
 class ProjectDetails {
   final String projectName;
   final DateTime createdDate;
-  final DateTime lastHeartBeat;
+  final DateTime? lastHeartBeat;
   final String id;
 
   const ProjectDetails({
