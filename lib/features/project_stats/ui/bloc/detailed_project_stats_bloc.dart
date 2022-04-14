@@ -10,9 +10,7 @@ import "package:waka_time_app/features/project_stats/domain/usecases/get_project
 import "package:waka_time_app/features/project_stats/domain/usecases/get_project_stats_uc.dart";
 
 part "detailed_project_stats_bloc.freezed.dart";
-
 part "detailed_project_stats_event.dart";
-
 part "detailed_project_stats_state.dart";
 
 typedef _S = DetailedProjectStatsState;
@@ -52,7 +50,7 @@ class DetailedProjectStatsBloc extends Bloc<_E, _S> {
       GetProjectStatsUCParameters(
         apiKey: apiKey,
         start: formatter.format(projectDetails.createdDate),
-        end: formatter.format(DateTime.now()),
+        end: formatter.format(projectDetails.lastHeartBeat ?? DateTime.now()),
         project: projectDetails.projectName,
       ),
     );

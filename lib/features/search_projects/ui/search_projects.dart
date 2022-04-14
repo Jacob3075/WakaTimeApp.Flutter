@@ -1,9 +1,13 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/models/project_details.dart";
+import "package:waka_time_app/common/ui/widgets/animations.dart";
+import "package:waka_time_app/common/ui/widgets/staggered_list_animation.dart";
 import "package:waka_time_app/di/injection.dart";
 import "package:waka_time_app/features/search_projects/ui/bloc/search_projects_bloc.dart";
+import "package:waka_time_app/features/search_projects/ui/widgets/project_list_item.dart";
 
 typedef _E = SearchProjectsEvent;
 
@@ -26,13 +30,15 @@ class SearchProjects extends StatelessWidget {
         ),
       );
 
-  Widget _onLoadingState() => const Text("LOADING");
-
-  Widget _onDataLoadedState(List<ProjectDetails> projects, BuildContext context) =>
-      ListView.builder(
-        itemCount: projects.length,
-        itemBuilder: (BuildContext context, int index) => Text(projects[index].projectName),
+  Widget _onDataLoadedState(List<ProjectDetails> projects, BuildContext context) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: 18.w),
+        child: StaggeredListAnimation(
+          itemCount: projects.length,
+          getChild: (int index) => ProjectListItem(project: projects[index]),
+        ),
       );
 
-  Widget _onErrorSate(Errors error) => Text(error.getErrorMessage());
+  Widget _onLoadingState() => Animations.loading();
+
+  Widget _onErrorSate(Errors error) => Animations.error();
 }
