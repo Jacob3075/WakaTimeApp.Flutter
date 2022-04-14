@@ -21,45 +21,46 @@ class DetailedProjectStats extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
-        create: (context) =>
-            getIt<DetailedProjectStatsBloc>()..add(_E.loadData(projectName: projectName)),
-        child: BlocBuilder<DetailedProjectStatsBloc, DetailedProjectStatsState>(
-          builder: (_, state) => state.when(
-            loading: _onLoadingState,
-            dataLoaded: (it) => _onDataLoadedState(it, context),
-            error: _onErrorSate,
+  Widget build(BuildContext context) => SafeArea(
+        child: Scaffold(
+          body: BlocProvider(
+            create: (context) =>
+                getIt<DetailedProjectStatsBloc>()..add(_E.loadData(projectName: projectName)),
+            child: BlocBuilder<DetailedProjectStatsBloc, DetailedProjectStatsState>(
+              builder: (_, state) => state.when(
+                loading: _onLoadingState,
+                dataLoaded: (it) => _onDataLoadedState(it, context),
+                error: _onErrorSate,
+              ),
+            ),
           ),
         ),
       );
 
-  Widget _onDataLoadedState(ProjectStats projectSummaries, BuildContext context) => SafeArea(
-        child: DefaultTabController(
-          length: 5,
-          child: Scaffold(
-            appBar: CustomAppBar(
-              projectName: projectName,
-              onPressed: () => context.router.pop(),
-            ),
-            body: TabBarView(
-              physics: const BouncingScrollPhysics(),
-              children: [
-                TimeStatsPage(projectSummaries: projectSummaries),
-                SecondaryStatsPage.language(secondaryStats: projectSummaries.languages),
-                // FIXME: NOT SHOWING 100%
-                SecondaryStatsPage.operatingSystem(
-                  secondaryStats: projectSummaries.operatingSystems,
-                ),
-                SecondaryStatsPage.operatingSystem(secondaryStats: projectSummaries.editors),
-                const Text("Page 5"),
-              ],
-            ),
+  Widget _onDataLoadedState(ProjectStats projectSummaries, BuildContext context) =>
+      DefaultTabController(
+        length: 5,
+        child: Scaffold(
+          appBar: CustomAppBar(
+            projectName: projectName,
+            onPressed: () => context.router.pop(),
+          ),
+          body: TabBarView(
+            physics: const BouncingScrollPhysics(),
+            children: [
+              TimeStatsPage(projectSummaries: projectSummaries),
+              SecondaryStatsPage.language(secondaryStats: projectSummaries.languages),
+              SecondaryStatsPage.operatingSystem(
+                secondaryStats: projectSummaries.operatingSystems,
+              ),
+              SecondaryStatsPage.operatingSystem(secondaryStats: projectSummaries.editors),
+              const Text("Page 5"),
+            ],
           ),
         ),
       );
 
   Widget _onLoadingState() => Scaffold(body: SafeArea(child: Animations.loading()));
 
-  // TODO: ADD ERROR SCREEN
-  Widget _onErrorSate(Errors errors) => Center(child: Text("ERROR: $errors"));
+  Widget _onErrorSate(Errors errors) => Animations.error(errors.getErrorMessage());
 }

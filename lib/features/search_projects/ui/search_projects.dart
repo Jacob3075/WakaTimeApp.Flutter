@@ -40,5 +40,5 @@ class SearchProjects extends StatelessWidget {
 
   Widget _onLoadingState() => Animations.loading();
 
-  Widget _onErrorSate(Errors error) => Animations.error();
+  Widget _onErrorSate(Errors error) => Animations.error(error.getErrorMessage());
 }

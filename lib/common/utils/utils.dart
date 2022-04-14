@@ -28,7 +28,9 @@ Future<Either<Errors, T>> getDataOrErrorFromApi<T>({
       Errors.networkError(NetworkErrors(errorMessage: "Format Exception, ${exception.message}")),
     );
   } on Exception catch (exception) {
-    return Left(Errors.networkError(NetworkErrors(errorMessage: exception.toString())));
+    return Left(
+      Errors.networkError(NetworkErrors(errorMessage: "Exception: ${exception.toString()}")),
+    );
   }
 }
 
@@ -45,7 +47,7 @@ Either<Errors, T> _getDataOrErrorFromResponse<T>({
     return Left(
       Errors.networkError(
         NetworkErrors.clientError(
-          errorMessage: response.body,
+          errorMessage: "Client Error: ${response.body}",
           code: statusCode,
         ),
       ),
@@ -56,7 +58,7 @@ Either<Errors, T> _getDataOrErrorFromResponse<T>({
     return Left(
       Errors.networkError(
         NetworkErrors.serverError(
-          errorMessage: response.body,
+          errorMessage: "Server Error: ${response.body}",
           code: statusCode,
         ),
       ),
