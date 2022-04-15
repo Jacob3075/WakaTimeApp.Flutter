@@ -21,6 +21,11 @@ class StatsRange {
     required this.endDate,
   });
 
+  StatsRange operator +(StatsRange other) => StatsRange(
+        startDate: [startDate, other.startDate].reduce((min, b) => min.isBefore(b) ? b : min),
+        endDate: [startDate, other.startDate].reduce((max, b) => max.isAfter(b) ? max : b),
+      );
+
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
