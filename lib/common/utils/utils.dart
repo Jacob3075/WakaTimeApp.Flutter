@@ -2,6 +2,7 @@ import "dart:io";
 
 import "package:dartz/dartz.dart";
 import "package:http/http.dart" as http;
+import 'package:waka_time_app/common/domain/errors/domain_errors.dart';
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/errors/network_errors.dart";
 import "package:waka_time_app/common/utils/extensions.dart";
@@ -44,6 +45,10 @@ Either<Errors, T> _getDataOrErrorFromResponse<T>({
   if (statusCode == 401) return Left(Errors.networkError(NetworkErrors.unauthorized()));
 
   if (statusCode.isBetween(400, 499)) {
+    if (statusCode == 400 && response.body.contains("Please try a smaller time range.")) {
+      return Left(Errors.domainError(DomainErrors.dateRangeTooLarge(errorMessage: response.body)));
+    }
+
     return Left(
       Errors.networkError(
         NetworkErrors.clientError(

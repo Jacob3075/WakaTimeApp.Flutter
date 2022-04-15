@@ -5,9 +5,11 @@ part "domain_errors.g.dart";
 
 @freezed
 class DomainErrors with _$DomainErrors {
-  const factory DomainErrors({required String errorMessage}) = Data;
+  const factory DomainErrors({required String errorMessage}) = DomainErrorData;
 
   const factory DomainErrors.invalidData({required String errorMessage}) = InvalidData;
+
+  const factory DomainErrors.dateRangeTooLarge({required String errorMessage}) = DateRangeTooLarge;
 
   factory DomainErrors.fromJson(Map<String, dynamic> json) => _$DomainErrorsFromJson(json);
 }

@@ -24,4 +24,18 @@ class Errors with _$Errors {
         ),
         domainError: (domainError) => domainError.domainError.errorMessage,
       );
+
+  Type getErrorType() => map(
+        networkError: (networkError) => networkError.networkError.map(
+          (value) => NetworkErrorData,
+          noConnection: (error) => NoConnection,
+          clientError: (error) => ClientError,
+          serverError: (error) => ServerError,
+        ),
+        domainError: (domainError) => domainError.domainError.map(
+          (value) => DomainErrorData,
+          invalidData: (error) => InvalidData,
+          dateRangeTooLarge: (error) => DateRangeTooLarge,
+        ),
+      );
 }

@@ -5,22 +5,22 @@ part "network_errors.g.dart";
 
 @freezed
 class NetworkErrors with _$NetworkErrors {
-  const factory NetworkErrors({required String errorMessage}) = Data;
+  const factory NetworkErrors({required String errorMessage}) = NetworkErrorData;
 
-  const factory NetworkErrors.noConnection() = _NoConnection;
+  const factory NetworkErrors.noConnection() = NoConnection;
 
   factory NetworkErrors.unauthorized() =>
-      const _ClientError(errorMessage: "Unauthorized", code: 401);
+      const ClientError(errorMessage: "Unauthorized", code: 401);
 
   const factory NetworkErrors.clientError({
     required String errorMessage,
     required int code,
-  }) = _ClientError;
+  }) = ClientError;
 
   const factory NetworkErrors.serverError({
     required String errorMessage,
     required int code,
-  }) = _ServerError;
+  }) = ServerError;
 
   factory NetworkErrors.fromJson(Map<String, dynamic> json) => _$NetworkErrorsFromJson(json);
 }
