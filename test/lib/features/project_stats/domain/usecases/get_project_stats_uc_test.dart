@@ -24,11 +24,11 @@ main() {
       when(client.get(any))
           .thenAnswer((realInvocation) async => http.Response(sampleProjectStatsJson, 200));
 
-      final result = await getProjectStatsUC(const GetProjectStatsUCParameters(
+      final result = await getProjectStatsUC(GetProjectStatsUCParameters(
         apiKey: "",
         project: "",
-        start: "",
-        end: "",
+        start: DateTime.now(),
+        end: DateTime.now(),
       ));
 
       expect(result, isA<Right>());
@@ -52,7 +52,12 @@ main() {
         "project": "Waka Time App",
       };
 
-      await getProjectStatsUC(GetProjectStatsUCParameters.fromJson(parametersMap));
+      await getProjectStatsUC(GetProjectStatsUCParameters(
+        apiKey: parametersMap["api_key"]!,
+        project: parametersMap["project"]!,
+        start: DateTime.parse(parametersMap["start"]!),
+        end: DateTime.parse(parametersMap["end"]!),
+      ));
 
       final Uri calledUri = verify(client.get(captureAny)).captured.first;
 

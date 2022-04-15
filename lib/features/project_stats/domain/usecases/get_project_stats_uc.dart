@@ -43,15 +43,23 @@ class GetProjectStatsUC extends BaseUseCase<_P, _R> {
   }
 }
 
-@freezed
-class GetProjectStatsUCParameters extends BaseUseCaseParameters
-    with _$GetProjectStatsUCParameters {
-  const factory GetProjectStatsUCParameters({
-    @JsonKey(name: "api_key") required String apiKey,
-    required String start,
-    required String end,
-    required String project,
-  }) = _GetProjectStatsUCParameters;
+class GetProjectStatsUCParameters extends BaseUseCaseParameters {
+  final String apiKey;
+  final DateTime start;
+  final DateTime end;
+  final String project;
+  final _formatter = DateFormat("yyyy-MM-dd");
+
+  String get startDateString => _formatter.format(start);
+
+  String get endDateString => _formatter.format(end);
+
+  GetProjectStatsUCParameters({
+    required this.apiKey,
+    required this.start,
+    required this.end,
+    required this.project,
+  });
 
   factory GetProjectStatsUCParameters.fromJson(Map<String, dynamic> json) =>
       _$GetProjectStatsUCParametersFromJson(json);

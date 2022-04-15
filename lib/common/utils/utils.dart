@@ -47,7 +47,7 @@ Either<Errors, T> _getDataOrErrorFromResponse<T>({
     return Left(
       Errors.networkError(
         NetworkErrors.clientError(
-          errorMessage: "Client Error: ${response.body}",
+          errorMessage: response.body,
           code: statusCode,
         ),
       ),
@@ -58,7 +58,7 @@ Either<Errors, T> _getDataOrErrorFromResponse<T>({
     return Left(
       Errors.networkError(
         NetworkErrors.serverError(
-          errorMessage: "Server Error: ${response.body}",
+          errorMessage: response.body,
           code: statusCode,
         ),
       ),

@@ -19,8 +19,8 @@ class Errors with _$Errors {
         networkError: (networkError) => networkError.networkError.map(
           (value) => value.errorMessage,
           noConnection: (error) => "No Network Connection",
-          clientError: (error) => error.errorMessage,
-          serverError: (error) => error.errorMessage,
+          clientError: (error) => "Client Error: ${error.errorMessage}",
+          serverError: (error) => "Server Error: ${error.errorMessage}",
         ),
         domainError: (domainError) => domainError.domainError.errorMessage,
       );

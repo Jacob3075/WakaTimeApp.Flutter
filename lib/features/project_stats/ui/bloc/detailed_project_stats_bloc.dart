@@ -1,7 +1,6 @@
 import "package:bloc/bloc.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 import "package:injectable/injectable.dart";
-import "package:intl/intl.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/models/project_details.dart";
 import "package:waka_time_app/common/ui/bloc/user_auth_cubit.dart";
@@ -45,12 +44,11 @@ class DetailedProjectStatsBloc extends Bloc<_E, _S> {
   }
 
   Future<void> _onProjectDetailsSuccess(ProjectDetails projectDetails, Emitter emit) async {
-    final formatter = DateFormat("yyyy-MM-dd");
     final projectStatsResult = await getProjectStats(
       GetProjectStatsUCParameters(
         apiKey: apiKey,
-        start: formatter.format(projectDetails.createdDate),
-        end: formatter.format(projectDetails.lastHeartBeat ?? DateTime.now()),
+        start: projectDetails.createdDate,
+        end: projectDetails.lastHeartBeat ?? DateTime.now(),
         project: projectDetails.projectName,
       ),
     );
