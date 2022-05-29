@@ -39,6 +39,7 @@ class RecentProjectsSection {
             ),
           ),
           GestureDetector(
+            onTap: _seeAllProjects,
             child: Text(
               "See All",
               style: TextStyle(
@@ -47,7 +48,6 @@ class RecentProjectsSection {
                 color: AppColors.accentText,
               ),
             ),
-            onTap: _seeAllProjects,
           )
         ],
       );

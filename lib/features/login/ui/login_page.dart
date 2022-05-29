@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
 
-  Future<bool> _openLink() async => await launch(Constants.apiKeyUrl);
+  Future<bool> _openLink() async => await launchUrl(Uri.parse(Constants.apiKeyUrl));
 
   void _onLoginButtonPressed(BuildContext context) async =>
       await context.read<LoginPageCubit>().login(apiKeyTextController.text);

@@ -111,12 +111,12 @@ class StatsCard extends StatelessWidget {
                 ],
               ),
               Positioned(
+                left: 100.h,
                 child: SvgPicture.asset(
                   icon,
                   height: cardHeight,
                   width: cardHeight,
                 ),
-                left: 100.h,
               ),
             ],
           ),

@@ -74,15 +74,22 @@ class GetProjectStatsUC extends BaseUseCase<_P, _R> {
         (data) => Right(data),
       );
 
-  // TODO: MERGE DUPLICATE ENTRIES
   ProjectStats _combiner(ProjectStats first, ProjectStats second) => ProjectStats(
         totalTime: first.totalTime + second.totalTime,
         dailyProjectStats: first.dailyProjectStats + second.dailyProjectStats,
         range: first.range + second.range,
-        languages: Languages(first.languages.values + second.languages.values),
-        operatingSystems:
-            OperatingSystems(first.operatingSystems.values + second.operatingSystems.values),
-        editors: Editors(first.editors.values + second.editors.values),
+        languages: Languages.mergeDuplicates(
+          first.languages.values + second.languages.values,
+          first.totalTime + second.totalTime,
+        ),
+        operatingSystems: OperatingSystems.mergeDuplicates(
+          first.operatingSystems.values + second.operatingSystems.values,
+          first.totalTime + second.totalTime,
+        ),
+        editors: Editors.mergeDuplicates(
+          first.editors.values + second.editors.values,
+          first.totalTime + second.totalTime,
+        ),
       );
 
   Future<http.Response> _apiCall(_P parameters) async => await _client.get(
