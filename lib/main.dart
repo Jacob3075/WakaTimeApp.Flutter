@@ -20,7 +20,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) => ScreenUtilInit(
         designSize: const Size(411, 750),
         minTextAdapt: true,
-        builder: () => BlocProvider(
+        builder: (context, _) => BlocProvider(
           create: (_) => di.getIt<UserAuthCubit>(),
           child: MaterialApp.router(
             debugShowCheckedModeBanner: false,
