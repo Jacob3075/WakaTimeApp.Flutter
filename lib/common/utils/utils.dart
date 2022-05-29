@@ -2,7 +2,7 @@ import "dart:io";
 
 import "package:dartz/dartz.dart";
 import "package:http/http.dart" as http;
-import 'package:waka_time_app/common/domain/errors/domain_errors.dart';
+import "package:waka_time_app/common/domain/errors/domain_errors.dart";
 import "package:waka_time_app/common/domain/errors/errors.dart";
 import "package:waka_time_app/common/domain/errors/network_errors.dart";
 import "package:waka_time_app/common/utils/extensions.dart";

@@ -47,8 +47,8 @@ class Editors extends SecondaryStats<Editor> {
   factory Editors.convertFromSuper(Iterable<SecondaryStat> secondaryStats) =>
       secondaryStats.map((it) => it as Editor).let(Editors.new);
 
-  factory Editors.mergeDuplicates(Iterable<SecondaryStat> values) =>
-      SecondaryStats.mergeStatsByName(values).let(Editors.convertFromSuper);
+  factory Editors.mergeDuplicates(Iterable<Editor> values, Time totalTime) =>
+      Editors(values).mergeStatsByName(totalTime).let(Editors.convertFromSuper);
 
   @override
   Editors topNAndCombineOthers(int count) => super.topNAndCombineOthersBase(

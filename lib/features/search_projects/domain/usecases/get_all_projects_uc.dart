@@ -32,11 +32,11 @@ class GetAllProjectsUC extends BaseUseCase<_P, _R> {
       if (apiResponse.isLeft()) return Left(apiResponse.getLeft()!);
 
       parameters = parameters.nextPage();
-      _ResponseData _responseData = apiResponse.getRight()!;
-      totalPages = _responseData.paginationData.totalPages;
-      currentPage = _responseData.paginationData.currentPage;
+      _ResponseData responseData = apiResponse.getRight()!;
+      totalPages = responseData.paginationData.totalPages;
+      currentPage = responseData.paginationData.currentPage;
 
-      result.addAll(_responseData.data);
+      result.addAll(responseData.data);
     } while (currentPage != totalPages);
 
     return Right(result);

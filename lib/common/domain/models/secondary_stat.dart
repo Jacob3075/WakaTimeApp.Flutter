@@ -49,14 +49,19 @@ abstract class SecondaryStats<T extends SecondaryStat> {
   SecondaryStats(Iterable<T> values) : values = values.toList(growable: false);
 
   @protected
-  static Iterable<SecondaryStat> mergeStatsByName(Iterable<SecondaryStat> values) => values
+  Iterable<SecondaryStat> mergeStatsByName(Time totalTime) => values
+      .map((stat) => _updatePercentOfStat(stat, totalTime))
       .groupFoldBy<String, SecondaryStat>(
         (it) => it.name,
-        ((previous, element) => element + previous),
+        ((previous, element) => (element + previous)),
       )
       .values
       .sortedBy<num>((element) => element.timeSpent.decimal)
       .reversed;
+
+  SecondaryStat _updatePercentOfStat(SecondaryStat stat, Time totalTime) => stat.copyWith(
+        percent: Percent(stat.percent.numerator, totalTime.totalSeconds),
+      );
 
   T get mostUsed;
 

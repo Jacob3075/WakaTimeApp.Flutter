@@ -47,8 +47,8 @@ class Languages extends SecondaryStats<Language> {
   factory Languages.convertFromSuper(Iterable<SecondaryStat> secondaryStats) =>
       secondaryStats.map((it) => it as Language).let(Languages.new);
 
-  factory Languages.mergeDuplicates(Iterable<SecondaryStat> values) =>
-      SecondaryStats.mergeStatsByName(values).let(Languages.convertFromSuper);
+  factory Languages.mergeDuplicates(Iterable<Language> values, Time totalTime) =>
+      Languages(values).mergeStatsByName(totalTime).let(Languages.convertFromSuper);
 
   @override
   Languages topNAndCombineOthers(int count) => super.topNAndCombineOthersBase(

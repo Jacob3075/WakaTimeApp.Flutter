@@ -47,8 +47,8 @@ class OperatingSystems extends SecondaryStats<OperatingSystem> {
   factory OperatingSystems.convertFromSuper(Iterable<SecondaryStat> secondaryStats) =>
       secondaryStats.map((it) => it as OperatingSystem).let(OperatingSystems.new);
 
-  factory OperatingSystems.mergeDuplicates(Iterable<SecondaryStat> values) =>
-      SecondaryStats.mergeStatsByName(values).let(OperatingSystems.convertFromSuper);
+  factory OperatingSystems.mergeDuplicates(Iterable<OperatingSystem> values, Time totalTime) =>
+      OperatingSystems(values).mergeStatsByName(totalTime).let(OperatingSystems.convertFromSuper);
 
   @override
   OperatingSystems topNAndCombineOthers(int count) => super.topNAndCombineOthersBase(
