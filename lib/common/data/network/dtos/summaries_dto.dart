@@ -7,7 +7,7 @@ part "summaries_dto.g.dart";
 @freezed
 class SummariesDTO with _$SummariesDTO {
   const factory SummariesDTO({
-    @JsonKey(name: "cummulative_total") required CumulativeTotalDTO cumulativeTotal,
+    @JsonKey(name: "cumulative_total") required CumulativeTotalDTO cumulativeTotal,
     required List<DataDTO> data,
     required String end,
     required String start,
