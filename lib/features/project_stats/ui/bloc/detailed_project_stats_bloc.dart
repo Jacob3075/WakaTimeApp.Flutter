@@ -44,11 +44,13 @@ class DetailedProjectStatsBloc extends Bloc<_E, _S> {
   }
 
   Future<void> _onProjectDetailsSuccess(ProjectDetails projectDetails, Emitter emit) async {
+    final end = DateTime.now();
+    final start = end.subtract(const Duration(days: 14));
     final projectStatsResult = await getProjectStats(
       GetProjectStatsUCParameters(
         apiKey: apiKey,
-        start: projectDetails.createdDate,
-        end: projectDetails.lastHeartBeat ?? DateTime.now(),
+        start: start,
+        end: end,
         project: projectDetails.projectName,
       ),
     );
